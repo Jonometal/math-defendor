@@ -41,6 +41,7 @@
 		
 		static public function makeNewGame(event:MouseEvent)
 		{
+		
 			if(event.target is AbsorberBtn)
 			{	newGame = new NewGame("Normal", "Normal", 600, 400, 1, 10);	}
 			if(event.target is MathAbsorberBtn)
