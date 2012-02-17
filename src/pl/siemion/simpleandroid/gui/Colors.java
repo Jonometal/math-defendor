@@ -13,6 +13,9 @@ public class Colors {
 	public static Paint PAINT_PLAYER = new Paint();
 	public static Paint PAINT_PLAYER_TEXT = new Paint();
 	
+	public static Paint PAINT_ENEMY = new Paint();
+	public static Paint PAINT_ENEMY_TEXT = new Paint();
+	
 	public static Paint PAINT_FPS = new Paint();	
 	public static int COLOR_BACKGROUD = Color.BLACK;
 	
@@ -28,8 +31,11 @@ public class Colors {
 		PAINT_PLAYER_TEXT.setColor(Color.GREEN);
 		PAINT_PLAYER_TEXT.setTextSize(20);
 		
-		PAINT_KEYPAD.setColor(Color.WHITE);
+		PAINT_ENEMY.setColor(Color.GREEN);
+		PAINT_ENEMY_TEXT.setColor(Color.RED);
+		PAINT_ENEMY_TEXT.setTextSize(15);
 		
+		PAINT_KEYPAD.setColor(Color.WHITE);
 		PAINT_KEYPAD.setStyle(Paint.Style.STROKE);
 		
 	}

@@ -1,10 +1,12 @@
 package pl.siemion.simpleandroid;
 
+import pl.siemion.simpleandroid.game.Fragile;
+import pl.siemion.simpleandroid.game.MathLevel;
+import pl.siemion.simpleandroid.game.Player;
 import pl.siemion.simpleandroid.gui.Colors;
 import pl.siemion.simpleandroid.gui.Keypad;
 import pl.siemion.simpleandroid.gui.Shapes;
 import pl.siemion.simpleandroid.physics.PhConstants;
-import pl.siemion.simpleandroid.physics.Player;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Point;
@@ -22,7 +24,8 @@ class GameView extends SurfaceView implements SurfaceHolder.Callback, OnTouchLis
  
 	/**------------------ Game physics variables BELOW*/
 	
-	private Player player;
+//	private Player player;
+	MathLevel level; //current Level
 	
 	/** ------------------- Game Graphics variables BELOW */
 	
@@ -115,7 +118,12 @@ class GameView extends SurfaceView implements SurfaceHolder.Callback, OnTouchLis
             
             /** ------------------- My physics */
             
-            player.movePlayer();
+            level.movePlayer();
+            level.moveWave();
+//            MathLevel().Enemis.moveThem();
+//            MathLevel().CheckForInterSections();
+            
+            
             
             
         }
@@ -155,8 +163,15 @@ class GameView extends SurfaceView implements SurfaceHolder.Callback, OnTouchLis
         	
         	
         	//Draw Player
-        	canvas.drawCircle(player.getX(), player.getY(), 30, Colors.PAINT_PLAYER);
-        	canvas.drawText("100", player.getX()-5, player.getY()-5, Colors.PAINT_PLAYER_TEXT);
+        	canvas.drawCircle(level.player.getLocation().x, level.player.getLocation().y, 30, Colors.PAINT_PLAYER);
+        	canvas.drawText("100", level.player.getLocation().x-5, level.player.getLocation().y-5, Colors.PAINT_PLAYER_TEXT);
+        	
+        	
+        	//Draw Waves
+        	for(Fragile object:level.getCurrentWave().getObjects() ){
+        		canvas.drawCircle(object.getLocation().x, object.getLocation().y, object.getSize(), Colors.PAINT_ENEMY);
+        		canvas.drawText("25", object.getLocation().x-5,object.getLocation().y-5, Colors.PAINT_ENEMY_TEXT);
+        	}
         	
 	        
         	canvas.restore();            
@@ -175,25 +190,32 @@ class GameView extends SurfaceView implements SurfaceHolder.Callback, OnTouchLis
     private AnimationThread thread;
 
     /**
-     * Constructor.
+     * Constructor. Initializes Whole game, should be done in more obvious way.
      * @param context don't care for it so much
      * @param attrs dont care too
      */
     public GameView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
+        //setting Touch-Listener
         this.setOnTouchListener(this);
         
-        //Player initializtion
-        player = new Player (100, 100);
-        player.setSpeedX(0.0f);
-        player.setSpeedY(0.0f);
-        
-        //Keypad initialization
-        
+        //Getting WindowManager in order to obtain screen dimentions
         WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         Display d = wm.getDefaultDisplay();
         
+        //Player initializtion
+        Player player = new Player (100, 100);
+        player.setSpeedX(0.0f);
+        player.setSpeedY(0.0f);
+        
+        
+        
+        //level creation
+        level = new MathLevel(player);
+        level.generateWaves(5, new Point(d.getWidth(), d.getHeight()));
+        
+        //Keypad initialization
         keypad = new Keypad();
         	keypad.setLeft(0 + Shapes.KEYPAD_HORIZONTAL_MARGIN, ((float)d.getHeight())/3)
         			.setRight(0 + Shapes.KEYPAD_HORIZONTAL_MARGIN, ((float)d.getHeight())/3*2)
@@ -209,7 +231,6 @@ class GameView extends SurfaceView implements SurfaceHolder.Callback, OnTouchLis
 
         // create thread only; it's started in surfaceCreated()
         thread = new AnimationThread(holder);
-
     }
     
     
@@ -264,19 +285,19 @@ class GameView extends SurfaceView implements SurfaceHolder.Callback, OnTouchLis
 			Log.v("action_down", x + " " + y + "" +  keypad.getWhichKeyWasTouched(x, y));
 			switch(keypad.getWhichKeyWasTouched(x, y)){
 			case Keypad.KEY_UP:
-				player.setSpeedX(PhConstants.speedIncrease);
+				level.player.setSpeedX(PhConstants.PLAYER_SPEED);
 				break;
 				
 			case Keypad.KEY_DOWN:
-				player.setSpeedX(-PhConstants.speedIncrease);
+				level.player.setSpeedX(-PhConstants.PLAYER_SPEED);
 				break;
 				
 			case Keypad.KEY_LEFT:
-				player.setSpeedY(-PhConstants.speedIncrease);
+				level.player.setSpeedY(-PhConstants.PLAYER_SPEED);
 				break;
 				
 			case Keypad.KEY_RIGHT:
-				player.setSpeedY(+PhConstants.speedIncrease);
+				level.player.setSpeedY(+PhConstants.PLAYER_SPEED);
 				break;
 				
 			case Keypad.KEY_NONE:
@@ -288,19 +309,19 @@ class GameView extends SurfaceView implements SurfaceHolder.Callback, OnTouchLis
 		case MotionEvent.ACTION_UP:
 			switch(keypad.getWhichKeyWasTouched(x, y)){
 			case Keypad.KEY_UP:
-				player.setSpeedX(0);
+				level.player.setSpeedX(0);
 				break;
 				
 			case Keypad.KEY_DOWN:
-				player.setSpeedX(0);
+				level.player.setSpeedX(0);
 				break;
 				
 			case Keypad.KEY_LEFT:
-				player.setSpeedY(0);
+				level.player.setSpeedY(0);
 				break;
 				
 			case Keypad.KEY_RIGHT:
-				player.setSpeedY(0);
+				level.player.setSpeedY(0);
 				break;
 				
 			case Keypad.KEY_NONE:

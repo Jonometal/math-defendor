@@ -6,5 +6,15 @@ package pl.siemion.simpleandroid.physics;
  *
  */
 public class PhConstants {
-	public static final float speedIncrease = 5f;
+	
+	/** TEMPORARY VARIABLES */
+	
+	public static final int nrEnemiesInWave = 3; 
+	
+	/** NORMAL VARIABLES */
+	public static final float PLAYER_SPEED = 5f;
+	
+	public static final float ENEMY_SPEED = 2.5f;
+	
+	public static final float ENEMY_SIZE = 20f;
 }
