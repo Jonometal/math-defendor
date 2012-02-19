@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import pl.siemion.simpleandroid.physics.PhConstants;
 
 import android.graphics.Point;
+import android.util.Log;
 
 /**
  * It's rather container of player, enemies, waves etc. Need to think about it 
@@ -15,14 +16,26 @@ import android.graphics.Point;
 public class MathLevel {
 	
 	/** Should be used in FIFO manner, so methods offer() and poll()*/
-	LinkedList<Wave> waves;
 	public Player player; //TODO it's public as it was convenient, but it should be done private and setters/getters should be written as MathLevel methods
 	
 	private Wave currentWave;
 	
+	LinkedList<Wave> waves;
 	
-	public void checkForIntersections(){
-		;
+	/**
+	 * This method checks for collisions (o-really!!)
+	 */
+	public void checkForCollisions(){
+		for(Fragile enemy: this.currentWave.getObjects()){
+			Log.v("coll1", calculateDistance(enemy, player) + " " + enemy.getSize() + player.getSize());
+			if(calculateDistance(enemy, player) < (enemy.getSize() + player.getSize())){
+				Log.v("coll", "Collision detected!");
+				synchronized(this.currentWave.objects){
+					this.currentWave.objects.remove(enemy);
+				}
+				
+			}
+		}
 	}
 	
 	public Wave getCurrentWave(){
@@ -68,5 +81,10 @@ public class MathLevel {
 		currentWave = waves.poll();
 	}
 	
-	
+	private float calculateDistance(Fragile object1, Fragile object2){
+		
+		double distance = Math.sqrt( (object1.getLocation().x - object2.getLocation().x) * (object1.getLocation().x - object2.getLocation().x) 
+								+ (object1.getLocation().y - object2.getLocation().y)* (object1.getLocation().y - object2.getLocation().y));
+		return (float)distance;
+	}
 }

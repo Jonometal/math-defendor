@@ -25,7 +25,7 @@ class GameView extends SurfaceView implements SurfaceHolder.Callback, OnTouchLis
 	/**------------------ Game physics variables BELOW*/
 	
 //	private Player player;
-	MathLevel level; //current Level
+	GameModel model;
 	
 	/** ------------------- Game Graphics variables BELOW */
 	
@@ -76,7 +76,7 @@ class GameView extends SurfaceView implements SurfaceHolder.Callback, OnTouchLis
                         	screenDimensions = new Point(getWidth(), getHeight());
                         	checkedScreenDimention = true;
                         }
-                    	updatePhysics();
+                    	calculateFPS();
                         doDraw(c);
                     }
                 }finally {
@@ -92,7 +92,7 @@ class GameView extends SurfaceView implements SurfaceHolder.Callback, OnTouchLis
          * realtime. Called at the start of draw().
          * Only calculates the FPS for now.
          */
-        private void updatePhysics() {
+        private void calculateFPS() {
             long now = System.currentTimeMillis();
                         
             if (mLastTime != 0) {
@@ -117,15 +117,6 @@ class GameView extends SurfaceView implements SurfaceHolder.Callback, OnTouchLis
             mLastTime = now;
             
             /** ------------------- My physics */
-            
-            level.movePlayer();
-            level.moveWave();
-//            MathLevel().Enemis.moveThem();
-//            MathLevel().CheckForInterSections();
-            
-            
-            
-            
         }
         
         /**
@@ -133,10 +124,8 @@ class GameView extends SurfaceView implements SurfaceHolder.Callback, OnTouchLis
          */
         private void doDraw(Canvas canvas) {
         	
-//        	
-        	
-            // Draw the background color. Operations on the Canvas accumulate
-            // so this is like clearing the screen. In a real game you can 
+//             Draw the background color. Operations on the Canvas accumulate
+//             so this is like clearing the screen. In a real game you can 
         	// put in a background image of course
         	canvas.drawColor(Colors.COLOR_BACKGROUD);
         	
@@ -163,15 +152,16 @@ class GameView extends SurfaceView implements SurfaceHolder.Callback, OnTouchLis
         	
         	
         	//Draw Player
-        	canvas.drawCircle(level.player.getLocation().x, level.player.getLocation().y, 30, Colors.PAINT_PLAYER);
-        	canvas.drawText("100", level.player.getLocation().x-5, level.player.getLocation().y-5, Colors.PAINT_PLAYER_TEXT);
+        	canvas.drawCircle(model.level.player.getLocation().x, model.level.player.getLocation().y, model.level.player.getSize(), Colors.PAINT_PLAYER);
+        	canvas.drawText("100", model.level.player.getLocation().x-5, model.level.player.getLocation().y-5, Colors.PAINT_PLAYER_TEXT);
         	
         	
         	//Draw Waves
-        	for(Fragile object:level.getCurrentWave().getObjects() ){
-        		canvas.drawCircle(object.getLocation().x, object.getLocation().y, object.getSize(), Colors.PAINT_ENEMY);
-        		canvas.drawText("25", object.getLocation().x-5,object.getLocation().y-5, Colors.PAINT_ENEMY_TEXT);
-        	}
+        	if(model.level.getCurrentWave() != null)
+	        	for(Fragile object: model.level.getCurrentWave().getObjects() ){
+	        		canvas.drawCircle(object.getLocation().x, object.getLocation().y, object.getSize(), Colors.PAINT_ENEMY);
+	        		canvas.drawText("25", object.getLocation().x-5,object.getLocation().y-5, Colors.PAINT_ENEMY_TEXT);
+	        	}
         	
 	        
         	canvas.restore();            
@@ -194,27 +184,19 @@ class GameView extends SurfaceView implements SurfaceHolder.Callback, OnTouchLis
      * @param context don't care for it so much
      * @param attrs dont care too
      */
-    public GameView(Context context, AttributeSet attrs) {
+    public GameView(Context context, AttributeSet attrs, GameModel model) {
         super(context, attrs);
 
+        //Setting an in-view reference to model
+        this.model = model;
+        
         //setting Touch-Listener
         this.setOnTouchListener(this);
         
         //Getting WindowManager in order to obtain screen dimentions
         WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         Display d = wm.getDefaultDisplay();
-        
-        //Player initializtion
-        Player player = new Player (100, 100);
-        player.setSpeedX(0.0f);
-        player.setSpeedY(0.0f);
-        
-        
-        
-        //level creation
-        level = new MathLevel(player);
-        level.generateWaves(5, new Point(d.getWidth(), d.getHeight()));
-        
+                
         //Keypad initialization
         keypad = new Keypad();
         	keypad.setLeft(0 + Shapes.KEYPAD_HORIZONTAL_MARGIN, ((float)d.getHeight())/3)
@@ -249,7 +231,7 @@ class GameView extends SurfaceView implements SurfaceHolder.Callback, OnTouchLis
      */
     public void surfaceCreated(SurfaceHolder holder) {
         thread.setRunning(true);
-        thread.start();
+        thread.start();	
     }
 
     /*
@@ -285,19 +267,19 @@ class GameView extends SurfaceView implements SurfaceHolder.Callback, OnTouchLis
 			Log.v("action_down", x + " " + y + "" +  keypad.getWhichKeyWasTouched(x, y));
 			switch(keypad.getWhichKeyWasTouched(x, y)){
 			case Keypad.KEY_UP:
-				level.player.setSpeedX(PhConstants.PLAYER_SPEED);
+				model.level.player.setSpeedX(PhConstants.PLAYER_SPEED);
 				break;
 				
 			case Keypad.KEY_DOWN:
-				level.player.setSpeedX(-PhConstants.PLAYER_SPEED);
+				model.level.player.setSpeedX(-PhConstants.PLAYER_SPEED);
 				break;
 				
 			case Keypad.KEY_LEFT:
-				level.player.setSpeedY(-PhConstants.PLAYER_SPEED);
+				model.level.player.setSpeedY(-PhConstants.PLAYER_SPEED);
 				break;
 				
 			case Keypad.KEY_RIGHT:
-				level.player.setSpeedY(+PhConstants.PLAYER_SPEED);
+				model.level.player.setSpeedY(+PhConstants.PLAYER_SPEED);
 				break;
 				
 			case Keypad.KEY_NONE:
@@ -309,19 +291,19 @@ class GameView extends SurfaceView implements SurfaceHolder.Callback, OnTouchLis
 		case MotionEvent.ACTION_UP:
 			switch(keypad.getWhichKeyWasTouched(x, y)){
 			case Keypad.KEY_UP:
-				level.player.setSpeedX(0);
+				model.level.player.setSpeedX(0);
 				break;
 				
 			case Keypad.KEY_DOWN:
-				level.player.setSpeedX(0);
+				model.level.player.setSpeedX(0);
 				break;
 				
 			case Keypad.KEY_LEFT:
-				level.player.setSpeedY(0);
+				model.level.player.setSpeedY(0);
 				break;
 				
 			case Keypad.KEY_RIGHT:
-				level.player.setSpeedY(0);
+				model.level.player.setSpeedY(0);
 				break;
 				
 			case Keypad.KEY_NONE:

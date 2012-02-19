@@ -1,5 +1,6 @@
 package pl.siemion.simpleandroid.game;
 
+import pl.siemion.simpleandroid.physics.PhConstants;
 import android.graphics.PointF;
 
 /**
@@ -10,7 +11,7 @@ import android.graphics.PointF;
 public class Player implements Fragile {
 	private PointF location;
 		
-	private float size;
+	private float size = PhConstants.PLAYER_SIZE;
 	
 	private float speedX;
 	
@@ -68,7 +69,6 @@ public class Player implements Fragile {
 	public void moveIt() {
 		this.location.x += speedX;
 		this.location.y += speedY;
-		
 	}
 
 
