@@ -1,0 +1,5 @@
+- MathLevel should have generateWaves funtion();
+
+- in Model you detect collision
+
+- Model will be ; collision detection on run() fiction(); 
