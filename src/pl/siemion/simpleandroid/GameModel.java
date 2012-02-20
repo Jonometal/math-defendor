@@ -38,7 +38,7 @@ public class GameModel extends Thread{
 //            	Log.v("loop-model","oooo noo looop")
             	  level.movePlayer();
                   level.moveWave();
-//                  level.checkForCollisions();
+                  level.checkForCollisions();
                   Thread.sleep(PhConstants.MODEL_MILISEC_BREAK);
                 } catch (InterruptedException e) {
                 	e.printStackTrace();

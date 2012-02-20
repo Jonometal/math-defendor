@@ -26,15 +26,21 @@ public class MathLevel {
 	 * This method checks for collisions (o-really!!)
 	 */
 	public void checkForCollisions(){
+		LinkedList<Integer> toBeRemoved = new LinkedList<Integer>();
 		for(Fragile enemy: this.currentWave.getObjects()){
-			Log.v("coll1", calculateDistance(enemy, player) + " " + enemy.getSize() + player.getSize());
+//			Log.v("coll1", calculateDistance(enemy, player) + " " + enemy.getSize() + player.getSize());
 			if(calculateDistance(enemy, player) < (enemy.getSize() + player.getSize())){
-				Log.v("coll", "Collision detected!");
-				synchronized(this.currentWave.objects){
-					this.currentWave.objects.remove(enemy);
-				}
+//				Log.v("coll", "Collision detected!");
+				toBeRemoved.add(this.currentWave.getObjects().indexOf(enemy));
+//				synchronized(this.currentWave.objects){
+//					this.currentWave.objects.remove(enemy);
+//				}
 				
 			}
+		}
+		while(!toBeRemoved.isEmpty()){
+			Log.v("coll", "to be REmoved!");
+			this.currentWave.objects.remove(toBeRemoved.poll());
 		}
 	}
 	
@@ -52,13 +58,15 @@ public class MathLevel {
 	
 	public void moveWave(){
 		//move all of the objects!
-		for(Fragile object : this.currentWave.objects)
-			object.moveIt();
+		if(this.currentWave != null){
+			for(Fragile object : this.currentWave.objects)
+				object.moveIt();
 		
 		//check wheter it shouldn't be next wave?
 				
-		if(this.currentWave.objects.peek().getLocation().y <= 0){
-			this.currentWave = waves.poll();
+			if(this.currentWave.objects.peek().getLocation().y <= 0){
+				this.currentWave = waves.poll();
+			}
 		}
 		
 	}
