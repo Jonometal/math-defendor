@@ -12,6 +12,8 @@ import android.graphics.PointF;
  */
 public interface Fragile {
 	
+	public void collisionDetected();
+	
 	public float getSpeedX();
 	
 	public float getSpeedY();

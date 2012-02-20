@@ -83,6 +83,12 @@ public class Player implements Fragile {
 		this.size = size;
 	}
 
+	@Override
+	public void collisionDetected() {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 	/* private methods here */
 	

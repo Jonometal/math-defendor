@@ -20,6 +20,12 @@ public class Enemy implements Fragile {
 	}
 	
 	@Override
+	public void collisionDetected() {
+		;
+		
+	}
+
+	@Override
 	public float getSpeedX() {
 		return this.speedX;
 	}

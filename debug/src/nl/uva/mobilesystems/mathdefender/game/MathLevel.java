@@ -1,12 +1,10 @@
 package nl.uva.mobilesystems.mathdefender.game;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 
 import nl.uva.mobilesystems.mathdefender.physics.PhConstants;
-
-
 import android.graphics.Point;
-import android.util.Log;
 
 /**
  * It's rather container of player, enemies, waves etc. Need to think about it 
@@ -27,22 +25,20 @@ public class MathLevel {
 	 * This method checks for collisions (o-really!!)
 	 */
 	public void checkForCollisions(){
-		LinkedList<Integer> toBeRemoved = new LinkedList<Integer>();
-		for(Fragile enemy: this.currentWave.getObjects()){
-//			Log.v("coll1", calculateDistance(enemy, player) + " " + enemy.getSize() + player.getSize());
-			if(calculateDistance(enemy, player) < (enemy.getSize() + player.getSize())){
-//				Log.v("coll", "Collision detected!");
-				toBeRemoved.add(this.currentWave.getObjects().indexOf(enemy));
-//				synchronized(this.currentWave.objects){
-//					this.currentWave.objects.remove(enemy);
-//				}
-				
+		
+		if(this.currentWave != null){
+			Iterator<Fragile> iter = this.currentWave.getObjects().iterator();
+			Fragile enemy;
+			while(iter.hasNext()){
+				enemy = iter.next();
+				if(calculateDistance(enemy, player) < (enemy.getSize() + player.getSize())){
+					enemy.collisionDetected();
+					player.collisionDetected();
+					iter.remove();
+				}
 			}
 		}
-		while(!toBeRemoved.isEmpty()){
-			Log.v("coll", "to be REmoved!");
-			this.currentWave.objects.remove(toBeRemoved.poll());
-		}
+	
 	}
 	
 	public Wave getCurrentWave(){
