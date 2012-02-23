@@ -2,4 +2,5 @@
 <resources>
     <string name="hello">Hello World, InitialActivity22222!</string>
     <string name="app_name">Math-o-Defender</string>
+    <string name="debug_waves_left">Waves left:</string> 
 </resources>
