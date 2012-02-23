@@ -1,6 +1,6 @@
 package nl.uva.mobilesystems.mathdefender.gui;
 
-public class Shapes {
+public class AndGUIConstants {
 
 	public static float KEYPAD_SIZE = 40;
 	
@@ -10,4 +10,7 @@ public class Shapes {
 	/** The margin from Bottom*/
 	 
 	public static float KEYPAD_VERTICAL_MARGIN = 10;
+	
+	public static final int CAMERA_WIDTH = 720;
+	public static final int CAMERA_HEIGHT = 480;
 }

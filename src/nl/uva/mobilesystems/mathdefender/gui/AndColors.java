@@ -8,7 +8,7 @@ import android.graphics.Paint;
  * @author siemionides
  *
  */
-public class Colors {
+public class AndColors {
 	
 	public static Paint PAINT_PLAYER = new Paint();
 	public static Paint PAINT_PLAYER_TEXT = new Paint();

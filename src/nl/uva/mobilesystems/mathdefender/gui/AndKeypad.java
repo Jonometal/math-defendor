@@ -2,7 +2,7 @@ package nl.uva.mobilesystems.mathdefender.gui;
 
 import android.graphics.PointF;
 
-public class Keypad {
+public class AndKeypad {
 	
 	public static final int KEY_UP = 1;
 	public static final int KEY_DOWN = 2;
@@ -22,36 +22,36 @@ public class Keypad {
 
 	
 	
-	public Keypad setLeft(float leftX, float leftY){
+	public AndKeypad setLeft(float leftX, float leftY){
 		left.x = leftX;
 		left.y = leftY;
 		return this;
 	}
 	
-	public Keypad setRight(float rX, float rY){
+	public AndKeypad setRight(float rX, float rY){
 		right.x = rX;
 		right.y = rY;
 		return this;
 	}
 	
-	public Keypad setUp(float uX, float uY){
+	public AndKeypad setUp(float uX, float uY){
 		up.x = uX;
 		up.y = uY;
 		return this;
 	}
 	
-	public Keypad setDown(float dX, float dY){
+	public AndKeypad setDown(float dX, float dY){
 		down.x = dX;
 		down.y = dY;
 		return this;
 	}
 	
-	public Keypad setSize(float s){
+	public AndKeypad setSize(float s){
 		this.keySize = s;
 		return this;
 	}
 	
-	public Keypad(){
+	public AndKeypad(){
 		;
 	}
 	

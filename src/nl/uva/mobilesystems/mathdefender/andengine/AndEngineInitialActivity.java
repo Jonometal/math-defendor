@@ -1,15 +1,26 @@
 package nl.uva.mobilesystems.mathdefender.andengine;
 
+import java.util.Iterator;
+
+import nl.uva.mobilesystems.mathdefender.GameModel;
+import nl.uva.mobilesystems.mathdefender.gui.AndGUIConstants;
+import nl.uva.mobilesystems.mathdefender.physics.AndPhConstants;
+
 import org.andengine.engine.camera.Camera;
 import org.andengine.engine.camera.hud.controls.AnalogOnScreenControl;
 import org.andengine.engine.camera.hud.controls.AnalogOnScreenControl.IAnalogOnScreenControlListener;
 import org.andengine.engine.camera.hud.controls.BaseOnScreenControl;
+import org.andengine.engine.handler.IUpdateHandler;
 import org.andengine.engine.options.EngineOptions;
 import org.andengine.engine.options.EngineOptions.ScreenOrientation;
 import org.andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
 import org.andengine.entity.scene.Scene;
 import org.andengine.entity.scene.background.Background;
+import org.andengine.entity.sprite.AnimatedSprite;
+import org.andengine.entity.text.Text;
 import org.andengine.entity.util.FPSLogger;
+import org.andengine.opengl.font.Font;
+import org.andengine.opengl.font.FontFactory;
 import org.andengine.opengl.texture.TextureOptions;
 import org.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlas;
 import org.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlasTextureRegionFactory;
@@ -17,16 +28,16 @@ import org.andengine.opengl.texture.region.ITextureRegion;
 import org.andengine.opengl.texture.region.TiledTextureRegion;
 import org.andengine.ui.activity.SimpleBaseGameActivity;
 
+import android.graphics.Point;
+import android.graphics.Typeface;
 import android.opengl.GLES20;
-import android.util.Log;
 
 public class AndEngineInitialActivity extends SimpleBaseGameActivity {
 	// ===========================================================
 		// Constants
 		// ===========================================================
 
-	private static final int CAMERA_WIDTH = 720;
-	private static final int CAMERA_HEIGHT = 480;
+
 
 	private static final float DEMO_VELOCITY = 100.0f;
 
@@ -34,16 +45,25 @@ public class AndEngineInitialActivity extends SimpleBaseGameActivity {
 		// Fields
 		// ===========================================================
 	private Camera mCamera;
-
 	
+	private GameModel gModel;
+	
+	private AndPlayer player;
+
 	//game-sprites
-	private BitmapTextureAtlas mBitmapTextureAtlas;
-	private TiledTextureRegion mFaceTextureRegion;
+	private BitmapTextureAtlas mPlayerBitmap; //Player
+	private BitmapTextureAtlas mEnemyBitmap; //Enemy
+	private TiledTextureRegion mPlayerTextureRegion;
+	private TiledTextureRegion mEnemyTextureregion;
 	
 	//analog-control
 	private BitmapTextureAtlas mOnScreenControlTexture;
 	private ITextureRegion mOnScreenControlBaseTextureRegion;
 	private ITextureRegion mOnScreenControlKnobTextureRegion;
+	
+	//Text
+	private Font font;
+	public Text text; //how many waves are left;
 		
 	// ===========================================================
 	// Constructors
@@ -59,45 +79,73 @@ public class AndEngineInitialActivity extends SimpleBaseGameActivity {
 		
 	@Override
 	public EngineOptions onCreateEngineOptions() {
-		this.mCamera = new Camera(0, 0, AndEngineInitialActivity.CAMERA_WIDTH, AndEngineInitialActivity.CAMERA_HEIGHT);
-		return new EngineOptions(true, ScreenOrientation.LANDSCAPE_FIXED, new RatioResolutionPolicy(AndEngineInitialActivity.CAMERA_WIDTH, AndEngineInitialActivity.CAMERA_HEIGHT), this.mCamera);
+		//set Camera here
+		this.mCamera = new Camera(0, 0, AndGUIConstants.CAMERA_WIDTH, AndGUIConstants.CAMERA_HEIGHT);
+		return new EngineOptions(true, ScreenOrientation.LANDSCAPE_FIXED, new RatioResolutionPolicy(AndGUIConstants.CAMERA_WIDTH, AndGUIConstants.CAMERA_HEIGHT), this.mCamera);
 	}
 
 	@Override
-	
 	protected void onCreateResources() {
-		this.mBitmapTextureAtlas = new BitmapTextureAtlas(this.getTextureManager(), 96, 96, TextureOptions.BILINEAR);
-		this.mFaceTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(this.mBitmapTextureAtlas, this, "gfx/next.png", 0, 0, 1, 1);
-		this.mBitmapTextureAtlas.load();
 		
+		//player
+		this.mPlayerBitmap = new BitmapTextureAtlas(this.getTextureManager(), 96, 96, TextureOptions.BILINEAR);
+		this.mPlayerTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(this.mPlayerBitmap, this, "gfx/next.png", 0, 0, 1, 1);
+		this.mPlayerBitmap.load();
+		
+		//enemy
+		this.mEnemyBitmap = new BitmapTextureAtlas(this.getTextureManager(), 32, 32, TextureOptions.BILINEAR);
+		this.mEnemyTextureregion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(this.mEnemyBitmap, this, "gfx/face_box.png", 0, 0, 1, 1);
+		this.mEnemyBitmap.load();
+		
+		
+		//analog control
 		this.mOnScreenControlTexture = new BitmapTextureAtlas(this.getTextureManager(), 256, 128, TextureOptions.BILINEAR);
 		this.mOnScreenControlBaseTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(this.mOnScreenControlTexture, this, "gfx/onscreen_control_base.png", 0, 0);
 		this.mOnScreenControlKnobTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(this.mOnScreenControlTexture, this, "gfx/onscreen_control_knob.png", 128, 0);
 		this.mOnScreenControlTexture.load();
+		
+		//text
+		this.font = FontFactory.create(this.getFontManager(), this.getTextureManager(), 256, 256, Typeface.create(Typeface.DEFAULT, Typeface.BOLD), 32);
+		this.font.load();
 		
 	}
 
 	@Override
 	protected Scene onCreateScene() {
 		this.mEngine.registerUpdateHandler(new FPSLogger());
+		
+		//set our MathLevel here (will be calculated in separated thread)
+		gModel = new GameModel(this);
+			gModel.generateWaves(5, new Point(AndGUIConstants.CAMERA_WIDTH, AndGUIConstants.CAMERA_HEIGHT), this.mEnemyTextureregion,this.getVertexBufferObjectManager() );
 
+		//Set SCENE
 		final Scene scene = new Scene();
 		scene.setBackground(new Background(0.09804f, 0.6274f, 0.8784f));
+		
+		//Set Text
+//		this.text = new Text(500, 40, this.font, ResStrings.DEBUG_WAVES_LEFT + " " + this.gModel.getWavesLeft().size(), 
+//					new TextOptions(HorizontalAlign.CENTER), this.getVertexBufferObjectManager());
+//		scene.attachChild(text);
 
-		//player here
+		//Create a player here
 		final float centerX = 100;
 		final float centerY = 100;
-		final AndPlayer player = new AndPlayer(centerX, centerY, this.mFaceTextureRegion, this.getVertexBufferObjectManager());
+		player = new AndPlayer(centerX, centerY, this.mPlayerTextureRegion, this.getVertexBufferObjectManager());
 
 		scene.attachChild(player);
 		
 		
-		//analog-control here
-		final AnalogOnScreenControl analogOnScreenControl = new AnalogOnScreenControl(0, CAMERA_HEIGHT - this.mOnScreenControlBaseTextureRegion.getHeight(), this.mCamera, this.mOnScreenControlBaseTextureRegion, this.mOnScreenControlKnobTextureRegion, 0.1f, 200, this.getVertexBufferObjectManager(), new IAnalogOnScreenControlListener() {
+		//Set current wave objects here
+		for(AnimatedSprite waveObject: gModel.getCurrentWaveObjects()){
+			scene.attachChild(waveObject);
+		}
+		
+		
+		//Create analog-control here
+		final AnalogOnScreenControl analogOnScreenControl = new AnalogOnScreenControl(0, AndGUIConstants.CAMERA_HEIGHT - this.mOnScreenControlBaseTextureRegion.getHeight(), this.mCamera, this.mOnScreenControlBaseTextureRegion, this.mOnScreenControlKnobTextureRegion, 0.1f, 200, this.getVertexBufferObjectManager(), new IAnalogOnScreenControlListener() {
 			@Override
 			public void onControlChange(final BaseOnScreenControl pBaseOnScreenControl, final float pValueX, final float pValueY) {
-				player.getPhysicsHanlder().setVelocity(pValueX * 100, pValueY * 100);
-				Log.v("player", player.getX() + " " + player.getY());
+				player.getPhysicsHanlder().setVelocity(pValueX * AndPhConstants.PLAYER_VELOCITY, pValueY * AndPhConstants.PLAYER_VELOCITY);
 			}
 
 			@Override
@@ -115,9 +163,47 @@ public class AndEngineInitialActivity extends SimpleBaseGameActivity {
 		analogOnScreenControl.refreshControlKnobPosition();
 
 		scene.setChildScene(analogOnScreenControl);
+		
+		scene.registerUpdateHandler(new IUpdateHandler(){
+
+			@Override
+			public void onUpdate(float pSecondsElapsed) {
+				Iterator<AnimatedSprite> iter = gModel.getCurrentWaveObjects().iterator();
+				AnimatedSprite enemy;
+				while(iter.hasNext()){
+					enemy = iter.next();
+					if(player.collidesWith(enemy)){
+						gModel.removeObjectFromScene(enemy);
+						//TODO should be re-written here in more OOP manner: so player.collisionDetected() and enemy.collisionDetected() should be used instead putting a logic here
+						iter.remove();
+					}
+					
+				}
+//				for(AnimatedSprite enemy : gModel.getCurrentWaveObjects()){
+//					if(player.collidesWith(enemy)){
+//						gModel.removeObjectFromScene(enemy);
+//					}
+//				}
+			}
+
+			@Override
+			public void reset() {
+				;
+			}
+		});
+		
 
 		return scene;
 	}
 	
-
+	
+	
+	/*
+	 * PRIVATE METHODS GO DOWN ----------------------------------------------------
+	 */
+	
+	
+	
+	
+	
 }
