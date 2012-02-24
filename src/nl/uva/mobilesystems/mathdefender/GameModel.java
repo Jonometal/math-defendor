@@ -41,7 +41,7 @@ public class GameModel implements ObjectPositionEventListener {
 	private Text wavesLeftText; 
 	
 	public GameModel(AndEngineInitialActivity activity){
-		this.engine = activity.getEngine();
+		this.engine = activity.getEngine();			//Laurens: We should prob switch this to an object reference to the engine itself in case an activity can have several engines?
 		this.wavesLeftText = activity.text;
 	}
 	
