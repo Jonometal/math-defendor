@@ -1,5 +1,7 @@
 package nl.uva.mobilesystems.mathdefender.game;
 
+import java.util.LinkedList;
+
 /**
  * Level class
  * @author siemionides
@@ -15,6 +17,10 @@ public class Level {
 	
 	private int difficulty;
 	
+	private Wave currentWave;
+	
+	private LinkedList<Wave> waves;
+	
 	
 
 	public int getDifficulty() {
@@ -25,7 +31,23 @@ public class Level {
 		this.difficulty = difficulty;
 	}
 	
-	public Level(){
-		;
+	public Level(int difficulty){
+		this.difficulty = difficulty;
+	}
+
+	public LinkedList<Wave> getWaves() {
+		return waves;
+	}
+
+	public void setWaves(LinkedList<Wave> waves) {
+		this.waves = waves;
+	}
+
+	public Wave getCurrentWave() {
+		return currentWave;
+	}
+
+	public void setCurrentWave(Wave currentWave) {
+		this.currentWave = currentWave;
 	}
 }

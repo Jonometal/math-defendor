@@ -37,8 +37,6 @@ public class InitialActivity extends SimpleBaseGameActivity {
 		// Constants
 		// ===========================================================
 
-
-
 	private static final float DEMO_VELOCITY = 100.0f;
 
 		// ===========================================================
@@ -116,7 +114,7 @@ public class InitialActivity extends SimpleBaseGameActivity {
 		
 		//set our MathLevel here (will be calculated in separated thread)
 		gModel = new GameModel(this);
-			gModel.generateWaves(5, new Point(GUIConstants.CAMERA_WIDTH, GUIConstants.CAMERA_HEIGHT), this.mEnemyTextureregion,this.getVertexBufferObjectManager() );
+			gModel.setUpSimpleGame(5, new Point(GUIConstants.CAMERA_WIDTH, GUIConstants.CAMERA_HEIGHT), this.mEnemyTextureregion,this.getVertexBufferObjectManager() );
 
 		//Set SCENE
 		final Scene scene = new Scene();
