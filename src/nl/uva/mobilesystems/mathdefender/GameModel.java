@@ -5,8 +5,8 @@ import java.util.LinkedList;
 import nl.uva.mobilesystems.mathdefender.andengine.events.EventsConstants;
 import nl.uva.mobilesystems.mathdefender.andengine.events.ObjectPositionEvent;
 import nl.uva.mobilesystems.mathdefender.andengine.events.ObjectPositionEventListener;
+import nl.uva.mobilesystems.mathdefender.game.Level;
 import nl.uva.mobilesystems.mathdefender.game.Wave;
-import nl.uva.mobilesystems.mathdefender.gui.ResStrings;
 import nl.uva.mobilesystems.mathdefender.objects.Enemy;
 import nl.uva.mobilesystems.mathdefender.physics.PhConstants;
 
@@ -29,6 +29,9 @@ public class GameModel implements ObjectPositionEventListener {
 	
 	/** Game Variables */
 	Engine engine;
+	
+	/** Variable represeting current level that is maninated by GameModel */
+	private Level currentLevel;
 	
 	private Wave currentWave;
 	
