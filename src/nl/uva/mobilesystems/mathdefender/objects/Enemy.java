@@ -7,6 +7,7 @@ import nl.uva.mobilesystems.mathdefender.physics.PhConstants;
 import android.graphics.PointF;
 
 import org.andengine.engine.handler.physics.PhysicsHandler;
+import org.andengine.entity.Entity;
 import org.andengine.entity.sprite.AnimatedSprite;
 import org.andengine.opengl.texture.region.TiledTextureRegion;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
@@ -29,6 +30,7 @@ public class Enemy extends AnimatedSprite{
 		this.mPhysicsHandler = new PhysicsHandler(this);
 		this.registerUpdateHandler(this.mPhysicsHandler);
 		this.mPhysicsHandler.setVelocity(-PhConstants.ENEMY_VELOCITY, 0);
+		Entity a = new Entity();
 	}
 	
 

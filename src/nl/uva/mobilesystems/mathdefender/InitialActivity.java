@@ -49,10 +49,15 @@ public class InitialActivity extends SimpleBaseGameActivity {
 	private Player player;
 
 	//game-sprites
+	//player
 	private BitmapTextureAtlas mPlayerBitmap; //Player
-	private BitmapTextureAtlas mEnemyBitmap; //Enemy
 	private TiledTextureRegion mPlayerTextureRegion;
+	//enemy
+	private BitmapTextureAtlas mEnemyBitmap; //Enemy
 	private TiledTextureRegion mEnemyTextureregion;
+	//tower
+	private BitmapTextureAtlas mTowerBitmap; //Tower
+	private TiledTextureRegion mTowerTextureRegion;
 	
 	//analog-control
 	private BitmapTextureAtlas mOnScreenControlTexture;
@@ -95,6 +100,10 @@ public class InitialActivity extends SimpleBaseGameActivity {
 		this.mEnemyTextureregion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(this.mEnemyBitmap, this, "gfx/face_box.png", 0, 0, 1, 1);
 		this.mEnemyBitmap.load();
 		
+		//tower
+		this.mTowerBitmap = new BitmapTextureAtlas(this.getTextureManager(), 64, 64, TextureOptions.BILINEAR);
+		this.mTowerTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(this.mTowerBitmap, this, "gfx/chromatic_circle_small_64x64.png", 0, 0, 1, 1);
+		this.mTowerBitmap.load();
 		
 		//analog control
 		this.mOnScreenControlTexture = new BitmapTextureAtlas(this.getTextureManager(), 256, 128, TextureOptions.BILINEAR);
@@ -112,13 +121,14 @@ public class InitialActivity extends SimpleBaseGameActivity {
 	protected Scene onCreateScene() {
 		this.mEngine.registerUpdateHandler(new FPSLogger());
 		
-		//set our MathLevel here (will be calculated in separated thread)
-		gModel = new GameModel(this);
-			gModel.setUpSimpleGame(5, new Point(GUIConstants.CAMERA_WIDTH, GUIConstants.CAMERA_HEIGHT), this.mEnemyTextureregion,this.getVertexBufferObjectManager() );
-
-		//Set SCENE
+		//Set SCENE [must be done before Setting our MODEL obviously]
 		final Scene scene = new Scene();
 		scene.setBackground(new Background(0.09804f, 0.6274f, 0.8784f));
+		
+		//set our MathLevel here (will be calculated in separated thread)
+		gModel = new GameModel(this, scene);
+			// (nrWaves, nrTowers, [Screen_X, Screen_Y], EnemyTexture, TowerTexture, Library-shit-buffer)
+			gModel.setUpSimpleGame(5,1, new Point(GUIConstants.CAMERA_WIDTH, GUIConstants.CAMERA_HEIGHT), mEnemyTextureregion, mTowerTextureRegion, getVertexBufferObjectManager() );
 		
 		//Set Text
 //		this.text = new Text(500, 40, this.font, ResStrings.DEBUG_WAVES_LEFT + " " + this.gModel.getWavesLeft().size(), 
@@ -186,7 +196,7 @@ public class InitialActivity extends SimpleBaseGameActivity {
 
 			@Override
 			public void reset() {
-				;
+				; //nothing happens here so far?
 			}
 		});
 		

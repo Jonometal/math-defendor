@@ -8,12 +8,15 @@ import nl.uva.mobilesystems.mathdefender.andengine.events.ObjectPositionEventLis
 import nl.uva.mobilesystems.mathdefender.game.Level;
 import nl.uva.mobilesystems.mathdefender.game.Wave;
 import nl.uva.mobilesystems.mathdefender.objects.Enemy;
+import nl.uva.mobilesystems.mathdefender.objects.Tower;
 import nl.uva.mobilesystems.mathdefender.physics.PhConstants;
 
 import org.andengine.engine.Engine;
 import org.andengine.entity.IEntity;
+import org.andengine.entity.scene.Scene;
 import org.andengine.entity.sprite.AnimatedSprite;
 import org.andengine.entity.text.Text;
+import org.andengine.opengl.texture.region.ITiledTextureRegion;
 import org.andengine.opengl.texture.region.TiledTextureRegion;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 
@@ -27,8 +30,11 @@ import android.util.Log;
  */
 public class GameModel implements ObjectPositionEventListener {
 	
+	// ----------------------- VARIABLES --------------------------------
 	/** Game Variables */
 	Engine engine;
+	
+	Scene scene; //it's little bit akward, it must be here because current implementation of Model starts drawing before InitialActivity.onCreateScene() method is finished, so engine variable (field in GameModel class) doesnt know about this scene yet
 	
 	/** Variable represeting current level that is maninated by GameModel */
 	private Level currentLevel;
@@ -37,32 +43,18 @@ public class GameModel implements ObjectPositionEventListener {
 	
 	private Text wavesLeftText; 
 	
-	public GameModel(InitialActivity activity){
+	
+	// ----------------------- CONSTRUCTORS --------------------------------
+	
+	public GameModel(InitialActivity activity, Scene scene){
 		this.engine = activity.getEngine();			//Laurens: We should prob switch this to an object reference to the engine itself in case an activity can have several engines?
 		this.wavesLeftText = activity.text;
+		this.scene = scene;
 	}
 	
-	/** Ultra important and bad-coding style method; Sets waves, enemies in there */
-	public void setUpSimpleGame(int nrWaves, Point screenDimenstions, TiledTextureRegion textureRegion, VertexBufferObjectManager objectManager){
-		this.currentLevel = new Level(Level.DIFF_TUTORIAL);
-		this.currentLevel.setWaves(new LinkedList<Wave>());
-		
-		for(int i=0; i<nrWaves; i++){
-			LinkedList<AnimatedSprite>  tempEnemies = new LinkedList<AnimatedSprite>();
-			for(int j=0; j< PhConstants.NR_ENEMIES_IN_WAVE; j++){ //generating enemies
-				int random = (int)(Math.random() * 1000);	//should be an integer number from 0 - 1000 
-				int x = screenDimenstions.x; //the edge of a screen
-				int y = screenDimenstions.y / (PhConstants.NR_ENEMIES_IN_WAVE+1) * (j+1);	//so equal distribution on screen Width
-				
-				Enemy tempEnemy = new Enemy(x,y, textureRegion, objectManager);
-				tempEnemy.addObjectPositionEventListener(this);
-				tempEnemies.add(tempEnemy);
-			}
-			Wave tempWave = new Wave(tempEnemies);
-			this.currentLevel.getWaves().offer(tempWave);
-		}
-		this.currentLevel.setCurrentWave(this.currentLevel.getWaves().poll());
-	}
+
+
+	// ----------------------- SETTERS & GETTERS  --------------------------------
 	
 	
 	public LinkedList<AnimatedSprite> getCurrentWaveObjects(){
@@ -72,7 +64,10 @@ public class GameModel implements ObjectPositionEventListener {
 	public LinkedList<Wave> getWavesLeft(){
 		return this.currentLevel.getWaves();
 	}
-
+	
+	
+	// --------------------- OVERRIDDEN METHODS ------------------------------
+	
 	@Override
 	public void handleObjectPositionEvent(ObjectPositionEvent e) {
 		
@@ -94,14 +89,62 @@ public class GameModel implements ObjectPositionEventListener {
 		
 	}
 	
-
+	//-------------------- PUBLIC METHODS ----------------------------
+	
+	/** 
+	 * This method is here more for debug/development purposes. It sets:
+	 * - 1 New Level
+	 * - nrWaves Waves in it
+	 * - nrTowers Towers in it (will be places in the center of screen
+	 * 
+	 * Ultra important and bad-coding style method; Sets waves, enemies in there */
+	public void setUpSimpleGame(int nrWaves, int nrTowers, Point screenDimenstions, TiledTextureRegion textureEnemy, TiledTextureRegion textureTower, VertexBufferObjectManager objectManager){
+		this.currentLevel = new Level(Level.DIFF_TUTORIAL);
+		this.currentLevel.setWaves(new LinkedList<Wave>());
+		
+		for(int i=0; i<nrWaves; i++){
+			LinkedList<AnimatedSprite>  tempEnemies = new LinkedList<AnimatedSprite>();
+			for(int j=0; j< PhConstants.NR_ENEMIES_IN_WAVE; j++){ //generating enemies
+				int random = (int)(Math.random() * 1000);	//should be an integer number from 0 - 1000 
+				int x = screenDimenstions.x; //the edge of a screen
+				int y = screenDimenstions.y / (PhConstants.NR_ENEMIES_IN_WAVE+1) * (j+1);	//so equal distribution on screen Width
+				
+				Enemy tempEnemy = new Enemy(x,y, textureEnemy, objectManager);
+				tempEnemy.addObjectPositionEventListener(this);
+				tempEnemies.add(tempEnemy);
+			}
+			Wave tempWave = new Wave(tempEnemies);
+			this.currentLevel.getWaves().offer(tempWave);
+		}
+		this.currentLevel.setCurrentWave(this.currentLevel.getWaves().poll());
+		
+		//Add additional TOWER to the game
+		setNewTowerAt(screenDimenstions.x/2, screenDimenstions.y/2, textureTower, objectManager);
+		
+		
+	}
+	
+	
+	/**
+	 * Sets new Tower to current Level and adds it to the scene.
+	 * @param X
+	 * @param Y
+	 * @param pTiledTextureRegion
+	 * @param pVertexBufferObjectManager
+	 */
+	public void setNewTowerAt(final float X, final float Y, ITiledTextureRegion pTiledTextureRegion, final VertexBufferObjectManager pVertexBufferObjectManager){
+		Tower newTower = new Tower(X,Y, pTiledTextureRegion, pVertexBufferObjectManager);
+		this.currentLevel.getTowers().add(newTower);
+		addObjectToScene(newTower);
+		
+	}
 	
 	/**
 	 * This method is for code clarity.
 	 * @param entity
 	 */
 	public void addObjectToScene(IEntity entity){
-		engine.getScene().attachChild(entity);
+		this.scene.attachChild(entity);
 	}
 	
 	
@@ -122,15 +165,13 @@ public class GameModel implements ObjectPositionEventListener {
 	}
 	
 	
+	//-------------------- PRIVATE METHODS ----------------------------
+	
 	private void startNewWave(){
 		currentLevel.setCurrentWave(currentLevel.getWaves().poll());
 		for(IEntity object : currentLevel.getCurrentWave().getObjects()){
 			addObjectToScene(object);
 		}
-//		this.wavesLeftText.setText(ResStrings.DEBUG_WAVES_LEFT + " " + this.waves.size() );
-		Log.v("eventMine", "StartWave");
-
-//		this.engine.getScene().get
 	}
 	
 }
