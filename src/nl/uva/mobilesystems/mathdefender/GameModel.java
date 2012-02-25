@@ -119,7 +119,10 @@ public class GameModel implements ObjectPositionEventListener {
 		this.currentLevel.setCurrentWave(this.currentLevel.getWaves().poll());
 		
 		//Add additional TOWER to the game
-		setNewTowerAt(screenDimenstions.x/2, screenDimenstions.y/2, textureTower, objectManager);
+		for(int j=0; j<nrTowers; j++){
+			setNewTowerAt(screenDimenstions.x/2, screenDimenstions.y/2, textureTower, objectManager);
+		}
+		
 		
 		
 	}
