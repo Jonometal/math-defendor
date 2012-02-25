@@ -1,9 +1,9 @@
-package nl.uva.mobilesystems.mathdefender.andengine;
+package nl.uva.mobilesystems.mathdefender.objects;
 
 import nl.uva.mobilesystems.mathdefender.andengine.events.EventsConstants;
 import nl.uva.mobilesystems.mathdefender.andengine.events.ObjectPositionEvent;
 import nl.uva.mobilesystems.mathdefender.andengine.events.ObjectPositionEventListener;
-import nl.uva.mobilesystems.mathdefender.physics.AndPhConstants;
+import nl.uva.mobilesystems.mathdefender.physics.PhConstants;
 import android.graphics.PointF;
 
 import org.andengine.engine.handler.physics.PhysicsHandler;
@@ -13,7 +13,9 @@ import org.andengine.opengl.vbo.VertexBufferObjectManager;
 
 
 /** Class representing single "enemy" in wave **/ 
-public class AndEnemy extends AnimatedSprite{
+public class Enemy extends AnimatedSprite{
+	
+	
 
 	private ObjectPositionEventListener listener; 
 	
@@ -21,12 +23,12 @@ public class AndEnemy extends AnimatedSprite{
 	
 	private int sum;
 	
-	public AndEnemy(final float pX, final float pY, final TiledTextureRegion pTextureRegion, final VertexBufferObjectManager pVertexBufferObjectManager){
+	public Enemy(final float pX, final float pY, final TiledTextureRegion pTextureRegion, final VertexBufferObjectManager pVertexBufferObjectManager){
 		super(pX, pY, pTextureRegion, pVertexBufferObjectManager);
 
 		this.mPhysicsHandler = new PhysicsHandler(this);
 		this.registerUpdateHandler(this.mPhysicsHandler);
-		this.mPhysicsHandler.setVelocity(-AndPhConstants.ENEMY_VELOCITY, 0);
+		this.mPhysicsHandler.setVelocity(-PhConstants.ENEMY_VELOCITY, 0);
 	}
 	
 

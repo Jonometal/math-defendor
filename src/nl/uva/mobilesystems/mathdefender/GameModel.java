@@ -2,14 +2,13 @@ package nl.uva.mobilesystems.mathdefender;
 
 import java.util.LinkedList;
 
-import nl.uva.mobilesystems.mathdefender.andengine.AndEnemy;
-import nl.uva.mobilesystems.mathdefender.andengine.AndEngineInitialActivity;
 import nl.uva.mobilesystems.mathdefender.andengine.events.EventsConstants;
 import nl.uva.mobilesystems.mathdefender.andengine.events.ObjectPositionEvent;
 import nl.uva.mobilesystems.mathdefender.andengine.events.ObjectPositionEventListener;
-import nl.uva.mobilesystems.mathdefender.game.AndWave;
+import nl.uva.mobilesystems.mathdefender.game.Wave;
 import nl.uva.mobilesystems.mathdefender.gui.ResStrings;
-import nl.uva.mobilesystems.mathdefender.physics.AndPhConstants;
+import nl.uva.mobilesystems.mathdefender.objects.Enemy;
+import nl.uva.mobilesystems.mathdefender.physics.PhConstants;
 
 import org.andengine.engine.Engine;
 import org.andengine.entity.IEntity;
@@ -31,35 +30,35 @@ public class GameModel implements ObjectPositionEventListener {
 	/** Game Variables */
 	Engine engine;
 	
-	private AndWave currentWave;
+	private Wave currentWave;
 	
-	private LinkedList<AndWave> waves;
+	private LinkedList<Wave> waves;
 	
 	
 	/** Debug things */
 	
 	private Text wavesLeftText; 
 	
-	public GameModel(AndEngineInitialActivity activity){
+	public GameModel(InitialActivity activity){
 		this.engine = activity.getEngine();			//Laurens: We should prob switch this to an object reference to the engine itself in case an activity can have several engines?
 		this.wavesLeftText = activity.text;
 	}
 	
 	/** Ultra important and bad-coding style method; Sets waves, enemies in there */
 	public void generateWaves(int nrWaves, Point screenDimenstions, TiledTextureRegion textureRegion, VertexBufferObjectManager objectManager){
-		this.waves = new LinkedList<AndWave>();
+		this.waves = new LinkedList<Wave>();
 		for(int i=0; i<nrWaves; i++){
 			LinkedList<AnimatedSprite>  tempEnemies = new LinkedList<AnimatedSprite>();
-			for(int j=0; j< AndPhConstants.NR_ENEMIES_IN_WAVE; j++){ //generating enemies
+			for(int j=0; j< PhConstants.NR_ENEMIES_IN_WAVE; j++){ //generating enemies
 				int random = (int)(Math.random() * 1000);	//should be an integer number from 0 - 1000 
 				int x = screenDimenstions.x; //the edge of a screen
-				int y = screenDimenstions.y / (AndPhConstants.NR_ENEMIES_IN_WAVE+1) * (j+1);	//so equal distribution on screen Width
+				int y = screenDimenstions.y / (PhConstants.NR_ENEMIES_IN_WAVE+1) * (j+1);	//so equal distribution on screen Width
 				
-				AndEnemy tempEnemy = new AndEnemy(x,y, textureRegion, objectManager);
+				Enemy tempEnemy = new Enemy(x,y, textureRegion, objectManager);
 				tempEnemy.addObjectPositionEventListener(this);
 				tempEnemies.add(tempEnemy);
 			}
-			AndWave tempWave = new AndWave(tempEnemies);
+			Wave tempWave = new Wave(tempEnemies);
 			waves.offer(tempWave);
 		}
 		currentWave = waves.poll();
@@ -70,7 +69,7 @@ public class GameModel implements ObjectPositionEventListener {
 		return this.currentWave.getObjects();
 	}
 	
-	public LinkedList<AndWave> getWavesLeft(){
+	public LinkedList<Wave> getWavesLeft(){
 		return this.waves;
 	}
 

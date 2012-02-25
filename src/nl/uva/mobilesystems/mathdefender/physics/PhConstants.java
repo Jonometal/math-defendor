@@ -1,6 +1,11 @@
 package nl.uva.mobilesystems.mathdefender.physics;
 
-public class AndPhConstants {
+/**
+ * Class containing constants related to physics.
+ * @author siemionides
+ *
+ */
+public class PhConstants {
 	public static final float DEMO_VELOCITY = 100.0f;
 	
 	public static final float ENEMY_VELOCITY = 150.0f;

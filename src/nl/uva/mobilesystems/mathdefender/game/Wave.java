@@ -9,7 +9,7 @@ import org.andengine.entity.sprite.AnimatedSprite;
  * @author siemionides
  *
  */
-public class AndWave {
+public class Wave {
 	/** Interface Fragile, because not only enemies but bonuses etc may be found here */
 	LinkedList<AnimatedSprite> objects;
 	
@@ -18,7 +18,7 @@ public class AndWave {
 	public LinkedList<AnimatedSprite> getObjects(){
 		return objects;
 	}
-	public AndWave(LinkedList<AnimatedSprite> objects){
+	public Wave(LinkedList<AnimatedSprite> objects){
 		this.objects = objects;
 	}
 	

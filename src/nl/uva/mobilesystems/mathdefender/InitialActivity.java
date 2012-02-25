@@ -1,10 +1,10 @@
-package nl.uva.mobilesystems.mathdefender.andengine;
+package nl.uva.mobilesystems.mathdefender;
 
 import java.util.Iterator;
 
-import nl.uva.mobilesystems.mathdefender.GameModel;
-import nl.uva.mobilesystems.mathdefender.gui.AndGUIConstants;
-import nl.uva.mobilesystems.mathdefender.physics.AndPhConstants;
+import nl.uva.mobilesystems.mathdefender.gui.GUIConstants;
+import nl.uva.mobilesystems.mathdefender.objects.Player;
+import nl.uva.mobilesystems.mathdefender.physics.PhConstants;
 
 import org.andengine.engine.camera.Camera;
 import org.andengine.engine.camera.hud.controls.AnalogOnScreenControl;
@@ -32,7 +32,7 @@ import android.graphics.Point;
 import android.graphics.Typeface;
 import android.opengl.GLES20;
 
-public class AndEngineInitialActivity extends SimpleBaseGameActivity {
+public class InitialActivity extends SimpleBaseGameActivity {
 	// ===========================================================
 		// Constants
 		// ===========================================================
@@ -48,7 +48,7 @@ public class AndEngineInitialActivity extends SimpleBaseGameActivity {
 	
 	private GameModel gModel;
 	
-	private AndPlayer player;
+	private Player player;
 
 	//game-sprites
 	private BitmapTextureAtlas mPlayerBitmap; //Player
@@ -80,8 +80,8 @@ public class AndEngineInitialActivity extends SimpleBaseGameActivity {
 	@Override
 	public EngineOptions onCreateEngineOptions() {
 		//set Camera here
-		this.mCamera = new Camera(0, 0, AndGUIConstants.CAMERA_WIDTH, AndGUIConstants.CAMERA_HEIGHT);
-		return new EngineOptions(true, ScreenOrientation.LANDSCAPE_FIXED, new RatioResolutionPolicy(AndGUIConstants.CAMERA_WIDTH, AndGUIConstants.CAMERA_HEIGHT), this.mCamera);
+		this.mCamera = new Camera(0, 0, GUIConstants.CAMERA_WIDTH, GUIConstants.CAMERA_HEIGHT);
+		return new EngineOptions(true, ScreenOrientation.LANDSCAPE_FIXED, new RatioResolutionPolicy(GUIConstants.CAMERA_WIDTH, GUIConstants.CAMERA_HEIGHT), this.mCamera);
 	}
 
 	@Override
@@ -116,7 +116,7 @@ public class AndEngineInitialActivity extends SimpleBaseGameActivity {
 		
 		//set our MathLevel here (will be calculated in separated thread)
 		gModel = new GameModel(this);
-			gModel.generateWaves(5, new Point(AndGUIConstants.CAMERA_WIDTH, AndGUIConstants.CAMERA_HEIGHT), this.mEnemyTextureregion,this.getVertexBufferObjectManager() );
+			gModel.generateWaves(5, new Point(GUIConstants.CAMERA_WIDTH, GUIConstants.CAMERA_HEIGHT), this.mEnemyTextureregion,this.getVertexBufferObjectManager() );
 
 		//Set SCENE
 		final Scene scene = new Scene();
@@ -130,7 +130,7 @@ public class AndEngineInitialActivity extends SimpleBaseGameActivity {
 		//Create a player here
 		final float centerX = 100;
 		final float centerY = 100;
-		player = new AndPlayer(centerX, centerY, this.mPlayerTextureRegion, this.getVertexBufferObjectManager());
+		player = new Player(centerX, centerY, this.mPlayerTextureRegion, this.getVertexBufferObjectManager());
 
 		scene.attachChild(player);
 		
@@ -142,10 +142,10 @@ public class AndEngineInitialActivity extends SimpleBaseGameActivity {
 		
 		
 		//Create analog-control here
-		final AnalogOnScreenControl analogOnScreenControl = new AnalogOnScreenControl(0, AndGUIConstants.CAMERA_HEIGHT - this.mOnScreenControlBaseTextureRegion.getHeight(), this.mCamera, this.mOnScreenControlBaseTextureRegion, this.mOnScreenControlKnobTextureRegion, 0.1f, 200, this.getVertexBufferObjectManager(), new IAnalogOnScreenControlListener() {
+		final AnalogOnScreenControl analogOnScreenControl = new AnalogOnScreenControl(0, GUIConstants.CAMERA_HEIGHT - this.mOnScreenControlBaseTextureRegion.getHeight(), this.mCamera, this.mOnScreenControlBaseTextureRegion, this.mOnScreenControlKnobTextureRegion, 0.1f, 200, this.getVertexBufferObjectManager(), new IAnalogOnScreenControlListener() {
 			@Override
 			public void onControlChange(final BaseOnScreenControl pBaseOnScreenControl, final float pValueX, final float pValueY) {
-				player.getPhysicsHanlder().setVelocity(pValueX * AndPhConstants.PLAYER_VELOCITY, pValueY * AndPhConstants.PLAYER_VELOCITY);
+				player.getPhysicsHanlder().setVelocity(pValueX * PhConstants.PLAYER_VELOCITY, pValueY * PhConstants.PLAYER_VELOCITY);
 			}
 
 			@Override
@@ -167,6 +167,7 @@ public class AndEngineInitialActivity extends SimpleBaseGameActivity {
 		scene.registerUpdateHandler(new IUpdateHandler(){
 
 			@Override
+//			GameModel.checkCollisions()
 			public void onUpdate(float pSecondsElapsed) {
 				Iterator<AnimatedSprite> iter = gModel.getCurrentWaveObjects().iterator();
 				AnimatedSprite enemy;
@@ -177,7 +178,6 @@ public class AndEngineInitialActivity extends SimpleBaseGameActivity {
 						//TODO should be re-written here in more OOP manner: so player.collisionDetected() and enemy.collisionDetected() should be used instead putting a logic here
 						iter.remove();
 					}
-					
 				}
 //				for(AnimatedSprite enemy : gModel.getCurrentWaveObjects()){
 //					if(player.collidesWith(enemy)){
