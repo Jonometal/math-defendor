@@ -128,7 +128,7 @@ public class InitialActivity extends SimpleBaseGameActivity {
 		//set our MathLevel here (will be calculated in separated thread)
 		gModel = new GameModel(this, scene);
 			// (nrWaves, nrTowers, [Screen_X, Screen_Y], EnemyTexture, TowerTexture, Library-shit-buffer)
-			gModel.setUpSimpleGame(5,1, new Point(GUIConstants.CAMERA_WIDTH, GUIConstants.CAMERA_HEIGHT), mEnemyTextureregion, mTowerTextureRegion, getVertexBufferObjectManager() );
+			gModel.setUpSimpleGame(50,1, new Point(GUIConstants.CAMERA_WIDTH, GUIConstants.CAMERA_HEIGHT), mEnemyTextureregion, mTowerTextureRegion, getVertexBufferObjectManager() );
 		
 		//Set Text
 //		this.text = new Text(500, 40, this.font, ResStrings.DEBUG_WAVES_LEFT + " " + this.gModel.getWavesLeft().size(), 
