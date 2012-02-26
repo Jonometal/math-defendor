@@ -43,6 +43,9 @@ public class GameModel implements ObjectPositionEventListener {
 	
 	private Text wavesLeftText; 
 	
+	public static LinkedList<AnimatedSprite> myEnemies;
+	
+	
 	
 	// ----------------------- CONSTRUCTORS --------------------------------
 	
@@ -102,7 +105,8 @@ public class GameModel implements ObjectPositionEventListener {
 		this.currentLevel = new Level(Level.DIFF_TUTORIAL);
 		this.currentLevel.setWaves(new LinkedList<Wave>());
 		int levelDiff = 1;
-		for(int i=0; i<nrWaves; i++){
+			
+			for(int i=0; i<nrWaves; i++){
 			LinkedList<AnimatedSprite>  tempEnemies = new LinkedList<AnimatedSprite>();
 			for(int j=0; j< PhConstants.NR_ENEMIES_IN_WAVE; j++){ //generating enemies
 				int random = (int)(Math.random() * 1000);	//should be an integer number from 0 - 1000 
@@ -114,6 +118,7 @@ public class GameModel implements ObjectPositionEventListener {
 				tempEnemies.add(tempEnemy);
 			}
 			Wave tempWave = new Wave(tempEnemies);
+			this.myEnemies = tempEnemies;
 			this.currentLevel.getWaves().offer(tempWave);
 		}
 		this.currentLevel.setCurrentWave(this.currentLevel.getWaves().poll());
@@ -127,7 +132,7 @@ public class GameModel implements ObjectPositionEventListener {
 		
 	}
 	
-	
+		
 	/**
 	 * Sets new Tower to current Level and adds it to the scene.
 	 * @param X
