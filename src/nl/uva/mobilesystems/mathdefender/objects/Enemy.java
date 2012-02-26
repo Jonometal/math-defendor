@@ -43,6 +43,7 @@ public class Enemy extends AnimatedSprite{
 					case 1:
 						double element = Math.floor(Math.random() * (Player.getScore() + 10)) - 5;
 						mySum = "5";
+						System.out.print("My sum is " + mySum);
 						//if (gameMode == "Defender"){var element = Math.floor(Math.random() * (MathPlayer.getMyValue() + 10)) - 5;}
 						//else {var element = Math.floor(Math.random() * MathPlayer.getMyValue() + 10) - 5;}
 						//trace ("Element generated: " + element);
