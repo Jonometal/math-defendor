@@ -35,8 +35,8 @@ public class Player extends AnimatedSprite{
 		this.registerUpdateHandler(this.mPhysicsHandler);
 		
 		//Code to test adding a text element as a child to the Player object
-		/*this.attachChild(GameModel.myEnemies.get(0));
-		this.mFontTexture = new BitmapTextureAtlas(256, 256, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
+		this.attachChild(GameModel.myEnemies.get(0));
+		/*this.mFontTexture = new BitmapTextureAtlas(256, 256, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
 
         this.mFont = new Font(this.mFontTexture, Typeface.create(Typeface.DEFAULT, Typeface.BOLD), 32, true, Color.BLACK);
 		final ChangeableText elapsedText = new ChangeableText(100, 160, this.mFont, "Seconds elapsed:", "Seconds elapsed: XXXXX".length());
