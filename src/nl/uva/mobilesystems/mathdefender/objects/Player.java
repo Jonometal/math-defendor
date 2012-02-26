@@ -17,6 +17,7 @@ import android.graphics.PointF;
 public class Player extends AnimatedSprite{
 	
 	private final PhysicsHandler mPhysicsHandler;
+	private static double myScore = 5;
 	
 	
 
@@ -47,6 +48,9 @@ public class Player extends AnimatedSprite{
 		return this.mPhysicsHandler;
 	}
 
+	public static double getScore() {
+		return myScore;
+	}
 
 	
 }
