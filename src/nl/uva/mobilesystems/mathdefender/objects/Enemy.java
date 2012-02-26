@@ -22,24 +22,101 @@ public class Enemy extends AnimatedSprite{
 	
 	private final PhysicsHandler mPhysicsHandler;
 	
-	private int sum;
+	private String mySum = "";
+	private int myDiff;
 	
-	public Enemy(final float pX, final float pY, final TiledTextureRegion pTextureRegion, final VertexBufferObjectManager pVertexBufferObjectManager){
+	public Enemy(final float pX, final float pY, final TiledTextureRegion pTextureRegion, final VertexBufferObjectManager pVertexBufferObjectManager, final int difficulty){
+		
 		super(pX, pY, pTextureRegion, pVertexBufferObjectManager);
-
+		this.myDiff = difficulty;
 		this.mPhysicsHandler = new PhysicsHandler(this);
 		this.registerUpdateHandler(this.mPhysicsHandler);
 		this.mPhysicsHandler.setVelocity(-PhConstants.ENEMY_VELOCITY, 0);
+		genEquation();
 		Entity a = new Entity();
 	}
 	
-
-	public int getSum() {
-		return sum;
+	public void genEquation()
+	{
+		switch (myDiff)
+		{
+					case 1:
+						double element = Math.floor(Math.random() * (Player.getScore() + 10)) - 5;
+						mySum = "5";
+						//if (gameMode == "Defender"){var element = Math.floor(Math.random() * (MathPlayer.getMyValue() + 10)) - 5;}
+						//else {var element = Math.floor(Math.random() * MathPlayer.getMyValue() + 10) - 5;}
+						//trace ("Element generated: " + element);
+						//listOfElements.push(element);
+						//mySum = mySum + (element.toString());
+						//trace ("Mysum: " + mySum);
+						break;
+						/*
+					case 2:
+						if (gameMode == "Defender"){var element0 = Math.floor(Math.random() * (MathPlayer.getMyValue() + 100)) - 50;}
+						else {var element0 = Math.floor((Math.random() * myIncrementer) * 100);}
+						listOfElements.push(element0);
+						var element1 = randomConstructor("+-...");
+						listOfElements.push(element1);
+						if (gameMode == "Defender"){var element2 = Math.floor(Math.random() * (MathPlayer.getMyValue() + 100)) - 50;}
+						else {var element2 = Math.floor((Math.random() * myIncrementer) * 100);}
+						listOfElements.push(element2);
+						//trace("ListOfElements" + listOfElements);
+						mySum = mySum + (element0.toString());
+						mySum = mySum + (element1.toString());
+						mySum = mySum + (element2.toString());
+						break;
+					case 3:
+						if (gameMode == "Defender"){var element0 = Math.floor(Math.random() * (MathPlayer.getMyValue() + 200)) - 100;}
+						else {var element0 = Math.floor((Math.random() * myIncrementer) * 100);}
+						listOfElements.push(element0);
+						var element1 = randomConstructor("+-...");
+						listOfElements.push(element1);
+						if (gameMode == "Defender"){var element2 = Math.floor(Math.random() * (MathPlayer.getMyValue() + 200)) - 100;}
+						else {var element2 = Math.floor((Math.random() * myIncrementer) * 100);}
+						listOfElements.push(element2);
+						var element3 = randomConstructor("-+...");
+						listOfElements.push(element3);
+						if (gameMode == "Defender"){var element4 = Math.floor(Math.random() * (MathPlayer.getMyValue() + 100)) - 50;}
+						else {var element4 = Math.floor((Math.random() * myIncrementer) * 100);}
+						listOfElements.push(element4);
+						//trace("ListOfElements" + listOfElements);
+						mySum = mySum + (element0.toString());
+						mySum = mySum + (element1.toString());
+						mySum = mySum + (element2.toString());
+						mySum = mySum + (element3.toString());
+						mySum = mySum + (element4.toString());
+						break;
+					case 4:
+						if (gameMode == "Defender"){var element0 = Math.floor(Math.random() * (MathPlayer.getMyValue()))}
+						else {var element0 = Math.floor((Math.random() * myIncrementer) * 100);}
+						listOfElements.push(element0);
+						var element1 = randomConstructor("*fowrardslash...");
+						listOfElements.push(element1);
+						if (gameMode == "Defender"){var element2 = Math.floor(Math.random() * (MathPlayer.getMyValue()))}
+						else {var element2 = Math.floor((Math.random() * myIncrementer) * 100);}
+						listOfElements.push(element2);
+						//trace("ListOfElements" + listOfElements);
+						mySum = mySum + (element0.toString());
+						mySum = mySum + (element1.toString());
+						mySum = mySum + (element2.toString());
+						break;
+						
+					case 5:
+						break;
+						*/
+					default:
+						//trace ("Error! Difficulty == 0");
+						break;
+		}
+	}
+	
+	
+	public String getSum() {
+		return mySum;
 	}
 
-	public void setSum(int sum) {
-		this.sum = sum;
+	public void setSum(String sum) {
+		this.mySum = sum;
 	}
 	
 	public synchronized void addObjectPositionEventListener(ObjectPositionEventListener listener){
