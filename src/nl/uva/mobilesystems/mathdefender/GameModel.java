@@ -101,7 +101,7 @@ public class GameModel implements ObjectPositionEventListener {
 	public void setUpSimpleGame(int nrWaves, int nrTowers, Point screenDimenstions, TiledTextureRegion textureEnemy, TiledTextureRegion textureTower, VertexBufferObjectManager objectManager){
 		this.currentLevel = new Level(Level.DIFF_TUTORIAL);
 		this.currentLevel.setWaves(new LinkedList<Wave>());
-		
+		int levelDiff = 1;
 		for(int i=0; i<nrWaves; i++){
 			LinkedList<AnimatedSprite>  tempEnemies = new LinkedList<AnimatedSprite>();
 			for(int j=0; j< PhConstants.NR_ENEMIES_IN_WAVE; j++){ //generating enemies
@@ -109,7 +109,7 @@ public class GameModel implements ObjectPositionEventListener {
 				int x = screenDimenstions.x; //the edge of a screen
 				int y = screenDimenstions.y / (PhConstants.NR_ENEMIES_IN_WAVE+1) * (j+1);	//so equal distribution on screen Width
 				
-				Enemy tempEnemy = new Enemy(x,y, textureEnemy, objectManager);
+				Enemy tempEnemy = new Enemy(x,y, textureEnemy, objectManager, levelDiff);
 				tempEnemy.addObjectPositionEventListener(this);
 				tempEnemies.add(tempEnemy);
 			}
