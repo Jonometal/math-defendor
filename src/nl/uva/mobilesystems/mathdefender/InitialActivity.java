@@ -80,14 +80,14 @@ public class InitialActivity extends SimpleBaseGameActivity {
 	// Methods for/from SuperClass/Interfaces
 	// ===========================================================
 		
-	@Override
+	 
 	public EngineOptions onCreateEngineOptions() {
 		//set Camera here
 		this.mCamera = new Camera(0, 0, GUIConstants.CAMERA_WIDTH, GUIConstants.CAMERA_HEIGHT);
 		return new EngineOptions(true, ScreenOrientation.LANDSCAPE_FIXED, new RatioResolutionPolicy(GUIConstants.CAMERA_WIDTH, GUIConstants.CAMERA_HEIGHT), this.mCamera);
 	}
 
-	@Override
+	 
 	protected void onCreateResources() {
 		
 		//player
@@ -117,7 +117,7 @@ public class InitialActivity extends SimpleBaseGameActivity {
 		
 	}
 
-	@Override
+	 
 	protected Scene onCreateScene() {
 		this.mEngine.registerUpdateHandler(new FPSLogger());
 		
@@ -151,12 +151,12 @@ public class InitialActivity extends SimpleBaseGameActivity {
 		
 		//Create analog-control here
 		final AnalogOnScreenControl analogOnScreenControl = new AnalogOnScreenControl(0, GUIConstants.CAMERA_HEIGHT - this.mOnScreenControlBaseTextureRegion.getHeight(), this.mCamera, this.mOnScreenControlBaseTextureRegion, this.mOnScreenControlKnobTextureRegion, 0.1f, 200, this.getVertexBufferObjectManager(), new IAnalogOnScreenControlListener() {
-			@Override
+			 
 			public void onControlChange(final BaseOnScreenControl pBaseOnScreenControl, final float pValueX, final float pValueY) {
 				player.getPhysicsHanlder().setVelocity(pValueX * PhConstants.PLAYER_VELOCITY, pValueY * PhConstants.PLAYER_VELOCITY);
 			}
 
-			@Override
+			 
 			public void onControlClick(final AnalogOnScreenControl pAnalogOnScreenControl) {
 				//what happens if you click on analog screen
 				;
@@ -174,7 +174,7 @@ public class InitialActivity extends SimpleBaseGameActivity {
 		
 		scene.registerUpdateHandler(new IUpdateHandler(){
 
-			@Override
+			 
 //			GameModel.checkCollisions()
 			public void onUpdate(float pSecondsElapsed) {
 				Iterator<AnimatedSprite> iter = gModel.getCurrentWaveObjects().iterator();
@@ -194,7 +194,7 @@ public class InitialActivity extends SimpleBaseGameActivity {
 //				}
 			}
 
-			@Override
+			 
 			public void reset() {
 				; //nothing happens here so far?
 			}

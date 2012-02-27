@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="hello">Hello World, InitialActivity22222!</string>
+    <string name="hello">what, what!</string>
     <string name="app_name">Math-o-Defender</string>
-    <string name="debug_waves_left">Waves left:</string> 
+    <string name="debug_waves_left">Waves left:</string>
+    <string name="button_a1">This is Button A1</string>
+    <string name="textview_a1">This is TextView A1</string>
+    <string name="app_name_alt">My horse is amazing.</string> 
 </resources>

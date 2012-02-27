@@ -71,7 +71,7 @@ public class GameModel implements ObjectPositionEventListener {
 	
 	// --------------------- OVERRIDDEN METHODS ------------------------------
 	
-	@Override
+	 
 	public void handleObjectPositionEvent(ObjectPositionEvent e) {
 		
 		switch(e.getEventCode()){
@@ -164,7 +164,7 @@ public class GameModel implements ObjectPositionEventListener {
 	public void removeObjectFromScene(final IEntity entity){
 		engine.runOnUpdateThread(new Runnable() {
 			
-			@Override
+			 
 			public void run() {
 				entity.detachSelf();
 				entity.dispose();
