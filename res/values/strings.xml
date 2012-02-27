@@ -3,7 +3,13 @@
     <string name="hello">what, what!</string>
     <string name="app_name">Math-o-Defender</string>
     <string name="debug_waves_left">Waves left:</string>
-    <string name="button_a1">This is Button A1</string>
-    <string name="textview_a1">This is TextView A1</string>
-    <string name="app_name_alt">My horse is amazing.</string> 
+    
+    
+    <string name="app_name_alt">My horse is amazing.</string>
+    <string name="textview_title">My MathDefendor is amazing.</string>
+    <string name="textview_highscorestitle">Highscores</string> 
+    <string name="button_gamestart">Start Game</string>
+    <string name="button_highscores">See Highscores</string>
+    <string name="button_exit">Quit Application</string>
+    <string name="button_tutorialstart">Start Tutorial</string> 
 </resources>
