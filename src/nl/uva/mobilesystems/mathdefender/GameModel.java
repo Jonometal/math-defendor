@@ -17,6 +17,7 @@ import org.andengine.entity.IEntity;
 import org.andengine.entity.scene.Scene;
 import org.andengine.entity.sprite.AnimatedSprite;
 import org.andengine.entity.text.Text;
+import org.andengine.opengl.font.Font;
 import org.andengine.opengl.texture.TextureOptions;
 import org.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlas;
 import org.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlasTextureRegionFactory;
@@ -116,7 +117,8 @@ public class GameModel implements ObjectPositionEventListener {
 	 * - nrWaves Waves in it
 	 * - nrTowers Towers in it (will be places in the center of screen
 	 * 
-	 * Ultra important and bad-coding style method; Sets waves, enemies in there */
+	 * Ultra important and bad-coding style method; Sets waves, enemies in there 
+	 */
 	public void setUpSimpleGame(int nrWaves, int nrTowers, Point screenDimenstions, TiledTextureRegion textureEnemy,
 								TiledTextureRegion textureTower, TiledTextureRegion textureTowerBullet, VertexBufferObjectManager objectManager){
 		this.currentLevel = new Level(Level.DIFF_TUTORIAL);
