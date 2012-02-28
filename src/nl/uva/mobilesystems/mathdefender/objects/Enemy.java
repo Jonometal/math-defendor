@@ -135,7 +135,11 @@ public class Enemy extends AnimatedSprite{
 	public String getSum() {
 		return mySum;
 	}
-
+	
+	public double getResult() {
+		return myResult;
+	}
+	
 	public void setSum(String sum) {
 		this.mySum = sum;
 	}
