@@ -1,19 +1,14 @@
 package nl.uva.mobilesystems.mathdefender.objects;
 
-import nl.uva.mobilesystems.mathdefender.GameModel;
 import nl.uva.mobilesystems.mathdefender.gui.GUIConstants;
 
 import org.andengine.engine.handler.physics.PhysicsHandler;
 import org.andengine.entity.sprite.AnimatedSprite;
+import org.andengine.entity.text.Text;
 import org.andengine.opengl.font.Font;
-import org.andengine.opengl.font.FontFactory;
-import org.andengine.opengl.texture.TextureOptions;
 import org.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlas;
 import org.andengine.opengl.texture.region.TiledTextureRegion;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
-import org.andengine.util.color.Color;
-
-import android.graphics.Typeface;
 
 /**
  * Class representing player's drone.
@@ -24,7 +19,7 @@ public class Player extends AnimatedSprite{
 	
 	private final PhysicsHandler mPhysicsHandler;
 	private static double myScore = 5;
-	private Font mFont;
+	private Font myFont;
     private BitmapTextureAtlas mFontTexture;
 
 
@@ -32,8 +27,10 @@ public class Player extends AnimatedSprite{
 		super(pX, pY, pTextureRegion, pVertexBufferObjectManager);
 		this.mPhysicsHandler = new PhysicsHandler(this);
 		this.registerUpdateHandler(this.mPhysicsHandler);
-		
-		//this.attachChild(GameModel.myEnemies.get(0));
+		this.myFont = myFont;
+		final Text myText = new Text(0,0, this.myFont, "Score", "FPS: XXXXX".length(), this.getVertexBufferObjectManager());
+
+		this.attachChild(myText);
 	
 
 //        this.mFont = new Font(this.mFontTexture, Typeface.create(Typeface.DEFAULT, Typeface.BOLD), 32, true, Color.BLACK);
@@ -56,7 +53,7 @@ public class Player extends AnimatedSprite{
 			this.mPhysicsHandler.setVelocityY(0);
 		
 		super.onManagedUpdate(pSecondsElapsed);
-		
+		//myText.setText(myScore);
 	}
 	
 	public PhysicsHandler getPhysicsHanlder(){
