@@ -6,7 +6,7 @@
     
     
     <string name="app_name_alt">My horse is amazing.</string>
-    <string name="textview_title">My MathDefendor is amazing.</string>
+    <string name="textview_title">Math Defendor</string>
     <string name="textview_highscorestitle">Highscores</string> 
     <string name="button_gamestart">Start Game</string>
     <string name="button_highscores">See Highscores</string>

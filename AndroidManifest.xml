@@ -18,7 +18,8 @@
         <activity android:name=".StartMenu"
                   android:label="@string/app_name_alt"
                   android:screenOrientation="landscape"
-                  android:configChanges="orientation">
+                  android:configChanges="orientation"
+                  android:theme="@android:style/Theme.NoTitleBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -27,7 +28,8 @@
         <activity android:name=".Highscores"
                   android:label="@string/app_name_alt"
                   android:screenOrientation="landscape"
-                  android:configChanges="orientation">
+                  android:configChanges="orientation"
+                  android:theme="@android:style/Theme.NoTitleBar">
         </activity>
     </application>
 </manifest>
