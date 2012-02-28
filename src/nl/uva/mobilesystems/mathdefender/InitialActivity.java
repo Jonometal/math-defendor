@@ -74,6 +74,7 @@ public class InitialActivity extends SimpleBaseGameActivity {
 	
 	//Text
 	private Font font;
+	private Font playerFont;
 	public Text text; //how many waves are left;
 		
 	// ===========================================================
@@ -138,7 +139,9 @@ public class InitialActivity extends SimpleBaseGameActivity {
 		
 		//text
 		this.font = FontFactory.create(this.getFontManager(), this.getTextureManager(), 256, 256, Typeface.create(Typeface.DEFAULT, Typeface.BOLD), 32);
-		this.font.load();
+		this.font.load();		
+		this.playerFont = FontFactory.create(this.getFontManager(), this.getTextureManager(), 256, 256, TextureOptions.BILINEAR, Typeface.create(Typeface.DEFAULT, Typeface.BOLD), 48);
+		this.playerFont.load();
 		
 	}
 
@@ -163,7 +166,7 @@ public class InitialActivity extends SimpleBaseGameActivity {
 		//Create a player here
 		final float centerX = 100;
 		final float centerY = 100;
-		player = new Player(centerX, centerY, this.mPlayerTextureRegion, this.getVertexBufferObjectManager());
+		player = new Player(centerX, centerY, this.mPlayerTextureRegion, this.getVertexBufferObjectManager(), playerFont);
 
 		scene.attachChild(player);
 		
