@@ -120,7 +120,8 @@ public class GameModel implements ObjectPositionEventListener {
 	 * Ultra important and bad-coding style method; Sets waves, enemies in there 
 	 */
 	public void setUpSimpleGame(int nrWaves, int nrTowers, Point screenDimenstions, TiledTextureRegion textureEnemy,
-								TiledTextureRegion textureTower, TiledTextureRegion textureTowerBullet, VertexBufferObjectManager objectManager){
+								TiledTextureRegion textureTower, TiledTextureRegion textureTowerBullet,
+								VertexBufferObjectManager objectManager, Font enemyFont){
 		this.currentLevel = new Level(Level.DIFF_TUTORIAL);
 		this.currentLevel.setWaves(new LinkedList<Wave>());
 		int levelDiff = 1;
@@ -132,7 +133,7 @@ public class GameModel implements ObjectPositionEventListener {
 				int x = screenDimenstions.x; //the edge of a screen
 				int y = screenDimenstions.y / (PhConstants.NR_ENEMIES_IN_WAVE+1) * (j+1);	//so equal distribution on screen Width
 				
-				Enemy tempEnemy = new Enemy(x,y, textureEnemy, objectManager, levelDiff);
+				Enemy tempEnemy = new Enemy(x,y, textureEnemy, objectManager, levelDiff, enemyFont);
 				tempEnemy.addObjectPositionEventListener(this);
 				tempEnemies.add(tempEnemy);
 			}
