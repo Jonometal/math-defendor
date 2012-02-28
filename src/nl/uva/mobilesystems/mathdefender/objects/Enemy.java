@@ -42,13 +42,20 @@ public class Enemy extends AnimatedSprite{
 		this.registerUpdateHandler(this.mPhysicsHandler);
 		this.mPhysicsHandler.setVelocity(-PhConstants.ENEMY_VELOCITY, 0);
 		genEquation();
+		myResult = Math.ceil(calculateResult(mySum));
 		Entity a = new Entity();
 		this.myFont = myFont;
 		final Text myText = new Text(0,0, this.myFont, "Score", "FPS: XXXXX".length(), this.getVertexBufferObjectManager());
-		myText.setText(mySum);
+		myText.setText(Double.toString(myResult));
 		this.attachChild(myText);
 	}
 	
+	//This method should be placed in a StringCalc class and parse the string to return an answer in Double
+	private double calculateResult(String mySum)
+	{
+		return 10;
+	}
+
 	public void genEquation()
 	{
 		switch (myDiff)
