@@ -133,7 +133,7 @@ public class Enemy extends AnimatedSprite{
 	protected void onManagedUpdate(float pSecondsElapsed) {
 
 		if (this.getX() < 0){
-			fireEvent(EventsConstants.EVENT_OBJECT_OUT_OF_SCENE);
+			fireEvent(EventsConstants.EVENT_OBJECT_ENEMY_OUT_OF_SCENE);
 			
 		}
 		super.onManagedUpdate(pSecondsElapsed);

@@ -9,6 +9,7 @@ import nl.uva.mobilesystems.mathdefender.game.Level;
 import nl.uva.mobilesystems.mathdefender.game.Wave;
 import nl.uva.mobilesystems.mathdefender.objects.Enemy;
 import nl.uva.mobilesystems.mathdefender.objects.Tower;
+import nl.uva.mobilesystems.mathdefender.objects.TowerBullet;
 import nl.uva.mobilesystems.mathdefender.physics.PhConstants;
 
 import org.andengine.engine.Engine;
@@ -16,6 +17,9 @@ import org.andengine.entity.IEntity;
 import org.andengine.entity.scene.Scene;
 import org.andengine.entity.sprite.AnimatedSprite;
 import org.andengine.entity.text.Text;
+import org.andengine.opengl.texture.TextureOptions;
+import org.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlas;
+import org.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlasTextureRegionFactory;
 import org.andengine.opengl.texture.region.ITiledTextureRegion;
 import org.andengine.opengl.texture.region.TiledTextureRegion;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
@@ -39,9 +43,13 @@ public class GameModel implements ObjectPositionEventListener {
 	/** Variable represeting current level that is maninated by GameModel */
 	private Level currentLevel;
 	
+	
+	// Textures
+
 	/** Debug things */
 	
 	private Text wavesLeftText; 
+	
 	
 	public static LinkedList<AnimatedSprite> myEnemies;
 	
@@ -76,10 +84,11 @@ public class GameModel implements ObjectPositionEventListener {
 		
 		switch(e.getEventCode()){
 		
-		case EventsConstants.EVENT_OBJECT_OUT_OF_SCENE:
-			AnimatedSprite object = (AnimatedSprite) e.getSource(); 
+		case EventsConstants.EVENT_OBJECT_ENEMY_OUT_OF_SCENE:
+			Enemy object = (Enemy) e.getSource(); 
 			removeObjectFromScene(object);
 			currentLevel.getCurrentWave().removeObject(object);	//it's ugly, maybe it's better to create some method in Level that could be called instead of walking down trough this hierarchy?
+			object.removeObjectPositionEventListener();
 			object = null;
 			Log.v("eventMine", "RemovesObject");
 			if(currentLevel.getCurrentWave().getObjects().size() == 0){ //check whether something is still in current Wave
@@ -88,7 +97,14 @@ public class GameModel implements ObjectPositionEventListener {
 				
 			}
 			break;
-		}
+		case EventsConstants.EVENT_OBJECT_BULLET_OUT_OF_SCENE:
+			TowerBullet objectBullet = (TowerBullet) e.getSource();
+			removeObjectFromScene(objectBullet);
+			objectBullet.removeObjectPositionEventListener();
+			objectBullet.getTower().increaseBulletsAvailable(1);
+			break;
+		} 
+		
 		
 	}
 	
@@ -101,7 +117,8 @@ public class GameModel implements ObjectPositionEventListener {
 	 * - nrTowers Towers in it (will be places in the center of screen
 	 * 
 	 * Ultra important and bad-coding style method; Sets waves, enemies in there */
-	public void setUpSimpleGame(int nrWaves, int nrTowers, Point screenDimenstions, TiledTextureRegion textureEnemy, TiledTextureRegion textureTower, VertexBufferObjectManager objectManager){
+	public void setUpSimpleGame(int nrWaves, int nrTowers, Point screenDimenstions, TiledTextureRegion textureEnemy,
+								TiledTextureRegion textureTower, TiledTextureRegion textureTowerBullet, VertexBufferObjectManager objectManager){
 		this.currentLevel = new Level(Level.DIFF_TUTORIAL);
 		this.currentLevel.setWaves(new LinkedList<Wave>());
 		int levelDiff = 1;
@@ -125,7 +142,7 @@ public class GameModel implements ObjectPositionEventListener {
 		
 		//Add additional TOWER to the game
 		for(int j=0; j<nrTowers; j++){
-			setNewTowerAt(screenDimenstions.x/2, screenDimenstions.y/2, textureTower, objectManager);
+			setNewTowerAt(screenDimenstions.x/2, screenDimenstions.y/2, textureTower,textureTowerBullet, objectManager);
 		}
 		
 		
@@ -140,12 +157,11 @@ public class GameModel implements ObjectPositionEventListener {
 	 * @param pTiledTextureRegion
 	 * @param pVertexBufferObjectManager
 	 */
-	public void setNewTowerAt(final float X, final float Y, ITiledTextureRegion pTiledTextureRegion, final VertexBufferObjectManager pVertexBufferObjectManager){
-		Tower newTower = new Tower(X,Y, pTiledTextureRegion, pVertexBufferObjectManager);
+	public void setNewTowerAt(final float X, final float Y, TiledTextureRegion pTowerTiledTextureRegion,TiledTextureRegion pTowerBulletTiledTextureRegion, VertexBufferObjectManager pVertexBufferObjectManager ){
+		Tower newTower = new Tower(this, X,Y, pTowerTiledTextureRegion,pTowerBulletTiledTextureRegion, pVertexBufferObjectManager);
 		this.currentLevel.getTowers().add(newTower);
 		addObjectToScene(newTower);
 		this.scene.registerTouchArea(newTower);
-		
 	}
 	
 	/**

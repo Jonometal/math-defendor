@@ -54,12 +54,18 @@ public class InitialActivity extends SimpleBaseGameActivity {
 	//player
 	private BitmapTextureAtlas mPlayerBitmap; //Player
 	private TiledTextureRegion mPlayerTextureRegion;
+	
 	//enemy
 	private BitmapTextureAtlas mEnemyBitmap; //Enemy
 	private TiledTextureRegion mEnemyTextureregion;
+	
 	//tower
 	private BitmapTextureAtlas mTowerBitmap; //Tower
 	private TiledTextureRegion mTowerTextureRegion;
+	
+	//tower bullet
+	protected BitmapTextureAtlas mTowerBulletBitmap;
+	protected TiledTextureRegion mTowerBulletTextureRegion;
 	
 	//analog-control
 	private BitmapTextureAtlas mOnScreenControlTexture;
@@ -119,6 +125,11 @@ public class InitialActivity extends SimpleBaseGameActivity {
 		this.mTowerTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(this.mTowerBitmap, this, "gfx/chromatic_circle_small_64x64.png", 0, 0, 1, 1);
 		this.mTowerBitmap.load();
 		
+		//towerbullet
+		this.mTowerBulletBitmap = new BitmapTextureAtlas(this.getTextureManager(), 32, 32, TextureOptions.BILINEAR);
+		this.mTowerBulletTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(this.mTowerBulletBitmap, this, "gfx/bullet.png", 0, 0, 1, 1);
+		this.mTowerBulletBitmap.load();
+		
 		//analog control
 		this.mOnScreenControlTexture = new BitmapTextureAtlas(this.getTextureManager(), 256, 128, TextureOptions.BILINEAR);
 		this.mOnScreenControlBaseTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(this.mOnScreenControlTexture, this, "gfx/onscreen_control_base.png", 0, 0);
@@ -142,7 +153,7 @@ public class InitialActivity extends SimpleBaseGameActivity {
 		//set our MathLevel here (will be calculated in separated thread)
 		gModel = new GameModel(this, scene);
 			// (nrWaves, nrTowers, [Screen_X, Screen_Y], EnemyTexture, TowerTexture, Library-shit-buffer)
-			gModel.setUpSimpleGame(50,1, new Point(GUIConstants.CAMERA_WIDTH, GUIConstants.CAMERA_HEIGHT), mEnemyTextureregion, mTowerTextureRegion, getVertexBufferObjectManager() );
+			gModel.setUpSimpleGame(50,1, new Point(GUIConstants.CAMERA_WIDTH, GUIConstants.CAMERA_HEIGHT), mEnemyTextureregion, mTowerTextureRegion, mTowerBulletTextureRegion, getVertexBufferObjectManager() );
 		
 		//Set Text
 //		this.text = new Text(500, 40, this.font, ResStrings.DEBUG_WAVES_LEFT + " " + this.gModel.getWavesLeft().size(), 
@@ -191,6 +202,7 @@ public class InitialActivity extends SimpleBaseGameActivity {
 			 
 //			GameModel.checkCollisions()
 			public void onUpdate(float pSecondsElapsed) {
+				
 				Iterator<AnimatedSprite> iter = gModel.getCurrentWaveObjects().iterator();
 				AnimatedSprite enemy;
 				while(iter.hasNext()){
