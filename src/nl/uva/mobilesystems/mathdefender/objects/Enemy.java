@@ -9,6 +9,8 @@ import android.graphics.PointF;
 import org.andengine.engine.handler.physics.PhysicsHandler;
 import org.andengine.entity.Entity;
 import org.andengine.entity.sprite.AnimatedSprite;
+import org.andengine.entity.text.Text;
+import org.andengine.opengl.font.Font;
 import org.andengine.opengl.texture.region.TiledTextureRegion;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 
@@ -23,9 +25,16 @@ public class Enemy extends AnimatedSprite{
 	private final PhysicsHandler mPhysicsHandler;
 	
 	private String mySum = "";
+	private double myResult;
 	private int myDiff;
+	private Text myText;
+	private Font myFont;
 	
-	public Enemy(final float pX, final float pY, final TiledTextureRegion pTextureRegion, final VertexBufferObjectManager pVertexBufferObjectManager, final int difficulty){
+	public Enemy(final float pX, final float pY, final TiledTextureRegion pTextureRegion,
+			final VertexBufferObjectManager pVertexBufferObjectManager,
+			final int difficulty, Font myFont
+			)
+	{
 		
 		super(pX, pY, pTextureRegion, pVertexBufferObjectManager);
 		this.myDiff = difficulty;
@@ -34,6 +43,10 @@ public class Enemy extends AnimatedSprite{
 		this.mPhysicsHandler.setVelocity(-PhConstants.ENEMY_VELOCITY, 0);
 		genEquation();
 		Entity a = new Entity();
+		this.myFont = myFont;
+		final Text myText = new Text(0,0, this.myFont, "Score", "FPS: XXXXX".length(), this.getVertexBufferObjectManager());
+		myText.setText(mySum);
+		this.attachChild(myText);
 	}
 	
 	public void genEquation()
