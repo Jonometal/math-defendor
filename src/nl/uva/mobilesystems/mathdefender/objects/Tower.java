@@ -5,6 +5,8 @@ import org.andengine.entity.sprite.TiledSprite;
 import org.andengine.input.touch.TouchEvent;
 import org.andengine.opengl.texture.region.ITiledTextureRegion;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
+
+import android.util.Log;
 /**
  * Class that will represent Tower that's going to shoot towards Enemies.
  * Currently it extends TiledSprite (no just sprite, no animation) but we can add
@@ -23,15 +25,22 @@ public class Tower extends TiledSprite{
 		super(X, Y, pTiledTextureRegion, pVertexBufferObjectManager);
 		this.mPhysicsHandler = new PhysicsHandler(this);
 		this.registerUpdateHandler(this.mPhysicsHandler);
+		
 	}
 	
 	
 	@Override
 	public boolean onAreaTouched(TouchEvent pSceneTouchEvent,
 			float pTouchAreaLocalX, float pTouchAreaLocalY) {
+		Log.v("tower", "touched");
 		this.setPosition(pSceneTouchEvent.getX() - this.getWidth() / 2, pSceneTouchEvent.getY() - this.getHeight() / 2);
 
 		return true;
+	}
+	
+	
+	public void shotAt(final float _x, final float _y){
+		;
 	}
 	
 	

@@ -34,7 +34,7 @@ public class GameModel implements ObjectPositionEventListener {
 	/** Game Variables */
 	Engine engine;
 	
-	Scene scene; //it's little bit akward, it must be here because current implementation of Model starts drawing before InitialActivity.onCreateScene() method is finished, so engine variable (field in GameModel class) doesnt know about this scene yet
+	Scene scene; //it's little bit awkward, it must be here because current implementation of Model starts drawing before InitialActivity.onCreateScene() method is finished, so engine variable (field in GameModel class) doesnt know about this scene yet
 	
 	/** Variable represeting current level that is maninated by GameModel */
 	private Level currentLevel;
@@ -144,6 +144,7 @@ public class GameModel implements ObjectPositionEventListener {
 		Tower newTower = new Tower(X,Y, pTiledTextureRegion, pVertexBufferObjectManager);
 		this.currentLevel.getTowers().add(newTower);
 		addObjectToScene(newTower);
+		this.scene.registerTouchArea(newTower);
 		
 	}
 	

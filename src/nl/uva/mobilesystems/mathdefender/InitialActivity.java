@@ -19,6 +19,7 @@ import org.andengine.entity.scene.background.Background;
 import org.andengine.entity.sprite.AnimatedSprite;
 import org.andengine.entity.text.Text;
 import org.andengine.entity.util.FPSLogger;
+import org.andengine.input.touch.controller.MultiTouch;
 import org.andengine.opengl.font.Font;
 import org.andengine.opengl.font.FontFactory;
 import org.andengine.opengl.texture.TextureOptions;
@@ -31,6 +32,7 @@ import org.andengine.ui.activity.SimpleBaseGameActivity;
 import android.graphics.Point;
 import android.graphics.Typeface;
 import android.opengl.GLES20;
+import android.widget.Toast;
 
 public class InitialActivity extends SimpleBaseGameActivity {
 	// ===========================================================
@@ -84,7 +86,19 @@ public class InitialActivity extends SimpleBaseGameActivity {
 	public EngineOptions onCreateEngineOptions() {
 		//set Camera here
 		this.mCamera = new Camera(0, 0, GUIConstants.CAMERA_WIDTH, GUIConstants.CAMERA_HEIGHT);
-		return new EngineOptions(true, ScreenOrientation.LANDSCAPE_FIXED, new RatioResolutionPolicy(GUIConstants.CAMERA_WIDTH, GUIConstants.CAMERA_HEIGHT), this.mCamera);
+		EngineOptions engineOptions = new EngineOptions(true, ScreenOrientation.LANDSCAPE_FIXED, new RatioResolutionPolicy(GUIConstants.CAMERA_WIDTH, GUIConstants.CAMERA_HEIGHT), this.mCamera); 
+		engineOptions.getTouchOptions().setNeedsMultiTouch(true);
+
+		if(MultiTouch.isSupported(this)) {
+			if(MultiTouch.isSupportedDistinct(this)) {
+				Toast.makeText(this, "MultiTouch detected --> Both controls will work properly!", Toast.LENGTH_SHORT).show();
+			} else {
+				Toast.makeText(this, "MultiTouch detected, but your device has problems distinguishing between fingers.\n\nControls are placed at different vertical locations.", Toast.LENGTH_LONG).show();
+			}
+		} else {
+			Toast.makeText(this, "Sorry your device does NOT support MultiTouch!\n\n(Falling back to SingleTouch.)\n\nControls are placed at different vertical locations.", Toast.LENGTH_LONG).show();
+		}
+		return engineOptions;
 	}
 
 	 

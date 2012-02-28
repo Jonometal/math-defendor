@@ -1,6 +1,5 @@
 package nl.uva.mobilesystems.mathdefender.andengine.events;
 
-import java.util.EventObject;
 
 /**
  * It's for imporatnt events that relate to object position:
