@@ -21,15 +21,15 @@ public class Player extends AnimatedSprite{
 	private static double myScore = 5;
 	private Font myFont;
     private BitmapTextureAtlas mFontTexture;
-
+    private Text myText;
 
 	public Player(final float pX, final float pY, final TiledTextureRegion pTextureRegion, final VertexBufferObjectManager pVertexBufferObjectManager, Font myFont){
 		super(pX, pY, pTextureRegion, pVertexBufferObjectManager);
 		this.mPhysicsHandler = new PhysicsHandler(this);
 		this.registerUpdateHandler(this.mPhysicsHandler);
 		this.myFont = myFont;
-		final Text myText = new Text(0,0, this.myFont, "Score", "FPS: XXXXX".length(), this.getVertexBufferObjectManager());
-
+		final Text myText = new Text(20,20, this.myFont, "Score", "FPS: XXXXX".length(), this.getVertexBufferObjectManager());
+		myText.setText(Double.toString(myScore));
 		this.attachChild(myText);
 	
 
@@ -53,7 +53,7 @@ public class Player extends AnimatedSprite{
 			this.mPhysicsHandler.setVelocityY(0);
 		
 		super.onManagedUpdate(pSecondsElapsed);
-		//myText.setText(myScore);
+		
 	}
 	
 	public PhysicsHandler getPhysicsHanlder(){
