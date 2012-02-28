@@ -72,7 +72,6 @@ public class Tower extends TiledSprite{
 			float pTouchAreaLocalX, float pTouchAreaLocalY) {
 		Log.v("tower", "touched");
 		this.setPosition(pSceneTouchEvent.getX() - this.getWidth() / 2, pSceneTouchEvent.getY() - this.getHeight() / 2);
-		shotAt(100,100);
 		return true;
 	}
 	
