@@ -4,6 +4,7 @@ import java.util.Iterator;
 
 import nl.uva.mobilesystems.mathdefender.gui.GUIConstants;
 import nl.uva.mobilesystems.mathdefender.objects.Player;
+import nl.uva.mobilesystems.mathdefender.objects.Enemy;
 import nl.uva.mobilesystems.mathdefender.physics.PhConstants;
 
 import org.andengine.engine.camera.Camera;
@@ -214,6 +215,7 @@ public class InitialActivity extends SimpleBaseGameActivity {
 					enemy = iter.next();
 					if(player.collidesWith(enemy)){
 						gModel.removeObjectFromScene(enemy);
+						player.setScore(((Enemy) enemy).getResult());
 						//TODO should be re-written here in more OOP manner: so player.collisionDetected() and enemy.collisionDetected() should be used instead putting a logic here
 						iter.remove();
 					}
