@@ -64,5 +64,8 @@ public class Player extends AnimatedSprite{
 		return myScore;
 	}
 
-	
+	public void setScore(double updateScore) {
+		myScore += updateScore;
+		//myText.setText(Double.toString(myScore));
+	}
 }
