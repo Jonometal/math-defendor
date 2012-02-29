@@ -17,7 +17,7 @@ public class PhConstants {
 	// TOWERS
 	public static final int TOWER_MAX_BULLETS = 4;
 	
-	public static final float TOWER_BULLET_SPEED = 450f;
+	public static final float TOWER_BULLET_SPEED = 350f;
 	
 	public static final float TOWER_RANGE = 250f; //the radius of area in which Tower can detect enemies and start shooting at them
 	

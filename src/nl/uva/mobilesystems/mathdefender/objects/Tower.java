@@ -45,6 +45,18 @@ public class Tower extends TiledSprite{
 	/** Tower needs some reload time between shots.*/
 	private float secondsElapsed = 0;
 
+	// -------------------- SETTERS & GETTERS 
+	public LinkedList<TowerBullet> getBullets() {
+		return bullets;
+	}
+
+
+	public void setBullets(LinkedList<TowerBullet> bullets) {
+		this.bullets = bullets;
+	}
+	
+	// -------------------- CONSTRUSTORS
+	
 	/**
 	 * Constructor
 	 * @param model
@@ -64,13 +76,17 @@ public class Tower extends TiledSprite{
 		
 		this.mPhysicsHandler = new PhysicsHandler(this);
 		this.registerUpdateHandler(this.mPhysicsHandler);
+		
+		this.bullets = new LinkedList<TowerBullet>();
 	}
+	
+	
 	
 	
 	@Override
 	public boolean onAreaTouched(TouchEvent pSceneTouchEvent,
 			float pTouchAreaLocalX, float pTouchAreaLocalY) {
-		Log.v("tower", "touched");
+//		Log.v("tower", "touched");
 		this.setPosition(pSceneTouchEvent.getX() - this.getWidth() / 2, pSceneTouchEvent.getY() - this.getHeight() / 2);
 		return true;
 	}
@@ -113,6 +129,7 @@ public class Tower extends TiledSprite{
 			
 			TowerBullet newBullet = new TowerBullet(_x-this.getX(), _y-this.getY(),this, pTowerBulletTiledTextureRegion, objectManager);
 			newBullet.addObjectPositionEventListener(model);
+			bullets.add(newBullet);
 //			this.attachChild(newBullet);
 			this.model.addObjectToScene(newBullet);
 			bulletsAvailable--;
@@ -120,6 +137,8 @@ public class Tower extends TiledSprite{
 		}else
 			return false; //no bullets available
 	}
+
+
 	
 	
 }

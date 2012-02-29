@@ -1,10 +1,13 @@
 package nl.uva.mobilesystems.mathdefender;
 
 import java.util.Iterator;
+import java.util.LinkedList;
 
 import nl.uva.mobilesystems.mathdefender.gui.GUIConstants;
-import nl.uva.mobilesystems.mathdefender.objects.Player;
 import nl.uva.mobilesystems.mathdefender.objects.Enemy;
+import nl.uva.mobilesystems.mathdefender.objects.Player;
+import nl.uva.mobilesystems.mathdefender.objects.Tower;
+import nl.uva.mobilesystems.mathdefender.objects.TowerBullet;
 import nl.uva.mobilesystems.mathdefender.physics.PhConstants;
 
 import org.andengine.engine.camera.Camera;
@@ -210,14 +213,38 @@ public class InitialActivity extends SimpleBaseGameActivity {
 			public void onUpdate(float pSecondsElapsed) {
 				
 				Iterator<AnimatedSprite> iter = gModel.getCurrentWaveObjects().iterator();
+				LinkedList<Tower> towers = gModel.getTowers();
 				AnimatedSprite enemy;
 				while(iter.hasNext()){
+					
 					enemy = iter.next();
-					if(player.collidesWith(enemy)){
+					if(player.collidesWith(enemy)){			//collsion player <-> enemy
 						gModel.removeObjectFromScene(enemy);
 						player.setScore(((Enemy) enemy).getResult());
 						//TODO should be re-written here in more OOP manner: so player.collisionDetected() and enemy.collisionDetected() should be used instead putting a logic here
 						iter.remove();
+					}else{	//otherwise check for collisions with bullets
+						Iterator<Tower> iterTower = towers.iterator();
+						Tower tower;
+						towerLoop: while(iterTower.hasNext()){
+							tower = iterTower.next();
+							if(tower.getBullets().size() == 0)	//no bullets for this tower, check next one
+								continue;
+							Iterator<TowerBullet> iterBullet = tower.getBullets().iterator();
+							TowerBullet bullet;
+							while(iterBullet.hasNext()){
+								bullet = iterBullet.next();
+								if(enemy.collidesWith(bullet)){ //collision enemy <-> bullet
+									gModel.removeObjectFromScene(bullet);
+									gModel.removeObjectFromScene(enemy);
+									tower.increaseBulletsAvailable(1);	//increase tower's bullet by 1
+									iterBullet.remove(); //remove bullet
+									iter.remove(); //remove enemy
+									break towerLoop;	//we're breaking the outer loop as for this enemy there won't be any collisions, because he is NO MORE.
+								}
+							}
+								
+						}
 					}
 				}
 //				for(AnimatedSprite enemy : gModel.getCurrentWaveObjects()){

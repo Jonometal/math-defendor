@@ -64,7 +64,7 @@ public class TowerBullet extends TiledSprite {
 	protected void onManagedUpdate(float pSecondsElapsed) {
 		
 			
-		Log.d("towerBullet2",  + this.getX() + " " + this.getY());
+//		Log.d("towerBullet2",  + this.getX() + " " + this.getY());
 		if (HelperClass.isOutSideScene(this.getX(), this.getY())){
 			fireEvent(EventsConstants.EVENT_OBJECT_BULLET_OUT_OF_SCENE);
 		}
