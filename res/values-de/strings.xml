@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">what, what!</string>
+    <string name="app_name">Math-o-Defender</string>
+    <string name="debug_waves_left">Wellen uebrig:</string>
+    
+    
+    <string name="app_name_alt">Mein Pferd ist erstaunlich.</string>
+    <string name="textview_title">Math Defendor</string>
+    <string name="textview_highscorestitle">Highscores</string> 
+    <string name="button_gamestart">Spiel starten</string>
+    <string name="button_highscores">Highscores ansehen</string>
+    <string name="button_exit">Applikation beenden</string>
+    <string name="button_tutorialstart">Tutorial starten</string> 
+</resources>
