@@ -135,8 +135,8 @@ public class GameModel implements ObjectPositionEventListener {
 			LinkedList<AnimatedSprite>  tempEnemies = new LinkedList<AnimatedSprite>();
 			for(int j=0; j< PhConstants.NR_ENEMIES_IN_WAVE; j++){ //generating enemies
 				int random = (int)(Math.random() * 1000);	//should be an integer number from 0 - 1000 
-				int x = screenDimenstions.x; //the edge of a screen
-				int y = screenDimenstions.y / (PhConstants.NR_ENEMIES_IN_WAVE+1) * (j+1);	//so equal distribution on screen Width
+				int x = screenDimensions.x; //the edge of a screen
+				int y = screenDimensions.y / (PhConstants.NR_ENEMIES_IN_WAVE+1) * (j+1);	//so equal distribution on screen Width
 				
 				Enemy tempEnemy = new Enemy(x,y, textureEnemy, objectManager, levelDiff, enemyFont);
 				tempEnemy.addObjectPositionEventListener(this);
@@ -150,11 +150,8 @@ public class GameModel implements ObjectPositionEventListener {
 		
 		//Add additional TOWER to the game
 		for(int j=0; j<nrTowers; j++){
-<<<<<<< .mine
-			setNewTowerAt(screenDimensions.x/2, screenDimensions.y/2, textureTower,textureTowerBullet, objectManager);
-=======
+
 			setNewTowerAt(350, 400, textureTower,textureTowerBullet, objectManager);
->>>>>>> .r70
 		}
 	}
 	
