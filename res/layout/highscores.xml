@@ -1,16 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/background_hsc"
-    android:baselineAligned="false"
-    android:gravity="center_horizontal"
-    android:orientation="horizontal" >
+   	<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    	android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:background="@drawable/background_hsc"
+    	android:baselineAligned="false"
+    	android:gravity="center_horizontal"
+    	android:orientation="horizontal">
 
-    <TextView android:id="@+id/text"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:text="@string/textview_highscorestitle"
-              android:textColor="#EEC300"
-              android:textSize="20pt" />
-</LinearLayout>
+	    <TableRow
+	        android:id="@+id/tableRow1"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:background="#aa000000"
+	        android:gravity="center_horizontal">
+	            <TextView android:id="@+id/hsctitle"
+              		android:layout_width="match_parent"
+              		android:layout_height="wrap_content"
+              		android:text="@string/textview_highscorestitle"
+              		android:textColor="#EEC300"
+              		android:textSize="20pt" 
+              		android:layout_marginBottom="10dp"/>
+	    </TableRow>
+
+	    <TableRow
+	        android:id="@+id/tableRow2"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	      	android:background="#00000000"
+	        android:gravity="center_horizontal" >
+	         <TextView android:id="@+id/column1"
+              		android:layout_width="match_parent"
+              		android:layout_height="wrap_content"
+              		android:text="@string/loremipsum1"
+              		android:textColor="#EEC300"
+              		android:textSize="12pt" 
+              		android:layout_margin="10dp"
+              		android:gravity="left"/>
+	         <TextView android:id="@+id/column2"
+              		android:layout_width="match_parent"
+              		android:layout_height="wrap_content"
+              		android:text="@string/loremipsum2"
+              		android:textColor="#EEC300"
+              		android:textSize="12pt" 
+              		android:layout_margin="10dp"
+              		android:gravity="right"/>
+	    </TableRow>
+
+	    
+	   <TableRow
+	        android:id="@+id/tableRow3"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	      	android:background="#33000000"
+	        android:gravity="center_horizontal" >
+	         <TextView android:id="@+id/column1a"
+              		android:layout_width="match_parent"
+              		android:layout_height="wrap_content"
+              		android:text="@string/loremipsum1"
+              		android:textColor="#EEC300"
+              		android:textSize="12pt" 
+              		android:layout_margin="10dp"
+              		android:gravity="left"/>
+	         <TextView android:id="@+id/column2a"
+              		android:layout_width="match_parent"
+              		android:layout_height="wrap_content"
+              		android:text="@string/loremipsum2"
+              		android:textColor="#EEC300"
+              		android:textSize="12pt" 
+              		android:layout_margin="10dp"
+              		android:gravity="right"/>
+	    </TableRow>
+	</TableLayout>

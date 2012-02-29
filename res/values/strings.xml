@@ -12,4 +12,7 @@
     <string name="button_highscores">See Highscores</string>
     <string name="button_exit">Quit Application</string>
     <string name="button_tutorialstart">Start Tutorial</string> 
+    
+    <string name="loremipsum1">Lorem ipsum</string>
+    <string name="loremipsum2">dolor sit amet</string> 
 </resources>
