@@ -1,5 +1,5 @@
 Poooooooooooooooo maker
-
+LAST TODO
 
 1) Laurens:
 	- Add Sum Class
@@ -13,3 +13,30 @@ Poooooooooooooooo maker
 	- Game Model -> Level -> Manner
 	- Add Tower to game; 
 
+
+TODO 29.02
+
+General:
+Upgrades:
+	- Speed upgrade
+	- BulletTime Upgrade
+	- Buy 
+	
+	
+1) Laurens
+	- Implement Sums-engine 
+		-> Sums will be displyed, generated, updating the player's score by the result of equation
+	-  	write for objects method collisionDetected() and put more brain there
+	- Laurens -> Levels
+	
+2) Tobi
+	- change graphics of objects, background, fonts (hand-written)
+	- paint enemies pink
+	
+3) MIchał
+	- help Laurens with updating Text
+ 	- rewrite code to be more useuful
+ 		- move collision tests to GameModel
+ 		- create separated class for textures; 
+		- write for objects method collisionDetected() and put more brain there
+	
