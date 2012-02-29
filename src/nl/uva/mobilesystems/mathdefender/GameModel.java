@@ -124,7 +124,7 @@ public class GameModel implements ObjectPositionEventListener {
 	 * 
 	 * Ultra important and bad-coding style method; Sets waves, enemies in there 
 	 */
-	public void setUpSimpleGame(int nrWaves, int nrTowers, Point screenDimenstions, TiledTextureRegion textureEnemy,
+	public void setUpSimpleGame(int nrWaves, int nrTowers, Point screenDimensions, TiledTextureRegion textureEnemy,
 								TiledTextureRegion textureTower, TiledTextureRegion textureTowerBullet,
 								VertexBufferObjectManager objectManager, Font enemyFont){
 		this.currentLevel = new Level(Level.DIFF_TUTORIAL);
@@ -150,7 +150,11 @@ public class GameModel implements ObjectPositionEventListener {
 		
 		//Add additional TOWER to the game
 		for(int j=0; j<nrTowers; j++){
+<<<<<<< .mine
+			setNewTowerAt(screenDimensions.x/2, screenDimensions.y/2, textureTower,textureTowerBullet, objectManager);
+=======
 			setNewTowerAt(350, 400, textureTower,textureTowerBullet, objectManager);
+>>>>>>> .r70
 		}
 	}
 	
