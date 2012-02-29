@@ -15,4 +15,6 @@
     
     <string name="loremipsum1">Lorem ipsum</string>
     <string name="loremipsum2">dolor sit amet</string> 
+    <string name="points1">5230</string>
+    <string name="points2">2344</string> 
 </resources>

@@ -19,8 +19,9 @@ import org.andengine.engine.options.EngineOptions;
 import org.andengine.engine.options.EngineOptions.ScreenOrientation;
 import org.andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
 import org.andengine.entity.scene.Scene;
-import org.andengine.entity.scene.background.Background;
+import org.andengine.entity.scene.background.SpriteBackground;
 import org.andengine.entity.sprite.AnimatedSprite;
+import org.andengine.entity.sprite.Sprite;
 import org.andengine.entity.text.Text;
 import org.andengine.entity.util.FPSLogger;
 import org.andengine.input.touch.controller.MultiTouch;
@@ -44,6 +45,8 @@ public class InitialActivity extends SimpleBaseGameActivity {
 		// ===========================================================
 
 	private static final float DEMO_VELOCITY = 100.0f;
+    private static final int CAMERA_WIDTH = 470;
+    private static final int CAMERA_HEIGHT = 270;
 
 		// ===========================================================
 		// Fields
@@ -55,6 +58,11 @@ public class InitialActivity extends SimpleBaseGameActivity {
 	private Player player;
 
 	//game-sprites
+	//background
+	private BitmapTextureAtlas mBackgroundBitmap; //Background
+	private ITextureRegion mBackgroundTextureRegion;
+	private Sprite mBackgroundSprite;
+	
 	//player
 	private BitmapTextureAtlas mPlayerBitmap; //Player
 	private TiledTextureRegion mPlayerTextureRegion;
@@ -114,6 +122,10 @@ public class InitialActivity extends SimpleBaseGameActivity {
 
 	 
 	protected void onCreateResources() {
+		//player
+		this.mBackgroundBitmap = new BitmapTextureAtlas(this.getTextureManager(), 531, 241, TextureOptions.BILINEAR);
+		this.mBackgroundTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(this.mBackgroundBitmap, this, "gfx/bg.png", 0, 0);
+		this.mBackgroundSprite = new Sprite(0f,0f, (float)CAMERA_WIDTH, (float)CAMERA_HEIGHT, this.mBackgroundTextureRegion, this.getVertexBufferObjectManager());
 		
 		//player
 		this.mPlayerBitmap = new BitmapTextureAtlas(this.getTextureManager(), 96, 96, TextureOptions.BILINEAR);
@@ -155,7 +167,9 @@ public class InitialActivity extends SimpleBaseGameActivity {
 		
 		//Set SCENE [must be done before Setting our MODEL obviously]
 		final Scene scene = new Scene();
-		scene.setBackground(new Background(0.09804f, 0.6274f, 0.8784f));
+		//scene.setBackground(new Background(0.05f, 0.8f, 0.8f));
+		scene.setBackground(new SpriteBackground(0.05f, 0.8f, 0.8f, this.mBackgroundSprite));
+		
 		
 		//set our MathLevel here (will be calculated in separated thread)
 		gModel = new GameModel(this, scene);
