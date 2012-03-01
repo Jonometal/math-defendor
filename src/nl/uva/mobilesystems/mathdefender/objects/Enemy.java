@@ -26,7 +26,7 @@ public class Enemy extends AnimatedSprite{
 	private final PhysicsHandler mPhysicsHandler;
 	
 	private String mySum = "";
-	private double myResult;
+	private int myResult;
 	private int myDiff;
 	private Text myText;
 	private Font myFont;
@@ -43,16 +43,16 @@ public class Enemy extends AnimatedSprite{
 		this.registerUpdateHandler(this.mPhysicsHandler);
 		this.mPhysicsHandler.setVelocity(-PhConstants.ENEMY_VELOCITY, 0);
 		genEquation();
-		myResult = Math.ceil(calculateResult(mySum));
+		myResult = (int)Math.ceil(calculateResult(mySum));
 		Entity a = new Entity();
 		this.myFont = myFont;
 		final Text myText = new Text(0,0, this.myFont, "Score", "FPS: XXXXX".length(), this.getVertexBufferObjectManager());
-		myText.setText(Double.toString(myResult));
+		myText.setText(Integer.toString(myResult));
 		this.attachChild(myText);
 	}
 	
-	//This method should be placed in a StringCalc class and parse the string to return an answer in Double
-	private double calculateResult(String mySum)
+	//This method should be placed in a StringCalc class and parse the string to return an answer in int
+	private int calculateResult(String mySum)
 	{
 		return 10;
 		//return StringCalc.calculate(mySum);
@@ -63,30 +63,28 @@ public class Enemy extends AnimatedSprite{
 		switch (myDiff)
 		{
 					case 1:
-						double element = Math.floor(Math.random() * (Player.getScore() + 10)) - 5;
-						mySum = mySum + Double.toString(element);
+						int element = (int) (Math.floor(Math.random() * (Player.getScore() + 10)) - 5);
+						mySum = mySum + Integer.toString(element);
 						//if (gameMode == "Defender"){var element = Math.floor(Math.random() * (MathPlayer.getMyValue() + 10)) - 5;}
 						//else {var element = Math.floor(Math.random() * MathPlayer.getMyValue() + 10) - 5;}
-						//trace ("Element generated: " + element);
 						//listOfElements.push(element);
-						//mySum = mySum + (element.toString());
-						//trace ("Mysum: " + mySum);
+						break;
+						
+					case 2:
+						//if (gameMode == "Defender"){var element0 = Math.floor(Math.random() * (MathPlayer.getMyValue() + 100)) - 50;}
+						//else {var element0 = Math.floor((Math.random() * myIncrementer) * 100);}
+						//listOfElements.push(element0);
+						//int element1 = randomConstructor("+-...");
+					//	listOfElements.push(element1);
+						//if (gameMode == "Defender"){var element2 = Math.floor(Math.random() * (MathPlayer.getMyValue() + 100)) - 50;}
+						//else {var element2 = Math.floor((Math.random() * myIncrementer) * 100);}
+						//listOfElements.push(element2);
+						//trace("ListOfElements" + listOfElements);
+						//mySum = mySum + (element0.toString());
+						//mySum = mySum + (element1.toString());
+						//mySum = mySum + (element2.toString());
 						break;
 						/*
-					case 2:
-						if (gameMode == "Defender"){var element0 = Math.floor(Math.random() * (MathPlayer.getMyValue() + 100)) - 50;}
-						else {var element0 = Math.floor((Math.random() * myIncrementer) * 100);}
-						listOfElements.push(element0);
-						var element1 = randomConstructor("+-...");
-						listOfElements.push(element1);
-						if (gameMode == "Defender"){var element2 = Math.floor(Math.random() * (MathPlayer.getMyValue() + 100)) - 50;}
-						else {var element2 = Math.floor((Math.random() * myIncrementer) * 100);}
-						listOfElements.push(element2);
-						//trace("ListOfElements" + listOfElements);
-						mySum = mySum + (element0.toString());
-						mySum = mySum + (element1.toString());
-						mySum = mySum + (element2.toString());
-						break;
 					case 3:
 						if (gameMode == "Defender"){var element0 = Math.floor(Math.random() * (MathPlayer.getMyValue() + 200)) - 100;}
 						else {var element0 = Math.floor((Math.random() * myIncrementer) * 100);}
@@ -137,7 +135,7 @@ public class Enemy extends AnimatedSprite{
 		return mySum;
 	}
 	
-	public double getResult() {
+	public int getResult() {
 		return myResult;
 	}
 	
