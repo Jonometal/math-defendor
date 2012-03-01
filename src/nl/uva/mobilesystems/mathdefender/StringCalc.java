@@ -1,9 +1,10 @@
  package nl.uva.mobilesystems.mathdefender;
  
 
+
+public class StringCalc{}
 /*
-public class StringCalc
-	{ 
+{ 
        
       public static int calculate(String s)
 		{ 
