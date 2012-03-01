@@ -22,7 +22,7 @@ import android.graphics.Typeface;
  * 
  * The name of class and access method is short so it's easy to use it, otherwise
  * you will have to use sth like TextureManager.getInstance().(your texture name)
- * @author majkeliusz
+ * @author siemionides
  *
  */
 public class TexMan {
