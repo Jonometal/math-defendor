@@ -18,7 +18,7 @@ import org.andengine.opengl.vbo.VertexBufferObjectManager;
 public class Player extends AnimatedSprite{
 	
 	private final PhysicsHandler mPhysicsHandler;
-	private static double myScore = 5;
+	private static int myScore = 5;
 	private Font myFont;
     private BitmapTextureAtlas mFontTexture;
     private Text myText;
@@ -29,7 +29,7 @@ public class Player extends AnimatedSprite{
 		this.registerUpdateHandler(this.mPhysicsHandler);
 		this.myFont = myFont;
 		final Text myText = new Text(20,20, this.myFont, "Score", "FPS: XXXXX".length(), this.getVertexBufferObjectManager());
-		myText.setText(Double.toString(myScore));
+		myText.setText(Integer.toString(myScore));
 		this.attachChild(myText);
 	
 
@@ -60,12 +60,12 @@ public class Player extends AnimatedSprite{
 		return this.mPhysicsHandler;
 	}
 
-	public static double getScore() {
+	public static int getScore() {
 		return myScore;
 	}
 
-	public void setScore(double updateScore) {
+	public void setScore(int updateScore) {
 		myScore += updateScore;
-		//myText.setText(Double.toString(myScore));
+		//myText.setText(int.toString(myScore));
 	}
 }
