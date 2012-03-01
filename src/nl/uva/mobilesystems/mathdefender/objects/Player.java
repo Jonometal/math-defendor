@@ -18,10 +18,30 @@ import org.andengine.opengl.vbo.VertexBufferObjectManager;
 public class Player extends AnimatedSprite{
 	
 	private final PhysicsHandler mPhysicsHandler;
-	private static int myScore = 5;
+	private int myScore = 5;
 	private Font myFont;
     private BitmapTextureAtlas mFontTexture;
     private Text myText;
+    
+	/*
+	 * SETTERS & GETTERS ----------------------------------------------------
+	 */
+	public PhysicsHandler getPhysicsHanlder(){
+		return this.mPhysicsHandler;
+	}
+
+	public int getScore() {
+		return myScore;
+	}
+
+//	public void updateScore(int updateScore) {
+//		myScore += updateScore;
+//		//myText.setText(int.toString(myScore));
+//	}
+    
+    /*
+     * CONSTRUCTORS ------------------------------------------------------
+     */
 
 	public Player(final float pX, final float pY, final TiledTextureRegion pTextureRegion, final VertexBufferObjectManager pVertexBufferObjectManager, Font myFont){
 		super(pX, pY, pTextureRegion, pVertexBufferObjectManager);
@@ -40,7 +60,9 @@ public class Player extends AnimatedSprite{
 //		this.mPhysicsHandler.setVelocity(AndPhConstants.DEMO_VELOCITY, AndPhConstants.DEMO_VELOCITY);
 		
 	}
-	
+	 /*
+     * OVERRIDEN METHOD ------------------------------------------------------
+     */
 	@Override
 	protected void onManagedUpdate(final float pSecondsElapsed) {
 
@@ -56,16 +78,19 @@ public class Player extends AnimatedSprite{
 		
 	}
 	
-	public PhysicsHandler getPhysicsHanlder(){
-		return this.mPhysicsHandler;
+	 /*
+     * PUBLIC METHODS ------------------------------------------------------
+     */
+	
+	/**
+	 * Should be called when collision is detected.
+	 * Currently it serves only collisions with enemies.
+	 * @param enemy
+	 */
+	public void collisionDetected(Enemy enemy){
+		this.myScore += enemy.getResult(); 
+		this.myText.setText("haha");
 	}
+	
 
-	public static int getScore() {
-		return myScore;
-	}
-
-	public void setScore(int updateScore) {
-		myScore += updateScore;
-		//myText.setText(int.toString(myScore));
-	}
 }
