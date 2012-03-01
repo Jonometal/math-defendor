@@ -36,7 +36,7 @@ Upgrades:
 3) MIchał
 	- help Laurens with updating Text
  	- rewrite code to be more useuful
- 		- move collision tests to GameModel
+ 		- DONE move collision tests to GameModel
  		- create separated class for textures; 
 		- write for objects method collisionDetected() and put more brain there
 	

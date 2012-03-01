@@ -23,9 +23,13 @@ import org.andengine.ui.activity.SimpleBaseGameActivity;
 
 import android.graphics.Point;
 import android.opengl.GLES20;
+import android.util.Log;
+import android.view.KeyEvent;
+import android.view.View;
+import android.view.View.OnKeyListener;
 import android.widget.Toast;
 
-public class InitialActivity extends SimpleBaseGameActivity {
+public class InitialActivity extends SimpleBaseGameActivity implements OnKeyListener{
 	// ===========================================================
 		// Constants
 		// ===========================================================
@@ -73,16 +77,20 @@ public class InitialActivity extends SimpleBaseGameActivity {
 		} else {
 			Toast.makeText(this, "Sorry your device does NOT support MultiTouch!\n\n(Falling back to SingleTouch.)\n\nControls are placed at different vertical locations.", Toast.LENGTH_LONG).show();
 		}
+		
+		
 		return engineOptions;
 	}
 
 	 
 	protected void onCreateResources() {
 		TexMan.initializeTextures(this);
+		
 	}
 
 	 
 	protected Scene onCreateScene() {
+		
 		this.mEngine.registerUpdateHandler(new FPSLogger());
 		
 		//Set SCENE [must be done before Setting our MODEL obviously]
@@ -94,7 +102,13 @@ public class InitialActivity extends SimpleBaseGameActivity {
 		//set our MathLevel here (will be calculated in separated thread)
 		gModel = new GameModel(this, scene);
 			// (nrWaves, nrTowers, [Screen_X, Screen_Y], EnemyTexture, TowerTexture, Library-shit-buffer)
-			gModel.setUpSimpleGame(50,1, new Point(GUIConstants.CAMERA_WIDTH, GUIConstants.CAMERA_HEIGHT),
+		final float centerX = 100;
+		final float centerY = 100;
+		player = new Player(centerX, centerY, TexMan.getIt().mPlayerTextureRegion, getVertexBufferObjectManager(), TexMan.getIt().playerFont, gModel);
+		gModel.setPlayer(player); ///deub???
+		scene.attachChild(player);
+		
+		gModel.setUpSimpleGame(50,1, new Point(GUIConstants.CAMERA_WIDTH, GUIConstants.CAMERA_HEIGHT),
 					TexMan.getIt().mEnemyTextureregion, TexMan.getIt().mTowerTextureRegion, TexMan.getIt().mTowerBulletTextureRegion, getVertexBufferObjectManager(), TexMan.getIt().playerFont
 					);
 		
@@ -104,11 +118,7 @@ public class InitialActivity extends SimpleBaseGameActivity {
 //		scene.attachChild(text);
 
 		//Create a player here
-		final float centerX = 100;
-		final float centerY = 100;
-		player = new Player(centerX, centerY, TexMan.getIt().mPlayerTextureRegion, getVertexBufferObjectManager(), TexMan.getIt().playerFont);
-		gModel.setPlayer(player); ///deub???
-		scene.attachChild(player);
+	
 		
 		//Set current wave objects here
 		for(AnimatedSprite waveObject: gModel.getCurrentWaveObjects()){
@@ -159,6 +169,31 @@ public class InitialActivity extends SimpleBaseGameActivity {
 		
 
 		return scene;
+	}
+
+
+	@Override
+	public synchronized void onGameDestroyed() {
+		super.onGameDestroyed();
+		Log.d("onDest", "destroyed?");
+		finish();
+	}
+	
+	
+	@Override
+	public boolean onKey(View v, int keyCode, KeyEvent event) {
+		Log.d("keyEvent111", Integer.toString(keyCode));
+		
+		if(event.getAction() == KeyEvent.ACTION_DOWN){
+			switch(keyCode){
+				case KeyEvent.KEYCODE_BACK: //kill the activity!
+					Log.d("keyEVENT", "finish it!");
+					finish();
+				break;
+			}
+		}
+			
+		return super.onKeyDown(keyCode, event);
 	}
 	
 	

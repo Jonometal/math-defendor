@@ -67,7 +67,8 @@ public class TexMan {
 	private static boolean wasInitialized = false;
 	
 	public static void initializeTextures(SimpleBaseGameActivity activity) throws IllegalStateException{
-		if(wasInitialized) throw new IllegalStateException("It was already initialized!");
+		
+//		if(wasInitialized) return;
 		
 		//pbackground
 		TexMan.getIt().mBackgroundBitmap = new BitmapTextureAtlas(activity.getTextureManager(), 531, 241, TextureOptions.BILINEAR);
@@ -106,7 +107,9 @@ public class TexMan {
 		TexMan.getIt().playerFont = FontFactory.create(activity.getFontManager(), activity.getTextureManager(), 256, 256, TextureOptions.BILINEAR, Typeface.create(Typeface.DEFAULT, Typeface.BOLD), 48);
 		TexMan.getIt().playerFont.load();
 	
-		wasInitialized = true;
+//		if(wasInitialized) throw new IllegalStateException("It was already initialized!");
+//		wasInitialized = true;
+		
 	}
 	
 	

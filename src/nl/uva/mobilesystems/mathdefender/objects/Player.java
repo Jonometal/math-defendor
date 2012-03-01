@@ -1,8 +1,12 @@
 package nl.uva.mobilesystems.mathdefender.objects;
 
+import nl.uva.mobilesystems.mathdefender.GameModel;
 import nl.uva.mobilesystems.mathdefender.gui.GUIConstants;
 
+import org.andengine.engine.handler.IUpdateHandler;
 import org.andengine.engine.handler.physics.PhysicsHandler;
+import org.andengine.engine.handler.timer.ITimerCallback;
+import org.andengine.engine.handler.timer.TimerHandler;
 import org.andengine.entity.sprite.AnimatedSprite;
 import org.andengine.entity.text.Text;
 import org.andengine.opengl.font.Font;
@@ -16,6 +20,8 @@ import org.andengine.opengl.vbo.VertexBufferObjectManager;
  *
  */
 public class Player extends AnimatedSprite{
+	
+	private GameModel model;
 	
 	private final PhysicsHandler mPhysicsHandler;
 	private int myScore = 5;
@@ -43,14 +49,15 @@ public class Player extends AnimatedSprite{
      * CONSTRUCTORS ------------------------------------------------------
      */
 
-	public Player(final float pX, final float pY, final TiledTextureRegion pTextureRegion, final VertexBufferObjectManager pVertexBufferObjectManager, Font myFont){
+	public Player(final float pX, final float pY, final TiledTextureRegion pTextureRegion, final VertexBufferObjectManager pVertexBufferObjectManager, Font myFont, GameModel model){
 		super(pX, pY, pTextureRegion, pVertexBufferObjectManager);
 		this.mPhysicsHandler = new PhysicsHandler(this);
 		this.registerUpdateHandler(this.mPhysicsHandler);
 		this.myFont = myFont;
-		final Text myText = new Text(20,20, this.myFont, "Score", "FPS: XXXXX".length(), this.getVertexBufferObjectManager());
+		myText = new Text(20,20, this.myFont, "Score", "FPS: XXXXX".length(), pVertexBufferObjectManager);
 		myText.setText(Integer.toString(myScore));
 		this.attachChild(myText);
+		this.model = model;
 	
 
 //        this.mFont = new Font(this.mFontTexture, Typeface.create(Typeface.DEFAULT, Typeface.BOLD), 32, true, Color.BLACK);
@@ -89,7 +96,23 @@ public class Player extends AnimatedSprite{
 	 */
 	public void collisionDetected(Enemy enemy){
 		this.myScore += enemy.getResult(); 
-		this.myText.setText("haha");
+		this.model.engine.runOnUpdateThread(new Runnable() {
+			
+			@Override
+			public void run() {
+				myText.setText(Integer.toString(myScore));
+			}
+		});
+		
+		
+//		this.model.engine.getScene().registerUpdateHandler(new TimerHandler(1 / 20.0f, true, new ITimerCallback() {
+//			@Override
+//			public void onTimePassed(final TimerHandler pTimerHandler) {
+//				myText.setText("hahaha");
+//			}
+//		}));
+		
+//		this.myText.setText("haha");
 	}
 	
 

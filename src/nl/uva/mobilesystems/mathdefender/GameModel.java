@@ -149,7 +149,7 @@ public class GameModel implements ObjectPositionEventListener {
 				int x = screenDimensions.x; //the edge of a screen
 				int y = screenDimensions.y / (PhConstants.NR_ENEMIES_IN_WAVE+1) * (j+1);	//so equal distribution on screen Width
 				
-				Enemy tempEnemy = new Enemy(x,y, textureEnemy, objectManager, levelDiff, enemyFont);
+				Enemy tempEnemy = new Enemy(x,y, textureEnemy, objectManager, levelDiff, enemyFont, this);
 				tempEnemy.addObjectPositionEventListener(this);
 				tempEnemies.add(tempEnemy);
 			}
@@ -203,7 +203,8 @@ public class GameModel implements ObjectPositionEventListener {
 			enemy = iter.next();
 			if(player.collidesWith(enemy)){			//collsion player <-> enemy
 				this.removeObjectFromScene(enemy);
-				player.setScore(((Enemy) enemy).getResult());
+				
+				player.collisionDetected((Enemy)enemy);
 				//TODO should be re-written here in more OOP manner: so player.collisionDetected() and enemy.collisionDetected() should be used instead putting a logic here
 				iter.remove();
 			}else{	//otherwise check for collisions with bullets

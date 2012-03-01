@@ -1,12 +1,10 @@
 package nl.uva.mobilesystems.mathdefender.objects;
 
-import nl.uva.mobilesystems.mathdefender.StringCalc;
+import nl.uva.mobilesystems.mathdefender.GameModel;
 import nl.uva.mobilesystems.mathdefender.andengine.events.EventsConstants;
 import nl.uva.mobilesystems.mathdefender.andengine.events.ObjectPositionEvent;
 import nl.uva.mobilesystems.mathdefender.andengine.events.ObjectPositionEventListener;
 import nl.uva.mobilesystems.mathdefender.physics.PhConstants;
-import android.graphics.PointF;
-import android.util.Log;
 
 import org.andengine.engine.handler.physics.PhysicsHandler;
 import org.andengine.entity.Entity;
@@ -16,11 +14,15 @@ import org.andengine.opengl.font.Font;
 import org.andengine.opengl.texture.region.TiledTextureRegion;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 
+import android.util.Log;
+
 
 /** Class representing single "enemy" in wave **/ 
 public class Enemy extends AnimatedSprite{
 	
 	
+	
+	private GameModel model;
 
 	private ObjectPositionEventListener listener; 
 	
@@ -34,11 +36,12 @@ public class Enemy extends AnimatedSprite{
 	
 	public Enemy(final float pX, final float pY, final TiledTextureRegion pTextureRegion,
 			final VertexBufferObjectManager pVertexBufferObjectManager,
-			final int difficulty, Font myFont
+			final int difficulty, Font myFont, GameModel model
 			)
 	{
 		
 		super(pX, pY, pTextureRegion, pVertexBufferObjectManager);
+		this.model = model;
 		this.myDiff = difficulty;
 		//Set different diff. here for testing purposes
 		this.myDiff = 4;
@@ -49,7 +52,7 @@ public class Enemy extends AnimatedSprite{
 		myResult = (int)Math.ceil(calculateResult(mySum));
 		Entity a = new Entity();
 		this.myFont = myFont;
-		final Text myText = new Text(0,0, this.myFont, "Score", "FPS: XXXXX".length(), this.getVertexBufferObjectManager());
+		myText = new Text(0,0, this.myFont, "Score", "FPS: XXXXX".length(), pVertexBufferObjectManager);
 		//myText.setText(Integer.toString(myResult));
 		myText.setText(mySum);		
 		this.attachChild(myText);
@@ -67,7 +70,7 @@ public class Enemy extends AnimatedSprite{
 		switch (myDiff)
 		{
 					case 1:
-						int element = (int) (Math.floor(Math.random() * (Player.getScore() + 10)) - 5);
+						int element = (int) (Math.floor(Math.random() * (model.getPlayer().getScore() + 10)) - 5);
 						mySum = mySum + Integer.toString(element);
 						//if (gameMode == "Defender"){var element = Math.floor(Math.random() * (Player.getScore() + 10)) - 5;}
 						//else {var element = Math.floor(Math.random() * Player.getScore() + 10) - 5;}
@@ -75,9 +78,9 @@ public class Enemy extends AnimatedSprite{
 						break;
 						
 					case 2:
-						int element2_0 = (int)(Math.floor(Math.random() * (Player.getScore() + 100)) - 50);
+						int element2_0 = (int)(Math.floor(Math.random() * (model.getPlayer().getScore() + 100)) - 50);
 						String element2_1 = randomConstructor("+-...");
-						int element2_2 = (int) Math.floor(Math.random() * (Player.getScore() + 100)) - 50;
+						int element2_2 = (int) Math.floor(Math.random() * (model.getPlayer().getScore() + 100)) - 50;
 						mySum = mySum + (Integer.toString(element2_0));
 						mySum = mySum + (element2_1);
 						mySum = mySum + (Integer.toString(element2_2));
@@ -85,11 +88,11 @@ public class Enemy extends AnimatedSprite{
 						break;
 						
 					case 3:
-						int element3_0 = (int)Math.floor(Math.random() * (Player.getScore() + 200)) - 100;
+						int element3_0 = (int)Math.floor(Math.random() * (model.getPlayer().getScore() + 200)) - 100;
 						String element3_1 = randomConstructor("+-");
-						int element3_2 = (int)Math.floor(Math.random() * (Player.getScore() + 200)) - 100;
+						int element3_2 = (int)Math.floor(Math.random() * (model.getPlayer().getScore() + 200)) - 100;
 						String element3_3 = randomConstructor("-+");
-						int element3_4 = (int)Math.floor(Math.random() * (Player.getScore() + 100)) - 50;
+						int element3_4 = (int)Math.floor(Math.random() * (model.getPlayer().getScore() + 100)) - 50;
 						mySum = mySum + (Integer.toString(element3_0));
 						mySum = mySum + (element3_1);
 						mySum = mySum + (Integer.toString(element3_2));
@@ -97,9 +100,9 @@ public class Enemy extends AnimatedSprite{
 						mySum = mySum + (Integer.toString(element3_4));
 						break;
 					case 4:
-						int element4_0 = (int)Math.floor(Math.random() * (Player.getScore()));
+						int element4_0 = (int)Math.floor(Math.random() * (model.getPlayer().getScore()));
 						String element4_1 = randomConstructor("*/...");
-						int element4_2 = (int)Math.floor(Math.random() * (Player.getScore()));
+						int element4_2 = (int)Math.floor(Math.random() * (model.getPlayer().getScore()));
 						mySum = mySum + (Integer.toString(element4_0));
 						mySum = mySum + (element4_1);
 						mySum = mySum + (Integer.toString(element4_2));
