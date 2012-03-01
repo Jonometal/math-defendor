@@ -41,7 +41,7 @@ public class Enemy extends AnimatedSprite{
 		super(pX, pY, pTextureRegion, pVertexBufferObjectManager);
 		this.myDiff = difficulty;
 		//Set different diff. here for testing purposes
-		this.myDiff = 2;
+		this.myDiff = 4;
 		this.mPhysicsHandler = new PhysicsHandler(this);
 		this.registerUpdateHandler(this.mPhysicsHandler);
 		this.mPhysicsHandler.setVelocity(-PhConstants.ENEMY_VELOCITY, 0);
@@ -51,8 +51,7 @@ public class Enemy extends AnimatedSprite{
 		this.myFont = myFont;
 		final Text myText = new Text(0,0, this.myFont, "Score", "FPS: XXXXX".length(), this.getVertexBufferObjectManager());
 		//myText.setText(Integer.toString(myResult));
-		//Testing equationgenerator here:
-		myText.setText(mySum);
+		myText.setText(mySum);		
 		this.attachChild(myText);
 	}
 	
@@ -76,53 +75,38 @@ public class Enemy extends AnimatedSprite{
 						break;
 						
 					case 2:
-						int element0 = (int)(Math.floor(Math.random() * (Player.getScore() + 100)) - 50);
-						String element1 = randomConstructor("+-...");
-						int element2 = (int) Math.floor(Math.random() * (Player.getScore() + 100)) - 50;
-						mySum = mySum + (Integer.toString(element0));
-						mySum = mySum + (element1.toString());
-						mySum = mySum + (Integer.toString(element2));
-						break;
-						/*
-					case 3:
-						if (gameMode == "Defender"){var element0 = Math.floor(Math.random() * (Player.getScore() + 200)) - 100;}
-						else {var element0 = Math.floor((Math.random() * myIncrementer) * 100);}
-						listOfElements.push(element0);
-						var element1 = randomConstructor("+-...");
-						listOfElements.push(element1);
-						if (gameMode == "Defender"){var element2 = Math.floor(Math.random() * (Player.getScore() + 200)) - 100;}
-						else {var element2 = Math.floor((Math.random() * myIncrementer) * 100);}
-						listOfElements.push(element2);
-						var element3 = randomConstructor("-+...");
-						listOfElements.push(element3);
-						if (gameMode == "Defender"){var element4 = Math.floor(Math.random() * (Player.getScore() + 100)) - 50;}
-						else {var element4 = Math.floor((Math.random() * myIncrementer) * 100);}
-						listOfElements.push(element4);
-						//trace("ListOfElements" + listOfElements);
-						mySum = mySum + (element0.toString());
-						mySum = mySum + (element1.toString());
-						mySum = mySum + (element2.toString());
-						mySum = mySum + (element3.toString());
-						mySum = mySum + (element4.toString());
-						break;
-					case 4:
-						if (gameMode == "Defender"){var element0 = Math.floor(Math.random() * (Player.getScore()))}
-						else {var element0 = Math.floor((Math.random() * myIncrementer) * 100);}
-						listOfElements.push(element0);
-						var element1 = randomConstructor("*fowrardslash...");
-						listOfElements.push(element1);
-						if (gameMode == "Defender"){var element2 = Math.floor(Math.random() * (Player.getScore()))}
-						else {var element2 = Math.floor((Math.random() * myIncrementer) * 100);}
-						listOfElements.push(element2);
-						//trace("ListOfElements" + listOfElements);
-						mySum = mySum + (element0.toString());
-						mySum = mySum + (element1.toString());
-						mySum = mySum + (element2.toString());
+						int element2_0 = (int)(Math.floor(Math.random() * (Player.getScore() + 100)) - 50);
+						String element2_1 = randomConstructor("+-...");
+						int element2_2 = (int) Math.floor(Math.random() * (Player.getScore() + 100)) - 50;
+						mySum = mySum + (Integer.toString(element2_0));
+						mySum = mySum + (element2_1);
+						mySum = mySum + (Integer.toString(element2_2));
+						
 						break;
 						
+					case 3:
+						int element3_0 = (int)Math.floor(Math.random() * (Player.getScore() + 200)) - 100;
+						String element3_1 = randomConstructor("+-");
+						int element3_2 = (int)Math.floor(Math.random() * (Player.getScore() + 200)) - 100;
+						String element3_3 = randomConstructor("-+");
+						int element3_4 = (int)Math.floor(Math.random() * (Player.getScore() + 100)) - 50;
+						mySum = mySum + (Integer.toString(element3_0));
+						mySum = mySum + (element3_1);
+						mySum = mySum + (Integer.toString(element3_2));
+						mySum = mySum + (element3_3);
+						mySum = mySum + (Integer.toString(element3_4));
+						break;
+					case 4:
+						int element4_0 = (int)Math.floor(Math.random() * (Player.getScore()));
+						String element4_1 = randomConstructor("*/...");
+						int element4_2 = (int)Math.floor(Math.random() * (Player.getScore()));
+						mySum = mySum + (Integer.toString(element4_0));
+						mySum = mySum + (element4_1);
+						mySum = mySum + (Integer.toString(element4_2));
+						break;						
 					case 5:
 						break;
-						*/
+						
 					default:
 						//trace ("Error! Difficulty == 0");
 						break;
