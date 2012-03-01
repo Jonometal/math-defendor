@@ -8,6 +8,7 @@ import nl.uva.mobilesystems.mathdefender.andengine.events.ObjectPositionEventLis
 import nl.uva.mobilesystems.mathdefender.game.Level;
 import nl.uva.mobilesystems.mathdefender.game.Wave;
 import nl.uva.mobilesystems.mathdefender.objects.Enemy;
+import nl.uva.mobilesystems.mathdefender.objects.Player;
 import nl.uva.mobilesystems.mathdefender.objects.Tower;
 import nl.uva.mobilesystems.mathdefender.objects.TowerBullet;
 import nl.uva.mobilesystems.mathdefender.physics.PhConstants;
@@ -18,10 +19,6 @@ import org.andengine.entity.scene.Scene;
 import org.andengine.entity.sprite.AnimatedSprite;
 import org.andengine.entity.text.Text;
 import org.andengine.opengl.font.Font;
-import org.andengine.opengl.texture.TextureOptions;
-import org.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlas;
-import org.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlasTextureRegionFactory;
-import org.andengine.opengl.texture.region.ITiledTextureRegion;
 import org.andengine.opengl.texture.region.TiledTextureRegion;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 
@@ -37,12 +34,16 @@ public class GameModel implements ObjectPositionEventListener {
 	
 	// ----------------------- VARIABLES --------------------------------
 	/** Game Variables */
-	Engine engine;
+	public Engine engine; 		//Scene is public because Player class uses it, should be changed later on
+	
 	
 	Scene scene; //it's little bit awkward, it must be here because current implementation of Model starts drawing before InitialActivity.onCreateScene() method is finished, so engine variable (field in GameModel class) doesnt know about this scene yet
+			
 	
 	/** Variable represeting current level that is maninated by GameModel */
 	private Level currentLevel;
+	
+	public Player player; //public for experiments with PLayer class
 	
 	
 	// Textures
@@ -68,6 +69,10 @@ public class GameModel implements ObjectPositionEventListener {
 
 	// ----------------------- SETTERS & GETTERS  --------------------------------
 	
+	
+	public void setPlayer(Player player){
+		this.player = player;
+	}
 	
 	public LinkedList<Tower> getTowers(){
 		return this.currentLevel.getTowers();
@@ -186,8 +191,6 @@ public class GameModel implements ObjectPositionEventListener {
 	 */
 	public void removeObjectFromScene(final IEntity entity){
 		engine.runOnUpdateThread(new Runnable() {
-			
-			 
 			public void run() {
 				entity.detachSelf();
 				entity.dispose();

@@ -37,6 +37,7 @@ import org.andengine.ui.activity.SimpleBaseGameActivity;
 import android.graphics.Point;
 import android.graphics.Typeface;
 import android.opengl.GLES20;
+import android.util.Log;
 import android.widget.Toast;
 
 public class InitialActivity extends SimpleBaseGameActivity {
@@ -186,10 +187,10 @@ public class InitialActivity extends SimpleBaseGameActivity {
 		//Create a player here
 		final float centerX = 100;
 		final float centerY = 100;
-		player = new Player(centerX, centerY, this.mPlayerTextureRegion, this.getVertexBufferObjectManager(), playerFont);
+		player = new Player(centerX, centerY, this.mPlayerTextureRegion, this.getVertexBufferObjectManager(), playerFont,gModel);
+		gModel.setPlayer(player); ///deub???
 
 		scene.attachChild(player);
-		
 		
 		//Set current wave objects here
 		for(AnimatedSprite waveObject: gModel.getCurrentWaveObjects()){
