@@ -1,5 +1,6 @@
 package nl.uva.mobilesystems.mathdefender.objects;
 
+import nl.uva.mobilesystems.mathdefender.StringCalc;
 import nl.uva.mobilesystems.mathdefender.andengine.events.EventsConstants;
 import nl.uva.mobilesystems.mathdefender.andengine.events.ObjectPositionEvent;
 import nl.uva.mobilesystems.mathdefender.andengine.events.ObjectPositionEventListener;
@@ -54,6 +55,7 @@ public class Enemy extends AnimatedSprite{
 	private double calculateResult(String mySum)
 	{
 		return 10;
+		//return StringCalc.calculate(mySum);
 	}
 
 	public void genEquation()
@@ -62,8 +64,7 @@ public class Enemy extends AnimatedSprite{
 		{
 					case 1:
 						double element = Math.floor(Math.random() * (Player.getScore() + 10)) - 5;
-						mySum = "5";
-						System.out.print("My sum is " + mySum);
+						mySum = mySum + Double.toString(element);
 						//if (gameMode == "Defender"){var element = Math.floor(Math.random() * (MathPlayer.getMyValue() + 10)) - 5;}
 						//else {var element = Math.floor(Math.random() * MathPlayer.getMyValue() + 10) - 5;}
 						//trace ("Element generated: " + element);
