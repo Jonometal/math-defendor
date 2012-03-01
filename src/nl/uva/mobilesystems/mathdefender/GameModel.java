@@ -1,5 +1,6 @@
 package nl.uva.mobilesystems.mathdefender;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 
 import nl.uva.mobilesystems.mathdefender.andengine.events.EventsConstants;
@@ -70,9 +71,6 @@ public class GameModel implements ObjectPositionEventListener {
 	// ----------------------- SETTERS & GETTERS  --------------------------------
 	
 	
-	public void setPlayer(Player player){
-		this.player = player;
-	}
 	
 	public LinkedList<Tower> getTowers(){
 		return this.currentLevel.getTowers();
@@ -82,8 +80,16 @@ public class GameModel implements ObjectPositionEventListener {
 		return this.currentLevel.getCurrentWave().getObjects();
 	}
 	
+	public Player getPlayer(){
+		return this.player;
+	}
+	
 	public LinkedList<Wave> getWavesLeft(){
 		return this.currentLevel.getWaves();
+	}
+	
+	public void setPlayer(Player player){
+		this.player = player;
 	}
 	
 	
@@ -183,7 +189,50 @@ public class GameModel implements ObjectPositionEventListener {
 		this.scene.attachChild(entity);
 	}
 	
-	
+	/**
+	 * Temporary (?) method that performs global collision check.
+	 * Currently it iterated through: enemies and checks collisions with:
+	 * - player
+	 * - bullets shoted from Tower
+	 */
+	public void performGlobalCollisionTest() {
+		Iterator<AnimatedSprite> iter = this.getCurrentWaveObjects().iterator();
+		LinkedList<Tower> towers = this.getTowers();
+		AnimatedSprite enemy;
+		while(iter.hasNext()){
+			enemy = iter.next();
+			if(player.collidesWith(enemy)){			//collsion player <-> enemy
+				this.removeObjectFromScene(enemy);
+				player.setScore(((Enemy) enemy).getResult());
+				//TODO should be re-written here in more OOP manner: so player.collisionDetected() and enemy.collisionDetected() should be used instead putting a logic here
+				iter.remove();
+			}else{	//otherwise check for collisions with bullets
+				Iterator<Tower> iterTower = towers.iterator();
+				Tower tower;
+				towerLoop: while(iterTower.hasNext()){
+					tower = iterTower.next();
+					if(tower.getBullets().size() == 0)	//no bullets for this tower, check next one
+						continue;
+					Iterator<TowerBullet> iterBullet = tower.getBullets().iterator();
+					TowerBullet bullet;
+					while(iterBullet.hasNext()){
+						bullet = iterBullet.next();
+						if(enemy.collidesWith(bullet)){ //collision enemy <-> bullet
+							this.removeObjectFromScene(bullet);
+							this.removeObjectFromScene(enemy);
+							tower.increaseBulletsAvailable(1);	//increase tower's bullet by 1
+							iterBullet.remove(); //remove bullet
+							iter.remove(); //remove enemy
+							break towerLoop;	//we're breaking the outer loop as for this enemy there won't be any collisions, because he is NO MORE.
+						}
+					}
+				}
+			}
+		}
+	}
+
+
+
 	/**
 	 * This method should be used to safely remove objects from scene care need be taken for concurrency issues.
 	 * It is possible to do it manually, (within engine.runOnUpdateThread) but it's here for code clarity. 

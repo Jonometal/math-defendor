@@ -123,9 +123,9 @@ public class InitialActivity extends SimpleBaseGameActivity {
 
 	 
 	protected void onCreateResources() {
-		//player
+		//pbackground
 		this.mBackgroundBitmap = new BitmapTextureAtlas(this.getTextureManager(), 531, 241, TextureOptions.BILINEAR);
-		this.mBackgroundTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(this.mBackgroundBitmap, this, "gfx/bg.png", 0, 0);
+		this.mBackgroundTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(this.mBackgroundBitmap, this, "gfx/bg.png", 0, 0,1,1);
 		this.mBackgroundSprite = new Sprite(0f,0f, (float)CAMERA_WIDTH, (float)CAMERA_HEIGHT, this.mBackgroundTextureRegion, this.getVertexBufferObjectManager());
 		
 		//player
@@ -187,9 +187,8 @@ public class InitialActivity extends SimpleBaseGameActivity {
 		//Create a player here
 		final float centerX = 100;
 		final float centerY = 100;
-		player = new Player(centerX, centerY, this.mPlayerTextureRegion, this.getVertexBufferObjectManager(), playerFont,gModel);
+		player = new Player(centerX, centerY, this.mPlayerTextureRegion, this.getVertexBufferObjectManager(), playerFont);
 		gModel.setPlayer(player); ///deub???
-
 		scene.attachChild(player);
 		
 		//Set current wave objects here
@@ -224,51 +223,15 @@ public class InitialActivity extends SimpleBaseGameActivity {
 		scene.registerUpdateHandler(new IUpdateHandler(){
 
 			 
-//			GameModel.checkCollisions()
+			//it's for checking the collisions
 			public void onUpdate(float pSecondsElapsed) {
-				
-				Iterator<AnimatedSprite> iter = gModel.getCurrentWaveObjects().iterator();
-				LinkedList<Tower> towers = gModel.getTowers();
-				AnimatedSprite enemy;
-				while(iter.hasNext()){
-					
-					enemy = iter.next();
-					if(player.collidesWith(enemy)){			//collsion player <-> enemy
-						gModel.removeObjectFromScene(enemy);
-						player.setScore(((Enemy) enemy).getResult());
-						//TODO should be re-written here in more OOP manner: so player.collisionDetected() and enemy.collisionDetected() should be used instead putting a logic here
-						iter.remove();
-					}else{	//otherwise check for collisions with bullets
-						Iterator<Tower> iterTower = towers.iterator();
-						Tower tower;
-						towerLoop: while(iterTower.hasNext()){
-							tower = iterTower.next();
-							if(tower.getBullets().size() == 0)	//no bullets for this tower, check next one
-								continue;
-							Iterator<TowerBullet> iterBullet = tower.getBullets().iterator();
-							TowerBullet bullet;
-							while(iterBullet.hasNext()){
-								bullet = iterBullet.next();
-								if(enemy.collidesWith(bullet)){ //collision enemy <-> bullet
-									gModel.removeObjectFromScene(bullet);
-									gModel.removeObjectFromScene(enemy);
-									tower.increaseBulletsAvailable(1);	//increase tower's bullet by 1
-									iterBullet.remove(); //remove bullet
-									iter.remove(); //remove enemy
-									break towerLoop;	//we're breaking the outer loop as for this enemy there won't be any collisions, because he is NO MORE.
-								}
-							}
-								
-						}
-					}
-				}
+				gModel.performGlobalCollisionTest();
 //				for(AnimatedSprite enemy : gModel.getCurrentWaveObjects()){
 //					if(player.collidesWith(enemy)){
 //						gModel.removeObjectFromScene(enemy);
 //					}
 //				}
 			}
-
 			 
 			public void reset() {
 				; //nothing happens here so far?
