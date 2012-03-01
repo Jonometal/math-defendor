@@ -34,9 +34,9 @@ Upgrades:
 	- paint enemies pink
 	
 3) MIchał
-	- help Laurens with updating Text
+     - DONE help Laurens with updating Text
  	- rewrite code to be more useuful
  		- DONE move collision tests to GameModel
- 		- create separated class for textures; 
-		- write for objects method collisionDetected() and put more brain there
+ 		- DONE create separated class for textures; 
+		-  write for objects method collisionDetected() and put more brain there
 	
