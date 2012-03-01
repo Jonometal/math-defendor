@@ -72,9 +72,6 @@ public class Enemy extends AnimatedSprite{
 					case 1:
 						int element = (int) (Math.floor(Math.random() * (model.getPlayer().getScore() + 10)) - 5);
 						mySum = mySum + Integer.toString(element);
-						//if (gameMode == "Defender"){var element = Math.floor(Math.random() * (Player.getScore() + 10)) - 5;}
-						//else {var element = Math.floor(Math.random() * Player.getScore() + 10) - 5;}
-						//listOfElements.push(element);
 						break;
 						
 					case 2:
