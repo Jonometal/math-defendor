@@ -1,13 +1,8 @@
 package nl.uva.mobilesystems.mathdefender;
 
-import java.util.Iterator;
-import java.util.LinkedList;
-
 import nl.uva.mobilesystems.mathdefender.gui.GUIConstants;
-import nl.uva.mobilesystems.mathdefender.objects.Enemy;
+import nl.uva.mobilesystems.mathdefender.gui.TexMan;
 import nl.uva.mobilesystems.mathdefender.objects.Player;
-import nl.uva.mobilesystems.mathdefender.objects.Tower;
-import nl.uva.mobilesystems.mathdefender.objects.TowerBullet;
 import nl.uva.mobilesystems.mathdefender.physics.PhConstants;
 
 import org.andengine.engine.camera.Camera;
@@ -19,25 +14,15 @@ import org.andengine.engine.options.EngineOptions;
 import org.andengine.engine.options.EngineOptions.ScreenOrientation;
 import org.andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
 import org.andengine.entity.scene.Scene;
-import org.andengine.entity.scene.background.SpriteBackground;
+import org.andengine.entity.scene.background.Background;
 import org.andengine.entity.sprite.AnimatedSprite;
-import org.andengine.entity.sprite.Sprite;
 import org.andengine.entity.text.Text;
 import org.andengine.entity.util.FPSLogger;
 import org.andengine.input.touch.controller.MultiTouch;
-import org.andengine.opengl.font.Font;
-import org.andengine.opengl.font.FontFactory;
-import org.andengine.opengl.texture.TextureOptions;
-import org.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlas;
-import org.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlasTextureRegionFactory;
-import org.andengine.opengl.texture.region.ITextureRegion;
-import org.andengine.opengl.texture.region.TiledTextureRegion;
 import org.andengine.ui.activity.SimpleBaseGameActivity;
 
 import android.graphics.Point;
-import android.graphics.Typeface;
 import android.opengl.GLES20;
-import android.util.Log;
 import android.widget.Toast;
 
 public class InitialActivity extends SimpleBaseGameActivity {
@@ -58,36 +43,6 @@ public class InitialActivity extends SimpleBaseGameActivity {
 	
 	private Player player;
 
-	//game-sprites
-	//background
-	private BitmapTextureAtlas mBackgroundBitmap; //Background
-	private ITextureRegion mBackgroundTextureRegion;
-	private Sprite mBackgroundSprite;
-	
-	//player
-	private BitmapTextureAtlas mPlayerBitmap; //Player
-	private TiledTextureRegion mPlayerTextureRegion;
-	
-	//enemy
-	private BitmapTextureAtlas mEnemyBitmap; //Enemy
-	private TiledTextureRegion mEnemyTextureregion;
-	
-	//tower
-	private BitmapTextureAtlas mTowerBitmap; //Tower
-	private TiledTextureRegion mTowerTextureRegion;
-	
-	//tower bullet
-	protected BitmapTextureAtlas mTowerBulletBitmap;
-	protected TiledTextureRegion mTowerBulletTextureRegion;
-	
-	//analog-control
-	private BitmapTextureAtlas mOnScreenControlTexture;
-	private ITextureRegion mOnScreenControlBaseTextureRegion;
-	private ITextureRegion mOnScreenControlKnobTextureRegion;
-	
-	//Text
-	private Font font;
-	private Font playerFont;
 	public Text text; //how many waves are left;
 		
 	// ===========================================================
@@ -123,43 +78,7 @@ public class InitialActivity extends SimpleBaseGameActivity {
 
 	 
 	protected void onCreateResources() {
-		//pbackground
-		this.mBackgroundBitmap = new BitmapTextureAtlas(this.getTextureManager(), 531, 241, TextureOptions.BILINEAR);
-		this.mBackgroundTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(this.mBackgroundBitmap, this, "gfx/bg.png", 0, 0,1,1);
-		this.mBackgroundSprite = new Sprite(0f,0f, (float)CAMERA_WIDTH, (float)CAMERA_HEIGHT, this.mBackgroundTextureRegion, this.getVertexBufferObjectManager());
-		
-		//player
-		this.mPlayerBitmap = new BitmapTextureAtlas(this.getTextureManager(), 96, 96, TextureOptions.BILINEAR);
-		this.mPlayerTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(this.mPlayerBitmap, this, "gfx/next.png", 0, 0, 1, 1);
-		this.mPlayerBitmap.load();
-		
-		//enemy
-		this.mEnemyBitmap = new BitmapTextureAtlas(this.getTextureManager(), 32, 32, TextureOptions.BILINEAR);
-		this.mEnemyTextureregion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(this.mEnemyBitmap, this, "gfx/face_box.png", 0, 0, 1, 1);
-		this.mEnemyBitmap.load();
-		
-		//tower
-		this.mTowerBitmap = new BitmapTextureAtlas(this.getTextureManager(), 64, 64, TextureOptions.BILINEAR);
-		this.mTowerTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(this.mTowerBitmap, this, "gfx/chromatic_circle_small_64x64.png", 0, 0, 1, 1);
-		this.mTowerBitmap.load();
-		
-		//towerbullet
-		this.mTowerBulletBitmap = new BitmapTextureAtlas(this.getTextureManager(), 32, 32, TextureOptions.BILINEAR);
-		this.mTowerBulletTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(this.mTowerBulletBitmap, this, "gfx/bullet.png", 0, 0, 1, 1);
-		this.mTowerBulletBitmap.load();
-		
-		//analog control
-		this.mOnScreenControlTexture = new BitmapTextureAtlas(this.getTextureManager(), 256, 128, TextureOptions.BILINEAR);
-		this.mOnScreenControlBaseTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(this.mOnScreenControlTexture, this, "gfx/onscreen_control_base.png", 0, 0);
-		this.mOnScreenControlKnobTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(this.mOnScreenControlTexture, this, "gfx/onscreen_control_knob.png", 128, 0);
-		this.mOnScreenControlTexture.load();
-		
-		//text
-		this.font = FontFactory.create(this.getFontManager(), this.getTextureManager(), 256, 256, Typeface.create(Typeface.DEFAULT, Typeface.BOLD), 32);
-		this.font.load();		
-		this.playerFont = FontFactory.create(this.getFontManager(), this.getTextureManager(), 256, 256, TextureOptions.BILINEAR, Typeface.create(Typeface.DEFAULT, Typeface.BOLD), 48);
-		this.playerFont.load();
-		
+		TexMan.initializeTextures(this);
 	}
 
 	 
@@ -168,15 +87,15 @@ public class InitialActivity extends SimpleBaseGameActivity {
 		
 		//Set SCENE [must be done before Setting our MODEL obviously]
 		final Scene scene = new Scene();
-		//scene.setBackground(new Background(0.05f, 0.8f, 0.8f));
-		scene.setBackground(new SpriteBackground(0.05f, 0.8f, 0.8f, this.mBackgroundSprite));
+		scene.setBackground(new Background(0.05f, 0.8f, 0.8f));
+//		scene.setBackground(new SpriteBackground(0.05f, 0.8f, 0.8f, TexMan.getIt().mBackgroundSprite));
 		
 		
 		//set our MathLevel here (will be calculated in separated thread)
 		gModel = new GameModel(this, scene);
 			// (nrWaves, nrTowers, [Screen_X, Screen_Y], EnemyTexture, TowerTexture, Library-shit-buffer)
 			gModel.setUpSimpleGame(50,1, new Point(GUIConstants.CAMERA_WIDTH, GUIConstants.CAMERA_HEIGHT),
-					mEnemyTextureregion, mTowerTextureRegion, mTowerBulletTextureRegion, getVertexBufferObjectManager(), playerFont
+					TexMan.getIt().mEnemyTextureregion, TexMan.getIt().mTowerTextureRegion, TexMan.getIt().mTowerBulletTextureRegion, getVertexBufferObjectManager(), TexMan.getIt().playerFont
 					);
 		
 		//Set Text
@@ -187,7 +106,7 @@ public class InitialActivity extends SimpleBaseGameActivity {
 		//Create a player here
 		final float centerX = 100;
 		final float centerY = 100;
-		player = new Player(centerX, centerY, this.mPlayerTextureRegion, this.getVertexBufferObjectManager(), playerFont);
+		player = new Player(centerX, centerY, TexMan.getIt().mPlayerTextureRegion, getVertexBufferObjectManager(), TexMan.getIt().playerFont);
 		gModel.setPlayer(player); ///deub???
 		scene.attachChild(player);
 		
@@ -198,7 +117,7 @@ public class InitialActivity extends SimpleBaseGameActivity {
 		
 		
 		//Create analog-control here
-		final AnalogOnScreenControl analogOnScreenControl = new AnalogOnScreenControl(0, GUIConstants.CAMERA_HEIGHT - this.mOnScreenControlBaseTextureRegion.getHeight(), this.mCamera, this.mOnScreenControlBaseTextureRegion, this.mOnScreenControlKnobTextureRegion, 0.1f, 200, this.getVertexBufferObjectManager(), new IAnalogOnScreenControlListener() {
+		final AnalogOnScreenControl analogOnScreenControl = new AnalogOnScreenControl(0, GUIConstants.CAMERA_HEIGHT - TexMan.getIt().mOnScreenControlBaseTextureRegion.getHeight(), this.mCamera, TexMan.getIt().mOnScreenControlBaseTextureRegion, TexMan.getIt().mOnScreenControlKnobTextureRegion, 0.1f, 200, this.getVertexBufferObjectManager(), new IAnalogOnScreenControlListener() {
 			 
 			public void onControlChange(final BaseOnScreenControl pBaseOnScreenControl, final float pValueX, final float pValueY) {
 				player.getPhysicsHanlder().setVelocity(pValueX * PhConstants.PLAYER_VELOCITY, pValueY * PhConstants.PLAYER_VELOCITY);
