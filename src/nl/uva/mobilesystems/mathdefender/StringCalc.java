@@ -1,8 +1,7 @@
-/*
- * package nl.uva.mobilesystems.mathdefender;
+ package nl.uva.mobilesystems.mathdefender;
  
 
-
+/*
 public class StringCalc
 	{ 
        
