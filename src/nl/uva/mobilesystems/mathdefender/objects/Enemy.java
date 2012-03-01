@@ -135,11 +135,15 @@ public class Enemy extends AnimatedSprite{
 		int choice = 0;
 		for(int o = 0; o < operatorString.length(); o++)
 		{
-			 Log.v("forloop","current char: " + o+  operatorString.charAt(o));
-			if (Character.toString(operatorString.charAt(o)) != "."){ amnt+=1; }
+			 
+			if (operatorString.charAt(o) != '.'){ amnt+=1; }
+			Log.v("forloop","charAt(o) = " + operatorString.charAt(o));
+			Log.v("forloop","amount is " + amnt);
 		}
+		
 		choice = (int)Math.floor(Math.random() *amnt);
 		//trace("char chose: " + choice + " from "  + amnt);
+		Log.v("forloop","current char: " + operatorString.charAt(choice));
 		return Character.toString(operatorString.charAt(choice));
 	}
 	
