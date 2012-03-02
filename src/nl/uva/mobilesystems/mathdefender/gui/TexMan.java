@@ -73,6 +73,7 @@ public class TexMan {
 		//pbackground
 		TexMan.getIt().mBackgroundBitmap = new BitmapTextureAtlas(activity.getTextureManager(), 531, 241, TextureOptions.BILINEAR);
 		TexMan.getIt().mBackgroundTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(TexMan.getIt().mBackgroundBitmap, activity, "gfx/bg.png", 0, 0,1,1);
+		TexMan.getIt().mBackgroundBitmap.load();
 		TexMan.getIt().mBackgroundSprite = new Sprite(0f,0f, (float)GUIConstants.CAMERA_WIDTH, (float)GUIConstants.CAMERA_HEIGHT, TexMan.getIt().mBackgroundTextureRegion, activity.getVertexBufferObjectManager());
 				
 			//player

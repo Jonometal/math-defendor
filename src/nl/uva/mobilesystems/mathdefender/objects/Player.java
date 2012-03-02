@@ -98,7 +98,6 @@ public class Player extends AnimatedSprite{
 		this.myScore += enemy.getResult(); 
 		this.model.engine.runOnUpdateThread(new Runnable() {
 			
-			@Override
 			public void run() {
 				myText.setText(Integer.toString(myScore));
 			}

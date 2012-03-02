@@ -14,7 +14,7 @@ import org.andengine.engine.options.EngineOptions;
 import org.andengine.engine.options.EngineOptions.ScreenOrientation;
 import org.andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
 import org.andengine.entity.scene.Scene;
-import org.andengine.entity.scene.background.Background;
+import org.andengine.entity.scene.background.SpriteBackground;
 import org.andengine.entity.sprite.AnimatedSprite;
 import org.andengine.entity.text.Text;
 import org.andengine.entity.util.FPSLogger;
@@ -95,8 +95,8 @@ public class InitialActivity extends SimpleBaseGameActivity implements OnKeyList
 		
 		//Set SCENE [must be done before Setting our MODEL obviously]
 		final Scene scene = new Scene();
-		scene.setBackground(new Background(0.05f, 0.8f, 0.8f));
-//		scene.setBackground(new SpriteBackground(0.05f, 0.8f, 0.8f, TexMan.getIt().mBackgroundSprite));
+//		scene.setBackground(new Background(0.05f, 0.8f, 0.8f));
+		scene.setBackground(new SpriteBackground(0.05f, 0.8f, 0.8f, TexMan.getIt().mBackgroundSprite));
 		
 		
 		//set our MathLevel here (will be calculated in separated thread)
@@ -180,7 +180,7 @@ public class InitialActivity extends SimpleBaseGameActivity implements OnKeyList
 	}
 	
 	
-	@Override
+
 	public boolean onKey(View v, int keyCode, KeyEvent event) {
 		Log.d("keyEvent111", Integer.toString(keyCode));
 		
