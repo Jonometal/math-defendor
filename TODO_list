@@ -13,30 +13,66 @@ LAST TODO
 	- Game Model -> Level -> Manner
 	- Add Tower to game; 
 
-
+--------------------------------------------
 TODO 29.02
 
 General:
 Upgrades:
 	- Speed upgrade
 	- BulletTime Upgrade
-	- Buy 
+	- Buying Tower's
+	- Upgrade speed of teleport reload
+	- Teleport option - charging for some point, Skips X of pixel without touching waves
+	- 
+	- Towers 
+		-> Update bullets so they
+		-> Coloring the enemies that can give you bonuses
+		-> Slow the enemies Down
+		-> (option:) The tower that kills the enemies so you don't earn points
+	- 
+	- 
+	- Optional things
+		-> Badges
+	
+	SHOP -> Items flow from right, they stop, you can press them ( see description )
+		 -> 
+
+Graphics;
+	- Smoke behind the player
+	- 
 	
 	
 1) Laurens
 	- Implement Sums-engine 
-		-> Sums will be displyed, generated, updating the player's score by the result of equation
-	-  	write for objects method collisionDetected() and put more brain there
+		-> DONE Sums will be displayed, 
+		-> DONE generated, 
+		-> DONE updating the player's score by the result of equation
+		-> TExtfield Character Limit
+	-  	 put more brain into the OBJECTS, not in the other Places (Game Model, Activity
+	
 	- Laurens -> Levels
+		+ Hand-writing the LEVELS
+			- separate MathLevel for Each Level;
+			- different levels 
+
+	- Make the waves not disappear when enemis are all gone 
+			
 	
 2) Tobi
 	- change graphics of objects, background, fonts (hand-written)
 	- paint enemies pink
+	- explosions!!
 	
 3) MIchał
-     - DONE help Laurens with updating Text
+    - DONE help Laurens with updating Text
  	- rewrite code to be more useuful
  		- DONE move collision tests to GameModel
  		- DONE create separated class for textures; 
-		-  write for objects method collisionDetected() and put more brain there
+		-  put more brain there to the objects
+	-> Re-Write Sum-Parsing + Tests there as well
+	-> Maybe: help Laurens 
+	
+	 	
+
+	
 	
