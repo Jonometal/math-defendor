@@ -2,53 +2,55 @@
  
 
 
-public class StringCalc{}
-/*
+public class StringCalc
 { 
-       
-      public static int calculate(String s)
-		{ 
+      
+      public static int calculate(String s){ 
            
+    	  int result = 0;
           // Convert nonenglish comma desimal delimiters to 
           // english dot 
-          while (s.contains(",") != false)
-			{ 
+          while (s.contains(",") != false){ 
               s = s.replace(",", "."); 
           } 
            
           // These two loops beneath appends the proper 
           // multiply sign when a formula is written 
           // like 2(2+2), and converts it to 2*(2+2) 
-           
+          
          for (int g = 0; g < s.length(); g++)
 			{ 
-              if (s.substring(g,0) == "(" && 
-                  s.substring(g-1) != "(" && 
-                  s.substring(g-1) != "+" && // if operator is already assigned, skip 
-                  s.substring(g-1) != "-" && 
-                  s.substring(g-1) != "*" && 
-                  s.substring(g-1) != "/" && 
+              if (s.charAt(g) == '(' && //it should be from 1, equals() here
+                  s.charAt(g-1) != '(' && 
+                  s.charAt(g-1) != '+' && // if operator is already assigned, skip 
+                  s.charAt(g-1) != '-' && 
+                  s.charAt(g-1) != '*' && 
+                  s.charAt(g-1) != '/' && 
                   g != 0 // if it is not the first char 
               )
 				{ 
                   s = s.substring(0, g)+"*"+s.substring(g, s.length()); 
               } 
           } 
-           
-          for (int h = 0; h < s.length(); h++)
+         System.out.println("check0 " + s); 
+         
+          for (int h = 0; h < s.length()-1; h++)
 			{ 
-              if (s.substring(h) == ")" && 
-                  s.substring(h+1) != ")" &&  
-                  s.substring(h+1) != "+" && // if operator is already assigned, skip 
-                  s.substring(h+1) != "-" && 
-                  s.substring(h+1) != "*" && 
-                  s.substring(h+1) != "/" && 
-                  h != s.length()-1 // if it is the last char, dont append 
+              if (s.charAt(h) == ')' && 
+                  s.charAt(h+1) != ')' &&  
+                  s.charAt(h+1) != '+' && // if operator is already assigned, skip 
+                  s.charAt(h+1) != '-' && 
+                  s.charAt(h+1) != '*' && 
+                  s.charAt(h+1) != '/' 
+//                  && h != s.length()-1 // if it is the last char, dont append 
               )
 				{ 
                   s = s.substring(0, h+1)+"*"+s.substring(h+1, s.length()); 
               } 
           } 
+          
+          System.out.println("check1 " + s);
+          /*
           // Code beneath sorts out the ordered operations 
           // into a xml structure. I used XML cause it was  
           // easy to debug and navigate in. 
@@ -64,10 +66,9 @@ public class StringCalc{}
               if (s.substring(i) == "(")
 				{ 
                   e = s.substring(startIndex, i); 
-                  if (e != "")
-					{ 
+                  if (e != "") 
                       currentOrder.appendChild(e); 
-                  } 
+                  
                   startIndex = i+1; 
                   o = <order/>; 
                   currentOrder.appendChild(o); 
@@ -135,7 +136,7 @@ public class StringCalc{}
                   o = new Object(); 
                   o.operation = "add"; 
                   o.value = eq.substring(startIndex, i); 
-                  a.push(o); 
+                  a.push(o); //add to the fron of Line
                   startIndex = i+1; 
               } else if (eq.substring(i) == "-")
 				{ 
@@ -211,10 +212,9 @@ public class StringCalc{}
                   result /= parseFloat(a[j+1].value); 
               } 
                
-          } 
+          } */
           return result; 
       } 
        
-  }     
-} 
-*/
+}     
+  

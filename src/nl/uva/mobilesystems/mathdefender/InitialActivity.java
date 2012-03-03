@@ -21,6 +21,9 @@ import org.andengine.entity.util.FPSLogger;
 import org.andengine.input.touch.controller.MultiTouch;
 import org.andengine.ui.activity.SimpleBaseGameActivity;
 
+import bsh.EvalError;
+import bsh.Interpreter;
+
 import android.graphics.Point;
 import android.opengl.GLES20;
 import android.util.Log;
@@ -63,6 +66,8 @@ public class InitialActivity extends SimpleBaseGameActivity implements OnKeyList
 		
 	 
 	public EngineOptions onCreateEngineOptions() {
+		
+		
 		//set Camera here
 		this.mCamera = new Camera(0, 0, GUIConstants.CAMERA_WIDTH, GUIConstants.CAMERA_HEIGHT);
 		EngineOptions engineOptions = new EngineOptions(true, ScreenOrientation.LANDSCAPE_FIXED, new RatioResolutionPolicy(GUIConstants.CAMERA_WIDTH, GUIConstants.CAMERA_HEIGHT), this.mCamera); 
