@@ -69,7 +69,7 @@ Graphics;
  		- DONE move collision tests to GameModel
  		- DONE create separated class for textures; 
 		-  put more brain there to the objects
-	-> Re-Write Sum-Parsing + Tests there as well
+	-> DONE Re-Write Sum-Parsing + Tests there as well
 	-> Maybe: help Laurens 
 	
 	 	
