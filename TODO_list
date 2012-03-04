@@ -23,7 +23,7 @@ Upgrades:
 	- Buying Tower's
 	- Upgrade speed of teleport reload
 	- Teleport option - charging for some point, Skips X of pixel without touching waves
-	- 
+	-  
 	- Towers 
 		-> Update bullets so they
 		-> Coloring the enemies that can give you bonuses
@@ -56,6 +56,7 @@ Graphics;
 			- different levels 
 
 	- Make the waves not disappear when enemis are all gone 
+	- Explore possibility of removing playersprite all together.
 			
 	
 2) Tobi
