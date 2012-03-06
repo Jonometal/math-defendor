@@ -47,7 +47,7 @@ Graphics;
 		-> DONE Sums will be displayed, 
 		-> DONE generated, 
 		-> DONE updating the player's score by the result of equation
-		-> TExtfield Character Limit
+		-> DONE TExtfield Character Limit
 	-  	 put more brain into the OBJECTS, not in the other Places (Game Model, Activity
 	
 	- Laurens -> Levels
