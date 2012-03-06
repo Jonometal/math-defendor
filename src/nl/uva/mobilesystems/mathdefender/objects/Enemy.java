@@ -47,7 +47,7 @@ public class Enemy extends AnimatedSprite{
 		this.model = model;
 		this.myDiff = difficulty;
 		//Set different diff. here for testing purposes
-		this.myDiff = 3;
+		this.myDiff = 4;
 		this.mPhysicsHandler = new PhysicsHandler(this);
 		this.registerUpdateHandler(this.mPhysicsHandler);
 		this.mPhysicsHandler.setVelocity(-PhConstants.ENEMY_VELOCITY, 0);
