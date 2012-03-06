@@ -107,9 +107,12 @@ public class GameModel implements ObjectPositionEventListener {
 			object.removeObjectPositionEventListener();
 			object = null;
 			Log.v("eventMine", "RemovesObject");
-			if(currentLevel.getCurrentWave().getObjects().size() == 0){ //check whether something is still in current Wave
+			if(currentLevel.getCurrentWave().getObjects().size() == 0)
+			{ //check whether something is still in current Wave
 				if( currentLevel.getWaves().size() > 0) //if there are still waves to be shown
+				{
 					startNewWave();
+				}
 				
 			}
 			break;
@@ -152,6 +155,7 @@ public class GameModel implements ObjectPositionEventListener {
 				tempEnemy.addObjectPositionEventListener(this);
 				tempEnemies.add(tempEnemy);
 			}
+			Log.v("newWave", "new Wave created ");
 			Wave tempWave = new Wave(tempEnemies);
 			this.myEnemies = tempEnemies;
 			this.currentLevel.getWaves().offer(tempWave);
@@ -201,11 +205,21 @@ public class GameModel implements ObjectPositionEventListener {
 		while(iter.hasNext()){
 			enemy = iter.next();
 			if(player.collidesWith(enemy)){			//collsion player <-> enemy
+				Log.v("removeMine", "removing enemy: " + enemy);
 				this.removeObjectFromScene(enemy);
 				
 				player.collisionDetected((Enemy)enemy);
 				//TODO should be re-written here in more OOP manner: so player.collisionDetected() and enemy.collisionDetected() should be used instead putting a logic here
 				iter.remove();
+				//this is the fix to the problem that no new waves appear when you get all three enemies
+				// This is horrible code though and should all be moved to the enemy/wave class.
+				if(currentLevel.getCurrentWave().getObjects().size() == 0)
+				{ //check whether something is still in current Wave
+					if( currentLevel.getWaves().size() > 0) //if there are still waves to be shown
+					{
+						startNewWave();
+					}
+				}
 			}else{	//otherwise check for collisions with bullets
 				Iterator<Tower> iterTower = towers.iterator();
 				Tower tower;
@@ -219,10 +233,22 @@ public class GameModel implements ObjectPositionEventListener {
 						bullet = iterBullet.next();
 						if(enemy.collidesWith(bullet)){ //collision enemy <-> bullet
 							this.removeObjectFromScene(bullet);
+							Log.v("removeMine", "bullet removing enemy: " + enemy);
 							this.removeObjectFromScene(enemy);
 							tower.increaseBulletsAvailable(1);	//increase tower's bullet by 1
 							iterBullet.remove(); //remove bullet
 							iter.remove(); //remove enemy
+							
+							//this is the fix to the problem that no new waves appear when you get all three enemies
+							// This is horrible code though and should all be moved to the enemy/wave class.
+							if(currentLevel.getCurrentWave().getObjects().size() == 0)
+							{ //check whether something is still in current Wave
+								if( currentLevel.getWaves().size() > 0) //if there are still waves to be shown
+								{
+									startNewWave();
+								}
+							}
+							
 							break towerLoop;	//we're breaking the outer loop as for this enemy there won't be any collisions, because he is NO MORE.
 						}
 					}
