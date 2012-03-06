@@ -55,7 +55,7 @@ Graphics;
 			- separate MathLevel for Each Level;
 			- different levels 
 
-	- Make the waves not disappear when enemis are all gone 
+	DONE Make the waves not disappear when enemis are all gone 
 	- Explore possibility of removing playersprite all together.
 			
 	
