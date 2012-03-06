@@ -47,7 +47,7 @@ public class Enemy extends AnimatedSprite{
 		this.model = model;
 		this.myDiff = difficulty;
 		//Set different diff. here for testing purposes
-		this.myDiff = 4;
+		this.myDiff = 3;
 		this.mPhysicsHandler = new PhysicsHandler(this);
 		this.registerUpdateHandler(this.mPhysicsHandler);
 		this.mPhysicsHandler.setVelocity(-PhConstants.ENEMY_VELOCITY, 0);
@@ -55,7 +55,7 @@ public class Enemy extends AnimatedSprite{
 		myResult = (int)Math.ceil(calculateResult(mySum));
 		Entity a = new Entity();
 		this.myFont = myFont;
-		myText = new Text(0,0, this.myFont, "Score", "FPS: XXXXX".length(), pVertexBufferObjectManager);
+		myText = new Text(0,0, this.myFont, "Equation", 50, pVertexBufferObjectManager);
 		//myText.setText(Integer.toString(myResult));
 		myText.setText(mySum);		
 		this.attachChild(myText);
