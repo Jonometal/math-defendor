@@ -145,7 +145,6 @@ public class GameModel implements ObjectPositionEventListener {
 			for(int i=0; i<nrWaves; i++){
 			LinkedList<AnimatedSprite>  tempEnemies = new LinkedList<AnimatedSprite>();
 			for(int j=0; j< PhConstants.NR_ENEMIES_IN_WAVE; j++){ //generating enemies
-				int random = (int)(Math.random() * 1000);	//should be an integer number from 0 - 1000 
 				int x = screenDimensions.x; //the edge of a screen
 				int y = screenDimensions.y / (PhConstants.NR_ENEMIES_IN_WAVE+1) * (j+1);	//so equal distribution on screen Width
 				
