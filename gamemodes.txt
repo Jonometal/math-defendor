@@ -1,8 +1,16 @@
 TUTORIAL MODE
 (future work?)
 
-ZEN MODE
+ZEN. MODE
 
+- each 10 waves you have 1 "bonus" wave; (speed upgrade, tower (2 types - simplifying and slowing down); bulle-time
+- POWER SLIDE
+- more hard - more waves passed
+- 10 (pts) 				10-3 = 7, 13 12
+= 354					-120 -120 -114
+- higscoring - as many waves as possible
+- additional difficulty levels;
+- 
 
 SUPERMARKET MODE
  
@@ -12,3 +20,13 @@ SUPERMARKET MODE
 For each level you get some budget and have to buy as many different shopping carts as possible, at least one from each wave. if you have budget left at the end of the level, you'll get this money additionally to the basic budget in the next level. If you have bought more shopping carts than the number of waves you get a defense tower for the next level.
 If you buy a cart above your budget, you lose a life and can start the same level, but only with the basic budget. You have five lives per level. For each life left after finishing the level, you get a 10€ bonus.
 Highscores are determined by the last wave you were able to do, for example L6W3. The system makes sure, that there are always ways to solve the level with the basic budget. However, the allowed error margin will be thinner from level to level, so that finally there is only one possible way to get through the level with the basic budget.
+
+bonuses: TOWER (shots down the most expensive/randomly)
+
+
+
+TOBi & Michal's meeting:
+
+-> Base class GameMode -> ZenGaMeModel and SUperMakret Mode
+-> ONE activity;
+-> 
