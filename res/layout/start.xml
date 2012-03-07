@@ -31,20 +31,28 @@
         android:orientation="vertical" >
 
         <Button
-            android:id="@+id/button_gamestart"
-            android:layout_width="150dp"
-            android:layout_height="50dp"
-            android:layout_marginBottom="5dp"
-            android:background="@drawable/button"
-            android:text="@string/button_gamestart" />
-
-        <Button
             android:id="@+id/button_tutorialstart"
             android:layout_width="150dp"
             android:layout_height="50dp"
             android:layout_marginBottom="5dp"
             android:background="@drawable/button"
             android:text="@string/button_tutorialstart" />
+
+        <Button
+            android:id="@+id/button_supermarketstart"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/button"
+            android:text="@string/button_supermarketstart" />
+        
+        <Button
+            android:id="@+id/button_zenstart"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/button"
+            android:text="@string/button_zenstart" />
 
         <Button
             android:id="@+id/button_highscores"

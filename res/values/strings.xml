@@ -8,10 +8,10 @@
     <string name="app_name_alt">My horse is amazing.</string>
     <string name="textview_title">Math Defendor</string>
     <string name="textview_highscorestitle">Highscores</string> 
-    <string name="button_gamestart">Start Game</string>
-    <string name="button_highscores">See Highscores</string>
-    <string name="button_exit">Quit Application</string>
-    <string name="button_tutorialstart">Start Tutorial</string> 
+    <string name="button_zenstart">Zen Mode</string>
+    <string name="button_supermarketstart">Supermarket Mode</string>
+    <string name="button_highscores">Highscores</string>
+    <string name="button_tutorialstart">Tutorial</string> 
     
     <string name="loremipsum1">Lorem ipsum</string>
     <string name="loremipsum2">dolor sit amet</string> 
