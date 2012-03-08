@@ -147,7 +147,7 @@ public class GameModel implements ObjectPositionEventListener {
 		//Add additional TOWER to the game
 		for(int j=0; j<nrTowers; j++){
 
-			//setNewTowerAt(350, 400, textureTower,textureTowerBullet, objectManager);
+			setNewTowerAt(350, 400, textureTower,textureTowerBullet, objectManager);
 		}
 	}
 	
