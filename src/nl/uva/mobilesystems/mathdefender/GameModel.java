@@ -138,34 +138,16 @@ public class GameModel implements ObjectPositionEventListener {
 	 * 
 	 * Ultra important and bad-coding style method; Sets waves, enemies in there 
 	 */
-	public void setUpSimpleGame(int nrWaves, int nrTowers, Point screenDimensions, TiledTextureRegion textureEnemy,
+	public void setUpSimpleGame(int difficulty, int nrWaves, int nrTowers, Point screenDimensions, TiledTextureRegion textureEnemy,
 								TiledTextureRegion textureTower, TiledTextureRegion textureTowerBullet,
 								VertexBufferObjectManager objectManager, Font enemyFont){
-		this.currentLevel = new Level(Level.DIFF_TUTORIAL);
-		this.currentLevel.setWaves(new LinkedList<Wave>());
-		int levelDiff = 1;
+		this.currentLevel = new Level(difficulty, nrWaves, nrTowers, screenDimensions, textureEnemy,objectManager, enemyFont, this);
 			
-			for(int i=0; i<nrWaves; i++){
-			LinkedList<AnimatedSprite>  tempEnemies = new LinkedList<AnimatedSprite>();
-			for(int j=0; j< PhConstants.NR_ENEMIES_IN_WAVE; j++){ //generating enemies
-				int x = screenDimensions.x; //the edge of a screen
-				int y = screenDimensions.y / (PhConstants.NR_ENEMIES_IN_WAVE+1) * (j+1);	//so equal distribution on screen Width
-				
-				Enemy tempEnemy = new Enemy(x,y, textureEnemy, objectManager, levelDiff, enemyFont, this);
-				tempEnemy.addObjectPositionEventListener(this);
-				tempEnemies.add(tempEnemy);
-			}
-			Log.v("newWave", "new Wave created ");
-			Wave tempWave = new Wave(tempEnemies);
-			this.myEnemies = tempEnemies;
-			this.currentLevel.getWaves().offer(tempWave);
-		}
-		this.currentLevel.setCurrentWave(this.currentLevel.getWaves().poll());
-		
+
 		//Add additional TOWER to the game
 		for(int j=0; j<nrTowers; j++){
 
-			setNewTowerAt(350, 400, textureTower,textureTowerBullet, objectManager);
+			//setNewTowerAt(350, 400, textureTower,textureTowerBullet, objectManager);
 		}
 	}
 	
@@ -221,8 +203,9 @@ public class GameModel implements ObjectPositionEventListener {
 				//TODO should be re-written here in more OOP manner: so player.collisionDetected() and enemy.collisionDetected() should be used instead putting a logic here
 				iter.remove();
 				
-			}else{	//otherwise check for collisions with bullets
-				Iterator<Tower> iterTower = towers.iterator();
+			}else
+			{	//otherwise check for collisions with bullets
+				/*Iterator<Tower> iterTower = towers.iterator();
 				Tower tower;
 				towerLoop: while(iterTower.hasNext()){
 					tower = iterTower.next();
@@ -245,7 +228,7 @@ public class GameModel implements ObjectPositionEventListener {
 							break towerLoop;	//we're breaking the outer loop as for this enemy there won't be any collisions, because he is NO MORE.
 						}
 					}
-				}
+				}*/
 			}
 		}
 	}
