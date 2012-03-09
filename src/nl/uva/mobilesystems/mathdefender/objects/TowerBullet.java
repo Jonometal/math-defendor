@@ -75,6 +75,16 @@ public class TowerBullet extends TiledSprite {
 		this.listener = listener;
 	}
 	
+	/**
+	 * Should be called when bullet collides. It fires an event {@link EventsConstants#EVENT_OBJECT_BULLET_OUT_OF_SCENE}
+	 * and notifies Tower about collision
+	 */
+	public void collisionDetected(){
+		fireEvent(EventsConstants.EVENT_OBJECT_BULLET_OUT_OF_SCENE);
+		this.tower.collisionBulletDetected();
+	}
+	
+	
 	public synchronized void removeObjectPositionEventListener(){
 		this.listener = null;
 	}

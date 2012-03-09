@@ -113,6 +113,12 @@ public class Enemy extends AnimatedSprite{
 		this.listener = listener;
 	}
 	
+	/** Should be called when collision between enemy and sth else happened.
+	 *  Erases the enemy and notifies relevant methods by firing en EVENT_OBJECT_ENEMY_OUT_OF_SCENE 
+	 *  */
+	public void collisionDetected(){
+		fireEvent(EventsConstants.EVENT_OBJECT_ENEMY_OUT_OF_SCENE);
+	}
 	
 	public synchronized void removeObjectPositionEventListener(){
 		this.listener = null;

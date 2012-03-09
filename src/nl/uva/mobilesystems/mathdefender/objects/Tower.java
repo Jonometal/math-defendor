@@ -111,6 +111,12 @@ public class Tower extends TiledSprite{
 		super.onManagedUpdate(pSecondsElapsed);
 	}
 	
+	/** When you detected Bullet collision call TowerBullet.collisionDetected() rather than this.
+	 * The former will this method. */
+	public void collisionBulletDetected(){
+		this.increaseBulletsAvailable(1);	//increase tower's bullet by 1
+		
+	}
 	
 	public void increaseBulletsAvailable(int bullets){
 		this.bulletsAvailable += bullets;

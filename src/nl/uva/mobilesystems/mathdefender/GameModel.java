@@ -111,7 +111,6 @@ public class GameModel implements ObjectPositionEventListener {
 			{ //check whether something is still in current Wave
 				if( currentLevel.getWaves().size() > 0) //if there are still waves to be shown
 				{
-					
 					startNewWave();
 				}
 			}
@@ -182,26 +181,22 @@ public class GameModel implements ObjectPositionEventListener {
 	public void performGlobalCollisionTest() {
 		//this is the fix to the problem that no new waves appear when you get all three enemies
 		// This is horrible code though and should all be moved to the enemy/wave class.
-		if(currentLevel.getCurrentWave().getObjects().size() == 0)
-		{ //check whether something is still in current Wave
-			if( currentLevel.getWaves().size() > 0) //if there are still waves to be shown
-			{
-				startNewWave();
-			}
-		}
+//		if(currentLevel.getCurrentWave().getObjects().size() == 0)
+//		{ //check whether something is still in current Wave
+//			if( currentLevel.getWaves().size() > 0) //if there are still waves to be shown
+//			{
+//				startNewWave();
+//			}
+//		}
 		Iterator<AnimatedSprite> iter = this.getCurrentWaveObjects().iterator();
 		LinkedList<Tower> towers = this.getTowers();
 		AnimatedSprite enemy;
 		while(iter.hasNext()){
 			enemy = iter.next();
 			if(player.collidesWith(enemy)){			//collsion player <-> enemy
-				Log.v("removeMine", "removing enemy: " + enemy);
-				this.removeObjectFromScene(enemy);
-				
-				player.collisionDetected((Enemy)enemy);
-				//TODO should be re-written here in more OOP manner: so player.collisionDetected() and enemy.collisionDetected() should be used instead putting a logic here
 				iter.remove();
-				
+				player.collisionDetected((Enemy)enemy);
+				((Enemy)enemy).collisionDetected();
 			}else
 			{	//otherwise check for collisions with bullets
 				Iterator<Tower> iterTower = towers.iterator();
@@ -215,14 +210,10 @@ public class GameModel implements ObjectPositionEventListener {
 					while(iterBullet.hasNext()){
 						bullet = iterBullet.next();
 						if(enemy.collidesWith(bullet)){ //collision enemy <-> bullet
-							this.removeObjectFromScene(bullet);
-							Log.v("removeMine", "bullet removing enemy: " + enemy);
-							this.removeObjectFromScene(enemy);
-							tower.increaseBulletsAvailable(1);	//increase tower's bullet by 1
 							iterBullet.remove(); //remove bullet
 							iter.remove(); //remove enemy
-							
-						
+							bullet.collisionDetected();
+							((Enemy)enemy).collisionDetected();
 							
 							break towerLoop;	//we're breaking the outer loop as for this enemy there won't be any collisions, because he is NO MORE.
 						}

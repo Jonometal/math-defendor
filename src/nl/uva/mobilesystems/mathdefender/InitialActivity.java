@@ -123,11 +123,6 @@ public class InitialActivity extends SimpleBaseGameActivity implements OnKeyList
 					TexMan.getIt().mEnemyTextureregion, TexMan.getIt().mTowerTextureRegion, TexMan.getIt().mTowerBulletTextureRegion, getVertexBufferObjectManager(), TexMan.getIt().playerFont
 					);
 		
-		//Set Text
-//		this.text = new Text(500, 40, this.font, ResStrings.DEBUG_WAVES_LEFT + " " + this.gModel.getWavesLeft().size(), 
-//					new TextOptions(HorizontalAlign.CENTER), this.getVertexBufferObjectManager());
-//		scene.attachChild(text);
-
 		//Create a player here
 	
 		
