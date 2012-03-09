@@ -39,14 +39,16 @@ public class Level {
 	private LinkedList<Wave> waves;
 	
 	
-	public Level(int difficulty, int nrWaves, int nrTowers, Point screenDimensions, TiledTextureRegion textureEnemy,
+	public Level(int difficulty, int nrWaves, int nrTowers, Point screenDimensions, TiledTextureRegion textureEnemy, TiledTextureRegion textureTower, TiledTextureRegion textureTowerBullet,
 			VertexBufferObjectManager objectManager,
 			Font enemyFont, GameModel model)
 	{
 		this.setWaves(new LinkedList<Wave>());
 		this.myDiff = difficulty;
 		this.model = model;
-		
+		Tower newTower = new Tower(model, 350, 400, textureTower,textureTowerBullet, objectManager);
+		this.towers.add(newTower);
+		Log.v("testTowersAdded", "found these towers: " + this.towers);
 		for(int i=0; i<nrWaves; i++){
 			LinkedList<AnimatedSprite>  tempEnemies = new LinkedList<AnimatedSprite>();
 			for(int j=0; j< PhConstants.NR_ENEMIES_IN_WAVE; j++)
@@ -97,16 +99,17 @@ public class Level {
 	}
 	
 	
-	// CONSTRUCTORS
-	public Level(int difficulty){
-		this.difficulty = difficulty;
-		this.towers = new LinkedList<Tower>();
-	}
-
 	public LinkedList<Tower> getTowers() {
 		return towers;
 	}
-
+	
+	public void addTower(Tower tower)
+	{
+		Log.v("testTowersbef", "found these towers: " + this.towers);
+		this.towers.add(tower);
+		Log.v("testTowersaft", "found these towers: " + this.towers);
+	}
+	
 	public void setTowers(LinkedList<Tower> towers) {
 		this.towers = towers;
 	}

@@ -141,14 +141,16 @@ public class GameModel implements ObjectPositionEventListener {
 	public void setUpSimpleGame(int difficulty, int nrWaves, int nrTowers, Point screenDimensions, TiledTextureRegion textureEnemy,
 								TiledTextureRegion textureTower, TiledTextureRegion textureTowerBullet,
 								VertexBufferObjectManager objectManager, Font enemyFont){
-		this.currentLevel = new Level(difficulty, nrWaves, nrTowers, screenDimensions, textureEnemy,objectManager, enemyFont, this);
+		this.currentLevel = new Level(difficulty, nrWaves, nrTowers, screenDimensions, textureEnemy,textureTower, textureTowerBullet, objectManager, enemyFont, this);
 			
-
+		Log.v("testTowers", "found these towers: " + this.getTowers());
+		
 		//Add additional TOWER to the game
 		for(int j=0; j<nrTowers; j++){
 
 			setNewTowerAt(350, 400, textureTower,textureTowerBullet, objectManager);
 		}
+		
 	}
 	
 		
@@ -161,7 +163,7 @@ public class GameModel implements ObjectPositionEventListener {
 	 */
 	public void setNewTowerAt(final float X, final float Y, TiledTextureRegion pTowerTiledTextureRegion,TiledTextureRegion pTowerBulletTiledTextureRegion, VertexBufferObjectManager pVertexBufferObjectManager ){
 		Tower newTower = new Tower(this, X,Y, pTowerTiledTextureRegion,pTowerBulletTiledTextureRegion, pVertexBufferObjectManager);
-		this.currentLevel.getTowers().add(newTower);
+		this.currentLevel.addTower(newTower);
 		addObjectToScene(newTower);
 		this.scene.registerTouchArea(newTower);
 	}
