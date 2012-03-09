@@ -47,6 +47,7 @@ public class Level {
 		this.myDiff = difficulty;
 		this.model = model;
 		Tower newTower = new Tower(model, 350, 400, textureTower,textureTowerBullet, objectManager);
+		this.towers = new LinkedList<Tower>();
 		this.towers.add(newTower);
 		Log.v("testTowersAdded", "found these towers: " + this.towers);
 		for(int i=0; i<nrWaves; i++){
@@ -63,10 +64,10 @@ public class Level {
 			}
 			Wave tempWave = new Wave(tempEnemies);
 			Log.v("newWave", "new Wave created ");
-			this.getWaves().offer(tempWave);
-			this.setCurrentWave(this.getWaves().poll());
-		
+			this.waves.offer(tempWave);
 		}
+		
+		this.setCurrentWave(this.getWaves().poll());
 		
 	}
 	

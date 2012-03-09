@@ -33,6 +33,11 @@ import android.view.View.OnKeyListener;
 import android.widget.Toast;
 
 public class InitialActivity extends SimpleBaseGameActivity implements OnKeyListener{
+	// ============================================
+	//	DEBUG
+	// =====================================
+	boolean zenMode = true; //TObi: set it to false so you could star the game in your mode
+	
 	// ===========================================================
 		// Constants
 		// ===========================================================
@@ -106,7 +111,7 @@ public class InitialActivity extends SimpleBaseGameActivity implements OnKeyList
 		
 		
 		//set our MathLevel here (will be calculated in separated thread)
-		gModel = new GameModel(this, scene);
+		gModel = this.zenMode ?  new GameZenModel(this, scene) : new GameSuperMarketModel(this, scene); //that's a trick, in java you can use this expression [ variable = boolean ? valueIfTrue : valueIfFalse ]
 			// (nrWaves, nrTowers, [Screen_X, Screen_Y], EnemyTexture, TowerTexture, Library-shit-buffer)
 		final float centerX = 100;
 		final float centerY = 100;
@@ -114,7 +119,7 @@ public class InitialActivity extends SimpleBaseGameActivity implements OnKeyList
 		gModel.setPlayer(player); ///deub???
 		scene.attachChild(player);
 		
-		gModel.setUpSimpleGame(0, 50, 1, new Point(GUIConstants.CAMERA_WIDTH, GUIConstants.CAMERA_HEIGHT),
+		gModel.setUpSimpleGame(0, 5, 1, new Point(GUIConstants.CAMERA_WIDTH, GUIConstants.CAMERA_HEIGHT),
 					TexMan.getIt().mEnemyTextureregion, TexMan.getIt().mTowerTextureRegion, TexMan.getIt().mTowerBulletTextureRegion, getVertexBufferObjectManager(), TexMan.getIt().playerFont
 					);
 		

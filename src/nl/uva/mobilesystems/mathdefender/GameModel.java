@@ -106,14 +106,14 @@ public class GameModel implements ObjectPositionEventListener {
 			currentLevel.getCurrentWave().removeObject(object);	//it's ugly, maybe it's better to create some method in Level that could be called instead of walking down trough this hierarchy?
 			object.removeObjectPositionEventListener();
 			object = null;
-			Log.v("eventMine", "RemovesObject");
+			Log.v("eventMine", "RemovesObject" + currentLevel.getCurrentWave().getObjects().size() + " " + currentLevel.getWaves().size() );
 			if(currentLevel.getCurrentWave().getObjects().size() == 0)
 			{ //check whether something is still in current Wave
 				if( currentLevel.getWaves().size() > 0) //if there are still waves to be shown
 				{
+					
 					startNewWave();
 				}
-				
 			}
 			break;
 		case EventsConstants.EVENT_OBJECT_BULLET_OUT_OF_SCENE:
@@ -124,8 +124,6 @@ public class GameModel implements ObjectPositionEventListener {
 			objectBullet.getTower().increaseBulletsAvailable(1);
 			break;
 		} 
-		
-		
 	}
 	
 	//-------------------- PUBLIC METHODS ----------------------------
@@ -150,7 +148,6 @@ public class GameModel implements ObjectPositionEventListener {
 
 			setNewTowerAt(350, 400, textureTower,textureTowerBullet, objectManager);
 		}
-		
 	}
 	
 		
