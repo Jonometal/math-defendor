@@ -66,6 +66,9 @@ public class TexMan {
 	
 	private static boolean wasInitialized = false;
 	
+	public static void initializeSupermarketTextures(){
+		;
+	}
 	public static void initializeTextures(SimpleBaseGameActivity activity) throws IllegalStateException{
 		
 //		if(wasInitialized) return;
