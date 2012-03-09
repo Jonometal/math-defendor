@@ -89,7 +89,8 @@ public class InitialActivity extends SimpleBaseGameActivity implements OnKeyList
 
 	 
 	protected void onCreateResources() {
-		TexMan.initializeTextures(this);
+//		if(zenZode)
+			TexMan.initializeTextures(this); //pass zen
 		
 	}
 
@@ -101,7 +102,7 @@ public class InitialActivity extends SimpleBaseGameActivity implements OnKeyList
 		//Set SCENE [must be done before Setting our MODEL obviously]
 		final Scene scene = new Scene();
 //		scene.setBackground(new Background(0.05f, 0.8f, 0.8f));
-		scene.setBackground(new SpriteBackground(0.05f, 0.8f, 0.8f, TexMan.getIt().mBackgroundSprite));
+		scene.setBackground(new SpriteBackground(0.05f, 0.8f, 0.8f, TexMan.getIt().mBackgroundSprite)); //different background
 		
 		
 		//set our MathLevel here (will be calculated in separated thread)
