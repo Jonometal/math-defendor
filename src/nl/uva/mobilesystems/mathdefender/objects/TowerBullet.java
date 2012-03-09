@@ -3,7 +3,7 @@ package nl.uva.mobilesystems.mathdefender.objects;
 import nl.uva.mobilesystems.mathdefender.andengine.events.EventsConstants;
 import nl.uva.mobilesystems.mathdefender.andengine.events.ObjectPositionEvent;
 import nl.uva.mobilesystems.mathdefender.andengine.events.ObjectPositionEventListener;
-import nl.uva.mobilesystems.mathdefender.physics.HelperClass;
+import nl.uva.mobilesystems.mathdefender.utils.HelperClass;
 import nl.uva.mobilesystems.mathdefender.physics.PhConstants;
 
 import org.andengine.engine.handler.physics.PhysicsHandler;

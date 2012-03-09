@@ -1,4 +1,4 @@
-package nl.uva.mobilesystems.mathdefender.physics;
+package nl.uva.mobilesystems.mathdefender.utils;
 
 import bsh.EvalError;
 import bsh.Interpreter;
@@ -97,6 +97,10 @@ public class HelperClass {
 		StringBuffer buf = new StringBuffer(baseString);
 		buf.deleteCharAt(index);
 		return buf.toString();
+	}
+	
+	public static String simplifyExpression(String expression){
+		return expression;
 	}
 	
 	
