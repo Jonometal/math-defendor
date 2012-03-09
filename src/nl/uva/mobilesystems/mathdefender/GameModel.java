@@ -204,7 +204,7 @@ public class GameModel implements ObjectPositionEventListener {
 				
 			}else
 			{	//otherwise check for collisions with bullets
-				/*Iterator<Tower> iterTower = towers.iterator();
+				Iterator<Tower> iterTower = towers.iterator();
 				Tower tower;
 				towerLoop: while(iterTower.hasNext()){
 					tower = iterTower.next();
@@ -227,7 +227,7 @@ public class GameModel implements ObjectPositionEventListener {
 							break towerLoop;	//we're breaking the outer loop as for this enemy there won't be any collisions, because he is NO MORE.
 						}
 					}
-				}*/
+				}
 			}
 		}
 	}
