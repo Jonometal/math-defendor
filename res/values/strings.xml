@@ -12,6 +12,7 @@
     <string name="button_supermarketstart">Supermarket Mode</string>
     <string name="button_highscores">Highscores</string>
     <string name="button_tutorialstart">Tutorial</string> 
+        <string name="button_continue">continue</string> 
     
     <string name="loremipsum1">Lorem ipsum</string>
     <string name="loremipsum2">dolor sit amet</string> 

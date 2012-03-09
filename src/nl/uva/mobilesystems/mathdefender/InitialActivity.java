@@ -26,6 +26,7 @@ import bsh.Interpreter;
 
 import android.graphics.Point;
 import android.opengl.GLES20;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -36,6 +37,7 @@ public class InitialActivity extends SimpleBaseGameActivity implements OnKeyList
 	// ============================================
 	//	DEBUG
 	// =====================================
+	
 	boolean zenMode = true; //TObi: set it to false so you could star the game in your mode
 	
 	// ===========================================================
@@ -72,6 +74,18 @@ public class InitialActivity extends SimpleBaseGameActivity implements OnKeyList
 	 
 	public EngineOptions onCreateEngineOptions() {
 		
+		String mode;
+		Bundle extras = getIntent().getExtras();
+		if(extras !=null)
+		{
+			mode = extras.getString("mode");
+		}
+		else{
+			mode = "NOMODE";
+		}
+		if(mode == "supermarket"){
+			zenMode = false;
+		}
 		
 		//set Camera here
 		this.mCamera = new Camera(0, 0, GUIConstants.CAMERA_WIDTH, GUIConstants.CAMERA_HEIGHT);
