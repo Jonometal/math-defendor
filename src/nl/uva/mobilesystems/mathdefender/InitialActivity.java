@@ -83,7 +83,8 @@ public class InitialActivity extends SimpleBaseGameActivity implements OnKeyList
 		else{
 			mode = "NOMODE";
 		}
-		if(mode == "supermarket"){
+		
+		if(mode.equals("supermarket")){
 			zenMode = false;
 		}
 		
