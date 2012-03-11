@@ -9,10 +9,10 @@ import nl.uva.mobilesystems.mathdefender.andengine.events.ObjectPositionEventLis
 import nl.uva.mobilesystems.mathdefender.game.Level;
 import nl.uva.mobilesystems.mathdefender.game.Wave;
 import nl.uva.mobilesystems.mathdefender.objects.Enemy;
+import nl.uva.mobilesystems.mathdefender.objects.Explosion;
 import nl.uva.mobilesystems.mathdefender.objects.Player;
 import nl.uva.mobilesystems.mathdefender.objects.Tower;
 import nl.uva.mobilesystems.mathdefender.objects.TowerBullet;
-import nl.uva.mobilesystems.mathdefender.physics.PhConstants;
 
 import org.andengine.engine.Engine;
 import org.andengine.entity.IEntity;
@@ -41,7 +41,7 @@ public class GameModel implements ObjectPositionEventListener {
 	public Scene scene; //it's little bit awkward, it must be here because current implementation of Model starts drawing before InitialActivity.onCreateScene() method is finished, so engine variable (field in GameModel class) doesnt know about this scene yet
 			
 	
-	/** Variable represeting current level that is maninated by GameModel */
+	/** Variable representing current level that is maninated by GameModel */
 	private Level currentLevel;
 	
 	public Player player; //public for experiments with PLayer class
@@ -52,7 +52,8 @@ public class GameModel implements ObjectPositionEventListener {
 	/** Debug things */
 	
 	private Text wavesLeftText; 
-	
+	private VertexBufferObjectManager objectManager;
+	private Font explosionFont;
 	
 	public static LinkedList<AnimatedSprite> myEnemies;
 	
@@ -138,9 +139,13 @@ public class GameModel implements ObjectPositionEventListener {
 	public void setUpSimpleGame(int difficulty, int nrWaves, int nrTowers, Point screenDimensions, TiledTextureRegion textureEnemy,
 								VertexBufferObjectManager objectManager, Font enemyFont){
 		this.currentLevel = new Level(difficulty, nrWaves, nrTowers, screenDimensions, textureEnemy, objectManager, enemyFont, this);
+
+		this.objectManager = objectManager;
+		this.explosionFont = enemyFont;
 	}			
 	
 		
+
 
 	
 	/**
@@ -176,6 +181,9 @@ public class GameModel implements ObjectPositionEventListener {
 				iter.remove();
 				player.collisionDetected((Enemy)enemy);
 				((Enemy)enemy).collisionDetected();
+				Explosion explosion = new Explosion(((Enemy)enemy).getX(), ((Enemy)enemy).getY(),
+						objectManager, explosionFont, this);
+				this.addObjectToScene(explosion);
 			}else
 			{	//otherwise check for collisions with bullets
 				Iterator<Tower> iterTower = towers.iterator();

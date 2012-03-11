@@ -3,7 +3,6 @@ package nl.uva.mobilesystems.mathdefender;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -31,26 +30,24 @@ public class StartMenu extends Activity implements OnClickListener {
 	}
 
 	public void onClick(View v) {/*
-		Log.d("MathDefendor", "Clicked View is: " + v);
+		
 		Intent intent;
+		
 		if(v == (Button)findViewById(R.id.button_tutorialstart)) {
-			intent = new Intent(this, InfoScreen.class); // param?
+			intent = new Intent(this, InfoScreen.class);
 			intent.putExtra("mode", "tutorial");
 			startActivity(intent);
 		}
-
 		else if(v == (Button)findViewById(R.id.button_zenstart)){
-			intent = new Intent(this, InfoScreen.class); // param?
+			intent = new Intent(this, InfoScreen.class);
 			intent.putExtra("mode", "zen");
 			startActivity(intent);
 		}
-		
 		else if(v == (Button)findViewById(R.id.button_supermarketstart)){
-			intent = new Intent(this, InfoScreen.class); // param?
+			intent = new Intent(this, InfoScreen.class);
 			intent.putExtra("mode", "supermarket");
 			startActivity(intent);
 		}
-		
 		else if(v == (Button)findViewById(R.id.button_highscores)) {
 			intent = new Intent(this, Highscores.class);
 			startActivity(intent);
