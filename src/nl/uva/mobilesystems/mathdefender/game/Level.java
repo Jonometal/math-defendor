@@ -5,8 +5,7 @@ import java.util.LinkedList;
 import nl.uva.mobilesystems.mathdefender.GameModel;
 import nl.uva.mobilesystems.mathdefender.objects.Enemy;
 import nl.uva.mobilesystems.mathdefender.objects.Tower;
-import nl.uva.mobilesystems.mathdefender.objects.TowerSimplificator;
-import nl.uva.mobilesystems.mathdefender.objects.TowerSlower;
+import nl.uva.mobilesystems.mathdefender.objects.TowerKiller;
 import nl.uva.mobilesystems.mathdefender.physics.PhConstants;
 
 import org.andengine.entity.sprite.AnimatedSprite;
@@ -125,7 +124,8 @@ public class Level {
 	 * @param pVertexBufferObjectManager
 	 */
 	public void setNewTowerAt(final float X, final float Y,  VertexBufferObjectManager pVertexBufferObjectManager ){
-		Tower newTower = new TowerSimplificator(this.model, X,Y, pVertexBufferObjectManager);
+		// Tower newTower = new TowerSimplificator(this.model, X,Y, pVertexBufferObjectManager);
+		Tower newTower = new TowerKiller(this.model, X,Y, pVertexBufferObjectManager);
 		this.addTower(newTower);
 		this.model.addObjectToScene(newTower);
 		this.model.scene.registerTouchArea(newTower);

@@ -14,12 +14,11 @@ import org.andengine.opengl.vbo.VertexBufferObjectManager;
 public class Explosion extends AnimatedSprite{
 	
 	private GameModel model;
-
-	private ObjectPositionEventListener listener; 
-	
 	
 	private Text myText;
 	private Font myFont;
+	
+	private float timer = 0;
 	
 	public Explosion(final float pX, final float pY, 
 			final VertexBufferObjectManager pVertexBufferObjectManager, Font myFont, GameModel model)
@@ -28,8 +27,7 @@ public class Explosion extends AnimatedSprite{
 		super(pX, pY, TexMan.getIt().mTowerKillerTextureRegion, pVertexBufferObjectManager);
 		this.model = model;
 		this.myFont = myFont;
-		myText = new Text(0,0, this.myFont, "Equation", 50, pVertexBufferObjectManager);
-		myText.setText("boobs");		
+		myText = new Text(0,0, this.myFont, "boobs", 50, pVertexBufferObjectManager);
 		this.attachChild(myText);
 		
 //	    PointParticleEmitter equationExplosion = new PointParticleEmitter(pX, pY);
@@ -52,21 +50,19 @@ public class Explosion extends AnimatedSprite{
 //	    this.attachChild(ExplosionParticleSystem);
 	}
 	
-	public synchronized void addObjectPositionEventListener(ObjectPositionEventListener listener){
-		this.listener = listener;
-	}
 	
 	@Override
 	protected void onManagedUpdate(float pSecondsElapsed) {
-		if(pSecondsElapsed > 0.2){
+		
+		timer += pSecondsElapsed;
+		
+		if(timer > 1){
 			myText.setText("and");
-			super.onManagedUpdate(pSecondsElapsed);
 		}
-		else if(pSecondsElapsed > 0.5){
+		if(timer > 2){
 			myText.setText("explosions!");
-			super.onManagedUpdate(pSecondsElapsed);
 		}
-		else if(pSecondsElapsed > 1){
+		if(timer > 3){
 			model.removeObjectFromScene(this);
 		}
 		else{
