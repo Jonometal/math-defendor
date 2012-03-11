@@ -4,6 +4,7 @@ import java.util.LinkedList;
 
 import nl.uva.mobilesystems.mathdefender.GameModel;
 import nl.uva.mobilesystems.mathdefender.andengine.events.EventsConstants;
+import nl.uva.mobilesystems.mathdefender.gui.TexMan;
 import nl.uva.mobilesystems.mathdefender.utils.HelperClass;
 import nl.uva.mobilesystems.mathdefender.physics.PhConstants;
 
@@ -66,12 +67,10 @@ public class Tower extends TiledSprite{
 	 * @param pTiledTowerBulletTextureRegion
 	 * @param pVertexBufferObjectManager
 	 */
-	public Tower(GameModel model,final float X, final float Y,  ITiledTextureRegion pTowerTiledTextureRegion,
-			final ITiledTextureRegion pTiledTowerBulletTextureRegion, final VertexBufferObjectManager pVertexBufferObjectManager){
+	public Tower(GameModel model,final float X, final float Y, final VertexBufferObjectManager pVertexBufferObjectManager){
 		
-		super(X, Y, pTowerTiledTextureRegion, pVertexBufferObjectManager);
+		super(X, Y, TexMan.getIt().mTowerTextureRegion, pVertexBufferObjectManager);
 		this.model = model;
-		this.pTowerBulletTiledTextureRegion = pTiledTowerBulletTextureRegion;
 		this.objectManager = pVertexBufferObjectManager;
 		
 		this.mPhysicsHandler = new PhysicsHandler(this);

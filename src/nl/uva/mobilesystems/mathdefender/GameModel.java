@@ -38,7 +38,7 @@ public class GameModel implements ObjectPositionEventListener {
 	public Engine engine; 		//Scene is public because Player class uses it, should be changed later on
 	
 	
-	Scene scene; //it's little bit awkward, it must be here because current implementation of Model starts drawing before InitialActivity.onCreateScene() method is finished, so engine variable (field in GameModel class) doesnt know about this scene yet
+	public Scene scene; //it's little bit awkward, it must be here because current implementation of Model starts drawing before InitialActivity.onCreateScene() method is finished, so engine variable (field in GameModel class) doesnt know about this scene yet
 			
 	
 	/** Variable represeting current level that is maninated by GameModel */
@@ -136,33 +136,12 @@ public class GameModel implements ObjectPositionEventListener {
 	 * Ultra important and bad-coding style method; Sets waves, enemies in there 
 	 */
 	public void setUpSimpleGame(int difficulty, int nrWaves, int nrTowers, Point screenDimensions, TiledTextureRegion textureEnemy,
-								TiledTextureRegion textureTower, TiledTextureRegion textureTowerBullet,
 								VertexBufferObjectManager objectManager, Font enemyFont){
-		this.currentLevel = new Level(difficulty, nrWaves, nrTowers, screenDimensions, textureEnemy,textureTower, textureTowerBullet, objectManager, enemyFont, this);
-			
-		Log.v("testTowers", "found these towers: " + this.getTowers());
-		
-		//Add additional TOWER to the game
-		for(int j=0; j<nrTowers; j++){
-
-			setNewTowerAt(350, 400, textureTower,textureTowerBullet, objectManager);
-		}
-	}
+		this.currentLevel = new Level(difficulty, nrWaves, nrTowers, screenDimensions, textureEnemy, objectManager, enemyFont, this);
+	}			
 	
 		
-	/**
-	 * Sets new Tower to current Level and adds it to the scene.
-	 * @param X
-	 * @param Y
-	 * @param pTiledTextureRegion
-	 * @param pVertexBufferObjectManager
-	 */
-	public void setNewTowerAt(final float X, final float Y, TiledTextureRegion pTowerTiledTextureRegion,TiledTextureRegion pTowerBulletTiledTextureRegion, VertexBufferObjectManager pVertexBufferObjectManager ){
-		Tower newTower = new Tower(this, X,Y, pTowerTiledTextureRegion,pTowerBulletTiledTextureRegion, pVertexBufferObjectManager);
-		this.currentLevel.addTower(newTower);
-		addObjectToScene(newTower);
-		this.scene.registerTouchArea(newTower);
-	}
+
 	
 	/**
 	 * This method is for code clarity.

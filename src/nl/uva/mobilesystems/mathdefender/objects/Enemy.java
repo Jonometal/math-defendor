@@ -4,6 +4,7 @@ import nl.uva.mobilesystems.mathdefender.GameModel;
 import nl.uva.mobilesystems.mathdefender.andengine.events.EventsConstants;
 import nl.uva.mobilesystems.mathdefender.andengine.events.ObjectPositionEvent;
 import nl.uva.mobilesystems.mathdefender.andengine.events.ObjectPositionEventListener;
+import nl.uva.mobilesystems.mathdefender.gui.TexMan;
 import nl.uva.mobilesystems.mathdefender.utils.HelperClass;
 import nl.uva.mobilesystems.mathdefender.physics.PhConstants;
 
@@ -38,12 +39,12 @@ public class Enemy extends AnimatedSprite{
 	private Text myText;
 	private Font myFont;
 	
-	public Enemy(final float pX, final float pY, final TiledTextureRegion pTextureRegion,
+	public Enemy(final float pX, final float pY,
 			final VertexBufferObjectManager pVertexBufferObjectManager,
 			final int difficulty, Font myFont, GameModel model)
 	{
 		
-		super(pX, pY, pTextureRegion, pVertexBufferObjectManager);
+		super(pX, pY, TexMan.getIt().mEnemyTextureregion, pVertexBufferObjectManager);
 		this.model = model;
 		this.myDiff = difficulty;
 		//Set different diff. here for testing purposes

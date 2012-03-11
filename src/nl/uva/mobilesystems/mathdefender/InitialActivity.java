@@ -135,7 +135,7 @@ public class InitialActivity extends SimpleBaseGameActivity implements OnKeyList
 		scene.attachChild(player);
 		
 		gModel.setUpSimpleGame(0, 5, 1, new Point(GUIConstants.CAMERA_WIDTH, GUIConstants.CAMERA_HEIGHT),
-					TexMan.getIt().mEnemyTextureregion, TexMan.getIt().mTowerTextureRegion, TexMan.getIt().mTowerBulletTextureRegion, getVertexBufferObjectManager(), TexMan.getIt().playerFont
+					TexMan.getIt().mEnemyTextureregion,  getVertexBufferObjectManager(), TexMan.getIt().playerFont
 					);
 		
 		//Create a player here

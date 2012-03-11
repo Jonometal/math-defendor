@@ -39,16 +39,16 @@ public class Level {
 	private LinkedList<Wave> waves;
 	
 	
-	public Level(int difficulty, int nrWaves, int nrTowers, Point screenDimensions, TiledTextureRegion textureEnemy, TiledTextureRegion textureTower, TiledTextureRegion textureTowerBullet,
+	public Level(int difficulty, int nrWaves, int nrTowers, Point screenDimensions, TiledTextureRegion textureEnemy, 
 			VertexBufferObjectManager objectManager,
 			Font enemyFont, GameModel model)
 	{
 		this.setWaves(new LinkedList<Wave>());
 		this.myDiff = difficulty;
 		this.model = model;
-		Tower newTower = new Tower(model, 350, 400, textureTower,textureTowerBullet, objectManager);
-		this.towers = new LinkedList<Tower>();
-		this.towers.add(newTower);
+		
+		setNewTowerAt(350, 400, objectManager);
+		
 		Log.v("testTowersAdded", "found these towers: " + this.towers);
 		for(int i=0; i<nrWaves; i++){
 			LinkedList<AnimatedSprite>  tempEnemies = new LinkedList<AnimatedSprite>();
@@ -57,7 +57,7 @@ public class Level {
 				int x = screenDimensions.x; //the edge of a screen
 				int y = screenDimensions.y / (PhConstants.NR_ENEMIES_IN_WAVE+1) * (j+1);	//so equal distribution on screen Width
 				
-				Enemy tempEnemy = new Enemy(x,y, textureEnemy, objectManager, difficulty, enemyFont, model);
+				Enemy tempEnemy = new Enemy(x,y, objectManager, difficulty, enemyFont, model);
 				tempEnemy.addObjectPositionEventListener(model);
 				tempEnemies.add(tempEnemy);
 				
@@ -106,9 +106,9 @@ public class Level {
 	
 	public void addTower(Tower tower)
 	{
-		Log.v("testTowersbef", "found these towers: " + this.towers);
+		if(this.towers == null)
+			this.towers = new LinkedList<Tower>();
 		this.towers.add(tower);
-		Log.v("testTowersaft", "found these towers: " + this.towers);
 	}
 	
 	public void setTowers(LinkedList<Tower> towers) {
@@ -117,6 +117,19 @@ public class Level {
 	
 	// ------------------- PUBLIC METHODS
 	
+	/**
+	 * Sets new Tower to current Level and adds it to the scene.
+	 * @param X
+	 * @param Y
+	 * @param pTiledTextureRegion
+	 * @param pVertexBufferObjectManager
+	 */
+	public void setNewTowerAt(final float X, final float Y,  VertexBufferObjectManager pVertexBufferObjectManager ){
+		Tower newTower = new Tower(this.model, X,Y, pVertexBufferObjectManager);
+		this.addTower(newTower);
+		this.model.addObjectToScene(newTower);
+		this.model.scene.registerTouchArea(newTower);
+	}
 	// ------------------- PRIVATE METHODS
 	
 	

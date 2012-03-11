@@ -43,13 +43,7 @@ public class GameZenModel extends GameModel {
 								TiledTextureRegion textureTower, TiledTextureRegion textureTowerBullet,
 								VertexBufferObjectManager objectManager, Font enemyFont){
 		super.setUpSimpleGame(difficulty, nrWaves, nrTowers, screenDimensions, textureEnemy, 
-							textureTower, textureTowerBullet, objectManager, enemyFont);
+							 objectManager, enemyFont);
 		
 	}
-	
-	public void setNewTowerAt(final float X, final float Y, TiledTextureRegion pTowerTiledTextureRegion,TiledTextureRegion pTowerBulletTiledTextureRegion, VertexBufferObjectManager pVertexBufferObjectManager ){
-		super.setNewTowerAt(X, Y, pTowerTiledTextureRegion, pTowerBulletTiledTextureRegion, pVertexBufferObjectManager);
-	}
-
-
 }

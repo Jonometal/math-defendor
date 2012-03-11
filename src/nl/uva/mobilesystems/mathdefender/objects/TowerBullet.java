@@ -3,6 +3,7 @@ package nl.uva.mobilesystems.mathdefender.objects;
 import nl.uva.mobilesystems.mathdefender.andengine.events.EventsConstants;
 import nl.uva.mobilesystems.mathdefender.andengine.events.ObjectPositionEvent;
 import nl.uva.mobilesystems.mathdefender.andengine.events.ObjectPositionEventListener;
+import nl.uva.mobilesystems.mathdefender.gui.TexMan;
 import nl.uva.mobilesystems.mathdefender.utils.HelperClass;
 import nl.uva.mobilesystems.mathdefender.physics.PhConstants;
 
@@ -20,8 +21,14 @@ import android.util.Log;
  */
 public class TowerBullet extends TiledSprite {
 
+	//------------_CONST
+	public static int TYPE_KILLER = 0; //meant to kill the enemy
+	public static int TYPE_SLOWS_DOWN = 1;
+	public static int TYPE_SIMPLIFY = 2;
+	
 	private final PhysicsHandler mPhysicsHandler;
 	
+	private int typeOfBullet;
 
 	/** Tower this bullet was shot from.*/
 	private final Tower tower;
@@ -41,7 +48,7 @@ public class TowerBullet extends TiledSprite {
 	public TowerBullet(float shootVX, float shootVY, Tower tower,
 			ITiledTextureRegion pTiledTextureRegion,
 			VertexBufferObjectManager pVertexBufferObjectManager) {
-		super(tower.getX(), tower.getY(), pTiledTextureRegion, pVertexBufferObjectManager);
+		super(tower.getX(), tower.getY(), TexMan.getIt().mTowerBulletTextureRegion, pVertexBufferObjectManager);
 		
 		this.tower = tower;
 		

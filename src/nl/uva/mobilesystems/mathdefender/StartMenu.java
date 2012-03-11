@@ -30,7 +30,7 @@ public class StartMenu extends Activity implements OnClickListener {
 		button.setOnClickListener(this);
 	}
 
-	public void onClick(View v) {
+	public void onClick(View v) {/*
 		Log.d("MathDefendor", "Clicked View is: " + v);
 		Intent intent;
 		if(v == (Button)findViewById(R.id.button_tutorialstart)) {
@@ -55,6 +55,7 @@ public class StartMenu extends Activity implements OnClickListener {
 			intent = new Intent(this, Highscores.class);
 			startActivity(intent);
 		}
+		*/
 		
 	}
 }
