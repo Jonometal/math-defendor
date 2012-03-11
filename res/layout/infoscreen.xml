@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+   	<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+   	    android:id="@+id/tableLayout"
+    	android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:baselineAligned="false"
+    	android:gravity="center_horizontal"
+    	android:orientation="horizontal">
+
+	    <TableRow
+	        android:id="@+id/tableRow1"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:background="#aa000000"
+	        android:gravity="center_horizontal">
+	            <TextView android:id="@+id/infoScreenTitle"
+              		android:layout_width="match_parent"
+              		android:layout_height="wrap_content"
+              		android:textColor="#EEC300"
+              		android:textSize="20pt" 
+              		android:layout_marginBottom="10dp"/>
+	    </TableRow>
+
+	    <TableRow
+	        android:id="@+id/tableRow2"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	      	android:background="#88ffffff"
+	        android:gravity="center_horizontal" >
+	         <TextView android:id="@+id/infoTextView"
+              		android:layout_width="match_parent"
+              		android:layout_height="wrap_content"
+              		android:textColor="#000000"
+              		android:textSize="10pt" 
+              		android:layout_margin="8dp"
+              		android:gravity="left"/>
+	    </TableRow>
+
+	    
+	   <TableRow
+	        android:id="@+id/tableRow3"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:gravity="center_horizontal" >
+        	<Button
+            	android:id="@+id/button_continue"
+            	android:layout_width="wrap_content"
+            	android:layout_height="50dp"
+            	android:layout_margin="8dp"
+            	android:background="@drawable/button"
+            	android:text="@string/button_continue" />
+	    </TableRow>
+	</TableLayout>
