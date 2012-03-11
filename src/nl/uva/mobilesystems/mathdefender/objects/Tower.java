@@ -57,8 +57,24 @@ public abstract class Tower extends TiledSprite{
 		this.bullets = bullets;
 	}
 	
+	public GameModel getModel(){
+		return this.model;
+	}
+	
+	public float getSecondsElapsed() {
+		return secondsElapsed;
+	}
+
+
+	public void setSecondsElapsed(float secondsElapsed) {
+		this.secondsElapsed = secondsElapsed;
+	}
+	
 	// -------------------- CONSTRUSTORS
 	
+	
+
+
 	/**
 	 * Constructor
 	 * @param model
@@ -94,17 +110,6 @@ public abstract class Tower extends TiledSprite{
 	
 	@Override
 	protected void onManagedUpdate(float pSecondsElapsed) {
-		this.secondsElapsed += pSecondsElapsed;
-		for(AnimatedSprite object : model.getCurrentWaveObjects()){
-			if(object instanceof Enemy && 
-					HelperClass.calculateDistance(this.getX() ,this.getY(),object.getX() , object.getY()) < PhConstants.TOWER_RANGE){
-				if(this.secondsElapsed >= PhConstants.TOWER_RELOAD_TIME){
-					//so Enemy  is within our range AND it was enough time -> Fire at HIM!
-					shotAt(object.getX(),object.getY());
-					this.secondsElapsed = 0;
-				}
-			}
-		}
 		super.onManagedUpdate(pSecondsElapsed);
 	}
 	

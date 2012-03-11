@@ -96,7 +96,14 @@ public class Enemy extends AnimatedSprite{
 		return equation;
 	}
 	
-
+	public float getVelocityX(){
+		return this.mPhysicsHandler.getVelocityX();
+	}
+	
+	public float getVelocityY(){
+		return this.mPhysicsHandler.getVelocityY();
+	}
+	
 	public String getSum() {
 		return mySum;
 	}
@@ -119,10 +126,9 @@ public class Enemy extends AnimatedSprite{
 	public void collisionDetected(Tower tower){
 		if(tower == null)
 			fireEvent(EventsConstants.EVENT_OBJECT_ENEMY_OUT_OF_SCENE);
-		if(tower instanceof TowerSimplificator){
-//			Log.d("Enemy", "Tower Simplificator hits me!");
+		
+		if(tower instanceof TowerSimplificator){	//Simplify Equation
 			this.setSum(HelperClass.simplifyExpression(this.getSum(), this.myDiff));
-			
 			this.model.engine.runOnUpdateThread(new Runnable() {
 				public void run() {
 					myText.setText((getSum()));
@@ -131,8 +137,12 @@ public class Enemy extends AnimatedSprite{
 			
 		}else if(tower instanceof TowerKiller)
 			fireEvent(EventsConstants.EVENT_OBJECT_ENEMY_OUT_OF_SCENE);
-		else if(tower instanceof TowerSlower)
-			;
+		else if(tower instanceof TowerSlower){
+			TowerSlower towerS = (TowerSlower)tower;
+			float vX = this.mPhysicsHandler.getVelocityX();
+			float vY = this.mPhysicsHandler.getVelocityY();
+			this.mPhysicsHandler.setVelocity(vX * towerS.getSlowDownRatio(), vY * towerS.getSlowDownRatio());
+		}
 	}
 	
 	public synchronized void removeObjectPositionEventListener(){

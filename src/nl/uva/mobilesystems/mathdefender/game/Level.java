@@ -6,6 +6,7 @@ import nl.uva.mobilesystems.mathdefender.GameModel;
 import nl.uva.mobilesystems.mathdefender.objects.Enemy;
 import nl.uva.mobilesystems.mathdefender.objects.Tower;
 import nl.uva.mobilesystems.mathdefender.objects.TowerKiller;
+import nl.uva.mobilesystems.mathdefender.objects.TowerSlower;
 import nl.uva.mobilesystems.mathdefender.physics.PhConstants;
 
 import org.andengine.entity.sprite.AnimatedSprite;
@@ -47,6 +48,7 @@ public class Level {
 		this.myDiff = difficulty;
 		this.model = model;
 		
+		// it's little bit Debug in here, so manually attaching different Towers to screen
 		setNewTowerAt(350, 400, objectManager);
 		
 		for(int i=0; i<nrWaves; i++){
@@ -100,7 +102,9 @@ public class Level {
 	
 	
 	public LinkedList<Tower> getTowers() {
+		int a = 4;
 		return towers;
+		
 	}
 	
 	public void addTower(Tower tower)
@@ -124,11 +128,20 @@ public class Level {
 	 * @param pVertexBufferObjectManager
 	 */
 	public void setNewTowerAt(final float X, final float Y,  VertexBufferObjectManager pVertexBufferObjectManager ){
+//		Tower newTower = new TowerSimplificator(this.model, X,Y, pVertexBufferObjectManager);
+//		this.addTower(newTower);
+//		this.model.addObjectToScene(newTower);
+//		this.model.scene.registerTouchArea(newTower);
+		
+		Tower newSlowindDownTower = new TowerSlower(this.model, 350, 100, pVertexBufferObjectManager);
+		this.addTower(newSlowindDownTower);
+		this.model.addObjectToScene(newSlowindDownTower);
+		this.model.scene.registerTouchArea(newSlowindDownTower);
 		// Tower newTower = new TowerSimplificator(this.model, X,Y, pVertexBufferObjectManager);
-		Tower newTower = new TowerKiller(this.model, X,Y, pVertexBufferObjectManager);
-		this.addTower(newTower);
-		this.model.addObjectToScene(newTower);
-		this.model.scene.registerTouchArea(newTower);
+//		Tower newTower = new TowerKiller(this.model, X,Y, pVertexBufferObjectManager);
+//		this.addTower(newTower);
+//		this.model.addObjectToScene(newTower);
+//		this.model.scene.registerTouchArea(newTower);
 	}
 	// ------------------- PRIVATE METHODS
 	

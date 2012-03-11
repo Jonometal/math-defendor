@@ -22,4 +22,6 @@ public class PhConstants {
 	public static final float TOWER_RANGE = 250f; //the radius of area in which Tower can detect enemies and start shooting at them
 	
 	public static final float TOWER_RELOAD_TIME = 0.5f; //in seconds I guess
+	
+	public static final float TOWER_SLOWER_RATIO = 0.5f;
 }
