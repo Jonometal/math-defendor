@@ -43,9 +43,17 @@ public class TexMan {
 	public BitmapTextureAtlas mEnemyBitmap; //Enemy
 	public TiledTextureRegion mEnemyTextureregion;
 	
-	//tower
-	public BitmapTextureAtlas mTowerBitmap; //Tower
-	public TiledTextureRegion mTowerTextureRegion;
+	//towerSimplificator
+	public BitmapTextureAtlas mTowerSimpBitmap; //Tower
+	public TiledTextureRegion mTowerSimpTextureRegion;
+	
+	//towerSlowDowner
+	public BitmapTextureAtlas mTowerSlowDownerBitmap; //Tower
+	public TiledTextureRegion mTowerSlowDownerTextureRegion;
+	
+	//towerKiller
+	public BitmapTextureAtlas mTowerKillerBitmap; //Tower
+	public TiledTextureRegion mTowerKillerTextureRegion;
 	
 	//tower bullet
 	public BitmapTextureAtlas mTowerBulletBitmap;
@@ -89,10 +97,20 @@ public class TexMan {
 		TexMan.getIt().mEnemyTextureregion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(TexMan.getIt().mEnemyBitmap, activity, "gfx/face_box.png", 0, 0, 1, 1);
 		TexMan.getIt().mEnemyBitmap.load();
 				
-			//tower
-		TexMan.getIt().mTowerBitmap = new BitmapTextureAtlas(activity.getTextureManager(), 64, 64, TextureOptions.BILINEAR);
-		TexMan.getIt().mTowerTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(TexMan.getIt().mTowerBitmap, activity, "gfx/chromatic_circle_small_64x64.png", 0, 0, 1, 1);
-		TexMan.getIt().mTowerBitmap.load();
+		//towerKiller
+		TexMan.getIt().mTowerKillerBitmap = new BitmapTextureAtlas(activity.getTextureManager(), 64, 64, TextureOptions.BILINEAR);
+		TexMan.getIt().mTowerKillerTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(TexMan.getIt().mTowerKillerBitmap, activity, "gfx/chromatic_circle_small_64x64.png", 0, 0, 1, 1);
+		TexMan.getIt().mTowerKillerBitmap.load();
+		
+		//towerSimplificator
+		TexMan.getIt().mTowerSimpBitmap = new BitmapTextureAtlas(activity.getTextureManager(), 64, 64, TextureOptions.BILINEAR);
+		TexMan.getIt().mTowerSimpTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(TexMan.getIt().mTowerSimpBitmap, activity, "gfx/tower_simplify.png", 0, 0, 1, 1);
+		TexMan.getIt().mTowerSimpBitmap.load();
+		
+		//towerSlowerDown
+		TexMan.getIt().mTowerSlowDownerBitmap = new BitmapTextureAtlas(activity.getTextureManager(), 64, 64, TextureOptions.BILINEAR);
+		TexMan.getIt().mTowerSlowDownerTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(TexMan.getIt().mTowerSlowDownerBitmap, activity, "gfx/towerSlowDowner.gif", 0, 0, 1, 1);
+		TexMan.getIt().mTowerSlowDownerBitmap.load();
 				
 		//towerbullet
 		TexMan.getIt().mTowerBulletBitmap = new BitmapTextureAtlas(activity.getTextureManager(), 32, 32, TextureOptions.BILINEAR);

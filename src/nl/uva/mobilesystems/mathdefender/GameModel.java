@@ -180,7 +180,7 @@ public class GameModel implements ObjectPositionEventListener {
 			if(player.collidesWith(enemy)){			//collsion player <-> enemy
 				iter.remove();
 				player.collisionDetected((Enemy)enemy);
-				((Enemy)enemy).collisionDetected();
+				((Enemy)enemy).collisionDetected(null);	//null becuse it's collision with Player
 				Explosion explosion = new Explosion(((Enemy)enemy).getX(), ((Enemy)enemy).getY(),
 						objectManager, explosionFont, this);
 				this.addObjectToScene(explosion);
@@ -200,7 +200,7 @@ public class GameModel implements ObjectPositionEventListener {
 							iterBullet.remove(); //remove bullet
 							iter.remove(); //remove enemy
 							bullet.collisionDetected();
-							((Enemy)enemy).collisionDetected();
+							((Enemy)enemy).collisionDetected(bullet.getTower());
 							
 							break towerLoop;	//we're breaking the outer loop as for this enemy there won't be any collisions, because he is NO MORE.
 						}

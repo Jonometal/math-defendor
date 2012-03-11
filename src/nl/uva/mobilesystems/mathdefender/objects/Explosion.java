@@ -25,7 +25,7 @@ public class Explosion extends AnimatedSprite{
 			final VertexBufferObjectManager pVertexBufferObjectManager, Font myFont, GameModel model)
 	{
 		
-		super(pX, pY, TexMan.getIt().mTowerTextureRegion, pVertexBufferObjectManager);
+		super(pX, pY, TexMan.getIt().mTowerKillerTextureRegion, pVertexBufferObjectManager);
 		this.model = model;
 		this.myFont = myFont;
 		myText = new Text(0,0, this.myFont, "Equation", 50, pVertexBufferObjectManager);

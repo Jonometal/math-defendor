@@ -4,8 +4,8 @@ import nl.uva.mobilesystems.mathdefender.andengine.events.EventsConstants;
 import nl.uva.mobilesystems.mathdefender.andengine.events.ObjectPositionEvent;
 import nl.uva.mobilesystems.mathdefender.andengine.events.ObjectPositionEventListener;
 import nl.uva.mobilesystems.mathdefender.gui.TexMan;
-import nl.uva.mobilesystems.mathdefender.utils.HelperClass;
 import nl.uva.mobilesystems.mathdefender.physics.PhConstants;
+import nl.uva.mobilesystems.mathdefender.utils.HelperClass;
 
 import org.andengine.engine.handler.physics.PhysicsHandler;
 import org.andengine.entity.sprite.TiledSprite;
@@ -21,10 +21,7 @@ import android.util.Log;
  */
 public class TowerBullet extends TiledSprite {
 
-	//------------_CONST
-	public static int TYPE_KILLER = 0; //meant to kill the enemy
-	public static int TYPE_SLOWS_DOWN = 1;
-	public static int TYPE_SIMPLIFY = 2;
+	
 	
 	private final PhysicsHandler mPhysicsHandler;
 	

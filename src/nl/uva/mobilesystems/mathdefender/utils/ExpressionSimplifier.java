@@ -39,7 +39,41 @@ public class ExpressionSimplifier {
 			}
 			break;
 		case 3:	//currently those are 3 numbers lined with "+"/"-" operators, so just calculate the first part of it 
-			//TODO - to be done;
+			/*
+			 * 44+1-3
+			 * -32+92-45
+			 * -69+59+24
+			 * 3-4-62
+			 * 8-63+-29
+			 */
+			
+			int pointer = 0;
+			StringBuffer tempString;
+			if(returnString.charAt(pointer) == '-')	//get rid of fist '-'
+				pointer++;
+			
+			
+			while(Character.isDigit(returnString.charAt(pointer))) //go through first number, now pointer is at "+" or "-"
+				pointer++;
+			
+			
+			if(returnString.charAt(pointer+1) == '-'){ //so we have ?a+-b?c let's put pointer on the "b"
+				pointer += 2;
+			}else 
+				pointer++;
+			
+			
+			while(Character.isDigit(returnString.charAt(pointer)))	//so now in ?a+-b?c the pointer is on the second ?, so we can calculate the first part
+				pointer++;
+			
+			tempString = new StringBuffer(returnString.substring(0, pointer));	
+			try {
+				returnString = Integer.toString(HelperClass.parseSum(tempString.toString())) + 
+							    returnString.subSequence(pointer, returnString.length());
+			} catch (EvalError e) {
+				Log.e("ExpressionSimplifier", "EvalError during parsing the sum:" + tempString.toString() );
+				e.printStackTrace();
+			}
 			break;
 		case 4:
 			break;

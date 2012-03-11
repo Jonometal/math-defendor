@@ -29,7 +29,7 @@ public class StartMenu extends Activity implements OnClickListener {
 		button.setOnClickListener(this);
 	}
 
-	public void onClick(View v) {/*
+	public void onClick(View v) {
 		
 		Intent intent;
 		
@@ -52,7 +52,7 @@ public class StartMenu extends Activity implements OnClickListener {
 			intent = new Intent(this, Highscores.class);
 			startActivity(intent);
 		}
-		*/
+		
 		
 	}
 }

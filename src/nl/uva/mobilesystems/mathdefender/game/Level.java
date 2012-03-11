@@ -2,19 +2,20 @@ package nl.uva.mobilesystems.mathdefender.game;
 
 import java.util.LinkedList;
 
+import nl.uva.mobilesystems.mathdefender.GameModel;
+import nl.uva.mobilesystems.mathdefender.objects.Enemy;
+import nl.uva.mobilesystems.mathdefender.objects.Tower;
+import nl.uva.mobilesystems.mathdefender.objects.TowerSimplificator;
+import nl.uva.mobilesystems.mathdefender.objects.TowerSlower;
+import nl.uva.mobilesystems.mathdefender.physics.PhConstants;
+
 import org.andengine.entity.sprite.AnimatedSprite;
 import org.andengine.opengl.font.Font;
-import org.andengine.opengl.texture.region.ITiledTextureRegion;
 import org.andengine.opengl.texture.region.TiledTextureRegion;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 
 import android.graphics.Point;
 import android.util.Log;
-
-import nl.uva.mobilesystems.mathdefender.objects.Enemy;
-import nl.uva.mobilesystems.mathdefender.objects.Tower;
-import nl.uva.mobilesystems.mathdefender.physics.PhConstants;
-import nl.uva.mobilesystems.mathdefender.GameModel;
 
 
 /**
@@ -49,7 +50,6 @@ public class Level {
 		
 		setNewTowerAt(350, 400, objectManager);
 		
-		Log.v("testTowersAdded", "found these towers: " + this.towers);
 		for(int i=0; i<nrWaves; i++){
 			LinkedList<AnimatedSprite>  tempEnemies = new LinkedList<AnimatedSprite>();
 			for(int j=0; j< PhConstants.NR_ENEMIES_IN_WAVE; j++)
@@ -125,7 +125,7 @@ public class Level {
 	 * @param pVertexBufferObjectManager
 	 */
 	public void setNewTowerAt(final float X, final float Y,  VertexBufferObjectManager pVertexBufferObjectManager ){
-		Tower newTower = new Tower(this.model, X,Y, pVertexBufferObjectManager);
+		Tower newTower = new TowerSimplificator(this.model, X,Y, pVertexBufferObjectManager);
 		this.addTower(newTower);
 		this.model.addObjectToScene(newTower);
 		this.model.scene.registerTouchArea(newTower);

@@ -13,6 +13,7 @@ import org.andengine.entity.sprite.AnimatedSprite;
 import org.andengine.entity.sprite.TiledSprite;
 import org.andengine.input.touch.TouchEvent;
 import org.andengine.opengl.texture.region.ITiledTextureRegion;
+import org.andengine.opengl.texture.region.TiledTextureRegion;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 
 import android.util.Log;
@@ -25,7 +26,7 @@ import android.util.Log;
  * @author siemionides
  *
  */
-public class Tower extends TiledSprite{
+public abstract class Tower extends TiledSprite{
 	
 	/**
 	 * It's ugly but.. this way GameModel can be registered as a listener of TowerBulletEvents (getting out of the scene)
@@ -61,15 +62,17 @@ public class Tower extends TiledSprite{
 	/**
 	 * Constructor
 	 * @param model
+	 * @param towerType Type of the tower, See {@link Tower#TYPE_KILLER}, {@link Tower#TYPE_SIMPLIFY} {@link Tower#TYPE_SLOWS_DOWN}
 	 * @param X
 	 * @param Y
 	 * @param pTowerTiledTextureRegion
 	 * @param pTiledTowerBulletTextureRegion
 	 * @param pVertexBufferObjectManager
 	 */
-	public Tower(GameModel model,final float X, final float Y, final VertexBufferObjectManager pVertexBufferObjectManager){
+	public Tower(GameModel model, final float X, final float Y, TiledTextureRegion towerTexture, final VertexBufferObjectManager pVertexBufferObjectManager){
+		super(X, Y, towerTexture, pVertexBufferObjectManager);
+
 		
-		super(X, Y, TexMan.getIt().mTowerTextureRegion, pVertexBufferObjectManager);
 		this.model = model;
 		this.objectManager = pVertexBufferObjectManager;
 		
@@ -85,7 +88,6 @@ public class Tower extends TiledSprite{
 	@Override
 	public boolean onAreaTouched(TouchEvent pSceneTouchEvent,
 			float pTouchAreaLocalX, float pTouchAreaLocalY) {
-//		Log.v("tower", "touched");
 		this.setPosition(pSceneTouchEvent.getX() - this.getWidth() / 2, pSceneTouchEvent.getY() - this.getHeight() / 2);
 		return true;
 	}
@@ -103,10 +105,6 @@ public class Tower extends TiledSprite{
 				}
 			}
 		}
-//		Log.d("towerBullet2",  + this.getX() + " " + this.getY());
-//		if (HelperClass.isOutSideScene(this.getX(), this.getY())){
-//			fireEvent(EventsConstants.EVENT_OBJECT_BULLET_OUT_OF_SCENE);
-//		}
 		super.onManagedUpdate(pSecondsElapsed);
 	}
 	

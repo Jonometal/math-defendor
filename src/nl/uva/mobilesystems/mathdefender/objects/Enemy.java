@@ -48,17 +48,16 @@ public class Enemy extends AnimatedSprite{
 		this.model = model;
 		this.myDiff = difficulty;
 		//Set different diff. here for testing purposes
-		this.myDiff = (int)Math.floor(Math.random() * 4 +1);
-		Log.v("diffMine", "myDiff: " + this.myDiff);
+//		this.myDiff = (int)Math.floor(Math.random() * 4 +1);
+//		Log.v("diffMine", "myDiff: " + this.myDiff);
 		this.mPhysicsHandler = new PhysicsHandler(this);
 		this.registerUpdateHandler(this.mPhysicsHandler);
 		this.mPhysicsHandler.setVelocity(-PhConstants.ENEMY_VELOCITY, 0);
 		this.mySum = genEquation();
 		myResult = (int)Math.ceil(calculateResult(mySum));
-		Entity a = new Entity();
 		this.myFont = myFont;
-		myText = new Text(0,0, this.myFont, "Equation", 50, pVertexBufferObjectManager);
-		//myText.setText(Integer.toString(myResult));
+		this.myText = new Text(0,0, this.myFont, "Equation", 50, pVertexBufferObjectManager);
+		
 		myText.setText(mySum);		
 		this.attachChild(myText);
 	}
@@ -115,10 +114,25 @@ public class Enemy extends AnimatedSprite{
 	}
 	
 	/** Should be called when collision between enemy and sth else happened.
-	 *  Erases the enemy and notifies relevant methods by firing en EVENT_OBJECT_ENEMY_OUT_OF_SCENE 
+	 *  If tower is null it assumes that player touched it
 	 *  */
-	public void collisionDetected(){
-		fireEvent(EventsConstants.EVENT_OBJECT_ENEMY_OUT_OF_SCENE);
+	public void collisionDetected(Tower tower){
+		if(tower == null)
+			fireEvent(EventsConstants.EVENT_OBJECT_ENEMY_OUT_OF_SCENE);
+		if(tower instanceof TowerSimplificator){
+//			Log.d("Enemy", "Tower Simplificator hits me!");
+			this.setSum(HelperClass.simplifyExpression(this.getSum(), this.myDiff));
+			
+			this.model.engine.runOnUpdateThread(new Runnable() {
+				public void run() {
+					myText.setText((getSum()));
+				}
+			});
+			
+		}else if(tower instanceof TowerKiller)
+			fireEvent(EventsConstants.EVENT_OBJECT_ENEMY_OUT_OF_SCENE);
+		else if(tower instanceof TowerSlower)
+			;
 	}
 	
 	public synchronized void removeObjectPositionEventListener(){

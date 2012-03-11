@@ -99,8 +99,9 @@ public class HelperClass {
 		return buf.toString();
 	}
 	
-	public static String simplifyExpression(String expression){
-		return expression;
+	public static String simplifyExpression(String expression, int diffLevel){
+		ExpressionSimplifier simp = new ExpressionSimplifier(expression, diffLevel);
+		return simp.getSimplified();
 	}
 	
 	

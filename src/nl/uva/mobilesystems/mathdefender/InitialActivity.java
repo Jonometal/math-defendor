@@ -134,7 +134,7 @@ public class InitialActivity extends SimpleBaseGameActivity implements OnKeyList
 		gModel.setPlayer(player); ///deub???
 		scene.attachChild(player);
 		
-		gModel.setUpSimpleGame(0, 5, 1, new Point(GUIConstants.CAMERA_WIDTH, GUIConstants.CAMERA_HEIGHT),
+		gModel.setUpSimpleGame(3, 5, 1, new Point(GUIConstants.CAMERA_WIDTH, GUIConstants.CAMERA_HEIGHT),
 					TexMan.getIt().mEnemyTextureregion,  getVertexBufferObjectManager(), TexMan.getIt().playerFont
 					);
 		
