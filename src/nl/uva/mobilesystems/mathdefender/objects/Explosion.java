@@ -1,13 +1,26 @@
 package nl.uva.mobilesystems.mathdefender.objects;
 
 import nl.uva.mobilesystems.mathdefender.GameModel;
-import nl.uva.mobilesystems.mathdefender.andengine.events.ObjectPositionEventListener;
 import nl.uva.mobilesystems.mathdefender.gui.TexMan;
 
+import org.andengine.entity.particle.SpriteParticleSystem;
+import org.andengine.entity.particle.emitter.CircleOutlineParticleEmitter;
+import org.andengine.entity.particle.initializer.AlphaParticleInitializer;
+import org.andengine.entity.particle.initializer.BlendFunctionParticleInitializer;
+import org.andengine.entity.particle.initializer.ColorParticleInitializer;
+import org.andengine.entity.particle.initializer.RotationParticleInitializer;
+import org.andengine.entity.particle.initializer.VelocityParticleInitializer;
+import org.andengine.entity.particle.modifier.AlphaParticleModifier;
+import org.andengine.entity.particle.modifier.ColorParticleModifier;
+import org.andengine.entity.particle.modifier.ExpireParticleModifier;
+import org.andengine.entity.particle.modifier.ScaleParticleModifier;
 import org.andengine.entity.sprite.AnimatedSprite;
+import org.andengine.entity.sprite.Sprite;
 import org.andengine.entity.text.Text;
 import org.andengine.opengl.font.Font;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
+
+import android.opengl.GLES20;
 
 
 /** Class representing single "enemy" in wave **/ 
@@ -15,39 +28,14 @@ public class Explosion extends AnimatedSprite{
 	
 	private GameModel model;
 	
-	private Text myText;
-	private Font myFont;
-	
 	private float timer = 0;
 	
 	public Explosion(final float pX, final float pY, 
-			final VertexBufferObjectManager pVertexBufferObjectManager, Font myFont, GameModel model)
+			final VertexBufferObjectManager pVertexBufferObjectManager, GameModel model)
 	{
 		
 		super(pX, pY, TexMan.getIt().mTowerKillerTextureRegion, pVertexBufferObjectManager);
 		this.model = model;
-		this.myFont = myFont;
-		myText = new Text(0,0, this.myFont, "boobs", 50, pVertexBufferObjectManager);
-		this.attachChild(myText);
-		
-//	    PointParticleEmitter equationExplosion = new PointParticleEmitter(pX, pY);
-//	    ParticleSystem ExplosionParticleSystem = new ParticleSystem(equationExplosion, 45, 60, 60);
-//
-//
-//	    ExplosionParticleSystem.addParticleInitializer(new AlphaInitializer(1f));
-//	    ExplosionParticleSystem.setBlendFunction(GL10.GL_SRC_ALPHA, GL10.GL_ONE);
-//	    ExplosionParticleSystem.addParticleInitializer(new VelocityInitializer(-175, 175, -175, 175));
-//	    ExplosionParticleSystem.addParticleInitializer(new RotationInitializer(0.0f, 360.0f));
-//	    ExplosionParticleSystem.addParticleInitializer(new RotationInitializer(0f, -20f));
-//
-//	    ExplosionParticleSystem.addParticleModifier(new ScaleModifier(1.0f, 0.5f, 0, MAX_PARTICLE_LIFE/2));
-//
-//	    ExplosionParticleSystem.addParticleModifier(new AlphaModifier(1, 0.35f, 0, MAX_PARTICLE_LIFE));
-//
-//	    ExplosionParticleSystem.addParticleModifier(new ExpireModifier(MAX_PARTICLE_LIFE, MAX_PARTICLE_LIFE));
-//
-//
-//	    this.attachChild(ExplosionParticleSystem);
 	}
 	
 	
@@ -56,12 +44,23 @@ public class Explosion extends AnimatedSprite{
 		
 		timer += pSecondsElapsed;
 		
-		if(timer > 1){
-			myText.setText("and");
-		}
-		if(timer > 2){
-			myText.setText("explosions!");
-		}
+			final CircleOutlineParticleEmitter particleEmitter = new CircleOutlineParticleEmitter(0, 0, 20);
+			final SpriteParticleSystem particleSystem = new SpriteParticleSystem(particleEmitter, 10, 20, 50, TexMan.getIt().mPlayerTextureRegion, this.getVertexBufferObjectManager());
+
+			particleSystem.addParticleInitializer(new ColorParticleInitializer<Sprite>(1, 0, 0));
+			particleSystem.addParticleInitializer(new AlphaParticleInitializer<Sprite>(0));
+			particleSystem.addParticleInitializer(new BlendFunctionParticleInitializer<Sprite>(GLES20.GL_SRC_ALPHA, GLES20.GL_ONE));
+			particleSystem.addParticleInitializer(new VelocityParticleInitializer<Sprite>(-2, 2, -20, -10));
+			particleSystem.addParticleInitializer(new RotationParticleInitializer<Sprite>(0.0f, 360.0f));
+
+			particleSystem.addParticleModifier(new ScaleParticleModifier<Sprite>(0, 5, 1.0f, 2.0f));
+			particleSystem.addParticleModifier(new ColorParticleModifier<Sprite>(0, 3, 1, 1, 0, 0.5f, 0, 0));
+			particleSystem.addParticleModifier(new ColorParticleModifier<Sprite>(4, 6, 1, 1, 0.5f, 1, 0, 1));
+			particleSystem.addParticleModifier(new AlphaParticleModifier<Sprite>(0, 1, 0, 1));
+			particleSystem.addParticleModifier(new AlphaParticleModifier<Sprite>(5, 6, 1, 0));
+			particleSystem.addParticleModifier(new ExpireParticleModifier<Sprite>(6));
+	
+		    this.attachChild(particleSystem);
 		if(timer > 3){
 			model.removeObjectFromScene(this);
 		}

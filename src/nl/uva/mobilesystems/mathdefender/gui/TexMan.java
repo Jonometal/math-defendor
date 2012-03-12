@@ -39,6 +39,10 @@ public class TexMan {
 	public BitmapTextureAtlas mPlayerBitmap; //Player
 	public TiledTextureRegion mPlayerTextureRegion;
 	
+	//particle
+	public BitmapTextureAtlas mParticleBitmap; //Particle System
+	public TiledTextureRegion mParticleTextureRegion;
+	
 	//enemy
 	public BitmapTextureAtlas mEnemyBitmap; //Enemy
 	public TiledTextureRegion mEnemyTextureregion;
@@ -87,6 +91,11 @@ public class TexMan {
 		TexMan.getIt().mBackgroundBitmap.load();
 		TexMan.getIt().mBackgroundSprite = new Sprite(0f,0f, (float)GUIConstants.CAMERA_WIDTH, (float)GUIConstants.CAMERA_HEIGHT, TexMan.getIt().mBackgroundTextureRegion, activity.getVertexBufferObjectManager());
 				
+		//particle
+//		TexMan.getIt().mParticleBitmap = new BitmapTextureAtlas(activity.getTextureManager(), 1, 1, TextureOptions.BILINEAR);
+//		TexMan.getIt().mParticleTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(TexMan.getIt().mParticleBitmap, activity, "gfx/particle_point.png", 0, 0, 1, 1); // this line doesn't work. WHY!?
+//		TexMan.getIt().mParticleBitmap.load();
+		
 			//player
 		TexMan.getIt().mPlayerBitmap = new BitmapTextureAtlas(activity.getTextureManager(), 96, 96, TextureOptions.BILINEAR);
 		TexMan.getIt().mPlayerTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(TexMan.getIt().mPlayerBitmap, activity, "gfx/next.png", 0, 0, 1, 1);

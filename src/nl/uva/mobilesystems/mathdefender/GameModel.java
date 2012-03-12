@@ -182,7 +182,7 @@ public class GameModel implements ObjectPositionEventListener {
 				player.collisionDetected((Enemy)enemy);
 				((Enemy)enemy).collisionDetected(null);	//null becuse it's collision with Player
 				Explosion explosion = new Explosion(((Enemy)enemy).getX(), ((Enemy)enemy).getY(),
-						objectManager, explosionFont, this);
+						objectManager, this);
 				this.addObjectToScene(explosion);
 			}else
 			{	//otherwise check for collisions with bullets
