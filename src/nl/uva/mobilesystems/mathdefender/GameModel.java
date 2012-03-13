@@ -8,6 +8,7 @@ import nl.uva.mobilesystems.mathdefender.andengine.events.ObjectPositionEvent;
 import nl.uva.mobilesystems.mathdefender.andengine.events.ObjectPositionEventListener;
 import nl.uva.mobilesystems.mathdefender.game.Level;
 import nl.uva.mobilesystems.mathdefender.game.Wave;
+import nl.uva.mobilesystems.mathdefender.gui.TexMan;
 import nl.uva.mobilesystems.mathdefender.objects.Enemy;
 import nl.uva.mobilesystems.mathdefender.objects.Explosion;
 import nl.uva.mobilesystems.mathdefender.objects.Player;
@@ -42,7 +43,7 @@ public class GameModel implements ObjectPositionEventListener {
 			
 	
 	/** Variable representing current level that is maninated by GameModel */
-	private Level currentLevel;
+	protected Level currentLevel;
 	
 	public Player player; //public for experiments with PLayer class
 	
@@ -52,8 +53,8 @@ public class GameModel implements ObjectPositionEventListener {
 	/** Debug things */
 	
 	private Text wavesLeftText; 
-	private VertexBufferObjectManager objectManager;
-	private Font explosionFont;
+	protected VertexBufferObjectManager objectManager;
+	protected Font explosionFont;
 	
 	public static LinkedList<AnimatedSprite> myEnemies;
 	
@@ -62,7 +63,7 @@ public class GameModel implements ObjectPositionEventListener {
 	// ----------------------- CONSTRUCTORS --------------------------------
 	
 	public GameModel(InitialActivity activity, Scene scene){
-		this.engine = activity.getEngine();			//Laurens: We should prob switch this to an object reference to the engine itself in case an activity can have several engines?
+		this.engine = activity.getEngine();			
 		this.wavesLeftText = activity.text;
 		this.scene = scene;
 	}
@@ -138,16 +139,20 @@ public class GameModel implements ObjectPositionEventListener {
 	 */
 	public void setUpSimpleGame(int difficulty, int nrWaves, int nrTowers, Point screenDimensions, TiledTextureRegion textureEnemy,
 								VertexBufferObjectManager objectManager, Font enemyFont){
+		Log.v("testingmarket", "Super running, over.");
 		this.currentLevel = new Level(difficulty, nrWaves, nrTowers, screenDimensions, textureEnemy, objectManager, enemyFont, this);
 
+		final float centerX = 100;
+		final float centerY = 100;
+		Player newPlayer = new Player(centerX, centerY, TexMan.getIt().mPlayerTextureRegion, objectManager, TexMan.getIt().playerFont, this);
+		this.player = newPlayer;
+		addObjectToScene(player);
+		
 		this.objectManager = objectManager;
 		this.explosionFont = enemyFont;
 	}			
 	
 		
-
-
-	
 	/**
 	 * This method is for code clarity.
 	 * @param entity
@@ -235,5 +240,9 @@ public class GameModel implements ObjectPositionEventListener {
 			addObjectToScene(object);
 		}
 	}
+
+
+
+	
 	
 }
