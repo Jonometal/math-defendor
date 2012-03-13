@@ -34,8 +34,26 @@ public class Explosion extends AnimatedSprite{
 			final VertexBufferObjectManager pVertexBufferObjectManager, GameModel model)
 	{
 		
-		super(pX, pY, TexMan.getIt().mTowerKillerTextureRegion, pVertexBufferObjectManager);
+		super(pX, pY, TexMan.getIt().mParticleTextureRegion, pVertexBufferObjectManager);
 		this.model = model;
+		
+		final CircleOutlineParticleEmitter particleEmitter = new CircleOutlineParticleEmitter(0, 0, 20);
+		final SpriteParticleSystem particleSystem = new SpriteParticleSystem(particleEmitter, 5, 10, 20, TexMan.getIt().mParticleTextureRegion, this.getVertexBufferObjectManager());
+
+		particleSystem.addParticleInitializer(new ColorParticleInitializer<Sprite>(1, 0, 0));
+		particleSystem.addParticleInitializer(new AlphaParticleInitializer<Sprite>(0));
+		particleSystem.addParticleInitializer(new BlendFunctionParticleInitializer<Sprite>(GLES20.GL_SRC_ALPHA, GLES20.GL_ONE));
+		particleSystem.addParticleInitializer(new VelocityParticleInitializer<Sprite>(-2, 2, -10, -10));
+		particleSystem.addParticleInitializer(new RotationParticleInitializer<Sprite>(0.0f, 360.0f));
+
+		particleSystem.addParticleModifier(new ScaleParticleModifier<Sprite>(0, 3, 1.0f, 2.0f));
+		particleSystem.addParticleModifier(new ColorParticleModifier<Sprite>(0, 1, 1, 1, 0, 0.5f, 0, 0));
+		particleSystem.addParticleModifier(new ColorParticleModifier<Sprite>(2, 3, 1, 1, 0.5f, 1, 0, 1));
+		particleSystem.addParticleModifier(new AlphaParticleModifier<Sprite>(0, 1, 0, 1));
+		particleSystem.addParticleModifier(new AlphaParticleModifier<Sprite>(2, 3, 1, 0));
+		particleSystem.addParticleModifier(new ExpireParticleModifier<Sprite>(3));
+
+	    this.attachChild(particleSystem);
 	}
 	
 	
@@ -44,23 +62,6 @@ public class Explosion extends AnimatedSprite{
 		
 		timer += pSecondsElapsed;
 		
-			final CircleOutlineParticleEmitter particleEmitter = new CircleOutlineParticleEmitter(0, 0, 20);
-			final SpriteParticleSystem particleSystem = new SpriteParticleSystem(particleEmitter, 10, 20, 50, TexMan.getIt().mPlayerTextureRegion, this.getVertexBufferObjectManager());
-
-			particleSystem.addParticleInitializer(new ColorParticleInitializer<Sprite>(1, 0, 0));
-			particleSystem.addParticleInitializer(new AlphaParticleInitializer<Sprite>(0));
-			particleSystem.addParticleInitializer(new BlendFunctionParticleInitializer<Sprite>(GLES20.GL_SRC_ALPHA, GLES20.GL_ONE));
-			particleSystem.addParticleInitializer(new VelocityParticleInitializer<Sprite>(-2, 2, -20, -10));
-			particleSystem.addParticleInitializer(new RotationParticleInitializer<Sprite>(0.0f, 360.0f));
-
-			particleSystem.addParticleModifier(new ScaleParticleModifier<Sprite>(0, 5, 1.0f, 2.0f));
-			particleSystem.addParticleModifier(new ColorParticleModifier<Sprite>(0, 3, 1, 1, 0, 0.5f, 0, 0));
-			particleSystem.addParticleModifier(new ColorParticleModifier<Sprite>(4, 6, 1, 1, 0.5f, 1, 0, 1));
-			particleSystem.addParticleModifier(new AlphaParticleModifier<Sprite>(0, 1, 0, 1));
-			particleSystem.addParticleModifier(new AlphaParticleModifier<Sprite>(5, 6, 1, 0));
-			particleSystem.addParticleModifier(new ExpireParticleModifier<Sprite>(6));
-	
-		    this.attachChild(particleSystem);
 		if(timer > 3){
 			model.removeObjectFromScene(this);
 		}

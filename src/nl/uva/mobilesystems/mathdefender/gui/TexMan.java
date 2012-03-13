@@ -1,7 +1,6 @@
 package nl.uva.mobilesystems.mathdefender.gui;
 
 import org.andengine.entity.sprite.Sprite;
-import org.andengine.entity.text.Text;
 import org.andengine.opengl.font.Font;
 import org.andengine.opengl.font.FontFactory;
 import org.andengine.opengl.texture.TextureOptions;
@@ -92,9 +91,9 @@ public class TexMan {
 		TexMan.getIt().mBackgroundSprite = new Sprite(0f,0f, (float)GUIConstants.CAMERA_WIDTH, (float)GUIConstants.CAMERA_HEIGHT, TexMan.getIt().mBackgroundTextureRegion, activity.getVertexBufferObjectManager());
 				
 		//particle
-//		TexMan.getIt().mParticleBitmap = new BitmapTextureAtlas(activity.getTextureManager(), 1, 1, TextureOptions.BILINEAR);
-//		TexMan.getIt().mParticleTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(TexMan.getIt().mParticleBitmap, activity, "gfx/particle_point.png", 0, 0, 1, 1); // this line doesn't work. WHY!?
-//		TexMan.getIt().mParticleBitmap.load();
+		TexMan.getIt().mParticleBitmap = new BitmapTextureAtlas(activity.getTextureManager(), 32, 32, TextureOptions.BILINEAR);
+		TexMan.getIt().mParticleTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(TexMan.getIt().mParticleBitmap, activity, "gfx/particle_point.png", 0, 0, 1, 1); // this line doesn't work. WHY!?
+		TexMan.getIt().mParticleBitmap.load();
 		
 			//player
 		TexMan.getIt().mPlayerBitmap = new BitmapTextureAtlas(activity.getTextureManager(), 96, 96, TextureOptions.BILINEAR);
