@@ -38,7 +38,7 @@ public class InitialActivity extends SimpleBaseGameActivity implements OnKeyList
 	//	DEBUG
 	// =====================================
 	
-	boolean zenMode = true; //TObi: set it to false so you could star the game in your mode
+	boolean zenMode = false; //TObi: set it to false so you could star the game in your mode
 	
 	// ===========================================================
 		// Constants
@@ -55,7 +55,7 @@ public class InitialActivity extends SimpleBaseGameActivity implements OnKeyList
 	
 	private GameModel gModel;
 	
-	private Player player;
+	
 
 	public Text text; //how many waves are left;
 		
@@ -128,16 +128,20 @@ public class InitialActivity extends SimpleBaseGameActivity implements OnKeyList
 		//set our MathLevel here (will be calculated in separated thread)
 		gModel = this.zenMode ?  new GameZenModel(this, scene) : new GameSuperMarketModel(this, scene); //that's a trick, in java you can use this expression [ variable = boolean ? valueIfTrue : valueIfFalse ]
 			// (nrWaves, nrTowers, [Screen_X, Screen_Y], EnemyTexture, TowerTexture, Library-shit-buffer)
-		final float centerX = 100;
-		final float centerY = 100;
-		player = new Player(centerX, centerY, TexMan.getIt().mPlayerTextureRegion, getVertexBufferObjectManager(), TexMan.getIt().playerFont, gModel);
-		gModel.setPlayer(player); ///deub???
-		scene.attachChild(player);
+	
 		
-		gModel.setUpSimpleGame(3, 5, 1, new Point(GUIConstants.CAMERA_WIDTH, GUIConstants.CAMERA_HEIGHT),
+		if (zenMode)
+		{
+			gModel.setUpSimpleGame(3, 5, 1, new Point(GUIConstants.CAMERA_WIDTH, GUIConstants.CAMERA_HEIGHT),
+						TexMan.getIt().mEnemyTextureregion,  getVertexBufferObjectManager(), TexMan.getIt().playerFont
+						);
+		}
+		else
+		{
+			gModel.setUpSimpleGame(1, 10, 0, new Point(GUIConstants.CAMERA_WIDTH, GUIConstants.CAMERA_HEIGHT),
 					TexMan.getIt().mEnemyTextureregion,  getVertexBufferObjectManager(), TexMan.getIt().playerFont
 					);
-		
+		}
 		//Create a player here
 	
 		
@@ -151,7 +155,7 @@ public class InitialActivity extends SimpleBaseGameActivity implements OnKeyList
 		final AnalogOnScreenControl analogOnScreenControl = new AnalogOnScreenControl(0, GUIConstants.CAMERA_HEIGHT - TexMan.getIt().mOnScreenControlBaseTextureRegion.getHeight(), this.mCamera, TexMan.getIt().mOnScreenControlBaseTextureRegion, TexMan.getIt().mOnScreenControlKnobTextureRegion, 0.1f, 200, this.getVertexBufferObjectManager(), new IAnalogOnScreenControlListener() {
 			 
 			public void onControlChange(final BaseOnScreenControl pBaseOnScreenControl, final float pValueX, final float pValueY) {
-				player.getPhysicsHanlder().setVelocity(pValueX * PhConstants.PLAYER_VELOCITY, pValueY * PhConstants.PLAYER_VELOCITY);
+				gModel.getPlayer().getPhysicsHanlder().setVelocity(pValueX * PhConstants.PLAYER_VELOCITY, pValueY * PhConstants.PLAYER_VELOCITY);
 			}
 
 			 
