@@ -37,11 +37,10 @@ public class Enemy extends AnimatedSprite{
 	private int myResult;
 	private int myDiff;
 	private Text myText;
-	private Font myFont;
 	
 	public Enemy(final float pX, final float pY,
 			final VertexBufferObjectManager pVertexBufferObjectManager,
-			final int difficulty, Font myFont, GameModel model)
+			final int difficulty, GameModel model)
 	{
 		
 		super(pX, pY, TexMan.getIt().mEnemyTextureregion, pVertexBufferObjectManager);
@@ -55,8 +54,7 @@ public class Enemy extends AnimatedSprite{
 		this.mPhysicsHandler.setVelocity(-PhConstants.ENEMY_VELOCITY, 0);
 		this.mySum = genEquation();
 		myResult = (int)Math.ceil(calculateResult(mySum));
-		this.myFont = myFont;
-		this.myText = new Text(0,0, this.myFont, "Equation", 50, pVertexBufferObjectManager);
+		this.myText = new Text(0,0, TexMan.getIt().playerFont, "Equation", 50, pVertexBufferObjectManager);
 		
 		myText.setText(mySum);		
 		this.attachChild(myText);

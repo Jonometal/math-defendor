@@ -41,9 +41,8 @@ public class Level {
 	protected LinkedList<Wave> waves;
 	
 	
-	public Level(int difficulty, int nrWaves, int nrTowers, Point screenDimensions, TiledTextureRegion textureEnemy, 
-			VertexBufferObjectManager objectManager,
-			Font enemyFont, GameModel model)
+	public Level(int difficulty, int nrWaves, int nrTowers, Point screenDimensions,
+			VertexBufferObjectManager objectManager, GameModel model)
 	{
 		this.setWaves(new LinkedList<Wave>());
 		this.myDiff = difficulty;
@@ -59,7 +58,7 @@ public class Level {
 				int x = screenDimensions.x; //the edge of a screen
 				int y = screenDimensions.y / (PhConstants.NR_ENEMIES_IN_WAVE+1) * (j+1);	//so equal distribution on screen Width
 				
-				Enemy tempEnemy = new Enemy(x,y, objectManager, difficulty, enemyFont, model);
+				Enemy tempEnemy = new Enemy(x,y, objectManager, difficulty, model);
 				tempEnemy.addObjectPositionEventListener(model);
 				tempEnemies.add(tempEnemy);
 				

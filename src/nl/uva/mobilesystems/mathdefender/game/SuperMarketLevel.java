@@ -15,12 +15,12 @@ public class SuperMarketLevel extends Level {
 	public int myBudget;
 	
 	public SuperMarketLevel(int difficulty, int nrWaves, int nrTowers,
-			Point screenDimensions, TiledTextureRegion textureEnemy,
-			VertexBufferObjectManager objectManager, Font enemyFont,
+			Point screenDimensions,
+			VertexBufferObjectManager objectManager,
 			GameModel model, int budget)
 	{
-		super(difficulty, nrWaves, nrTowers, screenDimensions, textureEnemy,
-				objectManager, enemyFont, model);
+		super(difficulty, nrWaves, nrTowers, screenDimensions,
+				objectManager, model);
 		Log.v("testingmarket", "SMLevel created");
 		this.myBudget = budget;
 		model.getPlayer().setScore(budget);

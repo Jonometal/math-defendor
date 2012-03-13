@@ -53,8 +53,6 @@ public class GameSuperMarketModel extends GameModel{
 		final float centerX = 100;
 		final float centerY = 100;
 		this.screenDimensions = screenDimensions;
-		this.myTextureEnemy= TexMan.getIt().mEnemyTextureregion;
-		this.myEnemyFont= TexMan.getIt().playerFont;
 		this.player = new Player(centerX, centerY, TexMan.getIt().mPlayerTextureRegion, objectManager, TexMan.getIt().playerFont, this);
 		Log.v("testingmarket", "Player created: " + this.getPlayer());
 		scene.attachChild(this.player);
@@ -76,10 +74,10 @@ public class GameSuperMarketModel extends GameModel{
 		switch (levelCounter)
 		{
 					case 1:
-						currentLevel = new SuperMarketLevel(1, 5, 0, screenDimensions, myTextureEnemy, objectManager, myEnemyFont, this, 15);
+						currentLevel = new SuperMarketLevel(1, 5, 0, screenDimensions, objectManager,  this, 15);
 						break;
 					case 2:
-						currentLevel = new SuperMarketLevel(2, 10, 0, screenDimensions, myTextureEnemy, objectManager, myEnemyFont, this, 25);
+						currentLevel = new SuperMarketLevel(2, 10, 0, screenDimensions, objectManager, this, 25);
 						break;
 					default:
 						break;

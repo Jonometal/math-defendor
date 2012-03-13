@@ -47,8 +47,6 @@ public class GameModel implements ObjectPositionEventListener {
 	protected int levelCounter = 0;
 	public Point screenDimensions;
 	public Player player; //public for experiments with PLayer class
-	protected TiledTextureRegion myTextureEnemy;
-	protected Font myEnemyFont;
 	
 	// Textures
 
