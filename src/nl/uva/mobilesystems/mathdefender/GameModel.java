@@ -44,9 +44,11 @@ public class GameModel implements ObjectPositionEventListener {
 	
 	/** Variable representing current level that is maninated by GameModel */
 	protected Level currentLevel;
-	
+	protected int levelCounter = 0;
+	public Point screenDimensions;
 	public Player player; //public for experiments with PLayer class
-	
+	protected TiledTextureRegion myTextureEnemy;
+	protected Font myEnemyFont;
 	
 	// Textures
 
@@ -111,10 +113,8 @@ public class GameModel implements ObjectPositionEventListener {
 			Log.v("eventMine", "RemovesObject" + currentLevel.getCurrentWave().getObjects().size() + " " + currentLevel.getWaves().size() );
 			if(currentLevel.getCurrentWave().getObjects().size() == 0)
 			{ //check whether something is still in current Wave
-				if( currentLevel.getWaves().size() > 0) //if there are still waves to be shown
-				{
-					startNewWave();
-				}
+				Log.v("testingmarket", "Starting New Wave"); 
+				currentLevel.startNewWave();				
 			}
 			break;
 		case EventsConstants.EVENT_OBJECT_BULLET_OUT_OF_SCENE:
@@ -142,6 +142,9 @@ public class GameModel implements ObjectPositionEventListener {
 		Log.v("testingmarket", "Super running, over.");
 		final float centerX = 100;
 		final float centerY = 100;
+		this.screenDimensions = screenDimensions;
+		this.myTextureEnemy= textureEnemy;
+		this.myEnemyFont= enemyFont;
 		this.player = new Player(centerX, centerY, TexMan.getIt().mPlayerTextureRegion, objectManager, TexMan.getIt().playerFont, this);
 		Log.v("testingmarket", "Player created: " + this.getPlayer());
 		scene.attachChild(this.player);
@@ -234,16 +237,18 @@ public class GameModel implements ObjectPositionEventListener {
 			}
 		});
 	}
+
+
+
+	public void nextLevel() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 	//-------------------- PRIVATE METHODS ----------------------------
 	
-	private void startNewWave(){
-		currentLevel.setCurrentWave(currentLevel.getWaves().poll());
-		for(IEntity object : currentLevel.getCurrentWave().getObjects()){
-			addObjectToScene(object);
-		}
-	}
+	
 
 
 

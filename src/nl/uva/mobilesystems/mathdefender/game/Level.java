@@ -9,6 +9,7 @@ import nl.uva.mobilesystems.mathdefender.objects.TowerKiller;
 import nl.uva.mobilesystems.mathdefender.objects.TowerSlower;
 import nl.uva.mobilesystems.mathdefender.physics.PhConstants;
 
+import org.andengine.entity.IEntity;
 import org.andengine.entity.sprite.AnimatedSprite;
 import org.andengine.opengl.font.Font;
 import org.andengine.opengl.texture.region.TiledTextureRegion;
@@ -25,19 +26,19 @@ import android.util.Log;
  */
 public class Level {
 	// CONSTANTS
-	private int myDiff;
+	protected int myDiff;
 
 	//VARIABLES
-	private int difficulty;
+	protected int difficulty;
 
-	private GameModel model;
+	protected GameModel model;
 	
 	/** All of the towers that can be */
-	private LinkedList<Tower> towers;
+	protected LinkedList<Tower> towers;
 	
-	private Wave currentWave;
+	protected Wave currentWave;
 	
-	private LinkedList<Wave> waves;
+	protected LinkedList<Wave> waves;
 	
 	
 	public Level(int difficulty, int nrWaves, int nrTowers, Point screenDimensions, TiledTextureRegion textureEnemy, 
@@ -72,6 +73,17 @@ public class Level {
 		
 	}
 	
+	public void startNewWave()
+	{
+		if(this.getWaves().size() > 0)
+		{
+			this.setCurrentWave(this.getWaves().poll());
+			for(IEntity object : this.getCurrentWave().getObjects())
+			{
+				model.addObjectToScene(object);
+			}
+		}
+	}
 	
 	//SETTERS/GETTERS
 	public int getDifficulty() {

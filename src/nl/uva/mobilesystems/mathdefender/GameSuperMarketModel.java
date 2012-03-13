@@ -53,18 +53,38 @@ public class GameSuperMarketModel extends GameModel{
 		
 		final float centerX = 100;
 		final float centerY = 100;
+		this.screenDimensions = screenDimensions;
+		this.myTextureEnemy= textureEnemy;
+		this.myEnemyFont= enemyFont;
 		this.player = new Player(centerX, centerY, TexMan.getIt().mPlayerTextureRegion, objectManager, TexMan.getIt().playerFont, this);
 		Log.v("testingmarket", "Player created: " + this.getPlayer());
 		scene.attachChild(this.player);
 		
 		
-		this.currentLevel = new Level(difficulty, nrWaves, nrTowers, screenDimensions, textureEnemy, objectManager, enemyFont, this);
+		//this.currentLevel = new Level(difficulty, nrWaves, nrTowers, screenDimensions, textureEnemy, objectManager, enemyFont, this);
 		this.objectManager = objectManager;
 		this.explosionFont = enemyFont;
+		Log.v("testingmarket", "creating SMLevel with these vars: " + difficulty + nrWaves + nrTowers + 15 );
+		nextLevel();
 		
-		currentLevel = new SuperMarketLevel(difficulty, nrWaves, nrTowers, screenDimensions, textureEnemy, objectManager, enemyFont, this, 15);
-		
-		this.objectManager = objectManager;
-		this.explosionFont = enemyFont;
-	}		
+	}	
+	
+	@Override
+	public void nextLevel()
+	{
+		levelCounter++;
+		Log.v("testingmarket", "creating SMLevel with counter = " + levelCounter );
+	
+		switch (levelCounter)
+		{
+					case 1:
+						currentLevel = new SuperMarketLevel(1, 5, 0, screenDimensions, myTextureEnemy, objectManager, myEnemyFont, this, 15);
+						break;
+					case 2:
+						currentLevel = new SuperMarketLevel(2, 10, 0, screenDimensions, myTextureEnemy, objectManager, myEnemyFont, this, 25);
+						break;
+					default:
+						break;
+		}
+	}
 }
