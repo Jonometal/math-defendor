@@ -137,11 +137,13 @@ public class Enemy extends AnimatedSprite{
 			
 		}else if(tower instanceof TowerKiller)
 			fireEvent(EventsConstants.EVENT_OBJECT_ENEMY_OUT_OF_SCENE);
-		else if(tower instanceof TowerSlower){
+		else if(tower instanceof TowerSlower ){
 			TowerSlower towerS = (TowerSlower)tower;
-			float vX = this.mPhysicsHandler.getVelocityX();
-			float vY = this.mPhysicsHandler.getVelocityY();
-			this.mPhysicsHandler.setVelocity(vX * towerS.getSlowDownRatio(), vY * towerS.getSlowDownRatio());
+			if(Math.abs(this.getVelocityX()) == Math.abs(PhConstants.ENEMY_VELOCITY)){ //so the one that was already shooted down won't be again..
+				float vX = this.mPhysicsHandler.getVelocityX();
+				float vY = this.mPhysicsHandler.getVelocityY();
+				this.mPhysicsHandler.setVelocity(vX * towerS.getSlowDownRatio(), vY * towerS.getSlowDownRatio());
+			}
 		}
 	}
 	
