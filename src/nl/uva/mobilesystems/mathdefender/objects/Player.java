@@ -1,6 +1,7 @@
 package nl.uva.mobilesystems.mathdefender.objects;
 
 import nl.uva.mobilesystems.mathdefender.GameModel;
+import nl.uva.mobilesystems.mathdefender.GameSuperMarketModel;
 import nl.uva.mobilesystems.mathdefender.gui.GUIConstants;
 
 import org.andengine.engine.handler.IUpdateHandler;
@@ -40,6 +41,11 @@ public class Player extends AnimatedSprite{
 		return myScore;
 	}
 
+	// Setscore is meant to be used by SMLevel to set a budget for the player
+		public void setScore(int budget) {
+			myScore = budget;
+		}
+	
 //	public void updateScore(int updateScore) {
 //		myScore += updateScore;
 //		//myText.setText(int.toString(myScore));
@@ -94,8 +100,10 @@ public class Player extends AnimatedSprite{
 	 * Currently it serves only collisions with enemies.
 	 * @param enemy
 	 */
-	public void collisionDetected(Enemy enemy){
-		this.myScore += enemy.getResult(); 
+	public void collisionDetected(Enemy enemy)
+	{
+		
+		this.myScore += model instanceof GameSuperMarketModel ? - enemy.getResult(): enemy.getResult();
 		this.model.engine.runOnUpdateThread(new Runnable() {
 			
 			public void run() {
