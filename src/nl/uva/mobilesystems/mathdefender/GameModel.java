@@ -141,15 +141,16 @@ public class GameModel implements ObjectPositionEventListener {
 								VertexBufferObjectManager objectManager, Font enemyFont){
 		Log.v("testingmarket", "Super running, over.");
 		this.currentLevel = new Level(difficulty, nrWaves, nrTowers, screenDimensions, textureEnemy, objectManager, enemyFont, this);
-
+		this.objectManager = objectManager;
+		this.explosionFont = enemyFont;
+		
 		final float centerX = 100;
 		final float centerY = 100;
 		Player newPlayer = new Player(centerX, centerY, TexMan.getIt().mPlayerTextureRegion, objectManager, TexMan.getIt().playerFont, this);
 		this.player = newPlayer;
-		addObjectToScene(player);
+		scene.attachChild(player);
 		
-		this.objectManager = objectManager;
-		this.explosionFont = enemyFont;
+		
 	}			
 	
 		
