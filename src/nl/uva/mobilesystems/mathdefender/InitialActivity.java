@@ -128,20 +128,20 @@ public class InitialActivity extends SimpleBaseGameActivity implements OnKeyList
 		//set our MathLevel here (will be calculated in separated thread)
 		gModel = this.zenMode ?  new GameZenModel(this, scene) : new GameSuperMarketModel(this, scene); //that's a trick, in java you can use this expression [ variable = boolean ? valueIfTrue : valueIfFalse ]
 			// (nrWaves, nrTowers, [Screen_X, Screen_Y], EnemyTexture, TowerTexture, Library-shit-buffer)
-	
+		gModel.setUpSimpleGame( new Point(GUIConstants.CAMERA_WIDTH, GUIConstants.CAMERA_HEIGHT),getVertexBufferObjectManager());
 		
-		if (zenMode)
-		{
-			gModel.setUpSimpleGame(3, 5, 1, new Point(GUIConstants.CAMERA_WIDTH, GUIConstants.CAMERA_HEIGHT),
-						TexMan.getIt().mEnemyTextureregion,  getVertexBufferObjectManager(), TexMan.getIt().playerFont
-						);
-		}
-		else
-		{
-			gModel.setUpSimpleGame(1, 10, 0, new Point(GUIConstants.CAMERA_WIDTH, GUIConstants.CAMERA_HEIGHT),
-					TexMan.getIt().mEnemyTextureregion,  getVertexBufferObjectManager(), TexMan.getIt().playerFont
-					);
-		}
+//		if (zenMode)
+//		{
+//			gModel.setUpSimpleGame(3, 5, 1, new Point(GUIConstants.CAMERA_WIDTH, GUIConstants.CAMERA_HEIGHT),
+//						TexMan.getIt().mEnemyTextureregion,  getVertexBufferObjectManager(), TexMan.getIt().playerFont
+//						);
+//		}
+//		else
+//		{
+//			gModel.setUpSimpleGame(1, 10, 0, new Point(GUIConstants.CAMERA_WIDTH, GUIConstants.CAMERA_HEIGHT),
+//					TexMan.getIt().mEnemyTextureregion,  getVertexBufferObjectManager(), TexMan.getIt().playerFont
+//					);
+//		}
 		//Create a player here
 	
 		

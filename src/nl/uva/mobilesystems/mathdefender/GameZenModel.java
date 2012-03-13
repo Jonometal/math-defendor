@@ -39,11 +39,11 @@ public class GameZenModel extends GameModel {
 	/** 
 	* Extends the base class' method + may give sth more in the future.
 	 */
-	public void setUpSimpleGame(int difficulty, int nrWaves, int nrTowers, Point screenDimensions, TiledTextureRegion textureEnemy,
-								TiledTextureRegion textureTower, TiledTextureRegion textureTowerBullet,
-								VertexBufferObjectManager objectManager, Font enemyFont){
-		super.setUpSimpleGame(difficulty, nrWaves, nrTowers, screenDimensions, textureEnemy, 
-							 objectManager, enemyFont);
+	@Override
+	public void setUpSimpleGame(Point screenDimensions, VertexBufferObjectManager objectManager){
+//		super.setUpSimpleGame(difficulty, nrWaves, nrTowers, screenDimensions, textureEnemy, 
+//							 objectManager, enemyFont);
+		;
 		
 	}
 }

@@ -130,29 +130,25 @@ public class GameModel implements ObjectPositionEventListener {
 	//-------------------- PUBLIC METHODS ----------------------------
 	
 	/** 
-	 * This method is here more for debug/development purposes. It sets:
-	 * - 1 New Level
-	 * - nrWaves Waves in it
-	 * - nrTowers Towers in it (will be places in the center of screen
+	 * Check GameZenModel or GameSuperMarketModel for implementations of those funtions for each of mode.
 	 * 
 	 * Ultra important and bad-coding style method; Sets waves, enemies in there 
 	 */
-	public void setUpSimpleGame(int difficulty, int nrWaves, int nrTowers, Point screenDimensions, TiledTextureRegion textureEnemy,
-								VertexBufferObjectManager objectManager, Font enemyFont){
-		Log.v("testingmarket", "Super running, over.");
-		final float centerX = 100;
-		final float centerY = 100;
-		this.screenDimensions = screenDimensions;
-		this.myTextureEnemy= textureEnemy;
-		this.myEnemyFont= enemyFont;
-		this.player = new Player(centerX, centerY, TexMan.getIt().mPlayerTextureRegion, objectManager, TexMan.getIt().playerFont, this);
-		Log.v("testingmarket", "Player created: " + this.getPlayer());
-		scene.attachChild(this.player);
-		
-		
-		this.currentLevel = new Level(difficulty, nrWaves, nrTowers, screenDimensions, textureEnemy, objectManager, enemyFont, this);
-		this.objectManager = objectManager;
-		this.explosionFont = enemyFont;
+	public void setUpSimpleGame(Point screenDimensions,	VertexBufferObjectManager objectManager){
+//		Log.v("testingmarket", "Super running, over.");
+//		final float centerX = 100;
+//		final float centerY = 100;
+//		this.screenDimensions = screenDimensions;
+//		this.myTextureEnemy= textureEnemy;
+//		this.myEnemyFont= enemyFont;
+//		this.player = new Player(centerX, centerY, TexMan.getIt().mPlayerTextureRegion, objectManager, TexMan.getIt().playerFont, this);
+//		Log.v("testingmarket", "Player created: " + this.getPlayer());
+//		scene.attachChild(this.player);
+//		
+//		
+//		this.currentLevel = new Level(difficulty, nrWaves, nrTowers, screenDimensions, textureEnemy, objectManager, enemyFont, this);
+//		this.objectManager = objectManager;
+//		this.explosionFont = enemyFont;
 		
 		
 		

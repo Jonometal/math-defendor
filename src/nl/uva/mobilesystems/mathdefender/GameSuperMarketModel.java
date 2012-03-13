@@ -46,16 +46,15 @@ public class GameSuperMarketModel extends GameModel{
 	* Extends the base class' method + may give sth more in the future.
 	 */
 	@Override
-	public void setUpSimpleGame(int difficulty, int nrWaves, int nrTowers, Point screenDimensions, TiledTextureRegion textureEnemy,
-							VertexBufferObjectManager objectManager, Font enemyFont)
+	public void setUpSimpleGame(Point screenDimensions,	VertexBufferObjectManager objectManager)
 	{
 		Log.v("testingmarket", "Market running, over.2");
 		
 		final float centerX = 100;
 		final float centerY = 100;
 		this.screenDimensions = screenDimensions;
-		this.myTextureEnemy= textureEnemy;
-		this.myEnemyFont= enemyFont;
+		this.myTextureEnemy= TexMan.getIt().mEnemyTextureregion;
+		this.myEnemyFont= TexMan.getIt().playerFont;
 		this.player = new Player(centerX, centerY, TexMan.getIt().mPlayerTextureRegion, objectManager, TexMan.getIt().playerFont, this);
 		Log.v("testingmarket", "Player created: " + this.getPlayer());
 		scene.attachChild(this.player);
@@ -63,10 +62,9 @@ public class GameSuperMarketModel extends GameModel{
 		
 		//this.currentLevel = new Level(difficulty, nrWaves, nrTowers, screenDimensions, textureEnemy, objectManager, enemyFont, this);
 		this.objectManager = objectManager;
-		this.explosionFont = enemyFont;
-		Log.v("testingmarket", "creating SMLevel with these vars: " + difficulty + nrWaves + nrTowers + 15 );
+		this.explosionFont = TexMan.getIt().playerFont;
+		Log.v("testingmarket", "creating SMLevel with these vars: " + 15 );
 		nextLevel();
-		
 	}	
 	
 	@Override
