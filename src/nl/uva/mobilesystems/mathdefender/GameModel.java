@@ -140,15 +140,18 @@ public class GameModel implements ObjectPositionEventListener {
 	public void setUpSimpleGame(int difficulty, int nrWaves, int nrTowers, Point screenDimensions, TiledTextureRegion textureEnemy,
 								VertexBufferObjectManager objectManager, Font enemyFont){
 		Log.v("testingmarket", "Super running, over.");
+		final float centerX = 100;
+		final float centerY = 100;
+		this.player = new Player(centerX, centerY, TexMan.getIt().mPlayerTextureRegion, objectManager, TexMan.getIt().playerFont, this);
+		Log.v("testingmarket", "Player created: " + this.getPlayer());
+		scene.attachChild(this.player);
+		
+		
 		this.currentLevel = new Level(difficulty, nrWaves, nrTowers, screenDimensions, textureEnemy, objectManager, enemyFont, this);
 		this.objectManager = objectManager;
 		this.explosionFont = enemyFont;
 		
-		final float centerX = 100;
-		final float centerY = 100;
-		Player newPlayer = new Player(centerX, centerY, TexMan.getIt().mPlayerTextureRegion, objectManager, TexMan.getIt().playerFont, this);
-		this.player = newPlayer;
-		scene.attachChild(player);
+		
 		
 		
 	}			
