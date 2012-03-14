@@ -41,7 +41,7 @@ public class SwipeListener implements IOnSceneTouchListener {
 		this.listener = null;
 	}
 	
-	@Override
+
 	public boolean onSceneTouchEvent(Scene pScene, TouchEvent pSceneTouchEvent) {
 //		Log.d("swipe", pSceneTouchEvent.getX() + ", " + pSceneTouchEvent.getY());
 		

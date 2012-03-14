@@ -44,36 +44,21 @@ Graphics;
 	
 1) Laurens
 	- Implement Sums-engine 
-		-> DONE Sums will be displayed, 
-		-> DONE generated, 
-		-> DONE updating the player's score by the result of equation
-		-> DONE TExtfield Character Limit
 	-  	 put more brain into the OBJECTS, not in the other Places (Game Model, Activity
 	
 	- Laurens -> Levels
 		+ Hand-writing the LEVELS
-			- separate MathLevel for Each Level;
 			- different levels 
-
-	DONE Make the waves not disappear when enemis are all gone 
-	- Explore possibility of removing playersprite all together.
-			
+		+ make sure you can't escape enemies (at least in supermarket mode, I guess)
 	
 2) Tobi
 	- change graphics of objects, background, fonts (hand-written)
-	- paint enemies pink
-	- explosions!!
-	- Info Screen to explain modes
+	- InfoScreen content
 	
 3) MIchał
-    - DONE help Laurens with updating Text
- 	- rewrite code to be more useuful
- 		- DONE move collision tests to GameModel
- 		- DONE create separated class for textures; 
-		-  put more brain there to the objects
-	-> DONE Re-Write Sum-Parsing + Tests there as well
 	-> Maybe: help Laurens 
 	-> TUtorial mode (with hints) - Low Priority/FutureWork
+	-> Yay! Level Completed!-Popup-Text and How You Did! (budget from last level)
 	
 	
 ZEN MODE
