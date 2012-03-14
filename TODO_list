@@ -47,11 +47,12 @@ Graphics;
 	- Implement Sums-engine 
 	- put more brain into the OBJECTS, not in the other Places (Game Model, Activity
 	- Add two more difficulties () to generating and simplifying
-	
+	- implement DIE funtion
 	- Laurens -> Levels
 		+ Hand-writing the LEVELS
 			- different levels 
 		+ make sure you can't escape enemies (at least in supermarket mode, I guess)
+	- Spawn new Wave after the finish of previous one
 	
 2) Tobi
 	- change graphics of objects, background, fonts (hand-written)
