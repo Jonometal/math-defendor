@@ -100,7 +100,6 @@ public abstract class Tower extends TiledSprite{
 	
 	
 	
-	
 	@Override
 	public boolean onAreaTouched(TouchEvent pSceneTouchEvent,
 			float pTouchAreaLocalX, float pTouchAreaLocalY) {

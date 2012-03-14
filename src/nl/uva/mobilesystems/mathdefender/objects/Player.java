@@ -3,17 +3,15 @@ package nl.uva.mobilesystems.mathdefender.objects;
 import nl.uva.mobilesystems.mathdefender.GameModel;
 import nl.uva.mobilesystems.mathdefender.GameSuperMarketModel;
 import nl.uva.mobilesystems.mathdefender.gui.GUIConstants;
+import nl.uva.mobilesystems.mathdefender.gui.TexMan;
+import nl.uva.mobilesystems.mathdefender.physics.PhConstants;
 
-import org.andengine.engine.handler.IUpdateHandler;
 import org.andengine.engine.handler.physics.PhysicsHandler;
-import org.andengine.engine.handler.timer.ITimerCallback;
-import org.andengine.engine.handler.timer.TimerHandler;
 import org.andengine.entity.sprite.AnimatedSprite;
 import org.andengine.entity.text.Text;
-import org.andengine.opengl.font.Font;
-import org.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlas;
-import org.andengine.opengl.texture.region.TiledTextureRegion;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
+
+import android.graphics.PointF;
 
 /**
  * Class representing player's drone.
@@ -26,8 +24,6 @@ public class Player extends AnimatedSprite{
 	
 	private final PhysicsHandler mPhysicsHandler;
 	private int myScore = 5;
-	private Font myFont;
-    private BitmapTextureAtlas mFontTexture;
     private Text myText;
     
 	/*
@@ -55,12 +51,11 @@ public class Player extends AnimatedSprite{
      * CONSTRUCTORS ------------------------------------------------------
      */
 
-	public Player(final float pX, final float pY, final TiledTextureRegion pTextureRegion, final VertexBufferObjectManager pVertexBufferObjectManager, Font myFont, GameModel model){
-		super(pX, pY, pTextureRegion, pVertexBufferObjectManager);
+	public Player(final float pX, final float pY, final VertexBufferObjectManager pVertexBufferObjectManager, GameModel model){
+		super(pX, pY, TexMan.getIt().mPlayerTextureRegion, pVertexBufferObjectManager);
 		this.mPhysicsHandler = new PhysicsHandler(this);
 		this.registerUpdateHandler(this.mPhysicsHandler);
-		this.myFont = myFont;
-		myText = new Text(20,20, this.myFont, "Score", "FPS: XXXXX".length(), pVertexBufferObjectManager);
+		myText = new Text(20,20, TexMan.getIt().playerFont, "Score", "FPS: XXXXX".length(), pVertexBufferObjectManager);
 		myText.setText(Integer.toString(myScore));
 		this.attachChild(myText);
 		this.model = model;
@@ -110,16 +105,15 @@ public class Player extends AnimatedSprite{
 				myText.setText(Integer.toString(myScore));
 			}
 		});
-		
-		
-//		this.model.engine.getScene().registerUpdateHandler(new TimerHandler(1 / 20.0f, true, new ITimerCallback() {
-//			@Override
-//			public void onTimePassed(final TimerHandler pTimerHandler) {
-//				myText.setText("hahaha");
-//			}
-//		}));
-		
-//		this.myText.setText("haha");
+	}
+	
+
+	public void moveOnSwipe(){
+		float moveByX = PhConstants.PLAYER_SWIPE_JUMP;
+		if(this.getX() + moveByX > GUIConstants.CAMERA_WIDTH){
+			moveByX = GUIConstants.CAMERA_WIDTH - this.getX() - this.getWidth();
+		}
+		this.setPosition(this.getX() + moveByX, this.getY());
 	}
 	
 

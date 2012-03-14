@@ -1,8 +1,8 @@
 package nl.uva.mobilesystems.mathdefender;
 
 import nl.uva.mobilesystems.mathdefender.gui.GUIConstants;
+import nl.uva.mobilesystems.mathdefender.gui.SwipeListener;
 import nl.uva.mobilesystems.mathdefender.gui.TexMan;
-import nl.uva.mobilesystems.mathdefender.objects.Player;
 import nl.uva.mobilesystems.mathdefender.physics.PhConstants;
 
 import org.andengine.engine.camera.Camera;
@@ -14,21 +14,22 @@ import org.andengine.engine.options.EngineOptions;
 import org.andengine.engine.options.EngineOptions.ScreenOrientation;
 import org.andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
 import org.andengine.entity.scene.Scene;
+import org.andengine.entity.scene.Scene.IOnSceneTouchListener;
 import org.andengine.entity.scene.background.SpriteBackground;
 import org.andengine.entity.sprite.AnimatedSprite;
 import org.andengine.entity.text.Text;
 import org.andengine.entity.util.FPSLogger;
+import org.andengine.input.touch.TouchEvent;
 import org.andengine.input.touch.controller.MultiTouch;
 import org.andengine.ui.activity.SimpleBaseGameActivity;
 
-import bsh.EvalError;
-import bsh.Interpreter;
-
+import android.app.Activity;
 import android.graphics.Point;
 import android.opengl.GLES20;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnKeyListener;
 import android.widget.Toast;
@@ -93,6 +94,7 @@ public class InitialActivity extends SimpleBaseGameActivity implements OnKeyList
 		EngineOptions engineOptions = new EngineOptions(true, ScreenOrientation.LANDSCAPE_FIXED, new RatioResolutionPolicy(GUIConstants.CAMERA_WIDTH, GUIConstants.CAMERA_HEIGHT), this.mCamera); 
 		engineOptions.getTouchOptions().setNeedsMultiTouch(true);
 
+		//set Multi Touch in here
 		if(MultiTouch.isSupported(this)) {
 			if(MultiTouch.isSupportedDistinct(this)) {
 				Toast.makeText(this, "MultiTouch detected --> Both controls will work properly!", Toast.LENGTH_SHORT).show();
@@ -102,8 +104,6 @@ public class InitialActivity extends SimpleBaseGameActivity implements OnKeyList
 		} else {
 			Toast.makeText(this, "Sorry your device does NOT support MultiTouch!\n\n(Falling back to SingleTouch.)\n\nControls are placed at different vertical locations.", Toast.LENGTH_LONG).show();
 		}
-		
-		
 		return engineOptions;
 	}
 
@@ -130,20 +130,6 @@ public class InitialActivity extends SimpleBaseGameActivity implements OnKeyList
 			// (nrWaves, nrTowers, [Screen_X, Screen_Y], EnemyTexture, TowerTexture, Library-shit-buffer)
 		gModel.setUpSimpleGame( new Point(GUIConstants.CAMERA_WIDTH, GUIConstants.CAMERA_HEIGHT),getVertexBufferObjectManager());
 		
-//		if (zenMode)
-//		{
-//			gModel.setUpSimpleGame(3, 5, 1, new Point(GUIConstants.CAMERA_WIDTH, GUIConstants.CAMERA_HEIGHT),
-//						TexMan.getIt().mEnemyTextureregion,  getVertexBufferObjectManager(), TexMan.getIt().playerFont
-//						);
-//		}
-//		else
-//		{
-//			gModel.setUpSimpleGame(1, 10, 0, new Point(GUIConstants.CAMERA_WIDTH, GUIConstants.CAMERA_HEIGHT),
-//					TexMan.getIt().mEnemyTextureregion,  getVertexBufferObjectManager(), TexMan.getIt().playerFont
-//					);
-//		}
-		//Create a player here
-	
 		
 		//Set current wave objects here
 		for(AnimatedSprite waveObject: gModel.getCurrentWaveObjects()){
@@ -192,6 +178,11 @@ public class InitialActivity extends SimpleBaseGameActivity implements OnKeyList
 			}
 		});
 		
+		
+		//set Swipe Detection
+		SwipeListener swipeList = new SwipeListener(getApplicationContext());
+			swipeList.addObjectPositionEventListener(gModel);
+		scene.setOnSceneTouchListener(swipeList);
 
 		return scene;
 	}

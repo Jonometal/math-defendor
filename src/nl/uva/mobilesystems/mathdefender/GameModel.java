@@ -54,7 +54,6 @@ public class GameModel implements ObjectPositionEventListener {
 	
 	private Text wavesLeftText; 
 	protected VertexBufferObjectManager objectManager;
-	protected Font explosionFont;
 	
 	public static LinkedList<AnimatedSprite> myEnemies;
 	
@@ -122,6 +121,14 @@ public class GameModel implements ObjectPositionEventListener {
 			objectBullet.removeObjectPositionEventListener();			//removes this listener
 			objectBullet.getTower().increaseBulletsAvailable(1);
 			break;
+		case EventsConstants.EVENT_SWIPE_DETECTED:
+			Log.d("swipe", "Swipe Detected from Model");
+			Explosion exp1 = new Explosion(this.player.getX(), this.player.getY(), this.objectManager, this);
+			this.player.moveOnSwipe();
+			Explosion exp2 = new Explosion(this.player.getX(), this.player.getY(), this.objectManager, this);
+			addObjectToScene(exp1);
+			addObjectToScene(exp2);
+			break;
 		} 
 	}
 	
@@ -132,7 +139,8 @@ public class GameModel implements ObjectPositionEventListener {
 	 * 
 	 * Ultra important and bad-coding style method; Sets waves, enemies in there 
 	 */
-	public void setUpSimpleGame(Point screenDimensions,	VertexBufferObjectManager objectManager){
+	public void setUpSimpleGame(Point screenDimensions,	VertexBufferObjectManager _objectManager){
+		this.objectManager = _objectManager;
 //		Log.v("testingmarket", "Super running, over.");
 //		final float centerX = 100;
 //		final float centerY = 100;

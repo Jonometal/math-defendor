@@ -53,14 +53,13 @@ public class GameSuperMarketModel extends GameModel{
 		final float centerX = 100;
 		final float centerY = 100;
 		this.screenDimensions = screenDimensions;
-		this.player = new Player(centerX, centerY, TexMan.getIt().mPlayerTextureRegion, objectManager, TexMan.getIt().playerFont, this);
+		this.player = new Player(centerX, centerY, objectManager, this);
 		Log.v("testingmarket", "Player created: " + this.getPlayer());
 		scene.attachChild(this.player);
 		
 		
 		//this.currentLevel = new Level(difficulty, nrWaves, nrTowers, screenDimensions, textureEnemy, objectManager, enemyFont, this);
 		this.objectManager = objectManager;
-		this.explosionFont = TexMan.getIt().playerFont;
 		Log.v("testingmarket", "creating SMLevel with these vars: " + 15 );
 		nextLevel();
 	}	
