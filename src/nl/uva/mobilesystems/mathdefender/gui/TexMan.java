@@ -62,6 +62,18 @@ public class TexMan {
 	public BitmapTextureAtlas mTowerBulletBitmap;
 	public TiledTextureRegion mTowerBulletTextureRegion;
 	
+	//upgrade Tower-Slower
+	public BitmapTextureAtlas mUpgradeTowerSlowerBitmap;
+	public TiledTextureRegion mUpgradeTowerSlowerTextureRegion;
+	
+	//upgrade Tower-Simplificator
+	public BitmapTextureAtlas mUpgradeTowerSimplificatorBitmap;
+	public TiledTextureRegion mUpgradeTowerSimplificatorTextureRegion;
+	
+	//upgrade Bullet-Time
+	public BitmapTextureAtlas mUpgradeBulletTimeBitmap;
+	public TiledTextureRegion mUpgradeBuletTimeTextureRegion;
+	
 	//analog-control
 	public BitmapTextureAtlas mOnScreenControlTexture;
 	public ITextureRegion mOnScreenControlBaseTextureRegion;
@@ -124,7 +136,22 @@ public class TexMan {
 		TexMan.getIt().mTowerBulletBitmap = new BitmapTextureAtlas(activity.getTextureManager(), 32, 32, TextureOptions.BILINEAR);
 		TexMan.getIt().mTowerBulletTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(TexMan.getIt().mTowerBulletBitmap, activity, "gfx/bullet.png", 0, 0, 1, 1);
 		TexMan.getIt().mTowerBulletBitmap.load();
-				
+		
+		//upgrade towerSimplificator
+		TexMan.getIt().mUpgradeTowerSimplificatorBitmap = new BitmapTextureAtlas(activity.getTextureManager(), 64, 64, TextureOptions.BILINEAR);
+		TexMan.getIt().mUpgradeTowerSimplificatorTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(TexMan.getIt().mUpgradeTowerSimplificatorBitmap, activity, "gfx/update_tower_simplify.png", 0, 0, 1, 1);
+		TexMan.getIt().mUpgradeTowerSimplificatorBitmap.load();
+		
+		//upgrade towerSlowDowner
+		TexMan.getIt().mUpgradeTowerSlowerBitmap = new BitmapTextureAtlas(activity.getTextureManager(), 62, 64, TextureOptions.BILINEAR);
+		TexMan.getIt().mUpgradeTowerSlowerTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(TexMan.getIt().mUpgradeTowerSlowerBitmap, activity, "gfx/upgrade_towerSlowDowner.gif", 0, 0, 1, 1);
+		TexMan.getIt().mUpgradeTowerSlowerBitmap.load();
+		
+		//upgrade Bullet Time
+		TexMan.getIt().mUpgradeBulletTimeBitmap = new BitmapTextureAtlas(activity.getTextureManager(), 64, 64, TextureOptions.BILINEAR);
+		TexMan.getIt().mUpgradeBuletTimeTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(TexMan.getIt().mUpgradeBulletTimeBitmap, activity, "gfx/upgrade_bullet_time.png", 0, 0, 1, 1);
+		TexMan.getIt().mUpgradeBulletTimeBitmap.load();
+		
 		//analog control
 		TexMan.getIt().mOnScreenControlTexture = new BitmapTextureAtlas(activity.getTextureManager(), 256, 128, TextureOptions.BILINEAR);
 		TexMan.getIt().mOnScreenControlBaseTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(TexMan.getIt().mOnScreenControlTexture, activity, "gfx/onscreen_control_base.png", 0, 0);
