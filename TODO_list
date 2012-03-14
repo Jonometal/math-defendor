@@ -42,9 +42,11 @@ Graphics;
 	- 
 	
 	
+	
 1) Laurens
 	- Implement Sums-engine 
-	-  	 put more brain into the OBJECTS, not in the other Places (Game Model, Activity
+	- put more brain into the OBJECTS, not in the other Places (Game Model, Activity
+	- Add two more difficulties () to generating and simplifying
 	
 	- Laurens -> Levels
 		+ Hand-writing the LEVELS
@@ -55,10 +57,12 @@ Graphics;
 	- change graphics of objects, background, fonts (hand-written)
 	- InfoScreen content
 	
-3) MIchał
-	-> Maybe: help Laurens 
+3) MIchał 
 	-> TUtorial mode (with hints) - Low Priority/FutureWork
-	-> Yay! Level Completed!-Popup-Text and How You Did! (budget from last level)
+	-> Yay! Level Completed!-Popup-Text and How You Did! (budget from last level) for BOth Modes
+	-> The Game crashes where there's no towers
+	-> ZEN MODE: Bonus Appear (wave?)
+	-> Tweak Swipe detection (so it doesn't collides with enemies?)
 	
 	
 ZEN MODE
