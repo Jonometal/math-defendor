@@ -32,6 +32,7 @@ public class Level {
 	protected int difficulty;
 
 	protected GameModel model;
+	protected VertexBufferObjectManager objectManager;
 	
 	/** All of the towers that can be */
 	protected LinkedList<Tower> towers;
@@ -51,6 +52,7 @@ public class Level {
 		this.model = model;
 		this.nrWaves = nrWaves;
 		this.wavesLeft = this.nrWaves;
+		this.objectManager = objectManager;
 		// it's little bit Debug in here, so manually attaching different Towers to screen
 		setNewTowerAt(350, 400, objectManager);		
 	}
