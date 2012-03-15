@@ -42,6 +42,10 @@ public class TexMan {
 	public BitmapTextureAtlas mParticleBitmap; //Particle System
 	public TiledTextureRegion mParticleTextureRegion;
 	
+	//particle-Player
+	public BitmapTextureAtlas mParticlePlayerBitmap; //Particle System
+	public TiledTextureRegion mParticlePlayerTextureRegion;
+	
 	//enemy
 	public BitmapTextureAtlas mEnemyBitmap; //Enemy
 	public TiledTextureRegion mEnemyTextureregion;
@@ -104,8 +108,13 @@ public class TexMan {
 				
 		//particle
 		TexMan.getIt().mParticleBitmap = new BitmapTextureAtlas(activity.getTextureManager(), 32, 32, TextureOptions.BILINEAR);
-		TexMan.getIt().mParticleTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(TexMan.getIt().mParticleBitmap, activity, "gfx/particle_point.png", 0, 0, 1, 1); // this line doesn't work. WHY!?
+		TexMan.getIt().mParticleTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(TexMan.getIt().mParticleBitmap, activity, "gfx/particle_point.png", 0, 0, 1, 1);
 		TexMan.getIt().mParticleBitmap.load();
+		
+		//particlePlayer
+		TexMan.getIt().mParticlePlayerBitmap = new BitmapTextureAtlas(activity.getTextureManager(), 32, 32, TextureOptions.BILINEAR);
+		TexMan.getIt().mParticlePlayerTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(TexMan.getIt().mParticlePlayerBitmap, activity, "gfx/particle_fire.png", 0, 0, 1, 1); 
+		TexMan.getIt().mParticlePlayerBitmap.load();
 		
 			//player
 		TexMan.getIt().mPlayerBitmap = new BitmapTextureAtlas(activity.getTextureManager(), 96, 96, TextureOptions.BILINEAR);

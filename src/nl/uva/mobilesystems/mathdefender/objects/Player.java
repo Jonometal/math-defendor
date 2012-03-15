@@ -7,11 +7,24 @@ import nl.uva.mobilesystems.mathdefender.gui.TexMan;
 import nl.uva.mobilesystems.mathdefender.physics.PhConstants;
 
 import org.andengine.engine.handler.physics.PhysicsHandler;
+import org.andengine.entity.particle.SpriteParticleSystem;
+import org.andengine.entity.particle.emitter.PointParticleEmitter;
+import org.andengine.entity.particle.initializer.AccelerationParticleInitializer;
+import org.andengine.entity.particle.initializer.BlendFunctionParticleInitializer;
+import org.andengine.entity.particle.initializer.ColorParticleInitializer;
+import org.andengine.entity.particle.initializer.RotationParticleInitializer;
+import org.andengine.entity.particle.initializer.VelocityParticleInitializer;
+import org.andengine.entity.particle.modifier.AlphaParticleModifier;
+import org.andengine.entity.particle.modifier.ColorParticleModifier;
+import org.andengine.entity.particle.modifier.ExpireParticleModifier;
+import org.andengine.entity.particle.modifier.ScaleParticleModifier;
 import org.andengine.entity.sprite.AnimatedSprite;
+import org.andengine.entity.sprite.Sprite;
 import org.andengine.entity.text.Text;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 
 import android.graphics.PointF;
+import android.opengl.GLES20;
 
 /**
  * Class representing player's drone.
@@ -59,6 +72,25 @@ public class Player extends AnimatedSprite{
 		myText.setText(Integer.toString(myScore));
 		this.attachChild(myText);
 		this.model = model;
+		
+//		Particle System
+//		{
+//			final SpriteParticleSystem particleSystem = new SpriteParticleSystem(new PointParticleEmitter(0, 0), 6, 10, 200, TexMan.getIt().mParticlePlayerTextureRegion, pVertexBufferObjectManager);
+//			particleSystem.addParticleInitializer(new BlendFunctionParticleInitializer<Sprite>(GLES20.GL_SRC_ALPHA, GLES20.GL_ONE));
+//			particleSystem.addParticleInitializer(new VelocityParticleInitializer<Sprite>(15, 22, -60, -90));
+//			particleSystem.addParticleInitializer(new AccelerationParticleInitializer<Sprite>(5, 15));
+//			particleSystem.addParticleInitializer(new RotationParticleInitializer<Sprite>(0.0f, 360.0f));
+//			particleSystem.addParticleInitializer(new ColorParticleInitializer<Sprite>(1.0f, 0.0f, 0.0f));
+//
+//			particleSystem.addParticleModifier(new ScaleParticleModifier<Sprite>(0, 5, 0.5f, 2.0f));
+//			particleSystem.addParticleModifier(new ExpireParticleModifier<Sprite>(11.5f));
+//			particleSystem.addParticleModifier(new AlphaParticleModifier<Sprite>(2.5f, 3.5f, 1.0f, 0.0f));
+//			particleSystem.addParticleModifier(new AlphaParticleModifier<Sprite>(3.5f, 4.5f, 0.0f, 1.0f));
+//			particleSystem.addParticleModifier(new ColorParticleModifier<Sprite>(0.0f, 11.5f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f));
+//			particleSystem.addParticleModifier(new AlphaParticleModifier<Sprite>(4.5f, 11.5f, 1.0f, 0.0f));
+//
+//			this.attachChild(particleSystem);
+//		}
 	
 
 //        this.mFont = new Font(this.mFontTexture, Typeface.create(Typeface.DEFAULT, Typeface.BOLD), 32, true, Color.BLACK);

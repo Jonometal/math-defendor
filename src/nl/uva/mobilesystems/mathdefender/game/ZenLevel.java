@@ -21,6 +21,7 @@ public class ZenLevel extends Level {
 		
 		super(difficulty, nrWaves, nrTowers, screenDimensions, objectManager, model);
 		
+		this.startNewWave();
 		//add also bonus wave at the end
 		this.waves.offer(createBonusWave());
 		
