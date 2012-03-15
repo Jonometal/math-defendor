@@ -1,6 +1,7 @@
 package nl.uva.mobilesystems.mathdefender;
 
 import nl.uva.mobilesystems.mathdefender.gui.GUIConstants;
+import nl.uva.mobilesystems.mathdefender.gui.OurHUD;
 import nl.uva.mobilesystems.mathdefender.gui.SwipeListener;
 import nl.uva.mobilesystems.mathdefender.gui.TexMan;
 import nl.uva.mobilesystems.mathdefender.physics.PhConstants;
@@ -14,22 +15,17 @@ import org.andengine.engine.options.EngineOptions;
 import org.andengine.engine.options.EngineOptions.ScreenOrientation;
 import org.andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
 import org.andengine.entity.scene.Scene;
-import org.andengine.entity.scene.Scene.IOnSceneTouchListener;
 import org.andengine.entity.scene.background.SpriteBackground;
-import org.andengine.entity.sprite.AnimatedSprite;
 import org.andengine.entity.text.Text;
 import org.andengine.entity.util.FPSLogger;
-import org.andengine.input.touch.TouchEvent;
 import org.andengine.input.touch.controller.MultiTouch;
 import org.andengine.ui.activity.SimpleBaseGameActivity;
 
-import android.app.Activity;
 import android.graphics.Point;
 import android.opengl.GLES20;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnKeyListener;
 import android.widget.Toast;
@@ -39,7 +35,7 @@ public class InitialActivity extends SimpleBaseGameActivity implements OnKeyList
 	//	DEBUG
 	// =====================================
 	
-	boolean zenMode = false; //TObi: set it to false so you could star the game in your mode
+	boolean zenMode = true; //TObi: set it to false so you could star the game in your mode
 	
 	// ===========================================================
 		// Constants
@@ -124,9 +120,12 @@ public class InitialActivity extends SimpleBaseGameActivity implements OnKeyList
 //		scene.setBackground(new Background(0.05f, 0.8f, 0.8f));
 		scene.setBackground(new SpriteBackground(0.05f, 0.8f, 0.8f, TexMan.getIt().mBackgroundSprite)); //different background
 		
+		//create a hud variable in here
+		OurHUD hud = new OurHUD(scene, getVertexBufferObjectManager());
+		
 		
 		//set our MathLevel here (will be calculated in separated thread)
-		gModel = this.zenMode ?  new GameZenModel(this, scene) : new GameSuperMarketModel(this, scene); //that's a trick, in java you can use this expression [ variable = boolean ? valueIfTrue : valueIfFalse ]
+		gModel = this.zenMode ?  new GameZenModel(this, scene, hud) : new GameSuperMarketModel(this, scene, hud); //that's a trick, in java you can use this expression [ variable = boolean ? valueIfTrue : valueIfFalse ]
 			// (nrWaves, nrTowers, [Screen_X, Screen_Y], EnemyTexture, TowerTexture, Library-shit-buffer)
 		gModel.setUpSimpleGame( new Point(GUIConstants.CAMERA_WIDTH, GUIConstants.CAMERA_HEIGHT),getVertexBufferObjectManager());
 		
@@ -179,6 +178,15 @@ public class InitialActivity extends SimpleBaseGameActivity implements OnKeyList
 			swipeList.addObjectPositionEventListener(gModel);
 		scene.setOnSceneTouchListener(swipeList);
 
+		//createHUD
+		
+//			hud.addToToHud(OurHUD.UPGRADE_TOWER_SIMPLIFIER);
+//			hud.addToToHud(OurHUD.UPGRADE_TOWER_SLOWER);
+//			hud.addToToHud(OurHUD.UPGRADE_TOWER_KILLER);
+//			hud.addToToHud(OurHUD.UPGRADE_BULLET_TIME);
+////			hud.addToToHud(OurHUD.HUD_ELEMENT_SWIPE_CHARGER); 
+		this.mCamera.setHUD(hud);
+		
 		return scene;
 	}
 
@@ -212,6 +220,11 @@ public class InitialActivity extends SimpleBaseGameActivity implements OnKeyList
 	/*
 	 * PRIVATE METHODS GO DOWN ----------------------------------------------------
 	 */
+	
+	private void makeToast(String text){
+		Toast.makeText(this, "Fire Icon touched!", Toast.LENGTH_SHORT).show();
+
+	}
 	
 	
 	

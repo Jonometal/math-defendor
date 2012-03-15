@@ -2,11 +2,10 @@ package nl.uva.mobilesystems.mathdefender;
 
 import nl.uva.mobilesystems.mathdefender.andengine.events.ObjectPositionEvent;
 import nl.uva.mobilesystems.mathdefender.game.ZenLevel;
+import nl.uva.mobilesystems.mathdefender.gui.OurHUD;
 import nl.uva.mobilesystems.mathdefender.objects.Player;
 
 import org.andengine.entity.scene.Scene;
-import org.andengine.opengl.font.Font;
-import org.andengine.opengl.texture.region.TiledTextureRegion;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 
 import android.graphics.Point;
@@ -19,8 +18,8 @@ import android.util.Log;
  */
 public class GameZenModel extends GameModel {
 
-	public GameZenModel(InitialActivity activity, Scene scene) {
-		super(activity, scene);
+	public GameZenModel(InitialActivity activity, Scene scene, OurHUD _hud) {
+		super(activity, scene, _hud);
 
 	}
 	
@@ -31,7 +30,7 @@ public class GameZenModel extends GameModel {
 	}
 	
 	/**
-	 * Generates next Level accoring to current user's performance.
+	 * Generates next Level according to current user's performance.
 	 */
 	public void nextLevel(){
 		this.currentLevel = new ZenLevel(++levelCounter, 1, 0, screenDimensions, objectManager, this);

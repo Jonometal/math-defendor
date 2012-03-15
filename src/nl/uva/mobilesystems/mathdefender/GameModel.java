@@ -8,21 +8,22 @@ import nl.uva.mobilesystems.mathdefender.andengine.events.ObjectPositionEvent;
 import nl.uva.mobilesystems.mathdefender.andengine.events.ObjectPositionEventListener;
 import nl.uva.mobilesystems.mathdefender.game.Level;
 import nl.uva.mobilesystems.mathdefender.game.Wave;
-import nl.uva.mobilesystems.mathdefender.gui.TexMan;
+import nl.uva.mobilesystems.mathdefender.gui.OurHUD;
 import nl.uva.mobilesystems.mathdefender.objects.Enemy;
 import nl.uva.mobilesystems.mathdefender.objects.Explosion;
 import nl.uva.mobilesystems.mathdefender.objects.Player;
 import nl.uva.mobilesystems.mathdefender.objects.Tower;
 import nl.uva.mobilesystems.mathdefender.objects.TowerBullet;
 import nl.uva.mobilesystems.mathdefender.objects.upgrades.Upgrade;
+import nl.uva.mobilesystems.mathdefender.objects.upgrades.UpgradeBulletTime;
+import nl.uva.mobilesystems.mathdefender.objects.upgrades.UpgradeTowerSimplificator;
+import nl.uva.mobilesystems.mathdefender.objects.upgrades.UpgradeTowerSlowDowner;
 
 import org.andengine.engine.Engine;
 import org.andengine.entity.IEntity;
 import org.andengine.entity.scene.Scene;
 import org.andengine.entity.sprite.AnimatedSprite;
 import org.andengine.entity.text.Text;
-import org.andengine.opengl.font.Font;
-import org.andengine.opengl.texture.region.TiledTextureRegion;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 
 import android.graphics.Point;
@@ -42,6 +43,7 @@ public class GameModel implements ObjectPositionEventListener {
 	
 	public Scene scene; //it's little bit awkward, it must be here because current implementation of Model starts drawing before InitialActivity.onCreateScene() method is finished, so engine variable (field in GameModel class) doesnt know about this scene yet
 			
+	public OurHUD hud; 
 	
 	/** Variable representing current level that is maninated by GameModel */
 	protected Level currentLevel;
@@ -62,10 +64,11 @@ public class GameModel implements ObjectPositionEventListener {
 	
 	// ----------------------- CONSTRUCTORS --------------------------------
 	
-	public GameModel(InitialActivity activity, Scene scene){
+	public GameModel(InitialActivity activity, Scene scene, OurHUD hud){
 		this.engine = activity.getEngine();			
 		this.wavesLeftText = activity.text;
 		this.scene = scene;
+		this.hud = hud;
 	}
 	
 
@@ -203,7 +206,13 @@ public class GameModel implements ObjectPositionEventListener {
 							objectManager, this);
 					this.addObjectToScene(explosion);
 				}else if(objectOnScreen instanceof Upgrade){
-					;
+					if(objectOnScreen instanceof UpgradeTowerSimplificator){
+						this.hud.addToToHud(OurHUD.UPGRADE_TOWER_SIMPLIFIER);
+					}else if(objectOnScreen instanceof UpgradeTowerSlowDowner){
+						this.hud.addToToHud(OurHUD.UPGRADE_TOWER_SLOWER);
+					}else if(objectOnScreen instanceof UpgradeBulletTime){
+						this.hud.addToToHud(OurHUD.UPGRADE_BULLET_TIME);
+					}
 				}
 				
 			}else

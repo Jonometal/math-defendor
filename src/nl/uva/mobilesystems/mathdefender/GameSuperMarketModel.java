@@ -1,18 +1,15 @@
 package nl.uva.mobilesystems.mathdefender;
 
 import nl.uva.mobilesystems.mathdefender.andengine.events.ObjectPositionEvent;
-import nl.uva.mobilesystems.mathdefender.game.Level;
 import nl.uva.mobilesystems.mathdefender.game.SuperMarketLevel;
-import nl.uva.mobilesystems.mathdefender.gui.TexMan;
+import nl.uva.mobilesystems.mathdefender.gui.OurHUD;
 import nl.uva.mobilesystems.mathdefender.objects.Player;
 
 import org.andengine.entity.scene.Scene;
-import org.andengine.opengl.font.Font;
-import org.andengine.opengl.texture.region.TiledTextureRegion;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
-import android.util.Log;
 
 import android.graphics.Point;
+import android.util.Log;
 
 /**
  * Tobi's class
@@ -22,8 +19,8 @@ import android.graphics.Point;
  */
 public class GameSuperMarketModel extends GameModel{
 
-	public GameSuperMarketModel(InitialActivity activity, Scene scene) {
-		super(activity, scene);
+	public GameSuperMarketModel(InitialActivity activity, Scene scene, OurHUD hud) {
+		super(activity, scene, hud);
 		Log.v("testingmarket", "Market running, over.");
 	}
 	
