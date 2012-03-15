@@ -54,7 +54,7 @@ public class GameModel implements ObjectPositionEventListener {
 	/** Debug things */
 	
 	private Text wavesLeftText; 
-	protected VertexBufferObjectManager objectManager;
+	public VertexBufferObjectManager objectManager;
 	
 	public static LinkedList<AnimatedSprite> myEnemies;
 	
