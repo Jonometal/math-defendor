@@ -66,8 +66,29 @@ public class Enemy extends AnimatedSprite{
 		Interpreter interpreter = new Interpreter();
 		int d = 0;
 		try {
-			interpreter.eval("result = " + _mySum);
-			d = Integer.parseInt(interpreter.get("result").toString());
+			if(this.myDiff <= 4)
+			{
+				interpreter.eval("result = " + _mySum);
+				d = Integer.parseInt(interpreter.get("result").toString());
+			}
+			else if (this.myDiff == 5)
+			{
+				for(int i=1; i<Character.getNumericValue(_mySum.charAt(2)); i++)
+				{
+					_mySum+= ("*" + _mySum.charAt(0));	
+				}
+				StringBuffer myString = new StringBuffer(_mySum);
+				Log.v("testingSP","calcing this sum1: " + myString.toString());
+				myString.delete(1,3);
+				Log.v("testingSP","calcing this sum1b: " + myString.toString());
+			///	myString.delete(2,3);
+			
+				_mySum = myString.toString();
+				Log.v("testingSP","calcing this sum2: " + _mySum);
+				interpreter.eval("result = " + _mySum);
+				d = Integer.parseInt(interpreter.get("result").toString());
+				
+			}
 		}catch (java.lang.ArithmeticException ae){
 			System.out.println("Catched!");
 		} catch (EvalError e) {

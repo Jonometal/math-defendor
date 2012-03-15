@@ -63,11 +63,13 @@ public class HelperClass {
 						// parseable sum wont get printed on the Enemy.
 						int element5_0 = (int)Math.floor(Math.random() * (10));
 						mySum = mySum + (Integer.toString(element5_0));
+						mySum += '^';
 						int element5_2 = (int)Math.floor(Math.random() * (10));
-						for(int i=0; i< element5_2; i++)
-						{
-							mySum+= '*' + Integer.toString(element5_2);							
-						}
+						mySum = mySum + (Integer.toString(element5_2));
+						//for(int i=0; i< element5_2; i++)
+						//{
+						//	mySum+= '*' + Integer.toString(element5_2);							
+						//}
 						Log.v("testingSP","mySum = " + mySum);
 						break;
 						
