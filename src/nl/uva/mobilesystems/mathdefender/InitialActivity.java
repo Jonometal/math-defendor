@@ -39,7 +39,7 @@ public class InitialActivity extends SimpleBaseGameActivity implements OnKeyList
 	//	DEBUG
 	// =====================================
 	
-	boolean zenMode = true; //TObi: set it to false so you could star the game in your mode
+	boolean zenMode = false; //TObi: set it to false so you could star the game in your mode
 	
 	// ===========================================================
 		// Constants
@@ -131,12 +131,7 @@ public class InitialActivity extends SimpleBaseGameActivity implements OnKeyList
 		gModel.setUpSimpleGame( new Point(GUIConstants.CAMERA_WIDTH, GUIConstants.CAMERA_HEIGHT),getVertexBufferObjectManager());
 		
 		
-		//Set current wave objects here
-		for(AnimatedSprite waveObject: gModel.getCurrentWaveObjects()){
-			scene.attachChild(waveObject);
-		}
-		
-		
+			
 		//Create analog-control here
 		final AnalogOnScreenControl analogOnScreenControl = new AnalogOnScreenControl(0, GUIConstants.CAMERA_HEIGHT - TexMan.getIt().mOnScreenControlBaseTextureRegion.getHeight(), this.mCamera, TexMan.getIt().mOnScreenControlBaseTextureRegion, TexMan.getIt().mOnScreenControlKnobTextureRegion, 0.1f, 200, this.getVertexBufferObjectManager(), new IAnalogOnScreenControlListener() {
 			 
