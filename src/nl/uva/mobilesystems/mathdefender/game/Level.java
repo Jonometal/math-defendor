@@ -36,49 +36,44 @@ public class Level {
 	/** All of the towers that can be */
 	protected LinkedList<Tower> towers;
 	
+	protected int nrWaves;
+	protected int wavesLeft;
 	protected Wave currentWave;
 	
 	protected LinkedList<Wave> waves;
 	
-	protected VertexBufferObjectManager objectManager;
-	
 	
 	public Level(int difficulty, int nrWaves, int nrTowers, Point screenDimensions,
-			VertexBufferObjectManager _objectManager, GameModel model)
+			VertexBufferObjectManager objectManager, GameModel model)
 	{
 		this.setWaves(new LinkedList<Wave>());
 		this.myDiff = difficulty;
 		this.model = model;
-		this.objectManager = _objectManager;
-		
+		this.nrWaves = nrWaves;
+		this.wavesLeft = this.nrWaves;
 		// it's little bit Debug in here, so manually attaching different Towers to screen
-		setNewTowerAt(350, 400, objectManager);
-		
-		for(int i=0; i<nrWaves; i++){
-			LinkedList<AnimatedSprite>  tempEnemies = new LinkedList<AnimatedSprite>();
-			for(int j=0; j< PhConstants.NR_ENEMIES_IN_WAVE; j++)
-			{ //generating enemies
-				int x = screenDimensions.x; //the edge of a screen
-				int y = screenDimensions.y / (PhConstants.NR_ENEMIES_IN_WAVE+1) * (j+1);	//so equal distribution on screen Width
-				
-				Enemy tempEnemy = new Enemy(x,y, objectManager, difficulty, model);
-				tempEnemy.addObjectPositionEventListener(model);
-				tempEnemies.add(tempEnemy);
-				
-			}
-			Wave tempWave = new Wave(tempEnemies);
-			Log.v("newWave", "new Wave created ");
-			this.waves.offer(tempWave);
-		}
-		
-		this.setCurrentWave(this.getWaves().poll());
-		
+		setNewTowerAt(350, 400, objectManager);		
 	}
 	
 	public void startNewWave()
 	{
-		if(this.getWaves().size() > 0)
+		if(this.wavesLeft >= 0)
 		{
+			this.wavesLeft --;
+			LinkedList<AnimatedSprite>  tempEnemies = new LinkedList<AnimatedSprite>();
+			for(int j=0; j< PhConstants.NR_ENEMIES_IN_WAVE; j++)
+			{ //generating enemies
+				int x = model.screenDimensions.x; //the edge of a screen
+				int y = model.screenDimensions.y / (PhConstants.NR_ENEMIES_IN_WAVE+1) * (j+1);	//so equal distribution on screen Width
+				
+				Enemy tempEnemy = new Enemy(x,y, model.objectManager, this.myDiff, model);
+				tempEnemy.addObjectPositionEventListener(model);
+				tempEnemies.add(tempEnemy);				
+			}
+			Wave tempWave = new Wave(tempEnemies);
+			Log.v("newWave", "new Wave created ");
+			this.waves.offer(tempWave);
+			
 			this.setCurrentWave(this.getWaves().poll());
 			for(IEntity object : this.getCurrentWave().getObjects())
 			{
