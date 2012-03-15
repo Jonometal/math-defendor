@@ -78,7 +78,15 @@ public class GameSuperMarketModel extends GameModel{
 						currentLevel.startNewWave();
 						break;
 					case 2:
-						currentLevel = new SuperMarketLevel(2, 10, 0, screenDimensions, objectManager, this, 25);
+						currentLevel = new SuperMarketLevel(2, 5, 0, screenDimensions, objectManager, this, 25);
+						currentLevel.startNewWave();
+						break;
+					case 3:
+						currentLevel = new SuperMarketLevel(3, 5, 0, screenDimensions, objectManager, this, 25);
+						currentLevel.startNewWave();
+						break;
+					case 4:
+						currentLevel = new SuperMarketLevel(4, 5, 0, screenDimensions, objectManager, this, 25);
 						currentLevel.startNewWave();
 						break;
 					default:
