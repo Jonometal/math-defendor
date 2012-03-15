@@ -26,14 +26,14 @@ public class SuperMarketLevel extends Level {
 	{
 		super(difficulty, nrWaves, nrTowers, screenDimensions,
 				objectManager, model);
-		Log.v("testingmarket", "SMLevel created with diff: " + difficulty + this.myDiff);
+		//Log.v("testingmarket", "SMLevel created with diff: " + difficulty + this.myDiff);
 		this.myBudget = budget;
 		model.getPlayer().setScore(budget);
 	}
 
 	public void startNewWave()
 	{
-		Log.v("testingmarket", "Waves left: " + this.wavesLeft);
+		//Log.v("testingmarket", "Waves left: " + this.wavesLeft);
 		if(this.wavesLeft == 0)
 		{
 			this.model.nextLevel();
@@ -44,7 +44,7 @@ public class SuperMarketLevel extends Level {
 			LinkedList<AnimatedSprite>  tempEnemies = new LinkedList<AnimatedSprite>();
 			for(int j=0; j< PhConstants.NR_ENEMIES_IN_WAVE; j++)
 			{ //generating enemies
-				Log.v("testingmarket", "Creating Enemy with: " + this.myDiff);
+				//Log.v("testingmarket", "Creating Enemy with: " + this.myDiff);
 				int x = this.model.screenDimensions.x; //the edge of a screen
 				int y = this.model.screenDimensions.y / (PhConstants.NR_ENEMIES_IN_WAVE+1) * (j+1);	//so equal distribution on screen Width
 				
@@ -53,17 +53,14 @@ public class SuperMarketLevel extends Level {
 				tempEnemies.add(tempEnemy);				
 			}
 			Wave tempWave = new Wave(tempEnemies);
-			Log.v("testingmarket", "new Wave created ");
+			//Log.v("testingmarket", "new Wave created ");
 			this.waves.offer(tempWave);
 			
 			this.setCurrentWave(this.getWaves().poll());
 			for(IEntity object : this.getCurrentWave().getObjects())
 			{
-				Log.v("testingmarket", "So far so good?");
 				this.model.addObjectToScene(object);
-				Log.v("testingmarket", "So far so good");
 			}
-			Log.v("testingmarket", "So far so good2");
 		}
 	}
 }

@@ -73,7 +73,9 @@ public class Enemy extends AnimatedSprite{
 		} catch (EvalError e) {
 			System.out.println(e.getLocalizedMessage());
 		}
+		Log.v("testingSP","myResult = " + d);
 		return d;
+		
 	}
 
 	/**

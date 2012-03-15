@@ -58,6 +58,17 @@ public class HelperClass {
 						mySum = mySum + (Integer.toString(element4_2));
 						break;						
 					case 5:
+						//The 5th level presents the user with sums like 5^6.Since our parser can't handle this
+						// I wrote a simple forloop thatw ill generate a parseable sum. I just have to fix it so that this
+						// parseable sum wont get printed on the Enemy.
+						int element5_0 = (int)Math.floor(Math.random() * (10));
+						mySum = mySum + (Integer.toString(element5_0));
+						int element5_2 = (int)Math.floor(Math.random() * (10));
+						for(int i=0; i< element5_2; i++)
+						{
+							mySum+= '*' + Integer.toString(element5_2);							
+						}
+						Log.v("testingSP","mySum = " + mySum);
 						break;
 						
 					default:
