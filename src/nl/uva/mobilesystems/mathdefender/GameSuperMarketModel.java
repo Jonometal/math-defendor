@@ -62,6 +62,7 @@ public class GameSuperMarketModel extends GameModel{
 		this.objectManager = objectManager;
 		Log.v("testingmarket", "creating SMLevel with these vars: " + 15 );
 		nextLevel();
+		currentLevel.startNewWave();
 	}	
 	
 	@Override
