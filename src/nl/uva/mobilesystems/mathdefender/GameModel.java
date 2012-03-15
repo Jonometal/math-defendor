@@ -14,6 +14,7 @@ import nl.uva.mobilesystems.mathdefender.objects.Explosion;
 import nl.uva.mobilesystems.mathdefender.objects.Player;
 import nl.uva.mobilesystems.mathdefender.objects.Tower;
 import nl.uva.mobilesystems.mathdefender.objects.TowerBullet;
+import nl.uva.mobilesystems.mathdefender.objects.upgrades.Upgrade;
 
 import org.andengine.engine.Engine;
 import org.andengine.entity.IEntity;
@@ -188,16 +189,23 @@ public class GameModel implements ObjectPositionEventListener {
 //		}
 		Iterator<AnimatedSprite> iter = this.getCurrentWaveObjects().iterator();
 		LinkedList<Tower> towers = this.getTowers();
-		AnimatedSprite enemy;
+		AnimatedSprite objectOnScreen;
 		while(iter.hasNext()){
-			enemy = iter.next();
-			if(player.collidesWith(enemy)){			//collsion player <-> enemy
+			objectOnScreen = iter.next();
+			if(player.collidesWith(objectOnScreen)){			//collsion player <-> enemy
+				
 				iter.remove();
-				player.collisionDetected((Enemy)enemy);
-				((Enemy)enemy).collisionDetected(null);	//null becuse it's collision with Player
-				Explosion explosion = new Explosion(((Enemy)enemy).getX(), ((Enemy)enemy).getY(),
-						objectManager, this);
-				this.addObjectToScene(explosion);
+				
+				if(objectOnScreen instanceof Enemy){
+					player.collisionDetected((Enemy)objectOnScreen);
+					((Enemy)objectOnScreen).collisionDetected(null);	//null becuse it's collision with Player
+					Explosion explosion = new Explosion(((Enemy)objectOnScreen).getX(), ((Enemy)objectOnScreen).getY(),
+							objectManager, this);
+					this.addObjectToScene(explosion);
+				}else if(objectOnScreen instanceof Upgrade){
+					;
+				}
+				
 			}else
 			{	//otherwise check for collisions with bullets
 				Iterator<Tower> iterTower = towers.iterator();
@@ -210,11 +218,11 @@ public class GameModel implements ObjectPositionEventListener {
 					TowerBullet bullet;
 					while(iterBullet.hasNext()){
 						bullet = iterBullet.next();
-						if(enemy.collidesWith(bullet)){ //collision enemy <-> bullet
+						if(objectOnScreen.collidesWith(bullet)){ //collision enemy <-> bullet
 							iterBullet.remove(); //remove bullet
 //							iter.remove(); //remove enemy
 							bullet.collisionDetected();
-							((Enemy)enemy).collisionDetected(bullet.getTower());
+							((Enemy)objectOnScreen).collisionDetected(bullet.getTower());
 							
 							break towerLoop;	//we're breaking the outer loop as for this enemy there won't be any collisions, because he is NO MORE.
 						}

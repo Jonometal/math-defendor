@@ -40,13 +40,16 @@ public class Level {
 	
 	protected LinkedList<Wave> waves;
 	
+	protected VertexBufferObjectManager objectManager;
+	
 	
 	public Level(int difficulty, int nrWaves, int nrTowers, Point screenDimensions,
-			VertexBufferObjectManager objectManager, GameModel model)
+			VertexBufferObjectManager _objectManager, GameModel model)
 	{
 		this.setWaves(new LinkedList<Wave>());
 		this.myDiff = difficulty;
 		this.model = model;
+		this.objectManager = _objectManager;
 		
 		// it's little bit Debug in here, so manually attaching different Towers to screen
 		setNewTowerAt(350, 400, objectManager);

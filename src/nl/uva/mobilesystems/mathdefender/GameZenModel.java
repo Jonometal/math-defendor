@@ -34,7 +34,7 @@ public class GameZenModel extends GameModel {
 	 * Generates next Level accoring to current user's performance.
 	 */
 	public void nextLevel(){
-		this.currentLevel = new ZenLevel(++levelCounter, 1, 1, screenDimensions, objectManager, this);
+		this.currentLevel = new ZenLevel(++levelCounter, 1, 0, screenDimensions, objectManager, this);
 	}
 
 	

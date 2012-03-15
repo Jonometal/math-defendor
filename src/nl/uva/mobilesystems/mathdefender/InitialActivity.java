@@ -39,7 +39,7 @@ public class InitialActivity extends SimpleBaseGameActivity implements OnKeyList
 	//	DEBUG
 	// =====================================
 	
-	boolean zenMode = false; //TObi: set it to false so you could star the game in your mode
+	boolean zenMode = true; //TObi: set it to false so you could star the game in your mode
 	
 	// ===========================================================
 		// Constants

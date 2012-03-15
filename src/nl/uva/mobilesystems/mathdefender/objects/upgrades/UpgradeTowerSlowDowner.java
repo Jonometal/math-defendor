@@ -6,7 +6,7 @@ import org.andengine.entity.sprite.AnimatedSprite;
 import org.andengine.opengl.texture.region.ITiledTextureRegion;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 
-public class UpgradeTowerSlowDowner extends AnimatedSprite {
+public class UpgradeTowerSlowDowner extends Upgrade {
 
 	public UpgradeTowerSlowDowner(float pX, float pY,
 			VertexBufferObjectManager pVertexBufferObjectManager) {
