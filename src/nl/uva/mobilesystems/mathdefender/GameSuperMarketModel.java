@@ -62,7 +62,7 @@ public class GameSuperMarketModel extends GameModel{
 		this.objectManager = objectManager;
 		Log.v("testingmarket", "creating SMLevel with these vars: " + 15 );
 		nextLevel();
-		currentLevel.startNewWave();
+		
 	}	
 	
 	@Override
@@ -75,9 +75,11 @@ public class GameSuperMarketModel extends GameModel{
 		{
 					case 1:
 						currentLevel = new SuperMarketLevel(1, 5, 0, screenDimensions, objectManager,  this, 15);
+						currentLevel.startNewWave();
 						break;
 					case 2:
 						currentLevel = new SuperMarketLevel(2, 10, 0, screenDimensions, objectManager, this, 25);
+						currentLevel.startNewWave();
 						break;
 					default:
 						break;
