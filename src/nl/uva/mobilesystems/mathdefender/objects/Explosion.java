@@ -46,11 +46,11 @@ public class Explosion extends AnimatedSprite{
 		particleSystem.addParticleInitializer(new VelocityParticleInitializer<Sprite>(-2, 2, -10, -10));
 		particleSystem.addParticleInitializer(new RotationParticleInitializer<Sprite>(0.0f, 360.0f));
 
-		particleSystem.addParticleModifier(new ScaleParticleModifier<Sprite>(0, 1, 1.0f, 2.0f));
+		particleSystem.addParticleModifier(new ScaleParticleModifier<Sprite>(0, 0.5f, 1.0f, 4.0f));
 		particleSystem.addParticleModifier(new ColorParticleModifier<Sprite>(0, 0.2f, 1, 1, 0, 0.5f, 0, 0));
-		particleSystem.addParticleModifier(new ColorParticleModifier<Sprite>(0.45f, 0.5f, 1, 1, 0.5f, 1, 0, 1));
-		particleSystem.addParticleModifier(new AlphaParticleModifier<Sprite>(0, 0.1f, 0, 1));
-		particleSystem.addParticleModifier(new AlphaParticleModifier<Sprite>(0.3f, 5, 1, 0));
+		particleSystem.addParticleModifier(new ColorParticleModifier<Sprite>(0.3f, 0.5f, 1, 1, 0.5f, 1, 0, 1));
+		particleSystem.addParticleModifier(new AlphaParticleModifier<Sprite>(0, 0.2f, 0, 1));
+		particleSystem.addParticleModifier(new AlphaParticleModifier<Sprite>(0.45f, 0.5f, 1, 0));
 		particleSystem.addParticleModifier(new ExpireParticleModifier<Sprite>(0.5f));
 
 	    this.attachChild(particleSystem);
@@ -62,7 +62,7 @@ public class Explosion extends AnimatedSprite{
 		
 		timer += pSecondsElapsed;
 		
-		if(timer > 3){
+		if(timer > 0.5){
 			model.removeObjectFromScene(this);
 		}
 		else{
