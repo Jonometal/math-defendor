@@ -66,7 +66,7 @@ public class Level {
 			for(int j=0; j< PhConstants.NR_ENEMIES_IN_WAVE; j++)
 			{ //generating enemies
 				int x = model.screenDimensions.x; //the edge of a screen
-				int y = model.screenDimensions.y / (PhConstants.NR_ENEMIES_IN_WAVE+1) * (j+1);	//so equal distribution on screen Width
+				int y = (model.screenDimensions.y / (PhConstants.NR_ENEMIES_IN_WAVE+1) * (j+1)) -10;	//so equal distribution on screen Width
 				
 				Enemy tempEnemy = new Enemy(x,y, model.objectManager, this.myDiff, model);
 				tempEnemy.addObjectPositionEventListener(model);

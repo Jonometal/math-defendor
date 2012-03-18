@@ -46,7 +46,7 @@ public class SuperMarketLevel extends Level {
 			{ //generating enemies
 				//Log.v("testingmarket", "Creating Enemy with: " + this.myDiff);
 				int x = this.model.screenDimensions.x; //the edge of a screen
-				int y = this.model.screenDimensions.y / (PhConstants.NR_ENEMIES_IN_WAVE+1) * (j+1);	//so equal distribution on screen Width
+				int y = (model.screenDimensions.y / (PhConstants.NR_ENEMIES_IN_WAVE+1) * (j+1)) - 10;	//so equal distribution on screen Width
 				
 				Enemy tempEnemy = new Enemy(x,y, this.model.objectManager, this.myDiff, this.model);
 				tempEnemy.addObjectPositionEventListener(this.model);
