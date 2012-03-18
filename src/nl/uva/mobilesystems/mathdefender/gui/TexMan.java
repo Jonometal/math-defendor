@@ -122,8 +122,8 @@ public class TexMan {
 		TexMan.getIt().mPlayerBitmap.load();
 				
 		//enemy
-		TexMan.getIt().mEnemyBitmap = new BitmapTextureAtlas(activity.getTextureManager(), 32, 32, TextureOptions.BILINEAR);
-		TexMan.getIt().mEnemyTextureregion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(TexMan.getIt().mEnemyBitmap, activity, "gfx/face_box.png", 0, 0, 1, 1);
+		TexMan.getIt().mEnemyBitmap = new BitmapTextureAtlas(activity.getTextureManager(), 96, 81, TextureOptions.BILINEAR);
+		TexMan.getIt().mEnemyTextureregion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(TexMan.getIt().mEnemyBitmap, activity, "gfx/cart_small.png", 0, 0, 1, 1);
 		TexMan.getIt().mEnemyBitmap.load();
 				
 		//towerKiller
