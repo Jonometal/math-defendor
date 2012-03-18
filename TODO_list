@@ -44,26 +44,23 @@ Graphics;
 	
 	
 1) Laurens
-	- Make sure you can pass each level but not too easily //I can do this only manually hardcoding each enemy
-	DONE put more brain into the OBJECTS, not in the other Places (Game Model, Activity
-	1 DONE Add two more difficulties () to generating and simplifying
-	DONE implement DIE funtion
-	DONE Hand-writing the LEVELS
-	DONE make sure you can't escape enemies (at least in supermarket mode, I guess)
-	DONE Spawn new Wave after the finish of previous one
+	- Hardcode levels for DEMO
+	- Implement bonus wave in SPmode
+	
+	- Work on the learning part for the pres
 	
 2) Tobi
 	- change graphics of objects, background, fonts (hand-written)
 	- InfoScreen content
 	
+	- Work on Design principles part for pres.
+	
 3) MIchał 
+	-> Game over screen showing #levels/final score
 	-> Yay! Level Completed!-Popup-Text and How You Did! (budget from last level) for BOth Modes
 	-> The Game crashes where there's no towers
-	-> ZEN MODE: Bonus Appear (wave?)
 	-> SuperMarket: BOnus (Simplifier, 
-	-> Tweak Swipe detection (so it doesn't collides with enemies?)
-	-> HUD (icons for Towers + Bullet Time + Swipe Funtion)
-	-> Low Priority: Smoke behind the player
+
 	
 	
 ZEN MODE
