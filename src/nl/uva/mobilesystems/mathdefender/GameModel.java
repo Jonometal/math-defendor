@@ -236,7 +236,8 @@ public class GameModel implements ObjectPositionEventListener {
 		engine.runOnUpdateThread(new Runnable() {
 			public void run() {
 				entity.detachSelf();
-				entity.dispose();
+				if(!entity.isDisposed())
+					entity.dispose();
 			}
 		});
 	}
