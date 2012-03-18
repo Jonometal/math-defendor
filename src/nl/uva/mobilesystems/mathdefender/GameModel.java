@@ -181,15 +181,6 @@ public class GameModel implements ObjectPositionEventListener {
 	 * - bullets shoted from Tower
 	 */
 	public void performGlobalCollisionTest() {
-		//this is the fix to the problem that no new waves appear when you get all three enemies
-		// This is horrible code though and should all be moved to the enemy/wave class.
-//		if(currentLevel.getCurrentWave().getObjects().size() == 0)
-//		{ //check whether something is still in current Wave
-//			if( currentLevel.getWaves().size() > 0) //if there are still waves to be shown
-//			{
-//				startNewWave();
-//			}
-//		}
 		Iterator<AnimatedSprite> iter = this.getCurrentWaveObjects().iterator();
 		LinkedList<Tower> towers = this.getTowers();
 		AnimatedSprite objectOnScreen;
