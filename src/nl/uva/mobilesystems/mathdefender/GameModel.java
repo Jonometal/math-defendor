@@ -127,9 +127,9 @@ public class GameModel implements ObjectPositionEventListener {
 			break;
 		case EventsConstants.EVENT_SWIPE_DETECTED:
 			Log.d("swipe", "Swipe Detected from Model");
-			Explosion exp1 = new Explosion(this.player.getX(), this.player.getY(), this.objectManager, this);
+			Explosion exp1 = new Explosion(this.player.getX(), this.player.getY(), this.objectManager, this, 0f, 1f, 0f, 30, 2, false);
 			this.player.moveOnSwipe();
-			Explosion exp2 = new Explosion(this.player.getX(), this.player.getY(), this.objectManager, this);
+			Explosion exp2 = new Explosion(this.player.getX(), this.player.getY(), this.objectManager, this, 0f, 0f, 1f, 30, 2, false);
 			addObjectToScene(exp1);
 			addObjectToScene(exp2);
 			break;
@@ -194,7 +194,7 @@ public class GameModel implements ObjectPositionEventListener {
 					player.collisionDetected((Enemy)objectOnScreen);
 					((Enemy)objectOnScreen).collisionDetected(null);	//null becuse it's collision with Player
 					Explosion explosion = new Explosion(((Enemy)objectOnScreen).getX(), ((Enemy)objectOnScreen).getY(),
-							objectManager, this);
+							objectManager, this, 1f, 0f, 0f, 10, 10, true);
 					this.addObjectToScene(explosion);
 				}else if(objectOnScreen instanceof Upgrade){
 					if(objectOnScreen instanceof UpgradeTowerSimplificator){
