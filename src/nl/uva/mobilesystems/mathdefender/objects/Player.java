@@ -158,9 +158,13 @@ public class Player extends AnimatedSprite{
 	
 	public void die()
 	{
-		Explosion explosion = new Explosion(this.getX(), this.getY(),
-				this.objectManager, this.model);
-		this.model.addObjectToScene(explosion);
+		Explosion explosion1 = new Explosion(this.getX(), this.getY(), this.objectManager, this.model);
+		this.model.addObjectToScene(explosion1);
+		Explosion explosion2 = new Explosion(this.getX()+15, this.getY(), this.objectManager, this.model);
+		this.model.addObjectToScene(explosion2);
+		Explosion explosion3 = new Explosion(this.getX()+15, this.getY()+15, this.objectManager, this.model);
+		this.model.addObjectToScene(explosion3);
+		
 		this.model.removeObjectFromScene(this);
 		//this.model.gameOver();
 	}

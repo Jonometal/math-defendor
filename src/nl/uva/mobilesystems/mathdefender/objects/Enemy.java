@@ -73,18 +73,20 @@ public class Enemy extends AnimatedSprite{
 			}
 			else if (this.myDiff == 5)
 			{
-				for(int i=1; i<Character.getNumericValue(_mySum.charAt(2)); i++)
+				if(Character.getNumericValue(_mySum.charAt(2)) <= 0)
 				{
-					_mySum+= ("*" + _mySum.charAt(0));	
+					_mySum = "1";
 				}
-				StringBuffer myString = new StringBuffer(_mySum);
-				Log.v("testingSP","calcing this sum1: " + myString.toString());
-				myString.delete(1,3);
-				Log.v("testingSP","calcing this sum1b: " + myString.toString());
-			///	myString.delete(2,3);
-			
-				_mySum = myString.toString();
-				Log.v("testingSP","calcing this sum2: " + _mySum);
+				else
+				{
+					for(int i=1; i<Character.getNumericValue(_mySum.charAt(2)); i++)
+					{
+						_mySum+= ("*" + _mySum.charAt(0));	
+					}
+					StringBuffer myString = new StringBuffer(_mySum);
+					myString.delete(1,3);
+					_mySum = myString.toString();
+				}
 				interpreter.eval("result = " + _mySum);
 				d = Integer.parseInt(interpreter.get("result").toString());
 				
