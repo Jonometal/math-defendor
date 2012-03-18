@@ -21,20 +21,22 @@
               		android:layout_marginBottom="10dp"/>
 	    </TableRow>
 
-	    <TableRow
-	        android:id="@+id/tableRow2"
-	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content"
-	      	android:background="#88ffffff"
-	        android:gravity="center_horizontal" >
+	    <ScrollView   
+        	android:id="@+id/ScrollView01"  
+      		android:layout_height="200dp"   
+      		android:layout_width="fill_parent"
+      	    android:background="#88ffffff"
+	        android:gravity="center_horizontal">  
+           
 	         <TextView android:id="@+id/infoTextView"
-              		android:layout_width="match_parent"
-              		android:layout_height="wrap_content"
+            		android:layout_width="400dp"
+           			android:layout_height="200dp"
               		android:textColor="#000000"
-              		android:textSize="10pt" 
-              		android:layout_margin="8dp"
+              		android:textSize="9pt" 
+              		android:layout_margin="20dp"
               		android:gravity="left"/>
-	    </TableRow>
+	   </ScrollView>  
+
 
 	    
 	   <TableRow
@@ -45,7 +47,7 @@
         	<Button
             	android:id="@+id/button_continue"
             	android:layout_width="wrap_content"
-            	android:layout_height="50dp"
+            	android:layout_height="wrap_content"
             	android:layout_margin="8dp"
             	android:background="@drawable/button"
             	android:text="@string/button_continue" />

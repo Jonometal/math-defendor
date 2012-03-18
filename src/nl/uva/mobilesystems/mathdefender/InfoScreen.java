@@ -31,12 +31,12 @@ public class InfoScreen extends Activity implements OnClickListener {
 
 		if(mode.equals("supermarket")){
 			infoScreenTitle.setText(R.string.supermarket);
-			infoTextView.setText(R.string.loremipsum1);
+			infoTextView.setText(R.string.supermarket_instructions);
 			tableLayout.setBackgroundResource(R.drawable.background_supermarket);
 		}
 		else if(mode.equals("zen")){
 			infoScreenTitle.setText(R.string.zen);
-			infoTextView.setText(R.string.loremipsum2);			
+			infoTextView.setText(R.string.zen_instructions);			
 			tableLayout.setBackgroundResource(R.drawable.background_hsc);
 		}
 		
