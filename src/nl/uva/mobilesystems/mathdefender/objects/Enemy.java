@@ -147,7 +147,7 @@ public class Enemy extends AnimatedSprite{
 	 *  If tower is null it assumes that player touched it
 	 *  */
 	public void collisionDetected(Tower tower){
-		if(tower == null)
+		if(tower == null)		//collision with enemy
 			fireEvent(EventsConstants.EVENT_OBJECT_ENEMY_OUT_OF_SCENE);
 		
 		if(tower instanceof TowerSimplificator){	//Simplify Equation

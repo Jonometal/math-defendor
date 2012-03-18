@@ -1,5 +1,6 @@
 package nl.uva.mobilesystems.mathdefender;
 
+import nl.uva.mobilesystems.mathdefender.andengine.events.EventsConstants;
 import nl.uva.mobilesystems.mathdefender.andengine.events.ObjectPositionEvent;
 import nl.uva.mobilesystems.mathdefender.game.SuperMarketLevel;
 import nl.uva.mobilesystems.mathdefender.gui.OurHUD;
@@ -27,6 +28,8 @@ public class GameSuperMarketModel extends GameModel{
 	
 	public void handleObjectPositionEvent(ObjectPositionEvent e) {
 		super.handleObjectPositionEvent(e);
+		
+		
 
 	}
 	

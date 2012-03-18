@@ -1,5 +1,8 @@
 package nl.uva.mobilesystems.mathdefender.objects.upgrades;
 
+import nl.uva.mobilesystems.mathdefender.andengine.events.EventsConstants;
+import nl.uva.mobilesystems.mathdefender.andengine.events.ObjectPositionEvent;
+import nl.uva.mobilesystems.mathdefender.andengine.events.ObjectPositionEventListener;
 import nl.uva.mobilesystems.mathdefender.gui.GUIConstants;
 import nl.uva.mobilesystems.mathdefender.physics.PhConstants;
 
@@ -15,6 +18,9 @@ import org.andengine.opengl.vbo.VertexBufferObjectManager;
  */
 public class Upgrade extends AnimatedSprite {
 
+	
+	private ObjectPositionEventListener listener; 
+	
 	private PhysicsHandler mPhysicsHandler;
 	public Upgrade(float pX, float pY, ITiledTextureRegion pTiledTextureRegion,
 			VertexBufferObjectManager pVertexBufferObjectManager) {
@@ -37,5 +43,27 @@ public class Upgrade extends AnimatedSprite {
 		}
 		super.onManagedUpdate(pSecondsElapsed);
 	}
+	
+	public synchronized Upgrade addObjectPositionEventListener(ObjectPositionEventListener listener){
+		this.listener = listener;
+		return this;
+	}
+	
+	
+	
+	/**
+	 * Currently those are collisions with Player
+	 */
+	public void collisionDetected(){
+		fireEvent(EventsConstants.EVENT_OBJECT_UPGRADE_OUT_OF_SCENE);
+	}
 
+	public synchronized void removeObjectPositionEventListener(){
+		this.listener = null;
+	}
+	
+	private synchronized void fireEvent(int eventCode){
+		ObjectPositionEvent event = new ObjectPositionEvent(this, eventCode);
+		this.listener.handleObjectPositionEvent(event);
+	}
 }

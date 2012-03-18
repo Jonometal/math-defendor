@@ -33,9 +33,11 @@ public class ZenLevel extends Level {
 		
 		
 		LinkedList<AnimatedSprite> bonusShop = new LinkedList<AnimatedSprite>();
-			bonusShop.add(new UpgradeBulletTime(x, y, this.objectManager));
-			bonusShop.add(new UpgradeTowerSimplificator(x, y*2, this.objectManager));
-			bonusShop.add(new UpgradeTowerSlowDowner(x, y*3, this.objectManager)); 
+		
+		
+			bonusShop.add(new UpgradeBulletTime(x, y, this.objectManager).addObjectPositionEventListener(this.model));
+			bonusShop.add(new UpgradeTowerSimplificator(x, y*2, this.objectManager).addObjectPositionEventListener(this.model));
+			bonusShop.add(new UpgradeTowerSlowDowner(x, y*3, this.objectManager).addObjectPositionEventListener(this.model)); 
 
 		
 		return new Wave(bonusShop);

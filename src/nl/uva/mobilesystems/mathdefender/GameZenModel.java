@@ -1,11 +1,16 @@
 package nl.uva.mobilesystems.mathdefender;
 
+import java.util.Iterator;
+
+import nl.uva.mobilesystems.mathdefender.andengine.events.EventsConstants;
 import nl.uva.mobilesystems.mathdefender.andengine.events.ObjectPositionEvent;
 import nl.uva.mobilesystems.mathdefender.game.ZenLevel;
 import nl.uva.mobilesystems.mathdefender.gui.OurHUD;
 import nl.uva.mobilesystems.mathdefender.objects.Player;
+import nl.uva.mobilesystems.mathdefender.objects.upgrades.Upgrade;
 
 import org.andengine.entity.scene.Scene;
+import org.andengine.entity.sprite.AnimatedSprite;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 
 import android.graphics.Point;
@@ -26,6 +31,24 @@ public class GameZenModel extends GameModel {
 	
 	public void handleObjectPositionEvent(ObjectPositionEvent e) {
 		super.handleObjectPositionEvent(e);
+		
+		//additional funtionality that is mode-dependend goes here
+		switch(e.getEventCode()){
+		case EventsConstants.EVENT_OBJECT_UPGRADE_OUT_OF_SCENE:
+			//so bonus object was hit, we should start new wave now!
+			Iterator<AnimatedSprite> iter = this.currentLevel.getCurrentWave().getObjects().iterator();
+			AnimatedSprite upgradeObject;
+			while(iter.hasNext()){
+				upgradeObject = iter.next();
+				if(upgradeObject instanceof Upgrade){
+					removeObjectFromScene(upgradeObject);
+//					iter.remove();
+				}
+			}
+				
+			nextLevel();
+			break;
+		}
 
 	}
 	

@@ -9,6 +9,7 @@ import nl.uva.mobilesystems.mathdefender.andengine.events.ObjectPositionEventLis
 import nl.uva.mobilesystems.mathdefender.game.Level;
 import nl.uva.mobilesystems.mathdefender.game.Wave;
 import nl.uva.mobilesystems.mathdefender.gui.OurHUD;
+import nl.uva.mobilesystems.mathdefender.gui.SwipeListener;
 import nl.uva.mobilesystems.mathdefender.objects.Enemy;
 import nl.uva.mobilesystems.mathdefender.objects.Explosion;
 import nl.uva.mobilesystems.mathdefender.objects.Player;
@@ -127,13 +128,21 @@ public class GameModel implements ObjectPositionEventListener {
 			break;
 		case EventsConstants.EVENT_SWIPE_DETECTED:
 			Log.d("swipe", "Swipe Detected from Model");
+
 			Explosion exp1 = new Explosion(this.player.getX(), this.player.getY(), this.objectManager, this, 0f, 1f, 0f, 30, 2, false);
-			this.player.moveOnSwipe();
+			this.player.moveOnSwipe(((SwipeListener)e.getSource()).xActionUp,((SwipeListener)e.getSource()).yActionUp);
 			Explosion exp2 = new Explosion(this.player.getX(), this.player.getY(), this.objectManager, this, 0f, 0f, 1f, 30, 2, false);
 			addObjectToScene(exp1);
 			addObjectToScene(exp2);
 			break;
+			
+		case EventsConstants.EVENT_OBJECT_UPGRADE_OUT_OF_SCENE:
+			Upgrade objectUpgrade = (Upgrade)e.getSource();
+			removeObjectFromScene(objectUpgrade);
+			objectUpgrade = null;
+			break;
 		} 
+		
 	}
 	
 	//-------------------- PUBLIC METHODS ----------------------------
@@ -145,24 +154,6 @@ public class GameModel implements ObjectPositionEventListener {
 	 */
 	public void setUpSimpleGame(Point screenDimensions,	VertexBufferObjectManager _objectManager){
 		this.objectManager = _objectManager;
-//		Log.v("testingmarket", "Super running, over.");
-//		final float centerX = 100;
-//		final float centerY = 100;
-//		this.screenDimensions = screenDimensions;
-//		this.myTextureEnemy= textureEnemy;
-//		this.myEnemyFont= enemyFont;
-//		this.player = new Player(centerX, centerY, TexMan.getIt().mPlayerTextureRegion, objectManager, TexMan.getIt().playerFont, this);
-//		Log.v("testingmarket", "Player created: " + this.getPlayer());
-//		scene.attachChild(this.player);
-//		
-//		
-//		this.currentLevel = new Level(difficulty, nrWaves, nrTowers, screenDimensions, textureEnemy, objectManager, enemyFont, this);
-//		this.objectManager = objectManager;
-//		this.explosionFont = enemyFont;
-		
-		
-		
-		
 	}			
 	
 		
@@ -186,17 +177,17 @@ public class GameModel implements ObjectPositionEventListener {
 		AnimatedSprite objectOnScreen;
 		while(iter.hasNext()){
 			objectOnScreen = iter.next();
-			if(player.collidesWith(objectOnScreen)){			//collsion player <-> enemy
+			if(player.collidesWith(objectOnScreen)){			//collsion player <-> sth on screen
 				
 				iter.remove();
 				
-				if(objectOnScreen instanceof Enemy){
+				if(objectOnScreen instanceof Enemy){			//collsion player <-> enemy
 					player.collisionDetected((Enemy)objectOnScreen);
 					((Enemy)objectOnScreen).collisionDetected(null);	//null becuse it's collision with Player
 					Explosion explosion = new Explosion(((Enemy)objectOnScreen).getX(), ((Enemy)objectOnScreen).getY(),
 							objectManager, this, 1f, 0f, 0f, 10, 10, true);
 					this.addObjectToScene(explosion);
-				}else if(objectOnScreen instanceof Upgrade){
+				}else if(objectOnScreen instanceof Upgrade){		//collsion player <-> UPDATE
 					if(objectOnScreen instanceof UpgradeTowerSimplificator){
 						this.hud.addToToHud(OurHUD.UPGRADE_TOWER_SIMPLIFIER);
 					}else if(objectOnScreen instanceof UpgradeTowerSlowDowner){
@@ -204,6 +195,8 @@ public class GameModel implements ObjectPositionEventListener {
 					}else if(objectOnScreen instanceof UpgradeBulletTime){
 						this.hud.addToToHud(OurHUD.UPGRADE_BULLET_TIME);
 					}
+					player.collisionDetected((Upgrade)objectOnScreen);
+					((Upgrade)objectOnScreen).collisionDetected();
 				}
 				
 			}else

@@ -4,28 +4,15 @@ import nl.uva.mobilesystems.mathdefender.GameModel;
 import nl.uva.mobilesystems.mathdefender.GameSuperMarketModel;
 import nl.uva.mobilesystems.mathdefender.gui.GUIConstants;
 import nl.uva.mobilesystems.mathdefender.gui.TexMan;
-import nl.uva.mobilesystems.mathdefender.physics.PhConstants;
+import nl.uva.mobilesystems.mathdefender.objects.upgrades.Upgrade;
 
 import org.andengine.engine.handler.physics.PhysicsHandler;
-import org.andengine.entity.particle.SpriteParticleSystem;
-import org.andengine.entity.particle.emitter.PointParticleEmitter;
-import org.andengine.entity.particle.initializer.AccelerationParticleInitializer;
-import org.andengine.entity.particle.initializer.BlendFunctionParticleInitializer;
-import org.andengine.entity.particle.initializer.ColorParticleInitializer;
-import org.andengine.entity.particle.initializer.RotationParticleInitializer;
-import org.andengine.entity.particle.initializer.VelocityParticleInitializer;
 import nl.uva.mobilesystems.mathdefender.objects.Explosion;
-import org.andengine.entity.particle.modifier.AlphaParticleModifier;
-import org.andengine.entity.particle.modifier.ColorParticleModifier;
-import org.andengine.entity.particle.modifier.ExpireParticleModifier;
-import org.andengine.entity.particle.modifier.ScaleParticleModifier;
 import org.andengine.entity.sprite.AnimatedSprite;
-import org.andengine.entity.sprite.Sprite;
 import org.andengine.entity.text.Text;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 
-import android.graphics.PointF;
-import android.opengl.GLES20;
+import android.util.Log;
 
 /**
  * Class representing player's drone.
@@ -126,7 +113,7 @@ public class Player extends AnimatedSprite{
      */
 	
 	/**
-	 * Should be called when collision is detected.
+	 * Should be called when collision with enemy is detected.
 	 * Currently it serves only collisions with enemies.
 	 * @param enemy
 	 */
@@ -147,13 +134,22 @@ public class Player extends AnimatedSprite{
 		});
 	}
 	
+	/**
+	 * Should be called when collision with enemy is detected.
+	 * Currently it serves only collisions with enemies.
+	 * @param enemy
+	 */
+	public void collisionDetected(Upgrade _upgrade){
+		Log.w("Player", "method not finished");
+	}
+	
 
-	public void moveOnSwipe(){
-		float moveByX = PhConstants.PLAYER_SWIPE_JUMP;
-		if(this.getX() + moveByX > GUIConstants.CAMERA_WIDTH){
-			moveByX = GUIConstants.CAMERA_WIDTH - this.getX() - this.getWidth();
-		}
-		this.setPosition(this.getX() + moveByX, this.getY());
+	public void moveOnSwipe(float newX, float newY){
+//		float moveByX = PhConstants.PLAYER_SWIPE_JUMP;
+//		if(this.getX() + moveByX > GUIConstants.CAMERA_WIDTH){
+//			moveByX = GUIConstants.CAMERA_WIDTH - this.getX() - this.getWidth();
+//		}
+		this.setPosition(newX, newY);
 	}
 	
 	public void die()

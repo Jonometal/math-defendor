@@ -178,7 +178,7 @@ public class InitialActivity extends SimpleBaseGameActivity implements OnKeyList
 		
 		
 		//set Swipe Detection
-		SwipeListener swipeList = new SwipeListener(getApplicationContext());
+		SwipeListener swipeList = new SwipeListener(getApplicationContext(), gModel);
 			swipeList.addObjectPositionEventListener(gModel);
 		scene.setOnSceneTouchListener(swipeList);
 
