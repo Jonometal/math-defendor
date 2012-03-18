@@ -10,7 +10,7 @@ public class PhConstants {
 	
 	public static final float ENEMY_VELOCITY = 150.0f;
 	
-	public static final int NR_ENEMIES_IN_WAVE = 3;
+	public static final int NR_ENEMIES_IN_WAVE = 4;
 	
 	// PLAYER
 	
