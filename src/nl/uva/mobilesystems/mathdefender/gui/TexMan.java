@@ -34,6 +34,10 @@ public class TexMan {
 	public ITextureRegion mBackgroundTextureRegion;
 	public Sprite mBackgroundSprite;
 	
+	public BitmapTextureAtlas mSupermarketBackgroundBitmap; //Background
+	public ITextureRegion mSupermarketBackgroundTextureRegion;
+	public Sprite mSupermarketBackgroundSprite;
+	
 	//player
 	public BitmapTextureAtlas mPlayerBitmap; //Player
 	public TiledTextureRegion mPlayerTextureRegion;
@@ -49,6 +53,10 @@ public class TexMan {
 	//enemy
 	public BitmapTextureAtlas mEnemyBitmap; //Enemy
 	public TiledTextureRegion mEnemyTextureregion;
+	
+	//enemy
+	public BitmapTextureAtlas mSupermarketEnemyBitmap; //Enemy
+	public TiledTextureRegion mSupermarketEnemyTextureregion;
 	
 	//towerSimplificator
 	public BitmapTextureAtlas mTowerSimpBitmap; //Tower
@@ -105,7 +113,13 @@ public class TexMan {
 		TexMan.getIt().mBackgroundTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(TexMan.getIt().mBackgroundBitmap, activity, "gfx/bg.png", 0, 0,1,1);
 		TexMan.getIt().mBackgroundBitmap.load();
 		TexMan.getIt().mBackgroundSprite = new Sprite(0f,0f, (float)GUIConstants.CAMERA_WIDTH, (float)GUIConstants.CAMERA_HEIGHT, TexMan.getIt().mBackgroundTextureRegion, activity.getVertexBufferObjectManager());
-				
+			
+		//supermarket background
+		TexMan.getIt().mSupermarketBackgroundBitmap = new BitmapTextureAtlas(activity.getTextureManager(), 400, 244, TextureOptions.BILINEAR);
+		TexMan.getIt().mSupermarketBackgroundTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(TexMan.getIt().mSupermarketBackgroundBitmap, activity, "gfx/supermarket_bg.png", 0, 0,1,1);
+		TexMan.getIt().mSupermarketBackgroundBitmap.load();
+		TexMan.getIt().mSupermarketBackgroundSprite = new Sprite(0f,0f, (float)GUIConstants.CAMERA_WIDTH, (float)GUIConstants.CAMERA_HEIGHT, TexMan.getIt().mSupermarketBackgroundTextureRegion, activity.getVertexBufferObjectManager());
+		
 		//particle
 		TexMan.getIt().mParticleBitmap = new BitmapTextureAtlas(activity.getTextureManager(), 32, 32, TextureOptions.BILINEAR);
 		TexMan.getIt().mParticleTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(TexMan.getIt().mParticleBitmap, activity, "gfx/particle_point.png", 0, 0, 1, 1);
@@ -117,14 +131,19 @@ public class TexMan {
 		TexMan.getIt().mParticlePlayerBitmap.load();
 		
 			//player
-		TexMan.getIt().mPlayerBitmap = new BitmapTextureAtlas(activity.getTextureManager(), 96, 96, TextureOptions.BILINEAR);
-		TexMan.getIt().mPlayerTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(TexMan.getIt().mPlayerBitmap, activity, "gfx/next.png", 0, 0, 1, 1);
+		TexMan.getIt().mPlayerBitmap = new BitmapTextureAtlas(activity.getTextureManager(), 87, 90, TextureOptions.BILINEAR);
+		TexMan.getIt().mPlayerTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(TexMan.getIt().mPlayerBitmap, activity, "gfx/player.png", 0, 0, 1, 1);
 		TexMan.getIt().mPlayerBitmap.load();
 				
 		//enemy
-		TexMan.getIt().mEnemyBitmap = new BitmapTextureAtlas(activity.getTextureManager(), 96, 81, TextureOptions.BILINEAR);
-		TexMan.getIt().mEnemyTextureregion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(TexMan.getIt().mEnemyBitmap, activity, "gfx/cart_small.png", 0, 0, 1, 1);
+		TexMan.getIt().mEnemyBitmap = new BitmapTextureAtlas(activity.getTextureManager(), 47, 60, TextureOptions.BILINEAR);
+		TexMan.getIt().mEnemyTextureregion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(TexMan.getIt().mEnemyBitmap, activity, "gfx/enemy.png", 0, 0, 1, 1);
 		TexMan.getIt().mEnemyBitmap.load();
+		
+		//enemy
+		TexMan.getIt().mSupermarketEnemyBitmap = new BitmapTextureAtlas(activity.getTextureManager(), 96, 81, TextureOptions.BILINEAR);
+		TexMan.getIt().mSupermarketEnemyTextureregion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(TexMan.getIt().mSupermarketEnemyBitmap, activity, "gfx/cart_small.png", 0, 0, 1, 1);
+		TexMan.getIt().mSupermarketEnemyBitmap.load();
 				
 		//towerKiller
 		TexMan.getIt().mTowerKillerBitmap = new BitmapTextureAtlas(activity.getTextureManager(), 64, 64, TextureOptions.BILINEAR);

@@ -3,6 +3,7 @@ package nl.uva.mobilesystems.mathdefender.game;
 import java.util.LinkedList;
 
 import nl.uva.mobilesystems.mathdefender.GameModel;
+import nl.uva.mobilesystems.mathdefender.gui.TexMan;
 import nl.uva.mobilesystems.mathdefender.objects.Enemy;
 import nl.uva.mobilesystems.mathdefender.objects.Tower;
 import nl.uva.mobilesystems.mathdefender.objects.TowerKiller;
@@ -68,7 +69,7 @@ public class Level {
 				int x = model.screenDimensions.x; //the edge of a screen
 				int y = (model.screenDimensions.y / (PhConstants.NR_ENEMIES_IN_WAVE+1) * (j+1)) -10;	//so equal distribution on screen Width
 				
-				Enemy tempEnemy = new Enemy(x,y, model.objectManager, this.myDiff, model);
+				Enemy tempEnemy = new Enemy(x,y, model.objectManager, this.myDiff, model, TexMan.getIt().mEnemyTextureregion);
 				tempEnemy.addObjectPositionEventListener(model);
 				tempEnemies.add(tempEnemy);				
 			}

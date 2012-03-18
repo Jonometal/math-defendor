@@ -3,6 +3,7 @@ package nl.uva.mobilesystems.mathdefender.game;
 import java.util.LinkedList;
 
 import nl.uva.mobilesystems.mathdefender.GameModel;
+import nl.uva.mobilesystems.mathdefender.gui.TexMan;
 import nl.uva.mobilesystems.mathdefender.objects.Enemy;
 import nl.uva.mobilesystems.mathdefender.physics.PhConstants;
 
@@ -48,7 +49,7 @@ public class SuperMarketLevel extends Level {
 				int x = this.model.screenDimensions.x; //the edge of a screen
 				int y = (model.screenDimensions.y / (PhConstants.NR_ENEMIES_IN_WAVE+1) * (j+1)) - 10;	//so equal distribution on screen Width
 				
-				Enemy tempEnemy = new Enemy(x,y, this.model.objectManager, this.myDiff, this.model);
+				Enemy tempEnemy = new Enemy(x,y, this.model.objectManager, this.myDiff, this.model, TexMan.getIt().mSupermarketEnemyTextureregion);
 				tempEnemy.addObjectPositionEventListener(this.model);
 				tempEnemies.add(tempEnemy);				
 			}

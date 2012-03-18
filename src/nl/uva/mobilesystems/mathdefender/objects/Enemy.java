@@ -40,10 +40,10 @@ public class Enemy extends AnimatedSprite{
 	
 	public Enemy(final float pX, final float pY,
 			final VertexBufferObjectManager pVertexBufferObjectManager,
-			final int difficulty, GameModel model)
+			final int difficulty, GameModel model, TiledTextureRegion texRegion)
 	{
 		
-		super(pX, pY, TexMan.getIt().mEnemyTextureregion, pVertexBufferObjectManager);
+		super(pX, pY, texRegion, pVertexBufferObjectManager);
 		this.model = model;
 		this.myDiff = difficulty;
 		//Set different diff. here for testing purposes
