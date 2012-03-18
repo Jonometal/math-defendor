@@ -66,11 +66,15 @@ public class HelperClass {
 						mySum += '^';
 						int element5_2 = (int)Math.floor(Math.random() * (10));
 						mySum = mySum + (Integer.toString(element5_2));
-						//for(int i=0; i< element5_2; i++)
-						//{
-						//	mySum+= '*' + Integer.toString(element5_2);							
-						//}
 						Log.v("testingSP","mySum = " + mySum);
+						break;
+					case 6:
+						//int element5_0 = (int)Math.floor(Math.random() * (10));
+						//mySum = mySum + (Integer.toString(element5_0));
+						//mySum += '^';
+						//int element5_2 = (int)Math.floor(Math.random() * (10));
+						//mySum = mySum + (Integer.toString(element5_2));
+						//Log.v("testingSP","mySum = " + mySum);
 						break;
 						
 					default:
