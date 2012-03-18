@@ -14,6 +14,7 @@ import org.andengine.entity.particle.initializer.BlendFunctionParticleInitialize
 import org.andengine.entity.particle.initializer.ColorParticleInitializer;
 import org.andengine.entity.particle.initializer.RotationParticleInitializer;
 import org.andengine.entity.particle.initializer.VelocityParticleInitializer;
+import nl.uva.mobilesystems.mathdefender.objects.Explosion;
 import org.andengine.entity.particle.modifier.AlphaParticleModifier;
 import org.andengine.entity.particle.modifier.ColorParticleModifier;
 import org.andengine.entity.particle.modifier.ExpireParticleModifier;
@@ -34,6 +35,7 @@ import android.opengl.GLES20;
 public class Player extends AnimatedSprite{
 	
 	private GameModel model;
+	private VertexBufferObjectManager objectManager;
 	
 	private final PhysicsHandler mPhysicsHandler;
 	private int myScore = 5;
@@ -72,6 +74,7 @@ public class Player extends AnimatedSprite{
 		myText.setText(Integer.toString(myScore));
 		this.attachChild(myText);
 		this.model = model;
+		this.objectManager = pVertexBufferObjectManager;
 		
 //		Particle System
 //		{
@@ -131,6 +134,11 @@ public class Player extends AnimatedSprite{
 	{
 		
 		this.myScore += model instanceof GameSuperMarketModel ? - enemy.getResult(): enemy.getResult();
+		if (this.myScore <= 0)
+		{
+			this.die();
+			
+		}
 		this.model.engine.runOnUpdateThread(new Runnable() {
 			
 			public void run() {
@@ -146,6 +154,15 @@ public class Player extends AnimatedSprite{
 			moveByX = GUIConstants.CAMERA_WIDTH - this.getX() - this.getWidth();
 		}
 		this.setPosition(this.getX() + moveByX, this.getY());
+	}
+	
+	public void die()
+	{
+		Explosion explosion = new Explosion(this.getX(), this.getY(),
+				this.objectManager, this.model);
+		this.model.addObjectToScene(explosion);
+		this.model.removeObjectFromScene(this);
+		//this.model.gameOver();
 	}
 	
 
