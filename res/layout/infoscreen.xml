@@ -20,36 +20,40 @@
               		android:textSize="20pt" 
               		android:layout_marginBottom="10dp"/>
 	    </TableRow>
-
-	    <ScrollView   
-        	android:id="@+id/ScrollView01"  
-      		android:layout_height="200dp"   
-      		android:layout_width="fill_parent"
-      	    android:background="#88ffffff"
-	        android:gravity="center_horizontal">  
-           
-	         <TextView android:id="@+id/infoTextView"
-            		android:layout_width="400dp"
-           			android:layout_height="200dp"
-              		android:textColor="#000000"
-              		android:textSize="9pt" 
-              		android:layout_margin="20dp"
-              		android:gravity="left"/>
-	   </ScrollView>  
-
-
-	    
-	   <TableRow
-	        android:id="@+id/tableRow3"
+			<TableRow
+	        android:id="@+id/tableRow5"
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:gravity="center_horizontal" >
-        	<Button
-            	android:id="@+id/button_continue"
-            	android:layout_width="wrap_content"
-            	android:layout_height="wrap_content"
-            	android:layout_margin="8dp"
-            	android:background="@drawable/button"
-            	android:text="@string/button_continue" />
-	    </TableRow>
+
+
+	   	    	    <Button
+	   	    	        android:id="@+id/button_continue"
+	   	    	        android:layout_width="wrap_content"
+	   	    	        android:layout_height="wrap_content"
+	   	    	        android:layout_marginTop="8dp"
+	   	    	        android:text="@string/button_continue" />
+   
+	   	</TableRow>
+	   	    	    
+	    <ScrollView
+	        android:id="@+id/ScrollView01"
+	        android:layout_width="fill_parent"
+	        android:layout_height="match_parent"
+	        android:background="#88ffffff"
+	        android:gravity="center_horizontal"
+	       	android:layout_marginLeft="20dp"
+	       	android:layout_marginRight ="20dp"
+	       	android:layout_marginBottom ="20dp" >
+
+	         <TextView
+	             android:id="@+id/infoTextView"
+	             android:layout_width="match_parent"
+	             android:layout_height="150dp"
+	             android:gravity="left"
+	             android:textColor="#004422"
+	             android:textSize="8pt"
+	             android:typeface="serif" />
+
+	   </ScrollView>  
 	</TableLayout>
