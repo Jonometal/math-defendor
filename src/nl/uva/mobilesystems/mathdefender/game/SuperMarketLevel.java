@@ -20,14 +20,40 @@ public class SuperMarketLevel extends Level {
 	
 	public int myBudget;
 	private GameModel myModel;
-	String[]array = {														//Demosums are written here, will only work if exact right number of waves and sums per wave are set
+	String[]array1 = {														//Demosums are written here, will only work if exact right number of waves and sums per wave are set
 			"2+3","9-9","-1+6","4-8",													//Level 1
 			"-17+15","-3+6","8-13","20-16",	
 			"33-37","-54+53","-29+33","4+1",	
 			"64-58","-62+58","-53+59","40-39",	
-			"-78+79","93-89","48-52","42-42",
-			
-			"2+3","9-9","-1+6","4-8",
+			"-78+79","93-89","48-52","42-42"			
+			};
+	String[]array2 = {														//Demosums are written here, will only work if exact right number of waves and sums per wave are set
+			"2+8-5","9-3+12","-1+8-2","5-4-5",													//Level 1
+			"-17+6+7","-5-6+14","8-10-3","20-8-8",	
+			"25-37+8","-24+13+10","-15+23-4","12-9+2",	
+			"44-28-10","-82+58+21","-53+56+2","40-39+1",	
+			"-38+29+9","93-99+12","48-12-40","42-42+0"			
+			};
+	String[]array3 = {														//Demosums are written here, will only work if exact right number of waves and sums per wave are set
+			"8*9","6*7","150/3","192/8",													//Level 1
+			"180/6","11*9","17*3","451/11",	
+			"198/2","6*9","136/3","400/50",	
+			"9*9","212/4","31*1","900/30",	
+			"-6*-19","-144/-12","4*13","1764/42"
+			};
+	String[]array4 = {														//Demosums are written here, will only work if exact right number of waves and sums per wave are set
+			"6*(12-6)","9-9","-1+6","4-8",													//Level 1
+			"2*4-2","-3+6","8-13","20-16",	
+			"4-8/2","-54+53","-29+33","4+1",	
+			"64-58","-62+58","-53+59","40-39",	
+			"-78+79","93-89","48-52","42-42"
+			};
+	String[]array5 = {														//Demosums are written here, will only work if exact right number of waves and sums per wave are set
+			"2+3","9-9","-1+6","4-8",													//Level 1
+			"-17+15","-3+6","8-13","20-16",	
+			"33-37","-54+53","-29+33","4+1",	
+			"64-58","-62+58","-53+59","40-39",	
+			"-78+79","93-89","48-52","42-42"
 			};
 	private LinkedList<String> demoSums = new LinkedList<String>();
 
@@ -45,8 +71,39 @@ public class SuperMarketLevel extends Level {
 		model.getPlayer().setScore(budget);
 		if (model.demo)
 		{
-			 for(String string : array)
-                 demoSums.add(string);
+			switch (myDiff)
+			{
+						case 1:
+							for(String string : array1)
+							{
+								demoSums.add(string);
+							}
+							break;
+						case 2:
+							for(String string : array2)
+							{
+								demoSums.add(string);
+							}
+							break;
+						case 3:
+							for(String string : array3)
+							{
+								demoSums.add(string);
+							}
+							break;
+						case 4:
+							for(String string : array4)
+							{
+								demoSums.add(string);
+							}
+							break;
+						case 5:
+							for(String string : array5)
+							{
+								demoSums.add(string);
+							}
+							break;
+			}
 		}
 	}
 
