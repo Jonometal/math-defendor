@@ -20,7 +20,13 @@ public class SuperMarketLevel extends Level {
 	
 	public int myBudget;
 	private GameModel myModel;
-	String[]array = { "one","two"};
+	String[]array = {														//Demosums are written here
+			"1","2","5","6",													//Wave1
+			"8","4","3","7",	
+			"10","20","15","16",	
+			"10","20","15","16",	
+			"10","20","15","16"	
+			};
 	private LinkedList<String> demoSums = new LinkedList<String>();
 
 	
@@ -63,9 +69,10 @@ public class SuperMarketLevel extends Level {
 					
 					if (myModel.demo)
 					{
+						Log.v("testingDemo", "Creating DemoWave");
 						Enemy tempEnemy = new Enemy(x,y, this.model.objectManager, this.myDiff, this.model, TexMan.getIt().mSupermarketEnemyTextureregion);
-						//tempEnemy.setSum(demoSums.getFirst());
-						//demoSums.removeFirst();
+						tempEnemy.setSum(demoSums.getFirst());
+						demoSums.removeFirst();
 						tempEnemy.addObjectPositionEventListener(this.model);
 						tempEnemies.add(tempEnemy);
 					}
