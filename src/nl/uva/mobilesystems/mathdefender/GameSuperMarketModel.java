@@ -20,6 +20,8 @@ import android.util.Log;
  */
 public class GameSuperMarketModel extends GameModel{
 
+	
+	
 	public GameSuperMarketModel(InitialActivity activity, Scene scene, OurHUD hud) {
 		super(activity, scene, hud);
 		Log.v("testingmarket", "Market running, over.");

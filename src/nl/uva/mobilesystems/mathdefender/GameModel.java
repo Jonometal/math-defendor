@@ -40,7 +40,7 @@ public class GameModel implements ObjectPositionEventListener {
 	// ----------------------- VARIABLES --------------------------------
 	/** Game Variables */
 	public Engine engine; 		//Scene is public because Player class uses it, should be changed later on
-	
+	public boolean demo = true; // Use this var to set game to demoMode (only used in SMLevel at the time)
 	
 	public Scene scene; //it's little bit awkward, it must be here because current implementation of Model starts drawing before InitialActivity.onCreateScene() method is finished, so engine variable (field in GameModel class) doesnt know about this scene yet
 			
