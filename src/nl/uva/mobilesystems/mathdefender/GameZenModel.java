@@ -26,6 +26,8 @@ import android.util.Log;
  */
 public class GameZenModel extends GameModel {
 
+
+	
 	public GameZenModel(InitialActivity activity, Scene scene, OurHUD _hud) {
 		super(activity, scene, _hud);
 
@@ -48,7 +50,8 @@ public class GameZenModel extends GameModel {
 //					iter.remove();
 				}
 			}
-			SceneManager.showZenLevelFinishedScene(this.player.getScore(), this.currentLevel.getNrWaves());	
+//			wavesPassedSinceTheBeginnig += this.currentLevel.getNrWaves();
+			SceneManager.showZenLevelFinishedScene(this.player.getScore(), wavesPassedSinceTheBeginnig);	
 			nextLevel();
 			break;
 		}
@@ -60,7 +63,7 @@ public class GameZenModel extends GameModel {
 	 */
 	public void nextLevel(){
 		
-		int numberOfWaves = 2;
+		int numberOfWaves = 3;
 		//Erase all of the towers on-screen FIRST
 		if(this.currentLevel != null && this.currentLevel.getTowers() != null){
 			Iterator<Tower> iter = this.currentLevel.getTowers().iterator();
@@ -73,7 +76,7 @@ public class GameZenModel extends GameModel {
 		}
 		
 		if(this.currentLevel == null){
-			this.currentLevel = new ZenLevel(4, numberOfWaves, 0, screenDimensions, objectManager, this);
+			this.currentLevel = new ZenLevel(1, numberOfWaves, 0, screenDimensions, objectManager, this);
 		}else{
 			this.currentLevel = new ZenLevel(this.currentLevel.getDifficulty()+1, numberOfWaves, 0, screenDimensions, objectManager, this);
 			this.player.setPosition(PhConstants.PLAYER_START_POSITION_X, PhConstants.PLAYER_START_POSITION_Y);

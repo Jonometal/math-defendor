@@ -82,7 +82,7 @@ public class SceneManager {
 	}
 	
 	
-	public void createGameOverScene(int playerScore){
+	public void createGameOverScene(int playerScore, int wavesPassed){
 		getIt().gameOverScene = new CameraScene(getIt().camera);
 		getIt().gameOverScene.setBackgroundEnabled(false);
 		
@@ -119,16 +119,22 @@ public class SceneManager {
 		Text contentText1 = new Text(0,0, TexMan.getIt().levelFinishedContentFont, "Your score: " + playerScore, 50, getIt().objectManager);
 		contentText1.setColor(1.0f, 1.0f, 1.0f);
 		contentText1.setPosition(GUIConstants.CAMERA_WIDTH/2-contentText1.getWidth()/2, spriteY+120f);
+
+		//WaVESpASSED
+		Text contentText2 = new Text(0,0, TexMan.getIt().levelFinishedContentFont, "Waves passed: " +wavesPassed, 50, getIt().objectManager);
+		contentText2.setColor(1.0f, 1.0f, 1.0f);
+		contentText2.setPosition(GUIConstants.CAMERA_WIDTH/2-contentText2.getWidth()/2, spriteY+220f);
 		
 		//Click to return to Main Menu: Text
-		Text contentText2 = new Text(0,0, TexMan.getIt().returnToMenuFont, "Touch for Main Menu.", 50, getIt().objectManager);
-		contentText2.setColor(1.0f, 1.0f, 1.0f);
-		contentText2.setPosition(GUIConstants.CAMERA_WIDTH/2-contentText2.getWidth()/2, spriteY+300f);
+		Text contentText3 = new Text(0,0, TexMan.getIt().returnToMenuFont, "Touch for Main Menu.", 50, getIt().objectManager);
+		contentText3.setColor(1.0f, 1.0f, 1.0f);
+		contentText3.setPosition(GUIConstants.CAMERA_WIDTH/2-contentText3.getWidth()/2, spriteY+300f);
 		
 		getIt().gameOverScene.attachChild(backSprite);
 		getIt().gameOverScene.attachChild(titleText);
 		getIt().gameOverScene.attachChild(contentText1);
 		getIt().gameOverScene.attachChild(contentText2);
+		getIt().gameOverScene.attachChild(contentText3);
 	}
 	
 	
@@ -217,9 +223,9 @@ public class SceneManager {
 	}
 	
 	
-	public static void showGameOverScene(int playerScore){
+	public static void showGameOverScene(int playerScore, int wavesPassed){
 		getIt().gameOverScene = null;
-		getIt().createGameOverScene(playerScore);
+		getIt().createGameOverScene(playerScore, wavesPassed);
 		getIt().mainScene.setChildScene(getIt().gameOverScene, true, true, true);
 //		getIt().mainScene.onUpdate(0);
 	}

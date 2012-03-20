@@ -52,6 +52,7 @@ public class ZenLevel extends Level {
 	
 	@Override
 	public void startNewWave(){
+		super.startNewWave();
 		if(this.wavesLeft > 1){
 			LinkedList<AnimatedSprite>  tempEnemies = new LinkedList<AnimatedSprite>();
 			for(int j=0; j< PhConstants.NR_ENEMIES_IN_WAVE; j++)

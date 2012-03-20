@@ -43,6 +43,8 @@ public class GameModel implements ObjectPositionEventListener {
 	public Engine engine; 		//Scene is public because Player class uses it, should be changed later on
 	public boolean demo = true; // Use this var to set game to demoMode (only used in SMLevel at the time)
 	
+	public int wavesPassedSinceTheBeginnig = 0;
+	
 	public Scene scene; //it's little bit awkward, it must be here because current implementation of Model starts drawing before InitialActivity.onCreateScene() method is finished, so engine variable (field in GameModel class) doesnt know about this scene yet
 			
 	public OurHUD hud; 
@@ -122,6 +124,7 @@ public class GameModel implements ObjectPositionEventListener {
 			if(currentLevel.getCurrentWave().getObjects().size() == 0)
 			{ //check whether something is still in current Wave
 				Log.v("testingmarket", "Starting New Wave"); 
+				
 				currentLevel.startNewWave();				
 			}
 			break;

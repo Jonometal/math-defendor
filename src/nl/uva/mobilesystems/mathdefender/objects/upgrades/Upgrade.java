@@ -28,19 +28,22 @@ public class Upgrade extends AnimatedSprite {
 		
 		this.mPhysicsHandler = new PhysicsHandler(this);
 		this.registerUpdateHandler(this.mPhysicsHandler);
-		this.mPhysicsHandler.setVelocity(-PhConstants.ENEMY_VELOCITY*2, 0);
-		this.mPhysicsHandler.setAccelerationX(200);
+		this.mPhysicsHandler.setVelocity(-PhConstants.UPGRADE_VELOCITY, 0);
+		this.mPhysicsHandler.setAccelerationX(100);
 	}
 	
 	@Override
 	protected void onManagedUpdate(float pSecondsElapsed) {
 
-//		if(this.getX() <= GUIConstants.CAMERA_WIDTH/3*2)
-//			this.mPhysicsHandler.setVelocity(0);
-		if(this.mPhysicsHandler.getVelocityX() >= 0){
+		if(this.getX() <= GUIConstants.CAMERA_WIDTH/3*2){
 			this.mPhysicsHandler.setVelocity(0);
 			this.mPhysicsHandler.setAcceleration(0);
 		}
+		
+//		if(this.mPhysicsHandler.getVelocityX() >= 0){
+//			this.mPhysicsHandler.setVelocity(0);
+//			this.mPhysicsHandler.setAcceleration(0);
+//		}
 		super.onManagedUpdate(pSecondsElapsed);
 	}
 	

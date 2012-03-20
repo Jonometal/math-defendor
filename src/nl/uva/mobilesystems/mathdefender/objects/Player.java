@@ -110,7 +110,7 @@ public class Player extends AnimatedSprite{
 	}
 	
 	 /*
-     * PUBLIC METHODS ------------------------------------------------------
+     * PUBLIC METHODS ------------------------------------------------------d
      */
 	
 	/**
@@ -121,7 +121,8 @@ public class Player extends AnimatedSprite{
 	public void collisionDetected(Enemy enemy)
 	{
 		
-		this.myScore += model instanceof GameSuperMarketModel ? - enemy.getResult(): enemy.getResult();
+		this.myScore += model instanceof GameSuperMarketModel ? - enemy.getResult(): enemy.getResult() - this.myScore;
+		
 		if (this.myScore <= 0)
 		{
 			this.die();
@@ -177,7 +178,7 @@ public class Player extends AnimatedSprite{
 //		}
 		this.model.removeObjectFromScene(this);
 		
-		SceneManager.showGameOverScene(this.myScore);
+		SceneManager.showGameOverScene(this.myScore, this.model.wavesPassedSinceTheBeginnig);
 		//this.model.gameOver();
 	}
 	

@@ -59,6 +59,7 @@ public class Level {
 	
 	public void startNewWave()
 	{
+		this.model.wavesPassedSinceTheBeginnig++;
 		;
 	}
 	
