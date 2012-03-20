@@ -20,12 +20,14 @@ public class SuperMarketLevel extends Level {
 	
 	public int myBudget;
 	private GameModel myModel;
-	String[]array = {														//Demosums are written here
-			"1","2","5","6",													//Wave1
-			"8","4","3","7",	
-			"10","20","15","16",	
-			"10","20","15","16",	
-			"10","20","15","16"	
+	String[]array = {														//Demosums are written here, will only work if exact right number of waves and sums per wave are set
+			"2+3","9-9","-1+6","4-8",													//Level 1
+			"-17+15","-3+6","8-13","20-16",	
+			"33-37","-54+53","-29+33","4+1",	
+			"64-58","-62+58","-53+59","40-39",	
+			"-78+79","93-89","48-52","42-42",
+			
+			"2+3","9-9","-1+6","4-8",
 			};
 	private LinkedList<String> demoSums = new LinkedList<String>();
 
