@@ -6,8 +6,10 @@ import nl.uva.mobilesystems.mathdefender.andengine.events.EventsConstants;
 import nl.uva.mobilesystems.mathdefender.andengine.events.ObjectPositionEvent;
 import nl.uva.mobilesystems.mathdefender.game.ZenLevel;
 import nl.uva.mobilesystems.mathdefender.gui.OurHUD;
+import nl.uva.mobilesystems.mathdefender.gui.SceneManager;
 import nl.uva.mobilesystems.mathdefender.objects.Player;
 import nl.uva.mobilesystems.mathdefender.objects.upgrades.Upgrade;
+import nl.uva.mobilesystems.mathdefender.physics.PhConstants;
 
 import org.andengine.entity.scene.Scene;
 import org.andengine.entity.sprite.AnimatedSprite;
@@ -45,7 +47,7 @@ public class GameZenModel extends GameModel {
 //					iter.remove();
 				}
 			}
-				
+			SceneManager.showZenLevelFinishedScene(this.player.getScore(), this.currentLevel.getNrWaves());	
 			nextLevel();
 			break;
 		}
@@ -56,7 +58,9 @@ public class GameZenModel extends GameModel {
 	 * Generates next Level according to current user's performance.
 	 */
 	public void nextLevel(){
-		this.currentLevel = new ZenLevel(++levelCounter, 1, 0, screenDimensions, objectManager, this);
+		
+		this.currentLevel = new ZenLevel(2, 2, 0, screenDimensions, objectManager, this);
+		this.player.setPosition(PhConstants.PLAYER_START_POSITION_X, PhConstants.PLAYER_START_POSITION_Y);
 	}
 
 	
@@ -77,10 +81,8 @@ public class GameZenModel extends GameModel {
 //							 objectManager, enemyFont);
 	
 		
-		final float centerX = 100;
-		final float centerY = 100;
 		this.screenDimensions = screenDimensions;
-		this.player = new Player(centerX, centerY, objectManager, this);
+		this.player = new Player(PhConstants.PLAYER_START_POSITION_X, PhConstants.PLAYER_START_POSITION_Y, objectManager, this);
 		Log.v("testingmarket", "Player created: " + this.getPlayer());
 		scene.attachChild(this.player);
 		nextLevel();

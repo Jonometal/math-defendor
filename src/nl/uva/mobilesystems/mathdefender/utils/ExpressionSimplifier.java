@@ -61,8 +61,7 @@ public class ExpressionSimplifier {
 				pointer += 2;
 			}else 
 				pointer++;
-			
-			
+			Log.d("exprsimp", returnString + " " + pointer);
 			while(Character.isDigit(returnString.charAt(pointer)))	//so now in ?a+-b?c the pointer is on the second ?, so we can calculate the first part
 				pointer++;
 			

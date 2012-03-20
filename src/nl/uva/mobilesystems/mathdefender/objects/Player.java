@@ -3,6 +3,7 @@ package nl.uva.mobilesystems.mathdefender.objects;
 import nl.uva.mobilesystems.mathdefender.GameModel;
 import nl.uva.mobilesystems.mathdefender.GameSuperMarketModel;
 import nl.uva.mobilesystems.mathdefender.gui.GUIConstants;
+import nl.uva.mobilesystems.mathdefender.gui.SceneManager;
 import nl.uva.mobilesystems.mathdefender.gui.TexMan;
 import nl.uva.mobilesystems.mathdefender.objects.upgrades.Upgrade;
 
@@ -154,6 +155,8 @@ public class Player extends AnimatedSprite{
 	
 	public void die()
 	{
+//		this.model.engine.stop();
+		
 		Explosion explosion1 = new Explosion(this.getX(), this.getY(),
 				this.objectManager, this.model, 1f, 0f, 0f, 10, 10, true);	
 		this.model.addObjectToScene(explosion1);

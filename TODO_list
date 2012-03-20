@@ -53,11 +53,13 @@ Graphics;
 	- change graphics of objects, background, fonts (hand-written) DONE
 	- InfoScreen content DONE, BUT I forgot the rules for ZEN GAME...
 	
-	- Work on Design principles part for pres.
+	- Work on Design principles part for pres
 	
 3) MIchał 
 	
 	-> ZEN MODE: Bonus Appear (wave?) and next level follows after..
+	-> Low Priority - change analog Screen into circles
+	-> Low Priority - Player above bonuses
 	-> Game over screen showing #levels/final score
 	-> Yay! Level Completed!-Popup-Text and How You Did! (budget from last level) for BOth Modes
 	-> The Game crashes where there's no towers

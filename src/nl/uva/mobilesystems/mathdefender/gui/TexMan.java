@@ -10,6 +10,7 @@ import org.andengine.opengl.texture.region.ITextureRegion;
 import org.andengine.opengl.texture.region.TiledTextureRegion;
 import org.andengine.ui.activity.SimpleBaseGameActivity;
 
+import android.graphics.Color;
 import android.graphics.Typeface;
 
 /**
@@ -37,6 +38,12 @@ public class TexMan {
 	public BitmapTextureAtlas mSupermarketBackgroundBitmap; //Background
 	public ITextureRegion mSupermarketBackgroundTextureRegion;
 	public Sprite mSupermarketBackgroundSprite;
+	
+	
+	//background-childscene [Level-Fisnied, game over etc]
+	public BitmapTextureAtlas mLevelFinishedBackgroundBitmap;
+	public ITextureRegion mLevelFinishedBackgroundTextureRegion;
+//	public Sprite mLevelFinishedBackgroundSprite;
 	
 	//player
 	public BitmapTextureAtlas mPlayerBitmap; //Player
@@ -94,6 +101,8 @@ public class TexMan {
 	//Text
 	public Font font;
 	public Font playerFont;
+	public Font levelFinishedTitleFont;
+	public Font levelFinishedContentFont;
 	
 //	---------------------  INTERNAL ENGINE OF CLASS + PUBLIC METHODS ------------------------------
 	
@@ -119,6 +128,13 @@ public class TexMan {
 		TexMan.getIt().mSupermarketBackgroundTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(TexMan.getIt().mSupermarketBackgroundBitmap, activity, "gfx/supermarket_bg.png", 0, 0,1,1);
 		TexMan.getIt().mSupermarketBackgroundBitmap.load();
 		TexMan.getIt().mSupermarketBackgroundSprite = new Sprite(0f,0f, (float)GUIConstants.CAMERA_WIDTH, (float)GUIConstants.CAMERA_HEIGHT, TexMan.getIt().mSupermarketBackgroundTextureRegion, activity.getVertexBufferObjectManager());
+		
+		//level finished scenebackground
+		TexMan.getIt().mLevelFinishedBackgroundBitmap = new BitmapTextureAtlas(activity.getTextureManager(), 499, 457, TextureOptions.BILINEAR);
+		TexMan.getIt().mLevelFinishedBackgroundTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(TexMan.getIt().mLevelFinishedBackgroundBitmap, activity, "gfx/blackboard.gif", 0, 0,1,1);
+		TexMan.getIt().mLevelFinishedBackgroundBitmap.load();
+//		TexMan.getIt().mLevelFinishedBackgroundSprite = 
+		
 		
 		//particle
 		TexMan.getIt().mParticleBitmap = new BitmapTextureAtlas(activity.getTextureManager(), 32, 32, TextureOptions.BILINEAR);
@@ -191,6 +207,13 @@ public class TexMan {
 		TexMan.getIt().font.load();		
 		TexMan.getIt().playerFont = FontFactory.create(activity.getFontManager(), activity.getTextureManager(), 256, 256, TextureOptions.BILINEAR, Typeface.create(Typeface.DEFAULT, Typeface.BOLD), 48);
 		TexMan.getIt().playerFont.load();
+		
+		//level finished font
+		TexMan.getIt().levelFinishedTitleFont = FontFactory.create(activity.getFontManager(), activity.getTextureManager(), 256, 256, Typeface.create(Typeface.DEFAULT, Typeface.BOLD), 32, Color.WHITE);
+		TexMan.getIt().levelFinishedTitleFont.load();
+		
+		TexMan.getIt().levelFinishedContentFont = FontFactory.create(activity.getFontManager(), activity.getTextureManager(), 256, 256, Typeface.create(Typeface.DEFAULT, Typeface.NORMAL), 30, Color.WHITE);
+		TexMan.getIt().levelFinishedContentFont.load();	
 	
 //		if(wasInitialized) throw new IllegalStateException("It was already initialized!");
 //		wasInitialized = true;

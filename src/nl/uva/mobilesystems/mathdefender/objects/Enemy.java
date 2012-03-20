@@ -152,6 +152,7 @@ public class Enemy extends AnimatedSprite{
 		
 		if(tower instanceof TowerSimplificator){	//Simplify Equation
 			this.setSum(HelperClass.simplifyExpression(this.getSum(), this.myDiff));
+			if(this.myDiff > 1) this.myDiff--;
 			this.model.engine.runOnUpdateThread(new Runnable() {
 				public void run() {
 					myText.setText((getSum()));

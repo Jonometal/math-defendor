@@ -7,6 +7,7 @@ import nl.uva.mobilesystems.mathdefender.gui.TexMan;
 import nl.uva.mobilesystems.mathdefender.objects.Enemy;
 import nl.uva.mobilesystems.mathdefender.objects.Tower;
 import nl.uva.mobilesystems.mathdefender.objects.TowerKiller;
+import nl.uva.mobilesystems.mathdefender.objects.TowerSimplificator;
 import nl.uva.mobilesystems.mathdefender.objects.TowerSlower;
 import nl.uva.mobilesystems.mathdefender.physics.PhConstants;
 
@@ -60,29 +61,7 @@ public class Level {
 	
 	public void startNewWave()
 	{
-		if(this.wavesLeft >= 0)
-		{
-			this.wavesLeft --;
-			LinkedList<AnimatedSprite>  tempEnemies = new LinkedList<AnimatedSprite>();
-			for(int j=0; j< PhConstants.NR_ENEMIES_IN_WAVE; j++)
-			{ //generating enemies
-				int x = model.screenDimensions.x; //the edge of a screen
-				int y = (model.screenDimensions.y / (PhConstants.NR_ENEMIES_IN_WAVE+1) * (j+1)) -10;	//so equal distribution on screen Width
-				
-				Enemy tempEnemy = new Enemy(x,y, model.objectManager, this.myDiff, model, TexMan.getIt().mEnemyTextureregion);
-				tempEnemy.addObjectPositionEventListener(model);
-				tempEnemies.add(tempEnemy);				
-			}
-			Wave tempWave = new Wave(tempEnemies);
-			Log.v("newWave", "new Wave created ");
-			this.waves.offer(tempWave);
-			
-			this.setCurrentWave(this.getWaves().poll());
-			for(IEntity object : this.getCurrentWave().getObjects())
-			{
-				model.addObjectToScene(object);
-			}
-		}
+		;
 	}
 	
 	//SETTERS/GETTERS
@@ -105,6 +84,10 @@ public class Level {
 
 	public Wave getCurrentWave() {
 		return currentWave;
+	}
+	
+	public int getNrWaves(){
+		return this.nrWaves;
 	}
 
 
@@ -145,7 +128,7 @@ public class Level {
 //		this.model.addObjectToScene(newTower);
 //		this.model.scene.registerTouchArea(newTower);
 		
-		Tower newSlowindDownTower = new TowerSlower(this.model, 350, 100, pVertexBufferObjectManager);
+		Tower newSlowindDownTower = new TowerSimplificator(this.model, 350, 100, pVertexBufferObjectManager);
 		this.addTower(newSlowindDownTower);
 		this.model.addObjectToScene(newSlowindDownTower);
 		this.model.scene.registerTouchArea(newSlowindDownTower);

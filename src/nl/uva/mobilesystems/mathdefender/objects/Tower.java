@@ -3,6 +3,7 @@ package nl.uva.mobilesystems.mathdefender.objects;
 import java.util.LinkedList;
 
 import nl.uva.mobilesystems.mathdefender.GameModel;
+import nl.uva.mobilesystems.mathdefender.InitialActivity;
 import nl.uva.mobilesystems.mathdefender.andengine.events.EventsConstants;
 import nl.uva.mobilesystems.mathdefender.gui.TexMan;
 import nl.uva.mobilesystems.mathdefender.utils.HelperClass;
@@ -16,6 +17,7 @@ import org.andengine.opengl.texture.region.ITiledTextureRegion;
 import org.andengine.opengl.texture.region.TiledTextureRegion;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 
+import android.app.AlertDialog;
 import android.util.Log;
 /**
  * Class that will represent Tower that's going to shoot towards Enemies.
@@ -104,6 +106,22 @@ public abstract class Tower extends TiledSprite{
 	public boolean onAreaTouched(TouchEvent pSceneTouchEvent,
 			float pTouchAreaLocalX, float pTouchAreaLocalY) {
 		this.setPosition(pSceneTouchEvent.getX() - this.getWidth() / 2, pSceneTouchEvent.getY() - this.getHeight() / 2);
+//		if(this.model.engine.isRunning()){
+//			this.model.scene.
+//			this.model.engine.stop();
+//			try {
+//				Thread.sleep(2000);
+//			} catch (InterruptedException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//			this.model.engine.start();
+//		}
+		AlertDialog.Builder builder = new AlertDialog.Builder(this.model.activity);
+		builder.setMessage("hello!");
+		AlertDialog aloert = builder.create();
+		
+			
 		return true;
 	}
 	

@@ -2,6 +2,7 @@ package nl.uva.mobilesystems.mathdefender;
 
 import nl.uva.mobilesystems.mathdefender.gui.GUIConstants;
 import nl.uva.mobilesystems.mathdefender.gui.OurHUD;
+import nl.uva.mobilesystems.mathdefender.gui.SceneManager;
 import nl.uva.mobilesystems.mathdefender.gui.SwipeListener;
 import nl.uva.mobilesystems.mathdefender.gui.TexMan;
 import nl.uva.mobilesystems.mathdefender.physics.PhConstants;
@@ -35,7 +36,7 @@ public class InitialActivity extends SimpleBaseGameActivity implements OnKeyList
 	//	DEBUG
 	// =====================================
 	
-	boolean zenMode = false; //TObi: set it to false so you could star the game in your mode
+	boolean zenMode = true; //TObi: set it to false so you could star the game in your mode
 	
 	// ===========================================================
 		// Constants
@@ -89,6 +90,7 @@ public class InitialActivity extends SimpleBaseGameActivity implements OnKeyList
 		this.mCamera = new Camera(0, 0, GUIConstants.CAMERA_WIDTH, GUIConstants.CAMERA_HEIGHT);
 		EngineOptions engineOptions = new EngineOptions(true, ScreenOrientation.LANDSCAPE_FIXED, new RatioResolutionPolicy(GUIConstants.CAMERA_WIDTH, GUIConstants.CAMERA_HEIGHT), this.mCamera); 
 		engineOptions.getTouchOptions().setNeedsMultiTouch(true);
+	
 
 		//set Multi Touch in here
 		if(MultiTouch.isSupported(this)) {
@@ -115,9 +117,8 @@ public class InitialActivity extends SimpleBaseGameActivity implements OnKeyList
 		
 		this.mEngine.registerUpdateHandler(new FPSLogger());
 		
-		//Set SCENE [must be done before Setting our MODEL obviously]
 		final Scene scene = new Scene();
-//		scene.setBackground(new Background(0.05f, 0.8f, 0.8f));
+		
 		if(zenMode){
 			scene.setBackground(new SpriteBackground(0.05f, 0.8f, 0.8f, TexMan.getIt().mBackgroundSprite)); //different background
 		}
@@ -133,30 +134,14 @@ public class InitialActivity extends SimpleBaseGameActivity implements OnKeyList
 			// (nrWaves, nrTowers, [Screen_X, Screen_Y], EnemyTexture, TowerTexture, Library-shit-buffer)
 		gModel.setUpSimpleGame( new Point(GUIConstants.CAMERA_WIDTH, GUIConstants.CAMERA_HEIGHT),getVertexBufferObjectManager());
 		
-		
+		//Create other scenes:
+		SceneManager.getIt().createSceneManager(mCamera, mEngine, scene, getVertexBufferObjectManager(), gModel);
+		SceneManager.getIt().createAnalogOnScreenControlScene();
+//		SceneManager.getIt().createZenLevelFinishedScene();
 			
-		//Create analog-control here
-		final AnalogOnScreenControl analogOnScreenControl = new AnalogOnScreenControl(0, GUIConstants.CAMERA_HEIGHT - TexMan.getIt().mOnScreenControlBaseTextureRegion.getHeight(), this.mCamera, TexMan.getIt().mOnScreenControlBaseTextureRegion, TexMan.getIt().mOnScreenControlKnobTextureRegion, 0.1f, 200, this.getVertexBufferObjectManager(), new IAnalogOnScreenControlListener() {
-			 
-			public void onControlChange(final BaseOnScreenControl pBaseOnScreenControl, final float pValueX, final float pValueY) {
-				gModel.getPlayer().getPhysicsHanlder().setVelocity(pValueX * PhConstants.PLAYER_VELOCITY, pValueY * PhConstants.PLAYER_VELOCITY);
-			}
+		
 
-			 
-			public void onControlClick(final AnalogOnScreenControl pAnalogOnScreenControl) {
-				//what happens if you click on analog screen
-				;
-//				face.registerEntityModifier(new SequenceEntityModifier(new ScaleModifier(0.25f, 1, 1.5f), new ScaleModifier(0.25f, 1.5f, 1)));
-			}
-		});
-		analogOnScreenControl.getControlBase().setBlendFunction(GLES20.GL_SRC_ALPHA, GLES20.GL_ONE_MINUS_SRC_ALPHA);
-		analogOnScreenControl.getControlBase().setAlpha(0.5f);
-		analogOnScreenControl.getControlBase().setScaleCenter(0, 128);
-		analogOnScreenControl.getControlBase().setScale(1.25f);
-		analogOnScreenControl.getControlKnob().setScale(1.25f);
-		analogOnScreenControl.refreshControlKnobPosition();
-
-		scene.setChildScene(analogOnScreenControl);
+		scene.setChildScene(SceneManager.getIt().analogOnScreenControl);
 		
 		scene.registerUpdateHandler(new IUpdateHandler(){
 

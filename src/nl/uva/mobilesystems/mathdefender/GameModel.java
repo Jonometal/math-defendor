@@ -46,6 +46,9 @@ public class GameModel implements ObjectPositionEventListener {
 			
 	public OurHUD hud; 
 	
+	
+	public InitialActivity activity;
+	
 	/** Variable representing current level that is maninated by GameModel */
 	protected Level currentLevel;
 	protected int levelCounter = 0;
@@ -67,6 +70,7 @@ public class GameModel implements ObjectPositionEventListener {
 	
 	public GameModel(InitialActivity activity, Scene scene, OurHUD hud){
 		this.engine = activity.getEngine();			
+		this.activity = activity;
 		this.wavesLeftText = activity.text;
 		this.scene = scene;
 		this.hud = hud;
