@@ -42,11 +42,11 @@ public class SuperMarketLevel extends Level {
 			"-6*-19","-144/-12","4*13","1764/42"
 			};
 	String[]array4 = {														//Demosums are written here, will only work if exact right number of waves and sums per wave are set
-			"6*(12-6)","0","0","0",													//Level 4
-			"2*4-2","0","0","0",
-			"4-8/2","0","0","0",
-			"12*(20/2)","0","0","0",	
-			"0","0","0","0"
+			"6*(120-90)","500-(45*5)","60+(12*9)","900/(50-20)",													//Level 4
+			"200*(4-3)","(18-6)*12","800-(150*5)","99/9-6",
+			"40+(-20*-6)","48*(21/7)","800-(150*5)","136/3+50",
+			"200*(4-3)","(18-6)*12","800-(150*5)","99/9-6",	
+			"40+(-20*-6)","48*(21/7)","800-(150*5)","136/3+50"
 			};
 	String[]array5 = {														//Demosums are written here, will only work if exact right number of waves and sums per wave are set
 			"0","0","0","0",													//Level 5
@@ -97,7 +97,7 @@ public class SuperMarketLevel extends Level {
 								demoSums.add(string);
 							}
 							break;
-						case 5:
+						case 6:
 							for(String string : array5)
 							{
 								demoSums.add(string);
