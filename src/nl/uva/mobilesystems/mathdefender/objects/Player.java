@@ -26,7 +26,7 @@ public class Player extends AnimatedSprite{
 	private VertexBufferObjectManager objectManager;
 	
 	private final PhysicsHandler mPhysicsHandler;
-	private int myScore = 5;
+	private int myScore = 15;
     private Text myText;
     
 	/*
