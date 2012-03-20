@@ -127,12 +127,21 @@ public class InitialActivity extends SimpleBaseGameActivity implements OnKeyList
 		}
 		//create a hud variable in here
 		OurHUD hud = new OurHUD(scene, getVertexBufferObjectManager());
+			hud.addToToHud(OurHUD.UPGRADE_TOWER_SIMPLIFIER);
+			hud.addToToHud(OurHUD.UPGRADE_TOWER_SLOWER);
+//			hud.addToToHud(OurHUD.UPGRADE_TOWER_KILLER);
+			hud.addToToHud(OurHUD.UPGRADE_BULLET_TIME);
+//		hud.addToToHud(OurHUD.HUD_ELEMENT_SWIPE_CHARGER); 
+			
 		
 		
 		//set our MathLevel here (will be calculated in separated thread)
 		gModel = this.zenMode ?  new GameZenModel(this, scene, hud) : new GameSuperMarketModel(this, scene, hud); //that's a trick, in java you can use this expression [ variable = boolean ? valueIfTrue : valueIfFalse ]
 			// (nrWaves, nrTowers, [Screen_X, Screen_Y], EnemyTexture, TowerTexture, Library-shit-buffer)
 		gModel.setUpSimpleGame( new Point(GUIConstants.CAMERA_WIDTH, GUIConstants.CAMERA_HEIGHT),getVertexBufferObjectManager());
+		
+		//BAD CODING, needed to add Model to HUD, so only now I can pass the reference
+		hud.setModel(gModel);
 		
 		//Create other scenes:
 		SceneManager.getIt().createSceneManager(mCamera, mEngine, scene, getVertexBufferObjectManager(), gModel);
@@ -166,14 +175,7 @@ public class InitialActivity extends SimpleBaseGameActivity implements OnKeyList
 		SwipeListener swipeList = new SwipeListener(getApplicationContext(), gModel);
 			swipeList.addObjectPositionEventListener(gModel);
 		scene.setOnSceneTouchListener(swipeList);
-
-		//createHUD
 		
-//			hud.addToToHud(OurHUD.UPGRADE_TOWER_SIMPLIFIER);
-//			hud.addToToHud(OurHUD.UPGRADE_TOWER_SLOWER);
-//			hud.addToToHud(OurHUD.UPGRADE_TOWER_KILLER);
-//			hud.addToToHud(OurHUD.UPGRADE_BULLET_TIME);
-////			hud.addToToHud(OurHUD.HUD_ELEMENT_SWIPE_CHARGER); 
 		this.mCamera.setHUD(hud);
 		
 		return scene;

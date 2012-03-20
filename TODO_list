@@ -57,12 +57,18 @@ Graphics;
 	
 3) MIchał 
 	
-	-> ZEN MODE: Bonus Appear (wave?) and next level follows after..
+	-> DONE ZEN MODE: Bonus Appear (wave?) and next level follows after..
+	-> DONE Game over screen showing #levels/final score
+	-> DONE ZEN MODE: Yay! Level Completed!-Popup-Text and How You Did! (budget from last level)
+	-> DONE - The Game crashes where there's no towers
+	-> HUD working + upgrades working
+		+ SWIPE icon (once a level?)
+		+ BULLET TIME WORKING?
 	-> Low Priority - change analog Screen into circles
 	-> Low Priority - Player above bonuses
-	-> Game over screen showing #levels/final score
-	-> Yay! Level Completed!-Popup-Text and How You Did! (budget from last level) for BOth Modes
-	-> The Game crashes where there's no towers
+	-> 
+	-> Yay! Level Completed!-Popup-Text and How You Did! (budget from last level) for SuperMarketMode
+	-
 	-> 
 	-> SuperMarket: BOnus (Simplifier, 
 

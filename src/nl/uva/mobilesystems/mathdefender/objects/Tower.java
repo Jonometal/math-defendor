@@ -117,9 +117,9 @@ public abstract class Tower extends TiledSprite{
 //			}
 //			this.model.engine.start();
 //		}
-		AlertDialog.Builder builder = new AlertDialog.Builder(this.model.activity);
-		builder.setMessage("hello!");
-		AlertDialog aloert = builder.create();
+//		AlertDialog.Builder builder = new AlertDialog.Builder(this.model.activity);
+//		builder.setMessage("hello!");
+//		AlertDialog aloert = builder.create();
 		
 			
 		return true;

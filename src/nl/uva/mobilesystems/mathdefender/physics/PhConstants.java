@@ -33,4 +33,11 @@ public class PhConstants {
 	public static final float TOWER_RELOAD_TIME = 1.9f; //in seconds I guess
 	
 	public static final float TOWER_SLOWER_RATIO = 0.5f;
+	
+	
+	//BONUSES
+	public static final float UPGRADE_BULLET_TIME_TIME = 5f; //in seconds
+	
+	public static final float UPGRADE_BULLET_TIME_SLOW_DOWN_RATIO = 0.3f;
+	
 }

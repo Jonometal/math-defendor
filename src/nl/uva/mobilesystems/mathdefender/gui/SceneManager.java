@@ -67,8 +67,6 @@ public class SceneManager {
 						
 						model.getPlayer().getPhysicsHanlder().setVelocity(pValueX * PhConstants.PLAYER_VELOCITY, pValueY * PhConstants.PLAYER_VELOCITY);
 					}
-
-					 
 					public void onControlClick(final AnalogOnScreenControl pAnalogOnScreenControl) {
 						//what happens if you click on analog screen
 						;
@@ -76,7 +74,7 @@ public class SceneManager {
 					}
 				});
 				analogOnScreenControl.getControlBase().setBlendFunction(GLES20.GL_SRC_ALPHA, GLES20.GL_ONE_MINUS_SRC_ALPHA);
-				analogOnScreenControl.getControlBase().setAlpha(0.5f);
+				analogOnScreenControl.getControlBase().setAlpha(0.0f);
 				analogOnScreenControl.getControlBase().setScaleCenter(0, 128);
 				analogOnScreenControl.getControlBase().setScale(1.25f);
 				analogOnScreenControl.getControlKnob().setScale(1.25f);
@@ -148,11 +146,7 @@ public class SceneManager {
 			@Override
 			public boolean onAreaTouched(TouchEvent pSceneTouchEvent,
 					float pTouchAreaLocalX, float pTouchAreaLocalY) {
-				Log.d("sceneManager", "hahahaha");
 				getIt().mainScene.clearChildScene();
-				
-				
-//				getIt().levelZenFinished.detachSelf();
 				getIt().mainScene.onUpdate(1);
 				getIt().mainScene.setChildScene(analogOnScreenControl);
 				
@@ -181,7 +175,7 @@ public class SceneManager {
 		//Touch for Next Level your score
 		Text contentText3 = new Text(0,0, TexMan.getIt().levelFinishedContentFont, "Touch for Next Level", 50, getIt().objectManager);
 		contentText3.setColor(1.0f, 1.0f, 1.0f);
-		contentText3.setPosition(GUIConstants.CAMERA_WIDTH/2-contentText3.getWidth()/2, spriteY+220f);
+		contentText3.setPosition(GUIConstants.CAMERA_WIDTH/2-contentText3.getWidth()/2, spriteY+300f);
 		
 		
 		

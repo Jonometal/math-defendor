@@ -116,28 +116,36 @@ public class Level {
 	// ------------------- PUBLIC METHODS
 	
 	/**
-	 * Sets new Tower to current Level and adds it to the scene.
+	 * Sets new Simplify Tower to current Level and adds it to the scene.
 	 * @param X
 	 * @param Y
 	 * @param pTiledTextureRegion
 	 * @param pVertexBufferObjectManager
 	 */
-	public void setNewTowerAt(final float X, final float Y,  VertexBufferObjectManager pVertexBufferObjectManager ){
-//		Tower newTower = new TowerSimplificator(this.model, X,Y, pVertexBufferObjectManager);
-//		this.addTower(newTower);
-//		this.model.addObjectToScene(newTower);
-//		this.model.scene.registerTouchArea(newTower);
+	public void setNewTowerSimplifyAt(final float X, final float Y,  VertexBufferObjectManager pVertexBufferObjectManager ){
 		
-		Tower newSlowindDownTower = new TowerSimplificator(this.model, 350, 100, pVertexBufferObjectManager);
+		Tower newSimplify = new TowerSimplificator(this.model, X, Y, pVertexBufferObjectManager);
+		this.addTower(newSimplify);
+		this.model.addObjectToScene(newSimplify);
+		this.model.scene.registerTouchArea(newSimplify);
+	}
+	
+	public void setNewTowerSlowerAt(final float X, final float Y,  VertexBufferObjectManager pVertexBufferObjectManager ){
+		
+		Tower newSlowindDownTower = new TowerSlower(this.model, X, Y, pVertexBufferObjectManager);
 		this.addTower(newSlowindDownTower);
 		this.model.addObjectToScene(newSlowindDownTower);
 		this.model.scene.registerTouchArea(newSlowindDownTower);
-		// Tower newTower = new TowerSimplificator(this.model, X,Y, pVertexBufferObjectManager);
-//		Tower newTower = new TowerKiller(this.model, X,Y, pVertexBufferObjectManager);
-//		this.addTower(newTower);
-//		this.model.addObjectToScene(newTower);
-//		this.model.scene.registerTouchArea(newTower);
 	}
+	
+	public void setNewTowerKillerAt(final float X, final float Y,  VertexBufferObjectManager pVertexBufferObjectManager ){
+		
+		Tower newSlowindDownTower = new TowerKiller(this.model, X, Y, pVertexBufferObjectManager);
+		this.addTower(newSlowindDownTower);
+		this.model.addObjectToScene(newSlowindDownTower);
+		this.model.scene.registerTouchArea(newSlowindDownTower);
+	}
+	
 	// ------------------- PRIVATE METHODS
 	
 	

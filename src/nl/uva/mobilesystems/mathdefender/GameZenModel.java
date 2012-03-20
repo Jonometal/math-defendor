@@ -8,6 +8,7 @@ import nl.uva.mobilesystems.mathdefender.game.ZenLevel;
 import nl.uva.mobilesystems.mathdefender.gui.OurHUD;
 import nl.uva.mobilesystems.mathdefender.gui.SceneManager;
 import nl.uva.mobilesystems.mathdefender.objects.Player;
+import nl.uva.mobilesystems.mathdefender.objects.Tower;
 import nl.uva.mobilesystems.mathdefender.objects.upgrades.Upgrade;
 import nl.uva.mobilesystems.mathdefender.physics.PhConstants;
 
@@ -58,6 +59,17 @@ public class GameZenModel extends GameModel {
 	 * Generates next Level according to current user's performance.
 	 */
 	public void nextLevel(){
+		//Erase all of the towers on-screen FIRST
+		if(this.currentLevel != null && this.currentLevel.getTowers() != null){
+			Iterator<Tower> iter = this.currentLevel.getTowers().iterator();
+			Tower t = null;
+			while(iter.hasNext()){
+				t = iter.next();
+				removeObjectFromScene(t);
+				iter.remove();
+			}
+		}
+		
 		
 		this.currentLevel = new ZenLevel(2, 2, 0, screenDimensions, objectManager, this);
 		this.player.setPosition(PhConstants.PLAYER_START_POSITION_X, PhConstants.PLAYER_START_POSITION_Y);

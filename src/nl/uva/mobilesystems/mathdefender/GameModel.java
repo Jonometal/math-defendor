@@ -19,6 +19,7 @@ import nl.uva.mobilesystems.mathdefender.objects.upgrades.Upgrade;
 import nl.uva.mobilesystems.mathdefender.objects.upgrades.UpgradeBulletTime;
 import nl.uva.mobilesystems.mathdefender.objects.upgrades.UpgradeTowerSimplificator;
 import nl.uva.mobilesystems.mathdefender.objects.upgrades.UpgradeTowerSlowDowner;
+import nl.uva.mobilesystems.mathdefender.physics.PhConstants;
 
 import org.andengine.engine.Engine;
 import org.andengine.entity.IEntity;
@@ -74,6 +75,7 @@ public class GameModel implements ObjectPositionEventListener {
 		this.wavesLeftText = activity.text;
 		this.scene = scene;
 		this.hud = hud;
+		this.hud.addObjectPositionEventListener(this);
 	}
 	
 
@@ -145,7 +147,45 @@ public class GameModel implements ObjectPositionEventListener {
 			removeObjectFromScene(objectUpgrade);
 			objectUpgrade = null;
 			break;
-		} 
+		
+		
+		case EventsConstants.EVENT_UPGRADE_HUD_PRESSED:
+			float tower_x = 100;
+			float tower_y = 200;
+			
+			
+			switch(e.getAdditionalInfoCode()){
+			
+			case EventsConstants.ADD_EVENT_HUD_PRESSED_TOWER_KILLER:
+				this.currentLevel.setNewTowerKillerAt(tower_x, tower_y, this.objectManager);
+				this.hud.removeFromHud(OurHUD.UPGRADE_TOWER_KILLER);
+				break;
+			
+			case EventsConstants.ADD_EVENT_HUD_PRESSED_TOWER_SIMPLIFICATOR:
+				this.currentLevel.setNewTowerSimplifyAt(tower_x, tower_y, this.objectManager);
+				this.hud.removeFromHud(OurHUD.UPGRADE_TOWER_SIMPLIFIER);
+				break;
+				
+			case EventsConstants.ADD_EVENT_HUD_PRESSED_TOWER_SLOWER:
+				this.currentLevel.setNewTowerSlowerAt(tower_x, tower_y, this.objectManager);
+				this.hud.removeFromHud(OurHUD.UPGRADE_TOWER_SLOWER);
+				break;
+			
+			case EventsConstants.ADD_EVENT_HUD_PRESSED_BULLET_TIME:
+				//notify All Enemies about BULLET-TIME for them
+				for(AnimatedSprite objectSprite : this.currentLevel.getCurrentWave().getObjects()){
+					if(objectSprite instanceof Enemy){
+						((Enemy)objectSprite).setSlowDownMode(PhConstants.UPGRADE_BULLET_TIME_TIME, PhConstants.UPGRADE_BULLET_TIME_SLOW_DOWN_RATIO);
+					}
+				}
+				
+				this.hud.removeFromHud(OurHUD.UPGRADE_BULLET_TIME);
+				break;
+			
+			}
+			Log.d("model", "HUD PRESSED " + e.getAdditionalInfoCode());
+			break;
+		}
 		
 	}
 	

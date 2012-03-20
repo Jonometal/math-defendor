@@ -1,5 +1,10 @@
 package nl.uva.mobilesystems.mathdefender.gui;
 
+import nl.uva.mobilesystems.mathdefender.GameModel;
+import nl.uva.mobilesystems.mathdefender.andengine.events.EventsConstants;
+import nl.uva.mobilesystems.mathdefender.andengine.events.ObjectPositionEvent;
+import nl.uva.mobilesystems.mathdefender.andengine.events.ObjectPositionEventListener;
+
 import org.andengine.engine.camera.hud.HUD;
 import org.andengine.entity.scene.Scene;
 import org.andengine.entity.sprite.AnimatedSprite;
@@ -21,6 +26,7 @@ import android.util.Log;
  */
 public class OurHUD extends HUD{
 	
+	ObjectPositionEventListener listener;
 	
 	// KEYS used to addToHud(int)., removeFromHud(int)
 	public static final int UPGRADE_TOWER_SIMPLIFIER = 0;
@@ -32,6 +38,7 @@ public class OurHUD extends HUD{
 	
 	
 	private Scene scene;
+	private GameModel model = null;
 	private VertexBufferObjectManager objectManager;
 	private TiledSprite upTowerSimplifier = null;
 	private TiledSprite upTowerSlower = null;
@@ -43,9 +50,21 @@ public class OurHUD extends HUD{
 		super();
 		this.scene = _scene;
 		this.objectManager = _objectManager;
-		
 	}
 	
+	
+	public synchronized void addObjectPositionEventListener(ObjectPositionEventListener listener){
+		this.listener = listener;
+	}
+	
+	public synchronized void removeObjectPositionEventListener(){
+		this.listener = null;
+	}
+	
+	private synchronized void fireEvent(int eventCode, int addCode){
+		ObjectPositionEvent event = new ObjectPositionEvent(this, eventCode,addCode);
+		this.listener.handleObjectPositionEvent(event);
+	}
 	
 	
 	/**
@@ -64,7 +83,7 @@ public class OurHUD extends HUD{
 			
 			this.upTowerSimplifier = new TiledSprite(x, y,GUIConstants.HUD_ICON_WIDTH, GUIConstants.HUD_ICON_HEIGHT,TexMan.getIt().mTowerSimpTextureRegion, this.objectManager){
 				public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
-					Log.d("hud", " SIMPLIFIER: Icon touched!!");
+					fireEvent(EventsConstants.EVENT_UPGRADE_HUD_PRESSED, EventsConstants.ADD_EVENT_HUD_PRESSED_TOWER_SIMPLIFICATOR);
 					return true;
 				}
 			};
@@ -79,7 +98,7 @@ public class OurHUD extends HUD{
 			
 			this.upTowerSlower = new TiledSprite(x, y,GUIConstants.HUD_ICON_WIDTH, GUIConstants.HUD_ICON_HEIGHT,TexMan.getIt().mTowerSlowDownerTextureRegion, this.objectManager){
 				public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
-					Log.d("hud", " SLOWER DOWNER: Icon touched!!");
+					fireEvent(EventsConstants.EVENT_UPGRADE_HUD_PRESSED, EventsConstants.ADD_EVENT_HUD_PRESSED_TOWER_SLOWER);
 					return true;
 				}
 			};
@@ -93,7 +112,7 @@ public class OurHUD extends HUD{
 			
 			this.upTowerKiller = new TiledSprite(x, y,GUIConstants.HUD_ICON_WIDTH, GUIConstants.HUD_ICON_HEIGHT,TexMan.getIt().mTowerKillerTextureRegion, this.objectManager){
 				public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
-					Log.d("hud", " KIller: Icon touched!!");
+					fireEvent(EventsConstants.EVENT_UPGRADE_HUD_PRESSED, EventsConstants.ADD_EVENT_HUD_PRESSED_TOWER_KILLER);
 					return true;
 				}
 			};
@@ -107,7 +126,7 @@ public class OurHUD extends HUD{
 			
 			this.upBulletTime = new TiledSprite(x, y,GUIConstants.HUD_ICON_WIDTH, GUIConstants.HUD_ICON_HEIGHT,TexMan.getIt().mUpgradeBuletTimeTextureRegion, this.objectManager){
 				public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
-					Log.d("hud", " BulletTime: Icon touched!!");
+					fireEvent(EventsConstants.EVENT_UPGRADE_HUD_PRESSED, EventsConstants.ADD_EVENT_HUD_PRESSED_BULLET_TIME);
 					return true;
 				}
 			};
@@ -119,6 +138,46 @@ public class OurHUD extends HUD{
 			break;
 			
 		}
+	}
+	
+	public void removeFromHud(int elementCode){
+		switch(elementCode){
+		
+		
+		case UPGRADE_TOWER_SIMPLIFIER:
+			this.scene.unregisterTouchArea(this.upTowerSimplifier);
+			this.model.removeObjectFromScene(this.upTowerSimplifier);
+			break;
+			
+		case UPGRADE_TOWER_SLOWER:
+			this.scene.unregisterTouchArea(this.upTowerSlower);
+			this.model.removeObjectFromScene(this.upTowerSlower);
+			break;
+		
+		case UPGRADE_TOWER_KILLER:
+			this.scene.unregisterTouchArea(this.upTowerKiller);
+			this.model.removeObjectFromScene(this.upTowerKiller);
+			break;
+			
+		case UPGRADE_BULLET_TIME:
+			this.scene.unregisterTouchArea(this.upBulletTime);
+			this.model.removeObjectFromScene(this.upBulletTime);
+			break;
+		
+		case HUD_ELEMENT_SWIPE_CHARGER:
+			break;
+			
+		}
+	}
+
+
+	public GameModel getModel() {
+		return model;
+	}
+
+
+	public void setModel(GameModel model) {
+		this.model = model;
 	}
 	
 
