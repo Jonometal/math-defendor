@@ -137,6 +137,9 @@ public class Enemy extends AnimatedSprite{
 	
 	public void setSum(String sum) {
 		this.mySum = sum;
+		myResult = (int)Math.ceil(calculateResult(mySum));
+		myText.setText(mySum);		
+		//this.attachChild(myText);
 	}
 	
 	public synchronized void addObjectPositionEventListener(ObjectPositionEventListener listener){
