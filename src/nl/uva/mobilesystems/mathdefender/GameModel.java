@@ -203,7 +203,7 @@ public class GameModel implements ObjectPositionEventListener {
 					((Upgrade)objectOnScreen).collisionDetected();
 				}
 				
-			}else
+			}else if(towers != null )
 			{	//otherwise check for collisions with bullets
 				Iterator<Tower> iterTower = towers.iterator();
 				Tower tower;

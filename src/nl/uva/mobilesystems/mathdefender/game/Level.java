@@ -56,7 +56,7 @@ public class Level {
 		this.wavesLeft = this.nrWaves;
 		this.objectManager = objectManager;
 		// it's little bit Debug in here, so manually attaching different Towers to screen
-		setNewTowerAt(350, 400, objectManager);		
+//		setNewTowerAt(350, 400, objectManager);		
 	}
 	
 	public void startNewWave()

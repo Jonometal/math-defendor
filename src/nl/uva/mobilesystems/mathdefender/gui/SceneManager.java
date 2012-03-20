@@ -49,9 +49,12 @@ public class SceneManager {
 	
 	// Scene Manager external fields
 	
-	public AnalogOnScreenControl analogOnScreenControl;
 	
-	public CameraScene levelZenFinished;
+	public AnalogOnScreenControl analogOnScreenControl; //analog Control - it's also child scene
+	
+	public CameraScene levelZenFinished;	//level ZEN finished Scene
+	
+	public CameraScene gameOverScene;
 	
 	
 	
@@ -79,6 +82,57 @@ public class SceneManager {
 				analogOnScreenControl.getControlKnob().setScale(1.25f);
 				analogOnScreenControl.refreshControlKnobPosition();
 	}
+	
+	
+	public void createGameOverScene(int playerScore){
+		getIt().gameOverScene = new CameraScene(getIt().camera);
+		getIt().gameOverScene.setBackgroundEnabled(false);
+		
+		float spriteX = GUIConstants.CAMERA_WIDTH/2-BACK_SPRITE_X/2;
+		float spriteY = GUIConstants.CAMERA_HEIGHT/2-BACK_SPRITE_Y/2;
+		
+		Sprite backSprite = new Sprite(spriteX ,spriteY, 
+				BACK_SPRITE_X, BACK_SPRITE_Y, TexMan.getIt().mLevelFinishedBackgroundTextureRegion, getIt().objectManager){
+			@Override
+			public boolean onAreaTouched(TouchEvent pSceneTouchEvent,
+					float pTouchAreaLocalX, float pTouchAreaLocalY) {
+				Log.d("sceneManager", "GameOverTouch");
+				getIt().model.activity.finish();
+//				getIt().mainScene.clearChildScene();
+//				
+//				
+////				getIt().levelZenFinished.detachSelf();
+//				getIt().mainScene.onUpdate(1);
+//				getIt().mainScene.setChildScene(analogOnScreenControl);
+				
+				return true;
+			}
+		};
+		getIt().gameOverScene.registerTouchArea(backSprite);
+
+		
+		//Text: Game Over - Title
+		Text titleText = new Text(0,0, TexMan.getIt().levelFinishedTitleFont, "Game Over!", 50, getIt().objectManager);
+		titleText.setColor(1.0f, 1.0f, 1.0f);
+		titleText.setPosition(GUIConstants.CAMERA_WIDTH/2-titleText.getWidth()/2, spriteY+20f);
+//		myText.setPosition(50f, 50f);
+		
+		//Your Score: Text
+		Text contentText1 = new Text(0,0, TexMan.getIt().levelFinishedContentFont, "Your score: " + playerScore, 50, getIt().objectManager);
+		contentText1.setColor(1.0f, 1.0f, 1.0f);
+		contentText1.setPosition(GUIConstants.CAMERA_WIDTH/2-contentText1.getWidth()/2, spriteY+120f);
+		
+		//Click to return to Main Menu: Text
+		Text contentText2 = new Text(0,0, TexMan.getIt().returnToMenuFont, "Touch for Main Menu.", 50, getIt().objectManager);
+		contentText2.setColor(1.0f, 1.0f, 1.0f);
+		contentText2.setPosition(GUIConstants.CAMERA_WIDTH/2-contentText2.getWidth()/2, spriteY+300f);
+		
+		getIt().gameOverScene.attachChild(backSprite);
+		getIt().gameOverScene.attachChild(titleText);
+		getIt().gameOverScene.attachChild(contentText1);
+		getIt().gameOverScene.attachChild(contentText2);
+	}
+	
 	
 	
 	public void createZenLevelFinishedScene(int playerScore, int wavesPassed){
@@ -124,6 +178,11 @@ public class SceneManager {
 		contentText2.setColor(1.0f, 1.0f, 1.0f);
 		contentText2.setPosition(GUIConstants.CAMERA_WIDTH/2-contentText2.getWidth()/2, spriteY+220f);
 		
+		//Touch for Next Level your score
+		Text contentText3 = new Text(0,0, TexMan.getIt().levelFinishedContentFont, "Touch for Next Level", 50, getIt().objectManager);
+		contentText3.setColor(1.0f, 1.0f, 1.0f);
+		contentText3.setPosition(GUIConstants.CAMERA_WIDTH/2-contentText3.getWidth()/2, spriteY+220f);
+		
 		
 		
 //		getIt().levelZenFinished.setBackground(new SpriteBackground(0.05f, 0.8f, 0.8f, TexMan.getIt().mLevelFinishedBackgroundSprite));
@@ -132,6 +191,7 @@ public class SceneManager {
 		getIt().levelZenFinished.attachChild(titleText);
 		getIt().levelZenFinished.attachChild(contentText1);
 		getIt().levelZenFinished.attachChild(contentText2);
+		getIt().levelZenFinished.attachChild(contentText3);
 	}
 	
 	
@@ -162,6 +222,13 @@ public class SceneManager {
 		return instance;
 	}
 	
+	
+	public static void showGameOverScene(int playerScore){
+		getIt().gameOverScene = null;
+		getIt().createGameOverScene(playerScore);
+		getIt().mainScene.setChildScene(getIt().gameOverScene, true, true, true);
+//		getIt().mainScene.onUpdate(0);
+	}
 	
 	
 	public static void showZenLevelFinishedScene(int currentScore, int wavesPassed){

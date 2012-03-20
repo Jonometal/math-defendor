@@ -167,7 +167,17 @@ public class Player extends AnimatedSprite{
 				this.objectManager, this.model, 1f, 0f, 0f, 10, 10, true);
 		this.model.addObjectToScene(explosion3);
 		
+		
+		
+//		try {
+//			Thread.sleep(1000);
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		this.model.removeObjectFromScene(this);
+		
+		SceneManager.showGameOverScene(this.myScore);
 		//this.model.gameOver();
 	}
 	

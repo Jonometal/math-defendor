@@ -103,6 +103,7 @@ public class TexMan {
 	public Font playerFont;
 	public Font levelFinishedTitleFont;
 	public Font levelFinishedContentFont;
+	public Font returnToMenuFont;
 	
 //	---------------------  INTERNAL ENGINE OF CLASS + PUBLIC METHODS ------------------------------
 	
@@ -214,6 +215,11 @@ public class TexMan {
 		
 		TexMan.getIt().levelFinishedContentFont = FontFactory.create(activity.getFontManager(), activity.getTextureManager(), 256, 256, Typeface.create(Typeface.DEFAULT, Typeface.NORMAL), 30, Color.WHITE);
 		TexMan.getIt().levelFinishedContentFont.load();	
+		
+		//return to menu font
+		TexMan.getIt().returnToMenuFont = FontFactory.create(activity.getFontManager(), activity.getTextureManager(), 256, 256, Typeface.create(Typeface.DEFAULT, Typeface.NORMAL), 24, Color.WHITE);
+		TexMan.getIt().returnToMenuFont.load();	
+
 	
 //		if(wasInitialized) throw new IllegalStateException("It was already initialized!");
 //		wasInitialized = true;
