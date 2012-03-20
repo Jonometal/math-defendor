@@ -93,6 +93,14 @@ public class TexMan {
 	public BitmapTextureAtlas mUpgradeBulletTimeBitmap;
 	public TiledTextureRegion mUpgradeBuletTimeTextureRegion;
 	
+	//Life-heart icon
+	public BitmapTextureAtlas mLifeIconBitmap;
+	public TiledTextureRegion mLifeIconTextureRegion;
+	
+	//Swipe-ICON
+	public BitmapTextureAtlas mSwipeIconBitmap;
+	public TiledTextureRegion mSwipeIconTextureRegion;
+	
 	//analog-control
 	public BitmapTextureAtlas mOnScreenControlTexture;
 	public ITextureRegion mOnScreenControlBaseTextureRegion;
@@ -104,6 +112,7 @@ public class TexMan {
 	public Font levelFinishedTitleFont;
 	public Font levelFinishedContentFont;
 	public Font returnToMenuFont;
+	public Font lifeIconFont;
 	
 //	---------------------  INTERNAL ENGINE OF CLASS + PUBLIC METHODS ------------------------------
 	
@@ -197,24 +206,43 @@ public class TexMan {
 		TexMan.getIt().mUpgradeBuletTimeTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(TexMan.getIt().mUpgradeBulletTimeBitmap, activity, "gfx/upgrade_bullet_time.png", 0, 0, 1, 1);
 		TexMan.getIt().mUpgradeBulletTimeBitmap.load();
 		
+		//Life (heart icon)
+		TexMan.getIt().mLifeIconBitmap = new BitmapTextureAtlas(activity.getTextureManager(), 64, 64, TextureOptions.BILINEAR);
+		TexMan.getIt().mLifeIconTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(TexMan.getIt().mLifeIconBitmap, activity, "gfx/lifeIcon.png", 0, 0, 1, 1);
+		TexMan.getIt().mLifeIconBitmap.load();
+		
+		//SwipeIcon
+		TexMan.getIt().mSwipeIconBitmap = new BitmapTextureAtlas(activity.getTextureManager(), 64, 64, TextureOptions.BILINEAR);
+		TexMan.getIt().mSwipeIconTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(TexMan.getIt().mSwipeIconBitmap, activity, "gfx/swipeIcon.png", 0, 0, 1, 1);
+		TexMan.getIt().mSwipeIconBitmap.load();
+		
 		//analog control
 		TexMan.getIt().mOnScreenControlTexture = new BitmapTextureAtlas(activity.getTextureManager(), 256, 128, TextureOptions.BILINEAR);
 		TexMan.getIt().mOnScreenControlBaseTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(TexMan.getIt().mOnScreenControlTexture, activity, "gfx/onscreen_control_base.png", 0, 0);
 		TexMan.getIt().mOnScreenControlKnobTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(TexMan.getIt().mOnScreenControlTexture, activity, "gfx/onscreen_control_knob.png", 128, 0);
 		TexMan.getIt().mOnScreenControlTexture.load();
 				
+		//
+		
+		
 		//text
 		TexMan.getIt().font = FontFactory.create(activity.getFontManager(), activity.getTextureManager(), 256, 256, Typeface.create(Typeface.DEFAULT, Typeface.BOLD), 32);
 		TexMan.getIt().font.load();		
+		
 		TexMan.getIt().playerFont = FontFactory.create(activity.getFontManager(), activity.getTextureManager(), 256, 256, TextureOptions.BILINEAR, Typeface.create(Typeface.DEFAULT, Typeface.BOLD), 48);
 		TexMan.getIt().playerFont.load();
 		
-		//level finished font
+		//level finished TITLE font
 		TexMan.getIt().levelFinishedTitleFont = FontFactory.create(activity.getFontManager(), activity.getTextureManager(), 256, 256, Typeface.create(Typeface.DEFAULT, Typeface.BOLD), 32, Color.WHITE);
 		TexMan.getIt().levelFinishedTitleFont.load();
 		
+		//level finished content font
 		TexMan.getIt().levelFinishedContentFont = FontFactory.create(activity.getFontManager(), activity.getTextureManager(), 256, 256, Typeface.create(Typeface.DEFAULT, Typeface.NORMAL), 30, Color.WHITE);
 		TexMan.getIt().levelFinishedContentFont.load();	
+		
+		//LifeIcon FOnt
+		TexMan.getIt().lifeIconFont = FontFactory.create(activity.getFontManager(), activity.getTextureManager(), 256, 256, Typeface.create(Typeface.DEFAULT, Typeface.NORMAL), 25, Color.BLACK);
+		TexMan.getIt().lifeIconFont.load();	
 		
 		//return to menu font
 		TexMan.getIt().returnToMenuFont = FontFactory.create(activity.getFontManager(), activity.getTextureManager(), 256, 256, Typeface.create(Typeface.DEFAULT, Typeface.NORMAL), 24, Color.WHITE);

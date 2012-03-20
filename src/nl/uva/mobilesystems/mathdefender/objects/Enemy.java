@@ -119,7 +119,6 @@ public class Enemy extends AnimatedSprite{
 
 		if(this.slowDownModeTime > 0) {
 			slowDownModeTime -= pSecondsElapsed;
-			Log.d("enemySlowDown", Float.toString(slowDownModeTime));
 		}
 		else if (slowDownModeTime < 0){
 			this.mPhysicsHandler.setVelocity(-PhConstants.ENEMY_VELOCITY, 0);

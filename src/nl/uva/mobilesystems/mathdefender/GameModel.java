@@ -135,11 +135,14 @@ public class GameModel implements ObjectPositionEventListener {
 		case EventsConstants.EVENT_SWIPE_DETECTED:
 			Log.d("swipe", "Swipe Detected from Model");
 
-			Explosion exp1 = new Explosion(this.player.getX(), this.player.getY(), this.objectManager, this, 0f, 1f, 0f, 30, 2, false);
-			this.player.moveOnSwipe(((SwipeListener)e.getSource()).xActionUp,((SwipeListener)e.getSource()).yActionUp);
-			Explosion exp2 = new Explosion(this.player.getX(), this.player.getY(), this.objectManager, this, 0f, 0f, 1f, 30, 2, false);
-			addObjectToScene(exp1);
-			addObjectToScene(exp2);
+			if(this.hud.isSwipeChargerSet()){
+				this.hud.removeFromHud(OurHUD.HUD_ELEMENT_SWIPE_CHARGER);
+				Explosion exp1 = new Explosion(this.player.getX(), this.player.getY(), this.objectManager, this,  1f, 0f, 0f, 10, 10, true);
+				this.player.moveOnSwipe(((SwipeListener)e.getSource()).xActionUp,((SwipeListener)e.getSource()).yActionUp);
+				Explosion exp2 = new Explosion(this.player.getX(), this.player.getY(), this.objectManager, this,  1f, 0f, 0f, 10, 10, true);
+				addObjectToScene(exp1);
+				addObjectToScene(exp2);
+			}
 			break;
 			
 		case EventsConstants.EVENT_OBJECT_UPGRADE_OUT_OF_SCENE:
@@ -256,6 +259,7 @@ public class GameModel implements ObjectPositionEventListener {
 					while(iterBullet.hasNext()){
 						bullet = iterBullet.next();
 						if(objectOnScreen.collidesWith(bullet)){ //collision enemy <-> bullet
+							this.hud.addThisManyLivesToHud(5);
 							iterBullet.remove(); //remove bullet
 //							iter.remove(); //remove enemy
 							bullet.collisionDetected();

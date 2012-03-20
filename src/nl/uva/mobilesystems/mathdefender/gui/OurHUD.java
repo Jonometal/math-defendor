@@ -9,6 +9,7 @@ import org.andengine.engine.camera.hud.HUD;
 import org.andengine.entity.scene.Scene;
 import org.andengine.entity.sprite.AnimatedSprite;
 import org.andengine.entity.sprite.TiledSprite;
+import org.andengine.entity.text.Text;
 import org.andengine.input.touch.TouchEvent;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 
@@ -44,7 +45,10 @@ public class OurHUD extends HUD{
 	private TiledSprite upTowerSlower = null;
 	private TiledSprite upTowerKiller = null;
 	private TiledSprite upBulletTime = null;
-	private AnimatedSprite swipeCharger = null;
+	
+	private TiledSprite lifeIcon = null;
+	private Text 		lifeIconText = null;
+	private TiledSprite swipeCharger = null;
 	
 	public OurHUD(Scene _scene, VertexBufferObjectManager _objectManager){
 		super();
@@ -67,6 +71,25 @@ public class OurHUD extends HUD{
 	}
 	
 	
+	public void addThisManyLivesToHud(int lives){
+		float x = 10f;
+		float y = GUIConstants.HUD_TOP_MARGIN;
+		
+		if(this.lifeIcon == null){
+			this.lifeIcon = new TiledSprite(x, y,GUIConstants.HUD_ICON_WIDTH, GUIConstants.HUD_ICON_HEIGHT,
+			TexMan.getIt().mLifeIconTextureRegion, this.objectManager);
+
+			this.lifeIconText = new Text(30,20, TexMan.getIt().lifeIconFont, Integer.toString(lives), 2, this.objectManager);
+			this.lifeIcon.attachChild(this.lifeIconText);
+			this.attachChild(this.lifeIcon);
+		}else{
+			this.lifeIconText.setText(Integer.toString(lives));
+		}
+		
+	}
+	
+	
+	
 	/**
 	 * So keys are int OurHud method. OurHud.UPGRADE_TOWER_SIMPLIFIER for example.
 	 * @param UpgradeKey
@@ -75,7 +98,6 @@ public class OurHUD extends HUD{
 		float x = 0;
 		float y = 0;
 		switch(upgradeKey){
-		
 		
 		case UPGRADE_TOWER_SIMPLIFIER:
 			x = GUIConstants.HUD_ICON_SPACE;
@@ -134,7 +156,12 @@ public class OurHUD extends HUD{
 			this.attachChild(this.upBulletTime);
 			break;
 		
-		case HUD_ELEMENT_SWIPE_CHARGER:
+		case HUD_ELEMENT_SWIPE_CHARGER:	//TowerKillet is deprecated
+			x = GUIConstants.HUD_ICON_SPACE*3;
+			y = GUIConstants.HUD_TOP_MARGIN;
+			
+			this.swipeCharger = new TiledSprite(x, y,GUIConstants.HUD_ICON_WIDTH, GUIConstants.HUD_ICON_HEIGHT,TexMan.getIt().mSwipeIconTextureRegion, this.objectManager);
+			this.attachChild(this.swipeCharger);
 			break;
 			
 		}
@@ -147,24 +174,30 @@ public class OurHUD extends HUD{
 		case UPGRADE_TOWER_SIMPLIFIER:
 			this.scene.unregisterTouchArea(this.upTowerSimplifier);
 			this.model.removeObjectFromScene(this.upTowerSimplifier);
+			this.upTowerSimplifier = null;
 			break;
 			
 		case UPGRADE_TOWER_SLOWER:
 			this.scene.unregisterTouchArea(this.upTowerSlower);
 			this.model.removeObjectFromScene(this.upTowerSlower);
+			this.upTowerSlower = null;
 			break;
 		
 		case UPGRADE_TOWER_KILLER:
 			this.scene.unregisterTouchArea(this.upTowerKiller);
 			this.model.removeObjectFromScene(this.upTowerKiller);
+			this.upTowerKiller = null;
 			break;
 			
 		case UPGRADE_BULLET_TIME:
 			this.scene.unregisterTouchArea(this.upBulletTime);
 			this.model.removeObjectFromScene(this.upBulletTime);
+			this.upBulletTime = null;
 			break;
 		
 		case HUD_ELEMENT_SWIPE_CHARGER:
+			this.model.removeObjectFromScene(this.swipeCharger);
+			this.swipeCharger = null;
 			break;
 			
 		}
@@ -178,6 +211,10 @@ public class OurHUD extends HUD{
 
 	public void setModel(GameModel model) {
 		this.model = model;
+	}
+	
+	public boolean isSwipeChargerSet(){
+		return (this.swipeCharger == null) ? false : true;
 	}
 	
 
