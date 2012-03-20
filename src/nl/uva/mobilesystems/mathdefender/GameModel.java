@@ -137,9 +137,9 @@ public class GameModel implements ObjectPositionEventListener {
 
 			if(this.hud.isSwipeChargerSet()){
 				this.hud.removeFromHud(OurHUD.HUD_ELEMENT_SWIPE_CHARGER);
-				Explosion exp1 = new Explosion(this.player.getX(), this.player.getY(), this.objectManager, this,  1f, 0f, 0f, 10, 10, true);
+				Explosion exp1 = new Explosion(this.player.getX(), this.player.getY(), this.objectManager, this,  0f, 1f, 0f, 10, 10, false);
 				this.player.moveOnSwipe(((SwipeListener)e.getSource()).xActionUp,((SwipeListener)e.getSource()).yActionUp);
-				Explosion exp2 = new Explosion(this.player.getX(), this.player.getY(), this.objectManager, this,  1f, 0f, 0f, 10, 10, true);
+				Explosion exp2 = new Explosion(this.player.getX(), this.player.getY(), this.objectManager, this,  0f, 0f, 1f, 10, 10, false);
 				addObjectToScene(exp1);
 				addObjectToScene(exp2);
 			}
