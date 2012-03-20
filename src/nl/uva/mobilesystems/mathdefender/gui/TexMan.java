@@ -157,7 +157,7 @@ public class TexMan {
 		TexMan.getIt().mParticlePlayerBitmap.load();
 		
 			//player
-		TexMan.getIt().mPlayerBitmap = new BitmapTextureAtlas(activity.getTextureManager(), 87, 90, TextureOptions.BILINEAR);
+		TexMan.getIt().mPlayerBitmap = new BitmapTextureAtlas(activity.getTextureManager(), 68, 70, TextureOptions.BILINEAR);
 		TexMan.getIt().mPlayerTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(TexMan.getIt().mPlayerBitmap, activity, "gfx/player.png", 0, 0, 1, 1);
 		TexMan.getIt().mPlayerBitmap.load();
 				
