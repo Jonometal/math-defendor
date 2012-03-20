@@ -74,7 +74,7 @@ public class SceneManager {
 					}
 				});
 				analogOnScreenControl.getControlBase().setBlendFunction(GLES20.GL_SRC_ALPHA, GLES20.GL_ONE_MINUS_SRC_ALPHA);
-				analogOnScreenControl.getControlBase().setAlpha(0.0f);
+				analogOnScreenControl.getControlBase().setAlpha(0.5f);
 				analogOnScreenControl.getControlBase().setScaleCenter(0, 128);
 				analogOnScreenControl.getControlBase().setScale(1.25f);
 				analogOnScreenControl.getControlKnob().setScale(1.25f);

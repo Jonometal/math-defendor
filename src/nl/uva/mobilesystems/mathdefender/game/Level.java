@@ -30,8 +30,6 @@ public class Level {
 	// CONSTANTS
 	protected int myDiff;
 
-	//VARIABLES
-	protected int difficulty;
 
 	protected GameModel model;
 	protected VertexBufferObjectManager objectManager;
@@ -65,13 +63,13 @@ public class Level {
 	}
 	
 	//SETTERS/GETTERS
-	public int getDifficulty() {
-		return difficulty;
-	}
-
-	public void setDifficulty(int difficulty) {
-		this.difficulty = difficulty;
-	}
+//	public int getDifficulty() {
+//		return difficulty;
+//	}
+//
+//	public void setDifficulty(int difficulty) {
+//		this.difficulty = difficulty;
+//	}
 	
 
 	public LinkedList<Wave> getWaves() {
@@ -88,6 +86,14 @@ public class Level {
 	
 	public int getNrWaves(){
 		return this.nrWaves;
+	}
+	
+	public int getDifficulty(){
+		return this.myDiff;
+	}
+	
+	public void setDifficulty(int diff){
+		this.myDiff = diff;
 	}
 
 

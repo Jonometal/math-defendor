@@ -8,7 +8,7 @@ package nl.uva.mobilesystems.mathdefender.physics;
 public class PhConstants {
 	public static final float DEMO_VELOCITY = 100.0f;
 	
-	public static final float ENEMY_VELOCITY = 100.0f;
+	public static final float ENEMY_VELOCITY = 30.0f;
 	
 	public static final int NR_ENEMIES_IN_WAVE = 4;
 	

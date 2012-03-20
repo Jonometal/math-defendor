@@ -259,7 +259,7 @@ public class GameModel implements ObjectPositionEventListener {
 					while(iterBullet.hasNext()){
 						bullet = iterBullet.next();
 						if(objectOnScreen.collidesWith(bullet)){ //collision enemy <-> bullet
-							this.hud.addThisManyLivesToHud(5);
+//							this.hud.addThisManyLivesToHud(5);
 							iterBullet.remove(); //remove bullet
 //							iter.remove(); //remove enemy
 							bullet.collisionDetected();

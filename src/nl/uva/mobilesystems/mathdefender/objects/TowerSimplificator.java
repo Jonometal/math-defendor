@@ -22,10 +22,12 @@ public class TowerSimplificator extends Tower {
 		this.setSecondsElapsed(this.getSecondsElapsed() + pSecondsElapsed);
 		for(AnimatedSprite object : getModel().getCurrentWaveObjects()){
 //			Log.d("Enemy", ((Enemy)object).getVelocityX() + " " + PhConstants.ENEMY_VELOCITY);
+			if(object instanceof Enemy && (((Enemy)object).getDifficulty() == 1)) continue;
+			if(object instanceof Enemy && (((Enemy)object).getDifficulty() >4)) continue;
 			if(object instanceof Enemy && 	//shot only towards Enemies moving with default speed
 					HelperClass.calculateDistance(this.getX() ,this.getY(),object.getX() , object.getY()) < PhConstants.TOWER_RANGE &&
 					Math.abs(((Enemy)object).getVelocityX()) == Math.abs(PhConstants.ENEMY_VELOCITY)){
-				if(this.getSecondsElapsed() >= PhConstants.TOWER_RELOAD_TIME){
+				if(this.getSecondsElapsed() >= PhConstants.TOWER_RELOAD_TIME ){
 //					Log.d("Enemy", "shoooting!");
 					//so Enemy  is within our range AND it was enough time -> Fire at HIM!
 					shotAt(object.getX(),object.getY());

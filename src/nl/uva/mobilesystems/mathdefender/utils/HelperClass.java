@@ -106,7 +106,9 @@ public class HelperClass {
 		Interpreter interpreter = new Interpreter();
 		int d = 0;
 		interpreter.eval("result = " + sum);
+		
 		d = Integer.parseInt(interpreter.get("result").toString());
+		Log.d("parseSUM", Integer.toString(d));
 		return d;
 	}
 	

@@ -28,7 +28,7 @@ public class ExpressionSimplifier {
 		String returnString = this.expression;
 		switch(this.diff){
 		case	1: //Apparently "1" is just one number, so nothing to be simplified here.
-			
+			;
 			break;
 		case 2:		//This one is just a + b so return a result here.
 			try {
@@ -52,7 +52,7 @@ public class ExpressionSimplifier {
 			if(returnString.charAt(pointer) == '-')	//get rid of fist '-'
 				pointer++;
 			
-			
+//			Log.d("debug", "beforeCrash" + returnString + "," + pointer);
 			while(Character.isDigit(returnString.charAt(pointer))) //go through first number, now pointer is at "+" or "-"
 				pointer++;
 			
@@ -74,10 +74,18 @@ public class ExpressionSimplifier {
 				e.printStackTrace();
 			}
 			break;
-		case 4:
+		case 4:	//it's just a*b or a/b
+			try {
+				returnString = Integer.toString(HelperClass.parseSum(expression));
+			} catch (EvalError e) {
+				Log.e("Exception thrown", "exception 1 in ExpressionSimplified.getSimplified() class");
+				e.printStackTrace();
+			}
+			
 			break;
 		case 5:
 			Log.e("FIXME", " simplifying for diff Level 5 not implemented YET" );
+			break;
 		}
 		
 		return returnString;

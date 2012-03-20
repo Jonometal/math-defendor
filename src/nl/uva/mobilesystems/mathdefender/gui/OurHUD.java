@@ -193,7 +193,7 @@ public class OurHUD extends HUD{
 			this.scene.unregisterTouchArea(this.upBulletTime);
 			this.model.removeObjectFromScene(this.upBulletTime);
 			this.upBulletTime = null;
-			break;
+			break; 
 		
 		case HUD_ELEMENT_SWIPE_CHARGER:
 			this.model.removeObjectFromScene(this.swipeCharger);

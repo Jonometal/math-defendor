@@ -59,6 +59,8 @@ public class GameZenModel extends GameModel {
 	 * Generates next Level according to current user's performance.
 	 */
 	public void nextLevel(){
+		
+		int numberOfWaves = 2;
 		//Erase all of the towers on-screen FIRST
 		if(this.currentLevel != null && this.currentLevel.getTowers() != null){
 			Iterator<Tower> iter = this.currentLevel.getTowers().iterator();
@@ -70,9 +72,15 @@ public class GameZenModel extends GameModel {
 			}
 		}
 		
+		if(this.currentLevel == null){
+			this.currentLevel = new ZenLevel(4, numberOfWaves, 0, screenDimensions, objectManager, this);
+		}else{
+			this.currentLevel = new ZenLevel(this.currentLevel.getDifficulty()+1, numberOfWaves, 0, screenDimensions, objectManager, this);
+			this.player.setPosition(PhConstants.PLAYER_START_POSITION_X, PhConstants.PLAYER_START_POSITION_Y);
+		}
 		
-		this.currentLevel = new ZenLevel(2, 2, 0, screenDimensions, objectManager, this);
-		this.player.setPosition(PhConstants.PLAYER_START_POSITION_X, PhConstants.PLAYER_START_POSITION_Y);
+		
+		
 	}
 
 	

@@ -106,6 +106,10 @@ public class Enemy extends AnimatedSprite{
 		this.listener = listener;
 	}
 	
+	public int getDifficulty(){
+		return this.myDiff;
+	}
+	
 	public synchronized void removeObjectPositionEventListener(){
 		this.listener = null;
 	}
@@ -137,7 +141,10 @@ public class Enemy extends AnimatedSprite{
 		
 		if(tower instanceof TowerSimplificator){	//Simplify Equation
 			this.setSum(HelperClass.simplifyExpression(this.getSum(), this.myDiff));
-			if(this.myDiff > 1) this.myDiff--;
+			if(this.myDiff == 2) this.myDiff = 1;
+			else if(this.myDiff == 3) this.myDiff = 2;
+			else if(this.myDiff == 4) this.myDiff = 1;
+			
 			this.model.engine.runOnUpdateThread(new Runnable() {
 				public void run() {
 					myText.setText((getSum()));

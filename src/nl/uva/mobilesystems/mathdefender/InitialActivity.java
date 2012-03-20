@@ -118,21 +118,29 @@ public class InitialActivity extends SimpleBaseGameActivity implements OnKeyList
 		this.mEngine.registerUpdateHandler(new FPSLogger());
 		
 		final Scene scene = new Scene();
+		OurHUD hud = new OurHUD(scene, getVertexBufferObjectManager());
 		
 		if(zenMode){
 			scene.setBackground(new SpriteBackground(0.05f, 0.8f, 0.8f, TexMan.getIt().mBackgroundSprite)); //different background
-		}
-		else{
-			scene.setBackground(new SpriteBackground(0.05f, 0.8f, 0.8f, TexMan.getIt().mSupermarketBackgroundSprite)); //different background
-		}
-		//create a hud variable in here
-		OurHUD hud = new OurHUD(scene, getVertexBufferObjectManager());
 			hud.addToToHud(OurHUD.UPGRADE_TOWER_SIMPLIFIER);
 			hud.addToToHud(OurHUD.UPGRADE_TOWER_SLOWER);
 //			hud.addToToHud(OurHUD.UPGRADE_TOWER_KILLER);
 			hud.addToToHud(OurHUD.UPGRADE_BULLET_TIME);
+//			hud.addThisManyLivesToHud(4);
+			hud.addToToHud(OurHUD.HUD_ELEMENT_SWIPE_CHARGER); 
+		}
+		else{
+			scene.setBackground(new SpriteBackground(0.05f, 0.8f, 0.8f, TexMan.getIt().mSupermarketBackgroundSprite)); //different background
+//			hud.addToToHud(OurHUD.UPGRADE_TOWER_SIMPLIFIER);
+//			hud.addToToHud(OurHUD.UPGRADE_TOWER_SLOWER);
+//			hud.addToToHud(OurHUD.UPGRADE_TOWER_KILLER);
+			hud.addToToHud(OurHUD.UPGRADE_BULLET_TIME);
 			hud.addThisManyLivesToHud(4);
 			hud.addToToHud(OurHUD.HUD_ELEMENT_SWIPE_CHARGER); 
+		}
+		//create a hud variable in here
+		
+			
 			
 		
 		
