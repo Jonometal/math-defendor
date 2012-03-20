@@ -15,10 +15,7 @@ public class StartMenu extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.start);
 		Button button;
-		
-		button = (Button)findViewById(R.id.button_tutorialstart);
-		button.setOnClickListener(this);
-		
+				
 		button = (Button)findViewById(R.id.button_supermarketstart);
 		button.setOnClickListener(this);
 		
@@ -33,12 +30,7 @@ public class StartMenu extends Activity implements OnClickListener {
 		
 		Intent intent;
 		
-		if(v == (Button)findViewById(R.id.button_tutorialstart)) {
-			intent = new Intent(this, InfoScreen.class);
-			intent.putExtra("mode", "tutorial");
-			startActivity(intent);
-		}
-		else if(v == (Button)findViewById(R.id.button_zenstart)){
+		if(v == (Button)findViewById(R.id.button_zenstart)){
 			intent = new Intent(this, InfoScreen.class);
 			intent.putExtra("mode", "zen");
 			startActivity(intent);

@@ -2,7 +2,9 @@ package nl.uva.mobilesystems.mathdefender;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -32,11 +34,15 @@ public class InfoScreen extends Activity implements OnClickListener {
 		if(mode.equals("supermarket")){
 			infoScreenTitle.setText(R.string.supermarket);
 			infoTextView.setText(R.string.supermarket_instructions);
+//			infoTextView.setText(Html.fromHtml("<b>Instructions:</b><br /><small>" + R.string.supermarket_instructions + "</small>"));
 			tableLayout.setBackgroundResource(R.drawable.background_supermarket);
 		}
 		else if(mode.equals("zen")){
 			infoScreenTitle.setText(R.string.zen);
-			infoTextView.setText(R.string.zen_instructions);			
+			infoTextView.setText(R.string.zen_instructions);
+//			ImageGetter imageGetter = new ImageGetter();
+//			infoTextView.setText(Html.fromHtml("<b>title</b><br /><small>Test.</small>", imageGetter, null));
+
 			tableLayout.setBackgroundResource(R.drawable.background_hsc);
 		}
 		
@@ -57,4 +63,22 @@ public class InfoScreen extends Activity implements OnClickListener {
 		}
 		
 	}
+//	private class ImageGetter implements Html.ImageGetter {
+//
+//	    public Drawable getDrawable(String source) {
+//	        int id;
+//
+//	        if (source.equals("enemy.png")) {
+//	            id = R.drawable.button_normal;
+//	        }
+//	        else {
+//	            return null;
+//	        }
+//
+//	        Drawable d = getResources().getDrawable(id);
+//	        d.setBounds(0,0,d.getIntrinsicWidth(),d.getIntrinsicHeight());
+//	        return d;
+//	    }
+//	};
 }
+

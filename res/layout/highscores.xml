@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+	    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+	        android:id="@+id/ScrollView01"
+	        android:layout_width="fill_parent"
+	        android:layout_height="match_parent"
+	        android:background="#aaffffff"
+	        android:gravity="center_horizontal"
+	       	android:layout_marginLeft="10dp"
+	       	android:layout_marginRight ="10dp"
+	       	android:layout_marginBottom ="10dp" >
    	<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     	android:layout_width="match_parent"
     	android:layout_height="wrap_content"
@@ -48,7 +57,7 @@
 
 	    
 	   <TableRow
-	        android:id="@+id/tableRow3"
+	        android:id="@+id/tableRow3434665"
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	      	android:background="#33000000"
@@ -61,7 +70,7 @@
               		android:textSize="10pt" 
               		android:layout_margin="4dp"
               		android:gravity="left"/>
-	         <TextView android:id="@+id/column2a"
+	         <TextView android:id="@+id/column56565666a"
               		android:layout_width="match_parent"
               		android:layout_height="wrap_content"
               		android:text="@string/points2"
@@ -70,4 +79,152 @@
               		android:layout_margin="4dp"
               		android:gravity="right"/>
 	    </TableRow>
+	    
+	   	    <TableRow
+	        android:id="@+id/tableRow6565655"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	      	android:background="#00000000"
+	        android:gravity="center_horizontal" >
+	         <TextView android:id="@+id/column2323232344"
+              		android:layout_width="match_parent"
+              		android:layout_height="wrap_content"
+              		android:text="Michal"
+              		android:textColor="#000000"
+              		android:textSize="10pt" 
+              		android:layout_margin="4dp"
+              		android:gravity="left"/>
+	         <TextView android:id="@+id/column343434"
+              		android:layout_width="match_parent"
+              		android:layout_height="wrap_content"
+              		android:text="Level 5, Wave 4"
+              		android:textColor="#000000"
+              		android:textSize="10pt" 
+              		android:layout_margin="4dp"
+              		android:gravity="right"/>
+	    </TableRow>
+
+	    
+	   <TableRow
+	        android:id="@+id/tableRow66565"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	      	android:background="#33000000"
+	        android:gravity="center_horizontal" >
+	         <TextView android:id="@+id/column1343434"
+              		android:layout_width="match_parent"
+              		android:layout_height="wrap_content"
+              		android:text="Michal"
+              		android:textColor="#000000"
+              		android:textSize="10pt" 
+              		android:layout_margin="4dp"
+              		android:gravity="left"/>
+	         <TextView android:id="@+id/column276767"
+              		android:layout_width="match_parent"
+              		android:layout_height="wrap_content"
+              		android:text="Level 5, Wave 3"
+              		android:textColor="#000000"
+              		android:textSize="10pt" 
+              		android:layout_margin="4dp"
+              		android:gravity="right"/>
+	    </TableRow>
+	    
+	   	    <TableRow
+	        android:id="@+id/tableRow76767"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	      	android:background="#00000000"
+	        android:gravity="center_horizontal" >
+	         <TextView android:id="@+id/column65656"
+              		android:layout_width="match_parent"
+              		android:layout_height="wrap_content"
+              		android:text="Anze"
+              		android:textColor="#000000"
+              		android:textSize="10pt" 
+              		android:layout_margin="4dp"
+              		android:gravity="left"/>
+	         <TextView android:id="@+id/column454545"
+              		android:layout_width="match_parent"
+              		android:layout_height="wrap_content"
+              		android:text="Level 4, Wave 3"
+              		android:textColor="#000000"
+              		android:textSize="10pt" 
+              		android:layout_margin="4dp"
+              		android:gravity="right"/>
+	    </TableRow>
+
+	    
+	   <TableRow
+	        android:id="@+id/tableRow43434"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	      	android:background="#33000000"
+	        android:gravity="center_horizontal" >
+	         <TextView android:id="@+id/column132323"
+              		android:layout_width="match_parent"
+              		android:layout_height="wrap_content"
+              		android:text="Tobi"
+              		android:textColor="#000000"
+              		android:textSize="10pt" 
+              		android:layout_margin="4dp"
+              		android:gravity="left"/>
+	         <TextView android:id="@+id/column121212"
+              		android:layout_width="match_parent"
+              		android:layout_height="wrap_content"
+              		android:text="Level 4, Wave 3"
+              		android:textColor="#000000"
+              		android:textSize="10pt" 
+              		android:layout_margin="4dp"
+              		android:gravity="right"/>
+	    </TableRow>
+	    
+	   	   	    <TableRow
+	        android:id="@+id/tableRow76767"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	      	android:background="#00000000"
+	        android:gravity="center_horizontal" >
+	         <TextView android:id="@+id/column65656"
+              		android:layout_width="match_parent"
+              		android:layout_height="wrap_content"
+              		android:text="Anze"
+              		android:textColor="#000000"
+              		android:textSize="10pt" 
+              		android:layout_margin="4dp"
+              		android:gravity="left"/>
+	         <TextView android:id="@+id/column454545"
+              		android:layout_width="match_parent"
+              		android:layout_height="wrap_content"
+              		android:text="Level 4, Wave 2"
+              		android:textColor="#000000"
+              		android:textSize="10pt" 
+              		android:layout_margin="4dp"
+              		android:gravity="right"/>
+	    </TableRow>
+
+	    
+	   <TableRow
+	        android:id="@+id/tableRow43434"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	      	android:background="#33000000"
+	        android:gravity="center_horizontal" >
+	         <TextView android:id="@+id/column132323"
+              		android:layout_width="match_parent"
+              		android:layout_height="wrap_content"
+              		android:text="Michal"
+              		android:textColor="#000000"
+              		android:textSize="10pt" 
+              		android:layout_margin="4dp"
+              		android:gravity="left"/>
+	         <TextView android:id="@+id/column121212"
+              		android:layout_width="match_parent"
+              		android:layout_height="wrap_content"
+              		android:text="Level 4, Wave 1"
+              		android:textColor="#000000"
+              		android:textSize="10pt" 
+              		android:layout_margin="4dp"
+              		android:gravity="right"/>
+	    </TableRow>
 	</TableLayout>
+	</ScrollView>
