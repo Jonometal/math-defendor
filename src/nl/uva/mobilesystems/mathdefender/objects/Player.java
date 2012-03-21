@@ -43,6 +43,7 @@ public class Player extends AnimatedSprite{
 	// Setscore is meant to be used by SMLevel to set a budget for the player
 		public void setScore(int budget) {
 			myScore = budget;
+			this.myText.setText(Integer.toString(myScore));
 		}
 	
 //	public void updateScore(int updateScore) {
@@ -121,7 +122,7 @@ public class Player extends AnimatedSprite{
 	public void collisionDetected(Enemy enemy)
 	{
 		
-		this.myScore += model instanceof GameSuperMarketModel ? - enemy.getResult(): enemy.getResult() - this.myScore;
+		this.myScore += model instanceof GameSuperMarketModel ?  -enemy.getResult() : enemy.getResult() - this.myScore;
 		
 		if (this.myScore <= 0)
 		{
